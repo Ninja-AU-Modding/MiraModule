@@ -11,6 +11,6 @@ public static class MiraModuleColors
     
     // Neutral Colors
     public static Color Sentinel => new Color32(143, 162, 141, 255);
-    public static Color Hacker => new Color32(0, 255, 127, 255); // Bright green/cyan hacker color
-    public static Color Abyss => new Color32(100, 180, 220, 255); // Soft ocean blue
+    public static Color Abyss => new Color32(75, 45, 120, 255); // Soft ocean blue
 }
+ 
