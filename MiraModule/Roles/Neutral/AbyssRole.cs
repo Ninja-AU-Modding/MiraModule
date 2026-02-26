@@ -122,17 +122,6 @@ public sealed class AbyssRole(IntPtr cppPtr)
         }
     }
 
-    public override bool CanUse(IUsable usable)
-    {
-        if (!GameManager.Instance.LogicUsables.CanUse(usable, Player))
-        {
-            return false;
-        }
-
-        var console = usable.TryCast<Console>()!;
-        return console == null || console.AllowImpostor;
-    }
-
     public override bool DidWin(GameOverReason gameOverReason)
     {
         return WinConditionMet();
