@@ -2,8 +2,10 @@ using AmongUs.GameOptions;
 using Il2CppInterop.Runtime.Attributes;
 using MiraAPI.GameOptions;
 using MiraAPI.Hud;
+using MiraAPI.Modifiers;
 using MiraAPI.Patches.Stubs;
 using MiraAPI.Roles;
+using MiraModule.Modifiers;
 using MiraAPI.Utilities;
 using Reactor.Utilities;
 using MiraModule.Assets;
@@ -107,17 +109,15 @@ public sealed class AbyssRole(IntPtr cppPtr)
             HudManager.Instance.ImpostorVentButton.buttonLabelText.SetOutlineColor(TownOfUsColors.Impostor);
         }
 
-        // Release any swallowed players if this Abyss is dying/leaving
+        // Release any swallowed players — remove their modifier which restores camera/HUD/movement
         var myId = targetPlayer.PlayerId;
         var keys = SwallowedPlayers.Where(kv => kv.Value == myId).Select(kv => kv.Key).ToList();
         foreach (var victimId in keys)
         {
-            SwallowedPlayers.Remove(victimId);
             var victim = MiscUtils.PlayerById(victimId);
-            if (victim != null && victim.HasDied())
+            if (victim != null && victim.HasModifier<SwallowedModifier>())
             {
-                // Revive the swallowed player so they can return
-                victim.Revive();
+                victim.RpcRemoveModifier<SwallowedModifier>();
             }
         }
     }
