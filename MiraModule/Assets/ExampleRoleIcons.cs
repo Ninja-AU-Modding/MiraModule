@@ -11,4 +11,5 @@ public static class ExampleRoleIcons
 
     // Neutrals
     public static LoadableAsset<Sprite> Sentinel { get; } = new LoadableResourceAsset($"{ShortPath}.RoleIcons.Sentinel.png", 200);
+    public static LoadableAsset<Sprite> Pelican { get; } = new LoadableResourceAsset($"{ShortPath}.RoleIcons.TempRoleIcon.png", 200);
 }
