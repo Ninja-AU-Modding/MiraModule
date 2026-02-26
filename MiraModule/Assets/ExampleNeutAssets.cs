@@ -11,6 +11,6 @@ public static class ExampleNeutAssets
     public static LoadableAsset<Sprite> SentinelExplodeSprite { get; } = new LoadableResourceAsset($"{ShortPath}.SentinelExplodeButton.png");
     public static LoadableAsset<Sprite> SentinelKillSprite { get; } = new LoadableResourceAsset($"{ShortPath}.SentinelKillButton.png");
 
-    // Pelican Assets
-    public static LoadableAsset<Sprite> PelicanGulpSprite { get; } = new LoadableResourceAsset($"{ShortPath}.Tempbutton.png");
+    // Abyss Assets
+    public static LoadableAsset<Sprite> AbyssGulpSprite { get; } = new LoadableResourceAsset($"{ShortPath}.AbyssGulpButton.png");
 }
