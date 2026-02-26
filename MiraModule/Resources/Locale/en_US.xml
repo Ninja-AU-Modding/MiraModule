@@ -20,6 +20,24 @@
     <string name="ExampleRoleSentinelExplode">Explode</string>
     <string name="ExampleRoleSentinelExplodeWikiDescription">Explode all players nearby.</string>
     
+    <!-- Pelican - Neutral Killing -->
+    <string name="ExampleRolePelican">Pelican</string>
+    <string name="ExampleRolePelicanIntroBlurb">Gulp down every last one of them.</string>
+    <string name="ExampleRolePelicanTabDescription">Use your Gulp ability to swallow players whole!\%nl\%Swallowed players vanish with \%b\%no body\%/b\% left behind. They die for good when a meeting is called.</string>
+
+    <!-- Pelican Wiki -->
+    <string name="ExampleRolePelicanWikiDescription">The Pelican is a Neutral Killing role that swallows other players, hiding them from the game entirely. Swallowed players leave no corpse and do not appear in the meeting dead list — until the next meeting is called, at which point they die for good. If the Pelican dies, any swallowed players are released alive.</string>
+    <string name="ExampleRolePelicanGulp">Gulp</string>
+    <string name="ExampleRolePelicanGulpWikiDescription">Swallow a nearby player. They vanish from the map and are hidden until the next meeting.</string>
+
+    <!-- Pelican Options -->
+    <string name="ExampleOptionPelicanGulpCooldown">Gulp Cooldown</string>
+    <string name="ExampleOptionPelicanCanVent">Pelican Can Vent</string>
+    <string name="ExampleOptionPelicanImpostorVision">Pelican Has Impostor Vision</string>
+
+    <!-- Cause of Death -->
+    <string name="DiedToPelican">Swallowed</string>
+
     <!-- Sentinel Options -->
     <string name="ExampleOptionSentinelKillCooldown">Kill Cooldown</string>
     <string name="ExampleOptionSentinelExplodeCooldown">Explode Cooldown</string>
