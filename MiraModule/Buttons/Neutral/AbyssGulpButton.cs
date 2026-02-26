@@ -1,8 +1,10 @@
 using MiraAPI.GameOptions;
 using MiraAPI.Hud;
 using MiraAPI.Keybinds;
+using MiraAPI.Modifiers;
 using MiraAPI.Utilities.Assets;
 using MiraModule.Assets;
+using MiraModule.Modifiers;
 using MiraModule.Options.Roles.Neutral;
 using MiraModule.Roles.Neutral;
 using TownOfUs.Buttons;
@@ -31,12 +33,16 @@ public sealed class AbyssGulpButton : TownOfUsKillRoleButton<AbyssRole, PlayerCo
 
     public override PlayerControl? GetTarget()
     {
+        // Never allow re-gulping someone already swallowed
+        bool NotAlreadySwallowed(PlayerControl p) => !p.HasModifier<SwallowedModifier>();
+
         if (!OptionGroupSingleton<LoversOptions>.Instance.LoversKillEachOther && PlayerControl.LocalPlayer.IsLover())
         {
-            return PlayerControl.LocalPlayer.GetClosestLivingPlayer(true, Distance, false, x => !x.IsLover());
+            return PlayerControl.LocalPlayer.GetClosestLivingPlayer(true, Distance, false,
+                x => !x.IsLover() && NotAlreadySwallowed(x));
         }
 
-        return PlayerControl.LocalPlayer.GetClosestLivingPlayer(true, Distance);
+        return PlayerControl.LocalPlayer.GetClosestLivingPlayer(true, Distance, false, NotAlreadySwallowed);
     }
 
     protected override void OnClick()
@@ -47,15 +53,8 @@ public sealed class AbyssGulpButton : TownOfUsKillRoleButton<AbyssRole, PlayerCo
             return;
         }
 
-        // Register the target as swallowed before the murder
-        AbyssRole.SwallowedPlayers[Target.PlayerId] = PlayerControl.LocalPlayer.PlayerId;
-
-        // Kill with no body created and no teleport, so nothing visible happens on the map
-        PlayerControl.LocalPlayer.RpcSpecialMurder(
-            Target,
-            createDeadBody: false,
-            teleportMurderer: false,
-            showKillAnim: false,
-            causeOfDeath: "Abyss");
+        // Add the swallowed modifier (networked) — this locks the victim's camera/movement
+        // and registers them in AbyssRole.SwallowedPlayers via OnActivate
+        Target.RpcAddModifier<SwallowedModifier>(PlayerControl.LocalPlayer.PlayerId);
     }
 }
