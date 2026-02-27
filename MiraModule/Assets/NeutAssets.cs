@@ -13,4 +13,7 @@ public static class NeutAssets
 
     // Abyss Assets
     public static LoadableAsset<Sprite> AbyssGulpSprite { get; } = new LoadableResourceAsset($"{ShortPath}.AbyssGulpButton.png");
+
+    // Shifter Assets
+    public static LoadableAsset<Sprite> ShifterShiftSprite { get; } = new LoadableResourceAsset($"{ShortPath}.Tempbutton.png");
 }
