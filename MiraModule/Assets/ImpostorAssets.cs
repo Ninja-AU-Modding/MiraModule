@@ -5,7 +5,7 @@ namespace MiraModule.Assets;
 
 public static class ImpostorAssets
 {
-    private const string ShortPath = "MiraModule.Resources.NeutButtons";
+    private const string ShortPath = "MiraModule.Resources.ImpButtons";
 
     // Eraser Assets
     public static LoadableAsset<Sprite> EraserEraseSprite { get; } = new LoadableResourceAsset($"{ShortPath}.Tempbutton.png");
