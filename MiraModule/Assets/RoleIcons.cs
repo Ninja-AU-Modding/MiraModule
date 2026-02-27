@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace MiraModule.Assets;
 
-public static class ExampleRoleIcons
+public static class RoleIcons
 {
     // THIS FILE SHOULD ONLY HOLD ROLE ICONS
 

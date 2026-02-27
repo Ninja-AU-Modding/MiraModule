@@ -21,11 +21,11 @@ namespace MiraModule.Buttons.Neutral;
 
 public sealed class SentinelExplodeButton : TownOfUsRoleButton<SentinelRole>
 {
-    public override string Name => TouLocale.GetParsed("ExampleRoleSentinelExplode", "Explode");
+    public override string Name => TouLocale.GetParsed("MiraRoleSentinelExplode", "Explode");
     public override BaseKeybind Keybind => Keybinds.SecondaryAction;
     public override Color TextOutlineColor => MiraModuleColors.Sentinel;
     public override float Cooldown => Math.Clamp(OptionGroupSingleton<SentinelOptions>.Instance.ExplodeCooldown + MapCooldown, 5f, 120f);
-    public override LoadableAsset<Sprite> Sprite => ExampleNeutAssets.SentinelExplodeSprite;
+    public override LoadableAsset<Sprite> Sprite => NeutAssets.SentinelExplodeSprite;
 
     private static List<PlayerControl> PlayersInRange => Helpers.GetClosestPlayers(PlayerControl.LocalPlayer,
         OptionGroupSingleton<SentinelOptions>.Instance.ExplosionRadius.Value * ShipStatus.Instance.MaxLightRadius);

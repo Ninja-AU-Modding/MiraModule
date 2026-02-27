@@ -3,7 +3,7 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<LangVersion>latest</LangVersion>
 		<DebugType>embedded</DebugType>
-		<VersionPrefix>1.0.0</VersionPrefix>
+		<VersionPrefix>1.0.3</VersionPrefix>
 		<VersionSuffix>dev</VersionSuffix>
 		<RootNamespace>MiraModule</RootNamespace>
 		<Description>MiraModule addon for Town of Us Mira</Description>

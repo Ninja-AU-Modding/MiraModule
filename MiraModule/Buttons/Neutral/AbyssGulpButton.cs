@@ -18,11 +18,11 @@ namespace MiraModule.Buttons.Neutral;
 
 public sealed class AbyssGulpButton : TownOfUsKillRoleButton<AbyssRole, PlayerControl>
 {
-    public override string Name => TouLocale.GetParsed("ExampleRoleAbyssGulp", "Gulp");
+    public override string Name => TouLocale.GetParsed("MiraRoleAbyssGulp", "Gulp");
     public override BaseKeybind Keybind => Keybinds.PrimaryAction;
     public override Color TextOutlineColor => MiraModuleColors.Abyss;
     public override float Cooldown => Math.Clamp(OptionGroupSingleton<AbyssOptions>.Instance.GulpCooldown + MapCooldown, 5f, 120f);
-    public override LoadableAsset<Sprite> Sprite => ExampleNeutAssets.AbyssGulpSprite;
+    public override LoadableAsset<Sprite> Sprite => NeutAssets.AbyssGulpSprite;
 
     public override void CreateButton(Transform parent)
     {

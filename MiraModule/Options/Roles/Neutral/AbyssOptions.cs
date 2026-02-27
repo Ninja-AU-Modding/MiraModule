@@ -9,14 +9,14 @@ namespace MiraModule.Options.Roles.Neutral;
 
 public sealed class AbyssOptions : AbstractOptionGroup<AbyssRole>
 {
-    public override string GroupName => TouLocale.Get("ExampleRoleAbyss", "Abyss");
+    public override string GroupName => TouLocale.Get("MiraRoleAbyss", "Abyss");
 
-    [ModdedNumberOption("ExampleOptionAbyssGulpCooldown", 5f, 120f, 2.5f, MiraNumberSuffixes.Seconds)]
+    [ModdedNumberOption("MiraOptionAbyssGulpCooldown", 5f, 120f, 2.5f, MiraNumberSuffixes.Seconds)]
     public float GulpCooldown { get; set; } = 25f;
 
-    [ModdedToggleOption("ExampleOptionAbyssImpostorVision")]
+    [ModdedToggleOption("MiraOptionAbyssImpostorVision")]
     public bool ImpostorVision { get; set; } = true;
 
-    [ModdedToggleOption("ExampleOptionAbyssCanVent")]
+    [ModdedToggleOption("MiraOptionAbyssCanVent")]
     public bool CanVent { get; set; }
 }

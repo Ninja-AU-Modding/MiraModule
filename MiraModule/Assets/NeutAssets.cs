@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace MiraModule.Assets;
 
-public static class ExampleNeutAssets
+public static class NeutAssets
 {
     // Sentinel Assets
     private const string ShortPath = "MiraModule.Resources.NeutButtons";

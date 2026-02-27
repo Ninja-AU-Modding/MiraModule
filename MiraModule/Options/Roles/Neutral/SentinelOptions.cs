@@ -9,20 +9,20 @@ namespace MiraModule.Options.Roles.Neutral;
 
 public sealed class SentinelOptions : AbstractOptionGroup<SentinelRole>
 {
-    public override string GroupName => TouLocale.Get("ExampleRoleSentinel", "Sentinel");
+    public override string GroupName => TouLocale.Get("MiraRoleSentinel", "Sentinel");
 
-    [ModdedNumberOption("ExampleOptionSentinelKillCooldown", 5f, 120f, 2.5f, MiraNumberSuffixes.Seconds)]
+    [ModdedNumberOption("MiraOptionSentinelKillCooldown", 5f, 120f, 2.5f, MiraNumberSuffixes.Seconds)]
     public float KillCooldown { get; set; } = 25f;
 
-    [ModdedNumberOption("ExampleOptionSentinelExplodeCooldown", 5f, 120f, 2.5f, MiraNumberSuffixes.Seconds)]
+    [ModdedNumberOption("MiraOptionSentinelExplodeCooldown", 5f, 120f, 2.5f, MiraNumberSuffixes.Seconds)]
     public float ExplodeCooldown { get; set; } = 60f;
 
-    public ModdedNumberOption ExplosionRadius { get; set; } = new("ExampleOptionSentinelExplosionRadius", 0.25f, 0.05f, 1f, 0.05f,
+    public ModdedNumberOption ExplosionRadius { get; set; } = new("MiraOptionSentinelExplosionRadius", 0.25f, 0.05f, 1f, 0.05f,
         MiraNumberSuffixes.Multiplier, "0.00");
 
-    [ModdedToggleOption("ExampleOptionSentinelImpostorVision")]
+    [ModdedToggleOption("MiraOptionSentinelImpostorVision")]
     public bool ImpostorVision { get; set; } = true;
 
-    [ModdedToggleOption("ExampleOptionSentinelCanVent")]
+    [ModdedToggleOption("MiraOptionSentinelCanVent")]
     public bool CanVent { get; set; }
 }

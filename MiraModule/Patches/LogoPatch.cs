@@ -13,7 +13,7 @@ public static class LogoPatch
     [HarmonyPrefix]
     public static bool Prefix(ref LoadableAsset<Sprite> __result)
     {
-        __result = ExampleAssets.Banner;
+        __result = Assets.Assets.Banner;
         return false;
     }
 }

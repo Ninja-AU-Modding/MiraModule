@@ -7,40 +7,38 @@
     <!-- Cause of Deaths -->
     <string name="DiedToSentinel">Terminated</string>
     <string name="DiedToSentinelExplosion">Disintegrated</string>
-    <string name="DiedToHacker">Hacked</string>
-    <string name="DiedToHackerMindControl">Mind Controlled</string>
     <string name="DiedToAbyss">Swallowed</string>
     
     <!-- Sentinel - Neutral Killing -->
-    <string name="ExampleRoleSentinel">Sentinel</string>
-    <string name="ExampleRoleSentinelIntroBlurb">Eliminate those who stand in your path.</string>
-    <string name="ExampleRoleSentinelTabDescription">Kill players by using your dope abilities!\%nl\%Preferably, explode \%b\%only\%/b\% in a secluded area.</string>
+    <string name="MiraRoleSentinel">Sentinel</string>
+    <string name="MiraRoleSentinelIntroBlurb">Eliminate those who stand in your path.</string>
+    <string name="MiraRoleSentinelTabDescription">Kill players by using your dope abilities!\%nl\%Preferably, explode \%b\%only\%/b\% in a secluded area.</string>
     
     <!-- Sentinel Wiki -->
-    <string name="ExampleRoleSentinelWikiDescription">The Sentinel is a Neutral Killing role that can explode themselves to kill anyone nearby. They may also kill normally, but where's the fun in that?</string>
-    <string name="ExampleRoleSentinelExplode">Explode</string>
-    <string name="ExampleRoleSentinelExplodeWikiDescription">Explode all players nearby.</string>
+    <string name="MiraRoleSentinelWikiDescription">The Sentinel is a Neutral Killing role that can explode themselves to kill anyone nearby. They may also kill normally, but where's the fun in that?</string>
+    <string name="MiraRoleSentinelExplode">Explode</string>
+    <string name="MiraRoleSentinelExplodeWikiDescription">Explode all players nearby.</string>
     
     <!-- Abyss - Neutral Killing -->
-    <string name="ExampleRoleAbyss">Abyss</string>
-    <string name="ExampleRoleAbyssIntroBlurb">Gulp down every last one of them.</string>
-    <string name="ExampleRoleAbyssTabDescription">Use your Gulp ability to swallow players whole!\%nl\%Swallowed players vanish with \%b\%no body\%/b\% left behind. They die for good when a meeting is called.</string>
+    <string name="MiraRoleAbyss">Abyss</string>
+    <string name="MiraRoleAbyssIntroBlurb">Gulp down every last one of them.</string>
+    <string name="MiraRoleAbyssTabDescription">Use your Gulp ability to swallow players whole!\%nl\%Swallowed players vanish with \%b\%no body\%/b\% left behind. They die for good when a meeting is called.</string>
 
     <!-- Abyss Wiki -->
-    <string name="ExampleRoleAbyssWikiDescription">The Abyss is a Neutral Killing role that swallows other players, hiding them from the game entirely. Swallowed players leave no corpse and do not appear in the meeting dead list — until the next meeting is called, at which point they die for good. If the Abyss dies, any swallowed players are released alive.</string>
-    <string name="ExampleRoleAbyssGulp">Gulp</string>
-    <string name="ExampleRoleAbyssGulpWikiDescription">Swallow a nearby player. They vanish from the map and are hidden until the next meeting.</string>
+    <string name="MiraRoleAbyssWikiDescription">The Abyss is a Neutral Killing role that swallows other players, hiding them from the game entirely. Swallowed players leave no corpse and do not appear in the meeting dead list — until the next meeting is called, at which point they die for good. If the Abyss dies, any swallowed players are released alive.</string>
+    <string name="MiraRoleAbyssGulp">Gulp</string>
+    <string name="MiraRoleAbyssGulpWikiDescription">Swallow a nearby player. They vanish from the map and are hidden until the next meeting.</string>
 
     <!-- Abyss Options -->
-    <string name="ExampleOptionAbyssGulpCooldown">Gulp Cooldown</string>
-    <string name="ExampleOptionAbyssCanVent">Abyss Can Vent</string>
-    <string name="ExampleOptionAbyssImpostorVision">Abyss Has Impostor Vision</string>
+    <string name="MiraOptionAbyssGulpCooldown">Gulp Cooldown</string>
+    <string name="MiraOptionAbyssCanVent">Abyss Can Vent</string>
+    <string name="MiraOptionAbyssImpostorVision">Abyss Has Impostor Vision</string>
 
     <!-- Sentinel Options -->
-    <string name="ExampleOptionSentinelKillCooldown">Kill Cooldown</string>
-    <string name="ExampleOptionSentinelExplodeCooldown">Explode Cooldown</string>
-    <string name="ExampleOptionSentinelExplosionRadius">Explosion Radius</string>
-    <string name="ExampleOptionSentinelCanVent">Sentinel Can Vent</string>
-    <string name="ExampleOptionSentinelImpostorVision">Sentinel Has Impostor Vision</string>
+    <string name="MiraOptionSentinelKillCooldown">Kill Cooldown</string>
+    <string name="MiraOptionSentinelExplodeCooldown">Explode Cooldown</string>
+    <string name="MiraOptionSentinelExplosionRadius">Explosion Radius</string>
+    <string name="MiraOptionSentinelCanVent">Sentinel Can Vent</string>
+    <string name="MiraOptionSentinelImpostorVision">Sentinel Has Impostor Vision</string>
    
 </resources>
