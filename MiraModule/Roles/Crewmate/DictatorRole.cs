@@ -119,8 +119,13 @@ public sealed class DictatorRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOfU
         // ── Condemn Button ────────────────────────────────────────────
         if (CondemnButton != null)
         {
-            var condemnVisible = (canUse || SelectingCondemnTarget) && !HasActed && UsesRemaining > 0;
-            CondemnButton.gameObject.SetActive(condemnVisible);
+            // Once SelectingCondemnTarget is true the button was manually hidden;
+            // don't let FixedUpdate override that by showing it again.
+            if (!SelectingCondemnTarget)
+            {
+                var condemnVisible = canUse && !HasActed && UsesRemaining > 0;
+                CondemnButton.gameObject.SetActive(condemnVisible);
+            }
             if (CondemnButton.gameObject.active)
             {
                 if (inDiscussion) CondemnButton.SetDisabled(); else CondemnButton.SetEnabled();
@@ -140,23 +145,23 @@ public sealed class DictatorRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOfU
         var skip = meeting.SkipVoteButton;
 
         // Move skip up to create room for two extra buttons beneath it
-        skip.transform.localPosition += new Vector3(0f, 0.66f, 0f);
+        skip.transform.localPosition += new Vector3(0f, 0.55f, 0f);
 
-        // ── End Meeting Button (0.44 below skip) ──────────────────────
+        // ── End Meeting Button (0.36 below skip) ──────────────────────
         EndMeetingButton = UnityEngine.Object.Instantiate(skip, skip.transform.parent);
         EndMeetingButton.Parent = meeting;
         EndMeetingButton.SetTargetPlayerId(252);
-        EndMeetingButton.transform.localPosition = skip.transform.localPosition + new Vector3(0f, -0.44f, 0f);
+        EndMeetingButton.transform.localPosition = skip.transform.localPosition + new Vector3(0f, -0.36f, 0f);
         EndMeetingButton.gameObject.GetComponentInChildren<TextTranslatorTMP>().Destroy();
         EndMeetingButton.gameObject.GetComponentInChildren<TextMeshPro>().text =
             TouLocale.GetParsed("MiraRoleDictatorEndMeeting").ToUpperInvariant();
         EndMeetingButton.gameObject.name = "button_dictatorEndMeeting";
 
-        // ── Condemn Button (0.88 below skip, giving clear gap from End Meeting) ───
+        // ── Condemn Button (0.72 below skip) ──────────────────────────
         CondemnButton = UnityEngine.Object.Instantiate(skip, skip.transform.parent);
         CondemnButton.Parent = meeting;
         CondemnButton.SetTargetPlayerId(253);
-        CondemnButton.transform.localPosition = skip.transform.localPosition + new Vector3(0f, -0.88f, 0f);
+        CondemnButton.transform.localPosition = skip.transform.localPosition + new Vector3(0f, -0.72f, 0f);
         CondemnButton.gameObject.GetComponentInChildren<TextTranslatorTMP>().Destroy();
         CondemnButton.gameObject.GetComponentInChildren<TextMeshPro>().text =
             TouLocale.GetParsed("MiraRoleDictatorCondemn").ToUpperInvariant();
@@ -178,6 +183,16 @@ public sealed class DictatorRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOfU
             {
                 EndMeetingButton?.ClearButtons();
                 CondemnButton?.ClearButtons();
+            }));
+
+        // The skip VOTE AREA confirm (VoteForMe) is caught by BeforeVoteEvent.
+        // We handle condemn-skip there via the SkipVoteButton check below.
+        // When in targeting mode and skip's checkmark is confirmed, fire condemn-skip.
+        meeting.SkipVoteButton.gameObject.GetComponentInChildren<PassiveButton>().OnClick
+            .AddListener((UnityAction)(() =>
+            {
+                // This fires on the first click (row highlight), not the checkmark.
+                // Condemn-skip is handled in BeforeVoteEvent when VoteForMe fires.
             }));
     }
 
@@ -207,7 +222,8 @@ public sealed class DictatorRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOfU
         MiscUtils.AddFakeChat(
             sender.Data,
             $"<color={dictatorColor}>{sender.Data.PlayerName} (Dictator)</color>",
-            message);
+            message,
+            showHeadsup: true);
     }
 
     /// <summary>Instantly end the meeting (skip, no exile).</summary>
@@ -241,7 +257,7 @@ public sealed class DictatorRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOfU
         dictator.CondemnVictim = victimId;
 
         string message;
-        if (victimId == byte.MaxValue - 1) // special: skip was condemned
+        if (victimId == 254) // special sentinel: skip was condemned
         {
             message = "The Dictator has forced the meeting to be skipped.";
         }
