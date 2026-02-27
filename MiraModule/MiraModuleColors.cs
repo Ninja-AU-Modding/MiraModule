@@ -15,6 +15,6 @@ public static class MiraModuleColors
     // Neutral Colors
     public static Color Sentinel => new Color32(143, 162, 141, 255);
     public static Color Abyss => new Color32(75, 45, 120, 255); // Soft ocean blue
-    public static Color Shifter => new Color32(75, 45, 120, 255); // Soft ocean blue
+    public static Color Shifter => new Color32(12, 11, 6, 255); // Greyish Black
 }
  
