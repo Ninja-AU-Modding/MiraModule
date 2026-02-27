@@ -139,7 +139,10 @@ public sealed class DictatorRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOfU
 
         var skip = meeting.SkipVoteButton;
 
-        // ── End Meeting Button ────────────────────────────────────────
+        // Move skip up first so we can place the two new buttons directly below it
+        skip.transform.localPosition += new Vector3(0f, 0.34f, 0f);
+
+        // ── End Meeting Button (directly below skip) ──────────────────
         EndMeetingButton = UnityEngine.Object.Instantiate(skip, skip.transform.parent);
         EndMeetingButton.Parent = meeting;
         EndMeetingButton.SetTargetPlayerId(252);
@@ -149,7 +152,7 @@ public sealed class DictatorRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOfU
             TouLocale.GetParsed("MiraRoleDictatorEndMeeting").ToUpperInvariant();
         EndMeetingButton.gameObject.name = "button_dictatorEndMeeting";
 
-        // ── Condemn Button ────────────────────────────────────────────
+        // ── Condemn Button (directly below End Meeting) ───────────────
         CondemnButton = UnityEngine.Object.Instantiate(skip, skip.transform.parent);
         CondemnButton.Parent = meeting;
         CondemnButton.SetTargetPlayerId(253);
@@ -176,9 +179,6 @@ public sealed class DictatorRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOfU
                 EndMeetingButton?.ClearButtons();
                 CondemnButton?.ClearButtons();
             }));
-
-        // Move skip up to make room for the two extra buttons
-        skip.transform.localPosition += new Vector3(0f, 0.40f, 0f);
     }
 
     // ── Cleanup (called by events after each meeting) ────────────────────
