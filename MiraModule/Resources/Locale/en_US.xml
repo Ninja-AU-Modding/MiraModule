@@ -40,5 +40,25 @@
     <string name="MiraOptionSentinelExplosionRadius">Explosion Radius</string>
     <string name="MiraOptionSentinelCanVent">Sentinel Can Vent</string>
     <string name="MiraOptionSentinelImpostorVision">Sentinel Has Impostor Vision</string>
+
+    <!-- Eraser - Impostor -->
+    <string name="MiraRoleEraser">Eraser</string>
+    <string name="MiraRoleEraserIntroBlurb">Wipe their roles from existence.</string>
+    <string name="MiraRoleEraserTabDescription">Use your Erase ability to mark players.\%nl\%Their role will be wiped at the \%b\%next meeting\%/b\%, no matter what happens in between.</string>
+
+    <!-- Eraser Wiki -->
+    <string name="MiraRoleEraserWikiDescription">The Eraser is an Impostor role that can target players and erase their roles. Erased players lose their role at the start of the next meeting — the erase is permanent and cannot be undone, even if the Eraser dies before the meeting. Each erase increases the Erase cooldown. By default, the Eraser cannot erase other Impostors. If a Neutral player is erased, the host can configure whether they become a Crewmate or die outright.</string>
+    <string name="MiraRoleEraserErase">Erase</string>
+    <string name="MiraRoleEraserEraseWikiDescription">Mark a player for erasure. Their role will be removed at the start of the next meeting.</string>
+
+    <!-- Eraser Options -->
+    <string name="MiraOptionEraserEraseCooldown">Erase Cooldown</string>
+    <string name="MiraOptionEraserCooldownIncrease">Cooldown Increase Per Erase</string>
+    <string name="MiraOptionEraserCanEraseImpostors">Eraser Can Erase Impostors</string>
+    <string name="MiraOptionEraserNeutralOutcome">Neutral Erase Outcome</string>
+    <string name="MiraOptionEraserCanVent">Eraser Can Vent</string>
+
+    <!-- Cause of Deaths -->
+    <string name="DiedToEraser">Erased</string>
    
 </resources>
