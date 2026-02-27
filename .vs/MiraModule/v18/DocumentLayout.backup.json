@@ -3,8 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{11FBC798-BAF5-4EE5-9511-BE6DB0592F99}|MiraModule\\MiraModule.csproj|c:\\users\\greys\\desktop\\!!amongmods\\miramodule\\miramodule\\miramodulecolors.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11FBC798-BAF5-4EE5-9511-BE6DB0592F99}|MiraModule\\MiraModule.csproj|solutionrelative:miramodule\\miramodulecolors.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{11FBC798-BAF5-4EE5-9511-BE6DB0592F99}|MiraModule\\MiraModule.csproj|c:\\users\\greys\\desktop\\!!amongmods\\miramodule\\miramodule\\miramoduleplayercolors.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11FBC798-BAF5-4EE5-9511-BE6DB0592F99}|MiraModule\\MiraModule.csproj|solutionrelative:miramodule\\miramoduleplayercolors.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{11FBC798-BAF5-4EE5-9511-BE6DB0592F99}|MiraModule\\MiraModule.csproj|c:\\users\\greys\\desktop\\!!amongmods\\miramodule\\miramodule\\resources\\neutbuttons\\sentinelkillbutton.png||{58961B49-13E0-48C0-9258-13CBC4D40279}",
+      "RelativeMoniker": "D:0:0:{11FBC798-BAF5-4EE5-9511-BE6DB0592F99}|MiraModule\\MiraModule.csproj|solutionrelative:miramodule\\resources\\neutbuttons\\sentinelkillbutton.png||{58961B49-13E0-48C0-9258-13CBC4D40279}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{11FBC798-BAF5-4EE5-9511-BE6DB0592F99}|MiraModule\\MiraModule.csproj|c:\\users\\greys\\desktop\\!!amongmods\\miramodule\\miramodule\\assets\\impostorassets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{11FBC798-BAF5-4EE5-9511-BE6DB0592F99}|MiraModule\\MiraModule.csproj|solutionrelative:miramodule\\assets\\impostorassets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{11FBC798-BAF5-4EE5-9511-BE6DB0592F99}|MiraModule\\MiraModule.csproj|c:\\users\\greys\\desktop\\!!amongmods\\miramodule\\miramodule\\roles\\crewmate\\dictatorrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11FBC798-BAF5-4EE5-9511-BE6DB0592F99}|MiraModule\\MiraModule.csproj|solutionrelative:miramodule\\roles\\crewmate\\dictatorrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{11FBC798-BAF5-4EE5-9511-BE6DB0592F99}|MiraModule\\MiraModule.csproj|c:\\users\\greys\\desktop\\!!amongmods\\miramodule\\miramodule\\assets\\neutassets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -29,10 +45,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{11FBC798-BAF5-4EE5-9511-BE6DB0592F99}|MiraModule\\MiraModule.csproj|c:\\users\\greys\\desktop\\!!amongmods\\miramodule\\miramodule\\patches\\abyssmeetingpatch.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{11FBC798-BAF5-4EE5-9511-BE6DB0592F99}|MiraModule\\MiraModule.csproj|solutionrelative:miramodule\\patches\\abyssmeetingpatch.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{11FBC798-BAF5-4EE5-9511-BE6DB0592F99}|MiraModule\\MiraModule.csproj|c:\\users\\greys\\desktop\\!!amongmods\\miramodule\\miramodule\\miramodulecolors.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11FBC798-BAF5-4EE5-9511-BE6DB0592F99}|MiraModule\\MiraModule.csproj|solutionrelative:miramodule\\miramodulecolors.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{11FBC798-BAF5-4EE5-9511-BE6DB0592F99}|MiraModule\\MiraModule.csproj|c:\\users\\greys\\desktop\\!!amongmods\\miramodule\\miramodule\\buttons\\neutral\\shiftershiftbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -83,14 +95,6 @@
       "RelativeMoniker": "D:0:0:{11FBC798-BAF5-4EE5-9511-BE6DB0592F99}|MiraModule\\MiraModule.csproj|solutionrelative:miramodule\\assets\\assets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{11FBC798-BAF5-4EE5-9511-BE6DB0592F99}|MiraModule\\MiraModule.csproj|c:\\users\\greys\\desktop\\!!amongmods\\miramodule\\miramodule\\resources\\neutbuttons\\sentinelkillbutton.png||{58961B49-13E0-48C0-9258-13CBC4D40279}",
-      "RelativeMoniker": "D:0:0:{11FBC798-BAF5-4EE5-9511-BE6DB0592F99}|MiraModule\\MiraModule.csproj|solutionrelative:miramodule\\resources\\neutbuttons\\sentinelkillbutton.png||{58961B49-13E0-48C0-9258-13CBC4D40279}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{11FBC798-BAF5-4EE5-9511-BE6DB0592F99}|MiraModule\\MiraModule.csproj|c:\\users\\greys\\desktop\\!!amongmods\\miramodule\\miramodule\\miramoduleplayercolors.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11FBC798-BAF5-4EE5-9511-BE6DB0592F99}|MiraModule\\MiraModule.csproj|solutionrelative:miramodule\\miramoduleplayercolors.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{11FBC798-BAF5-4EE5-9511-BE6DB0592F99}|MiraModule\\MiraModule.csproj|c:\\users\\greys\\desktop\\!!amongmods\\miramodule\\miramodule\\resources\\roleicons\\temproleicon.png||{58961B49-13E0-48C0-9258-13CBC4D40279}",
       "RelativeMoniker": "D:0:0:{11FBC798-BAF5-4EE5-9511-BE6DB0592F99}|MiraModule\\MiraModule.csproj|solutionrelative:miramodule\\resources\\roleicons\\temproleicon.png||{58961B49-13E0-48C0-9258-13CBC4D40279}"
     },
@@ -122,11 +126,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
+              "Title": "DictatorRole.cs",
+              "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Roles\\Crewmate\\DictatorRole.cs",
+              "RelativeDocumentMoniker": "MiraModule\\Roles\\Crewmate\\DictatorRole.cs",
+              "ToolTip": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Roles\\Crewmate\\DictatorRole.cs",
+              "RelativeToolTip": "MiraModule\\Roles\\Crewmate\\DictatorRole.cs",
+              "ViewState": "AgIAAJMAAAAAAAAAAAAkwKUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-27T21:57:50.944Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "ShifterOptions.cs",
               "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Options\\Roles\\Neutral\\ShifterOptions.cs",
               "RelativeDocumentMoniker": "MiraModule\\Options\\Roles\\Neutral\\ShifterOptions.cs",
@@ -139,43 +156,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AbyssOptions.cs",
-              "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Options\\Roles\\Neutral\\AbyssOptions.cs",
-              "RelativeDocumentMoniker": "MiraModule\\Options\\Roles\\Neutral\\AbyssOptions.cs",
-              "ToolTip": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Options\\Roles\\Neutral\\AbyssOptions.cs",
-              "RelativeToolTip": "MiraModule\\Options\\Roles\\Neutral\\AbyssOptions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-27T04:43:24.905Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "NeutAssets.cs",
-              "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Assets\\NeutAssets.cs",
-              "RelativeDocumentMoniker": "MiraModule\\Assets\\NeutAssets.cs",
-              "ToolTip": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Assets\\NeutAssets.cs",
-              "RelativeToolTip": "MiraModule\\Assets\\NeutAssets.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-26T11:44:55.992Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SentinelExplodeButton.cs",
-              "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Buttons\\Neutral\\SentinelExplodeButton.cs",
-              "RelativeDocumentMoniker": "MiraModule\\Buttons\\Neutral\\SentinelExplodeButton.cs",
-              "ToolTip": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Buttons\\Neutral\\SentinelExplodeButton.cs",
-              "RelativeToolTip": "MiraModule\\Buttons\\Neutral\\SentinelExplodeButton.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAABsAAABBAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-26T11:44:56.006Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "ImpostorAssets.cs",
               "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Assets\\ImpostorAssets.cs",
               "RelativeDocumentMoniker": "MiraModule\\Assets\\ImpostorAssets.cs",
@@ -183,11 +164,12 @@
               "RelativeToolTip": "MiraModule\\Assets\\ImpostorAssets.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-27T00:56:21.644Z"
+              "WhenOpened": "2026-02-27T00:56:21.644Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
               "Title": "AbyssMeetingPatch.cs",
               "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Patches\\AbyssMeetingPatch.cs",
               "RelativeDocumentMoniker": "MiraModule\\Patches\\AbyssMeetingPatch.cs",
@@ -199,7 +181,81 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SentinelKillButton.png",
+              "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Resources\\NeutButtons\\SentinelKillButton.png",
+              "RelativeDocumentMoniker": "MiraModule\\Resources\\NeutButtons\\SentinelKillButton.png",
+              "ToolTip": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Resources\\NeutButtons\\SentinelKillButton.png",
+              "RelativeToolTip": "MiraModule\\Resources\\NeutButtons\\SentinelKillButton.png",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
+              "WhenOpened": "2026-02-27T00:35:17.922Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MiraModulePlayerColors.cs",
+              "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\MiraModulePlayerColors.cs",
+              "RelativeDocumentMoniker": "MiraModule\\MiraModulePlayerColors.cs",
+              "ToolTip": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\MiraModulePlayerColors.cs",
+              "RelativeToolTip": "MiraModule\\MiraModulePlayerColors.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-27T00:40:43.287Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MiraModuleColors.cs",
+              "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\MiraModuleColors.cs",
+              "RelativeDocumentMoniker": "MiraModule\\MiraModuleColors.cs",
+              "ToolTip": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\MiraModuleColors.cs",
+              "RelativeToolTip": "MiraModule\\MiraModuleColors.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-26T12:46:12.237Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SentinelExplodeButton.cs",
+              "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Buttons\\Neutral\\SentinelExplodeButton.cs",
+              "RelativeDocumentMoniker": "MiraModule\\Buttons\\Neutral\\SentinelExplodeButton.cs",
+              "ToolTip": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Buttons\\Neutral\\SentinelExplodeButton.cs",
+              "RelativeToolTip": "MiraModule\\Buttons\\Neutral\\SentinelExplodeButton.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABsAAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-26T11:44:56.006Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "NeutAssets.cs",
+              "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Assets\\NeutAssets.cs",
+              "RelativeDocumentMoniker": "MiraModule\\Assets\\NeutAssets.cs",
+              "ToolTip": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Assets\\NeutAssets.cs",
+              "RelativeToolTip": "MiraModule\\Assets\\NeutAssets.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-26T11:44:55.992Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AbyssOptions.cs",
+              "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Options\\Roles\\Neutral\\AbyssOptions.cs",
+              "RelativeDocumentMoniker": "MiraModule\\Options\\Roles\\Neutral\\AbyssOptions.cs",
+              "ToolTip": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Options\\Roles\\Neutral\\AbyssOptions.cs",
+              "RelativeToolTip": "MiraModule\\Options\\Roles\\Neutral\\AbyssOptions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-27T04:43:24.905Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "RoleIcons.cs",
               "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Assets\\RoleIcons.cs",
               "RelativeDocumentMoniker": "MiraModule\\Assets\\RoleIcons.cs",
@@ -211,7 +267,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "ShifterShiftButton.cs",
               "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Buttons\\Neutral\\ShifterShiftButton.cs",
               "RelativeDocumentMoniker": "MiraModule\\Buttons\\Neutral\\ShifterShiftButton.cs",
@@ -223,7 +279,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 12,
               "Title": "ShifterRole.cs",
               "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Roles\\Neutral\\ShifterRole.cs",
               "RelativeDocumentMoniker": "MiraModule\\Roles\\Neutral\\ShifterRole.cs",
@@ -235,7 +291,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 13,
               "Title": "EraserAssassinModifier.cs",
               "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Modifiers\\EraserAssassinModifier.cs",
               "RelativeDocumentMoniker": "MiraModule\\Modifiers\\EraserAssassinModifier.cs",
@@ -247,7 +303,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 14,
               "Title": "AbyssAssassinModifier.cs",
               "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Modifiers\\AbyssAssassinModifier.cs",
               "RelativeDocumentMoniker": "MiraModule\\Modifiers\\AbyssAssassinModifier.cs",
@@ -259,19 +315,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "MiraModuleColors.cs",
-              "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\MiraModuleColors.cs",
-              "RelativeDocumentMoniker": "MiraModule\\MiraModuleColors.cs",
-              "ToolTip": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\MiraModuleColors.cs",
-              "RelativeToolTip": "MiraModule\\MiraModuleColors.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABEAAABQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-26T12:46:12.237Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 16,
               "Title": "MiraModule.csproj",
               "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\MiraModule.csproj",
               "RelativeDocumentMoniker": "MiraModule\\MiraModule.csproj",
@@ -284,7 +328,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 17,
               "Title": "AbyssRole.cs",
               "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Roles\\Neutral\\AbyssRole.cs",
               "RelativeDocumentMoniker": "MiraModule\\Roles\\Neutral\\AbyssRole.cs",
@@ -296,7 +340,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 19,
               "Title": "EraserOptions.cs",
               "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Options\\Roles\\Impostor\\EraserOptions.cs",
               "RelativeDocumentMoniker": "MiraModule\\Options\\Roles\\Impostor\\EraserOptions.cs",
@@ -308,7 +352,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 18,
               "Title": "EraserRole.cs",
               "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Roles\\Impostor\\EraserRole.cs",
               "RelativeDocumentMoniker": "MiraModule\\Roles\\Impostor\\EraserRole.cs",
@@ -320,7 +364,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 15,
               "Title": "AbyssGulpButton.cs",
               "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Buttons\\Neutral\\AbyssGulpButton.cs",
               "RelativeDocumentMoniker": "MiraModule\\Buttons\\Neutral\\AbyssGulpButton.cs",
@@ -332,7 +376,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 21,
               "Title": "GlobalUsings.cs",
               "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\GlobalUsings.cs",
               "RelativeDocumentMoniker": "MiraModule\\GlobalUsings.cs",
@@ -344,30 +388,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "MiraModulePlayerColors.cs",
-              "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\MiraModulePlayerColors.cs",
-              "RelativeDocumentMoniker": "MiraModule\\MiraModulePlayerColors.cs",
-              "ToolTip": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\MiraModulePlayerColors.cs",
-              "RelativeToolTip": "MiraModule\\MiraModulePlayerColors.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-27T00:40:43.287Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "SentinelKillButton.png",
-              "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Resources\\NeutButtons\\SentinelKillButton.png",
-              "RelativeDocumentMoniker": "MiraModule\\Resources\\NeutButtons\\SentinelKillButton.png",
-              "ToolTip": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Resources\\NeutButtons\\SentinelKillButton.png",
-              "RelativeToolTip": "MiraModule\\Resources\\NeutButtons\\SentinelKillButton.png",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
-              "WhenOpened": "2026-02-27T00:35:17.922Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 22,
               "Title": "Assets.cs",
               "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Assets\\Assets.cs",
               "RelativeDocumentMoniker": "MiraModule\\Assets\\Assets.cs",
@@ -379,7 +400,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 20,
               "Title": "SwallowedModifier.cs",
               "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Modifiers\\SwallowedModifier.cs",
               "RelativeDocumentMoniker": "MiraModule\\Modifiers\\SwallowedModifier.cs",
@@ -391,7 +412,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "TempRoleIcon.png",
               "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Resources\\RoleIcons\\TempRoleIcon.png",
               "RelativeDocumentMoniker": "MiraModule\\Resources\\RoleIcons\\TempRoleIcon.png",
@@ -402,7 +423,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "ExtensionLocale.cs",
               "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Modules\\ExtensionLocale.cs",
               "RelativeDocumentMoniker": "MiraModule\\Modules\\ExtensionLocale.cs",
@@ -414,7 +435,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "SentinelVentButton.png",
               "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Resources\\NeutButtons\\SentinelVentButton.png",
               "RelativeDocumentMoniker": "MiraModule\\Resources\\NeutButtons\\SentinelVentButton.png",
@@ -425,7 +446,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "Explode.cs",
               "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Modules\\Explode.cs",
               "RelativeDocumentMoniker": "MiraModule\\Modules\\Explode.cs",
@@ -437,7 +458,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "LogoPatch.cs",
               "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Patches\\LogoPatch.cs",
               "RelativeDocumentMoniker": "MiraModule\\Patches\\LogoPatch.cs",
@@ -449,7 +470,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "SentinelKillButton.cs",
               "DocumentMoniker": "C:\\Users\\greys\\Desktop\\!!AMONGMODs\\MiraModule\\MiraModule\\Buttons\\Neutral\\SentinelKillButton.cs",
               "RelativeDocumentMoniker": "MiraModule\\Buttons\\Neutral\\SentinelKillButton.cs",

@@ -140,13 +140,13 @@ public sealed class DictatorRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOfU
         var skip = meeting.SkipVoteButton;
 
         // Move skip up first so we can place the two new buttons directly below it
-        skip.transform.localPosition += new Vector3(0f, 0.34f, 0f);
+        skip.transform.localPosition += new Vector3(0f, 0.44f, 0f);
 
         // ── End Meeting Button (directly below skip) ──────────────────
         EndMeetingButton = UnityEngine.Object.Instantiate(skip, skip.transform.parent);
         EndMeetingButton.Parent = meeting;
         EndMeetingButton.SetTargetPlayerId(252);
-        EndMeetingButton.transform.localPosition = skip.transform.localPosition + new Vector3(0f, -0.17f, 0f);
+        EndMeetingButton.transform.localPosition = skip.transform.localPosition + new Vector3(0f, -0.22f, 0f);
         EndMeetingButton.gameObject.GetComponentInChildren<TextTranslatorTMP>().Destroy();
         EndMeetingButton.gameObject.GetComponentInChildren<TextMeshPro>().text =
             TouLocale.GetParsed("MiraRoleDictatorEndMeeting").ToUpperInvariant();
@@ -156,7 +156,7 @@ public sealed class DictatorRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOfU
         CondemnButton = UnityEngine.Object.Instantiate(skip, skip.transform.parent);
         CondemnButton.Parent = meeting;
         CondemnButton.SetTargetPlayerId(253);
-        CondemnButton.transform.localPosition = skip.transform.localPosition + new Vector3(0f, -0.34f, 0f);
+        CondemnButton.transform.localPosition = skip.transform.localPosition + new Vector3(0f, -0.44f, 0f);
         CondemnButton.gameObject.GetComponentInChildren<TextTranslatorTMP>().Destroy();
         CondemnButton.gameObject.GetComponentInChildren<TextMeshPro>().text =
             TouLocale.GetParsed("MiraRoleDictatorCondemn").ToUpperInvariant();
