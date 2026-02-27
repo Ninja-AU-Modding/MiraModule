@@ -6,7 +6,7 @@
 		<VersionPrefix>1.0.3</VersionPrefix>
 		<VersionSuffix>dev</VersionSuffix>
 		<RootNamespace>MiraModule</RootNamespace>
-		<Description>MiraModule addon for Town of Us Mira</Description>
+		<Description>Mira Module addon for Town of Us Mira</Description>
 		<!-- <Authors>your name</Authors> -->
 	</PropertyGroup>
 

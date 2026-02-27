@@ -33,16 +33,23 @@ public sealed class EraserEraseButton : TownOfUsKillRoleButton<EraserRole, Playe
 
     public override LoadableAsset<Sprite> Sprite => ImpostorAssets.EraserEraseSprite;
 
+    public override void CreateButton(Transform parent)
+    {
+        base.CreateButton(parent);
+        Reactor.Utilities.Coroutines.Start(
+            MiscUtils.CoMoveButtonIndex(this, false));
+    }
+
     public override PlayerControl? GetTarget()
     {
         var opts = OptionGroupSingleton<EraserOptions>.Instance;
 
         bool IsValidTarget(PlayerControl p)
         {
-            // Never erase someone already queued for erase
+            // Never re-queue an erase on someone already pending
             if (EraserRole.PendingErases.ContainsKey(p.PlayerId)) return false;
 
-            // By default, don't allow erasing other Impostors unless the option is on
+            // Don't allow erasing Impostors unless the option is on
             if (!opts.CanEraseImpostors && p.Data.Role.IsImpostor) return false;
 
             return true;
@@ -65,11 +72,8 @@ public sealed class EraserEraseButton : TownOfUsKillRoleButton<EraserRole, Playe
             return;
         }
 
-        // Queue the erase — it will resolve at the next meeting start
+        // Queue the erase — resolves at next meeting start via EraserMeetingPatch
         EraserRole.PendingErases[Target.PlayerId] = PlayerControl.LocalPlayer.PlayerId;
-
-        // Trigger the cooldown immediately
-        SetTimer(Cooldown);
 
         Info($"Eraser queued erase on {Target.Data.PlayerName} (id={Target.PlayerId})");
     }
