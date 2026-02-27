@@ -62,5 +62,19 @@
 
     <!-- Cause of Deaths -->
     <string name="DiedToEraser">Erased</string>
-   
+
+    <!-- Shifter - Neutral Benign -->
+    <string name="MiraRoleShifter">Shifter</string>
+    <string name="MiraRoleShifterIntroBlurb">Take someone's place before they even know it.</string>
+    <string name="MiraRoleShifterTabDescription">Use your Shift ability to target a player.\%nl\%At the \%b\%end of the next meeting\%/b\%, you'll swap roles with them — they become the Shifter, and you become whatever they were.\%nl\%The swap happens \%b\%even if either of you is dead\%/b\% before the meeting ends.</string>
+
+    <!-- Shifter Wiki -->
+    <string name="MiraRoleShifterWikiDescription">The Shifter is a Neutral Benign role that can swap roles with another player. The target must be chosen during the round, and the swap always occurs at the end of the next meeting — the target will not know until after the meeting who shifted with them. The shift is guaranteed even if the Shifter or the target dies before the meeting ends. The player who was shifted becomes the Shifter in their place.</string>
+    <string name="MiraRoleShifterShift">Shift</string>
+    <string name="MiraRoleShifterShiftWikiDescription">Target a player to swap roles with. The swap takes effect at the end of the next meeting, no matter what.</string>
+
+    <!-- Shifter Options -->
+    <string name="MiraOptionShifterShiftCooldown">Shift Cooldown</string>
+    <string name="MiraOptionShifterShiftDeadPlayers">Can Shift Dead Players</string>
+
 </resources>
