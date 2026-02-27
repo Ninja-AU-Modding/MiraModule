@@ -139,24 +139,24 @@ public sealed class DictatorRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOfU
 
         var skip = meeting.SkipVoteButton;
 
-        // Move skip up first so we can place the two new buttons directly below it
-        skip.transform.localPosition += new Vector3(0f, 0.44f, 0f);
+        // Move skip up to create room for two extra buttons beneath it
+        skip.transform.localPosition += new Vector3(0f, 0.66f, 0f);
 
-        // ── End Meeting Button (directly below skip) ──────────────────
+        // ── End Meeting Button (0.44 below skip) ──────────────────────
         EndMeetingButton = UnityEngine.Object.Instantiate(skip, skip.transform.parent);
         EndMeetingButton.Parent = meeting;
         EndMeetingButton.SetTargetPlayerId(252);
-        EndMeetingButton.transform.localPosition = skip.transform.localPosition + new Vector3(0f, -0.22f, 0f);
+        EndMeetingButton.transform.localPosition = skip.transform.localPosition + new Vector3(0f, -0.44f, 0f);
         EndMeetingButton.gameObject.GetComponentInChildren<TextTranslatorTMP>().Destroy();
         EndMeetingButton.gameObject.GetComponentInChildren<TextMeshPro>().text =
             TouLocale.GetParsed("MiraRoleDictatorEndMeeting").ToUpperInvariant();
         EndMeetingButton.gameObject.name = "button_dictatorEndMeeting";
 
-        // ── Condemn Button (directly below End Meeting) ───────────────
+        // ── Condemn Button (0.88 below skip, giving clear gap from End Meeting) ───
         CondemnButton = UnityEngine.Object.Instantiate(skip, skip.transform.parent);
         CondemnButton.Parent = meeting;
         CondemnButton.SetTargetPlayerId(253);
-        CondemnButton.transform.localPosition = skip.transform.localPosition + new Vector3(0f, -0.44f, 0f);
+        CondemnButton.transform.localPosition = skip.transform.localPosition + new Vector3(0f, -0.88f, 0f);
         CondemnButton.gameObject.GetComponentInChildren<TextTranslatorTMP>().Destroy();
         CondemnButton.gameObject.GetComponentInChildren<TextMeshPro>().text =
             TouLocale.GetParsed("MiraRoleDictatorCondemn").ToUpperInvariant();
@@ -240,7 +240,16 @@ public sealed class DictatorRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOfU
         dictator.HasActed = true;
         dictator.CondemnVictim = victimId;
 
-        var victimName = GameData.Instance.GetPlayerById(victimId)?.PlayerName ?? "??";
-        RpcAnnounce(sender, $"The Dictator has condemned {victimName} to their death.");
+        string message;
+        if (victimId == byte.MaxValue - 1) // special: skip was condemned
+        {
+            message = "The Dictator has forced the meeting to be skipped.";
+        }
+        else
+        {
+            var victimName = GameData.Instance.GetPlayerById(victimId)?.PlayerName ?? "??";
+            message = $"The Dictator has condemned {victimName} to their death.";
+        }
+        RpcAnnounce(sender, message);
     }
 }

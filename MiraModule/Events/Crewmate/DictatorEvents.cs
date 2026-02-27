@@ -12,6 +12,9 @@ namespace MiraModule.Events.Crewmate;
 
 public static class DictatorEvents
 {
+    // Special sentinel value meaning "condemn the skip" (force a skip result)
+    private const byte CondemnSkipId = byte.MaxValue - 1;
+
     // ── Button click interception ────────────────────────────────────────
     [RegisterEvent(1000)]
     public static void BeforeLocalVoteEvent(BeforeVoteEvent @event)
@@ -49,6 +52,15 @@ public static class DictatorEvents
             return;
         }
 
+        // ── Condemn: skip button chosen as target (force meeting skip) ─
+        if (voteArea == MeetingHud.Instance.SkipVoteButton && dictator.SelectingCondemnTarget)
+        {
+            DictatorRole.RpcCondemn(PlayerControl.LocalPlayer, CondemnSkipId);
+            dictator.SelectingCondemnTarget = false;
+            @event.Cancel();
+            return;
+        }
+
         // ── Condemn: player chosen as target ──────────────────────────
         if (voteArea != dictator.CondemnButton &&
             voteArea != MeetingHud.Instance.SkipVoteButton &&
@@ -59,17 +71,9 @@ public static class DictatorEvents
             @event.Cancel();
             return;
         }
-
-        // ── Condemn: cancelled via skip ───────────────────────────────
-        if (voteArea == MeetingHud.Instance.SkipVoteButton && dictator.SelectingCondemnTarget)
-        {
-            dictator.SelectingCondemnTarget = false;
-            dictator.CondemnVictim = byte.MaxValue;
-            @event.Cancel();
-        }
     }
 
-    // ── Vote tallying: force 15 votes onto the condemned player ─────────
+    // ── Vote tallying: force all votes onto the condemned player (or skip) ──
     [RegisterEvent]
     public static void VoteEvent(CheckForEndVotingEvent @event)
     {
@@ -80,7 +84,9 @@ public static class DictatorEvents
 
         if (dictator == null) return;
 
-        // Clear everyone's votes then stuff the condemned slot with 15
+        bool isSkip = dictator.CondemnVictim == CondemnSkipId;
+
+        // Clear everyone's votes
         foreach (var plr in PlayerControl.AllPlayerControls.ToArray())
         {
             var data = plr.GetVoteData();
@@ -88,10 +94,24 @@ public static class DictatorEvents
             data.VotesRemaining = 0;
         }
 
-        var dictData = dictator.Player.GetVoteData();
-        for (var i = 0; i < 15; i++)
+        if (isSkip)
         {
-            dictData.VoteForPlayer(dictator.CondemnVictim);
+            // Force a skip result: give every player a skip vote
+            foreach (var plr in PlayerControl.AllPlayerControls.ToArray())
+            {
+                var data = plr.GetVoteData();
+                data.SkipVote();
+            }
+        }
+        else
+        {
+            // Stuff the condemned slot with votes from every living player
+            foreach (var plr in PlayerControl.AllPlayerControls.ToArray())
+            {
+                if (plr.HasDied()) continue;
+                var data = plr.GetVoteData();
+                data.VoteForPlayer(dictator.CondemnVictim);
+            }
         }
     }
 
