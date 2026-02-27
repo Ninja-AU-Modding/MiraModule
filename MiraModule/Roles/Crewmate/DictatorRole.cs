@@ -198,6 +198,18 @@ public sealed class DictatorRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOfU
 
     // ── RPCs ─────────────────────────────────────────────────────────────
 
+    /// <summary>Broadcasts a Dictator announcement message to all clients' chat.</summary>
+    [MethodRpc((uint)MiraModuleRpc.DictatorAnnounce)]
+    public static void RpcAnnounce(PlayerControl sender, string message)
+    {
+        if (sender.Data.Role is not DictatorRole) return;
+        var dictatorColor = $"#{MiraModuleColors.Dictator.ToHtmlStringRGBA()}";
+        MiscUtils.AddFakeChat(
+            sender.Data,
+            $"<color={dictatorColor}>{sender.Data.PlayerName} (Dictator)</color>",
+            message);
+    }
+
     /// <summary>Instantly end the meeting (skip, no exile).</summary>
     [MethodRpc((uint)MiraModuleRpc.DictatorEndMeeting)]
     public static void RpcEndMeeting(PlayerControl sender)
@@ -216,6 +228,7 @@ public sealed class DictatorRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOfU
             data.VotesRemaining = 0;
         }
 
+        RpcAnnounce(sender, "The Dictator has forced the meeting to end.");
         meeting.CheckForEndVoting();
     }
 
@@ -226,5 +239,8 @@ public sealed class DictatorRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOfU
         if (sender.Data.Role is not DictatorRole dictator) return;
         dictator.HasActed = true;
         dictator.CondemnVictim = victimId;
+
+        var victimName = GameData.Instance.GetPlayerById(victimId)?.PlayerName ?? "??";
+        RpcAnnounce(sender, $"The Dictator has condemned {victimName} to their death.");
     }
 }
