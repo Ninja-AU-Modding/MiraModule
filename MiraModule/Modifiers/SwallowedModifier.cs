@@ -95,13 +95,22 @@ public sealed class SwallowedModifier : BaseModifier, IVisualAppearance
         CreateSwallowedText(abyss);
     }
 
+    // Set to true just before Visible = true so the visibility patch lets it through
+    public static readonly HashSet<byte> ReleasingPlayers = new();
+
     public override void OnDeactivate()
     {
         AbyssRole.SwallowedPlayers.Remove(Player.PlayerId);
 
-        // Restore appearance
+        // Restore appearance and visibility.
+        // Must register in ReleasingPlayers first so SwallowedVisibilityPatch allows Visible = true.
         if (!Player.HasDied())
+        {
+            ReleasingPlayers.Add(Player.PlayerId);
             Player.ResetAppearance(true);
+            Player.Visible = true;
+            ReleasingPlayers.Remove(Player.PlayerId);
+        }
 
         DestroyOverlays();
 

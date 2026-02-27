@@ -109,16 +109,28 @@ public sealed class AbyssRole(IntPtr cppPtr)
             HudManager.Instance.ImpostorVentButton.buttonLabelText.SetOutlineColor(TownOfUsColors.Impostor);
         }
 
-        // Release any swallowed players — remove their modifier which restores camera/HUD/movement
+        // Release any swallowed players — snap them to the Abyss's death position first,
+        // then remove their modifier (which restores camera/HUD/movement/appearance).
         var myId = targetPlayer.PlayerId;
+        var deathPos = targetPlayer.GetTruePosition();
         var keys = SwallowedPlayers.Where(kv => kv.Value == myId).Select(kv => kv.Key).ToList();
         foreach (var victimId in keys)
         {
             var victim = MiscUtils.PlayerById(victimId);
-            if (victim != null && victim.HasModifier<SwallowedModifier>())
+            if (victim == null) continue;
+
+            // Teleport victim to where the Abyss died before releasing them
+            victim.NetTransform.SnapTo(deathPos);
+
+            if (victim.HasModifier<SwallowedModifier>())
             {
                 victim.RpcRemoveModifier<SwallowedModifier>();
             }
+
+            // Force visibility on — register in ReleasingPlayers so the patch allows it through
+            SwallowedModifier.ReleasingPlayers.Add(victimId);
+            victim.Visible = true;
+            SwallowedModifier.ReleasingPlayers.Remove(victimId);
         }
     }
 
