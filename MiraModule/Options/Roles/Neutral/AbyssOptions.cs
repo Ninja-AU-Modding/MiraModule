@@ -19,4 +19,7 @@ public sealed class AbyssOptions : AbstractOptionGroup<AbyssRole>
 
     [ModdedToggleOption("MiraOptionAbyssCanVent")]
     public bool CanVent { get; set; }
+
+    [ModdedToggleOption("MiraOptionAbyssHasAssassin")]
+    public bool HasAssassin { get; set; } = false;
 }

@@ -32,6 +32,7 @@
     <!-- Abyss Options -->
     <string name="MiraOptionAbyssGulpCooldown">Gulp Cooldown</string>
     <string name="MiraOptionAbyssCanVent">Abyss Can Vent</string>
+    <string name="MiraOptionAbyssHasAssassin">Abyss Has Assassin Ability</string>
     <string name="MiraOptionAbyssImpostorVision">Abyss Has Impostor Vision</string>
 
     <!-- Sentinel Options -->
@@ -57,6 +58,7 @@
     <string name="MiraOptionEraserCanEraseImpostors">Eraser Can Erase Impostors</string>
     <string name="MiraOptionEraserNeutralOutcome">Neutral Erase Outcome</string>
     <string name="MiraOptionEraserCanVent">Eraser Can Vent</string>
+    <string name="MiraOptionEraserHasAssassin">Eraser Has Assassin Ability</string>
 
     <!-- Cause of Deaths -->
     <string name="DiedToEraser">Erased</string>

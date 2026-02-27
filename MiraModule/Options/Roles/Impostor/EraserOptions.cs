@@ -34,4 +34,7 @@ public sealed class EraserOptions : AbstractOptionGroup<EraserRole>
 
     [ModdedToggleOption("MiraOptionEraserCanVent")]
     public bool CanVent { get; set; } = false;
+
+    [ModdedToggleOption("MiraOptionEraserHasAssassin")]
+    public bool HasAssassin { get; set; } = true;
 }
