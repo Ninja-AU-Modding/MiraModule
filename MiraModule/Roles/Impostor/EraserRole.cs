@@ -1,4 +1,3 @@
-using AmongUs.GameOptions;
 using Il2CppInterop.Runtime.Attributes;
 using MiraAPI.GameOptions;
 using MiraAPI.Hud;
@@ -7,13 +6,15 @@ using MiraAPI.Roles;
 using MiraModule.Assets;
 using MiraModule.Buttons.Impostor;
 using MiraModule.Options.Roles.Impostor;
+using MiraAPI.Patches.Freeplay;
 using TownOfUs;
-using TownOfUs.Assets;
+using AmongUs.GameOptions;
 using TownOfUs.Modules.Localization;
 using TownOfUs.Modules.Wiki;
 using TownOfUs.Roles;
 using TownOfUs.Utilities;
 using UnityEngine;
+using Reactor.Utilities;
 
 namespace MiraModule.Roles.Impostor;
 
@@ -57,30 +58,34 @@ public sealed class EraserRole(IntPtr cppPtr)
 
     public Color RoleColor => MiraModuleColors.Eraser;
     public ModdedRoleTeams Team => ModdedRoleTeams.Impostor;
+    public RoleAlignment RoleAlignment => RoleAlignment.ImpostorKilling;
 
     public CustomRoleConfiguration Configuration => new(this)
     {
         Icon = RoleIcons.Eraser,
         GhostRole = RoleTypes.ImpostorGhost,
         UseVanillaKillButton = true,
-        CanUseVent = OptionGroupSingleton<EraserOptions>.Instance.CanVent,
         CanUseSabotage = true,
+        CanUseVent = OptionGroupSingleton<EraserOptions>.Instance.CanVent,
+        FreeplayFolder = TaskAdderPatches.ImpostorName,
     };
-
-    /// <summary>
-    /// How many erases this specific Eraser has queued or confirmed — used for cooldown scaling.
-    /// </summary>
-    public int TotalErasesDoneByMe =>
-        PendingErases.Values.Count(id => id == Player.PlayerId) +
-        ErasedPlayerIds.Count; // shared global total; we track globally since one eraser per game is typical
 
     public override void Initialize(PlayerControl player)
     {
         RoleBehaviourStubs.Initialize(this, player);
+        if (Player.AmOwner)
+        {
+            Coroutines.Start(MiscUtils.CoMoveButtonIndex(CustomButtonSingleton<EraserEraseButton>.Instance, !OptionGroupSingleton<EraserOptions>.Instance.CanVent));
+            HudManager.Instance.ImpostorVentButton.buttonLabelText.SetOutlineColor(MiraModuleColors.Eraser);
+        }
     }
 
     public override void Deinitialize(PlayerControl targetPlayer)
     {
         RoleBehaviourStubs.Deinitialize(this, targetPlayer);
+        if (Player.AmOwner)
+        {
+            HudManager.Instance.ImpostorVentButton.buttonLabelText.SetOutlineColor(TownOfUsColors.Impostor);
+        }
     }
 }
