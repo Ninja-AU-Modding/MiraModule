@@ -1,0 +1,7 @@
+namespace MiraModule;
+
+public enum MiraModuleRpc : uint
+{
+    DictatorEndMeeting = 10200,
+    DictatorCondemn = 10201,
+}

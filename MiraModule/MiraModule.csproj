@@ -14,5 +14,10 @@
 		<EmbeddedResource Include="Resources\**\*.*" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Buttons\Crewmates\" />
+	  <Folder Include="Options\Roles\Crewmates\" />
+	</ItemGroup>
+
 	<Import Project="../AmongUs.props" />
 </Project>

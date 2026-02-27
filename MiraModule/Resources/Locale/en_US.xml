@@ -73,6 +73,25 @@
     <string name="MiraRoleShifterShift">Shift</string>
     <string name="MiraRoleShifterShiftWikiDescription">Target a player to swap roles with. The swap takes effect at the end of the next meeting, no matter what.</string>
 
+    <!-- Dictator - Crewmate Power -->
+    <string name="MiraRoleDictator">Dictator</string>
+    <string name="MiraRoleDictatorIntroBlurb">Your word is law. Enforce it.</string>
+    <string name="MiraRoleDictatorTabDescription">As the Dictator you hold ultimate authority in meetings.\%nl\%Use \%b\%End Meeting\%/b\% to instantly dismiss a meeting with no exile.\%nl\%Use \%b\%Condemn\%/b\% to force all votes onto a chosen player, ensuring their exile.\%nl\%Each use costs one of your limited charges.</string>
+
+    <!-- Dictator Wiki -->
+    <string name="MiraRoleDictatorWikiDescription">The Dictator is a Crewmate Power role with limited uses. During a meeting they have two special buttons: End Meeting, which immediately closes the meeting with no exile, and Condemn, which forces 15 votes onto any chosen player guaranteeing their removal. Depending on settings, the Dictator may sacrifice themselves after using Condemn, or once their uses are exhausted.</string>
+    <string name="MiraRoleDictatorEndMeeting">End Meeting</string>
+    <string name="MiraRoleDictatorEndMeetingWikiDescription">Instantly end the meeting with no exile. Costs one use.</string>
+    <string name="MiraRoleDictatorCondemn">Condemn</string>
+    <string name="MiraRoleDictatorCondemnWikiDescription">Click Condemn, then click a player to force all votes onto them. They will be exiled. Costs one use.</string>
+
+    <!-- Dictator Options -->
+    <string name="MiraOptionDictatorMaxUses">Max Uses</string>
+    <string name="MiraOptionDictatorUsesLeft">Uses Remaining</string>
+    <string name="MiraOptionDictatorSacrificeOnUse">Dictator Sacrifices On Each Use</string>
+    <string name="MiraOptionDictatorSacrificeOnEmpty">Dictator Sacrifices When Uses Run Out</string>
+    <string name="MiraOptionDictatorCanCondemnCrew">Dictator Can Condemn Crewmates</string>
+
     <!-- Shifter Options -->
     <string name="MiraOptionShifterShiftCooldown">Shift Cooldown</string>
     <string name="MiraOptionShifterShiftDeadPlayers">Can Shift Dead Players</string>
