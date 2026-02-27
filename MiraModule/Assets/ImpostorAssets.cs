@@ -8,5 +8,5 @@ public static class ImpostorAssets
     private const string ShortPath = "MiraModule.Resources.ImpButtons";
 
     // Eraser Assets
-    public static LoadableAsset<Sprite> EraserEraseSprite { get; } = new LoadableResourceAsset($"{ShortPath}.Tempbutton.png");
+    public static LoadableAsset<Sprite> EraserEraseSprite { get; } = new LoadableResourceAsset($"{ShortPath}.EraserErase.png");
 }
