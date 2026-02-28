@@ -6,4 +6,6 @@ public enum MiraModuleRpc : uint
     DictatorCondemn = 10201,
     DictatorAnnounce = 10202,
     ExplosiveExplode = 10203,
+    ChaosTokenRoll = 10210,
+    ChaosTokenGain = 10211,
 }

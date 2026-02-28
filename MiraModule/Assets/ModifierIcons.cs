@@ -9,4 +9,7 @@ public static class ModifierIcons
 
     public static LoadableAsset<Sprite> Explosive { get; } =
         new LoadableResourceAsset($"{ShortPath}.TempIcon.png", 200);
+
+    public static LoadableAsset<Sprite> ChaosToken { get; } =
+        new LoadableResourceAsset($"{ShortPath}.TempIcon.png", 200);
 }
