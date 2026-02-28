@@ -92,22 +92,6 @@
     <string name="MiraOptionDictatorSacrificeOnEmpty">Dictator Sacrifices When Uses Run Out</string>
     <string name="MiraOptionDictatorCanCondemnCrew">Dictator Can Condemn Crewmates</string>
 
-    <!-- Phasewalker - Crewmate Support -->
-    <string name="MiraRolePhasewalker">Phasewalker</string>
-    <string name="MiraRolePhasewalkerIntroBlurb">Phase through walls and slip away unseen.</string>
-    <string name="MiraRolePhasewalkerTabDescription">Use your \%b\%Phase\%/b\% ability to walk through walls.\%nl\%While phased you are \%b\%semi-transparent\%/b\% and cannot interact with tasks, buttons, or bodies.\%nl\%Meetings will forcibly end your phase.</string>
-
-    <!-- Phasewalker Wiki -->
-    <string name="MiraRolePhasewalkerWikiDescription">The Phasewalker is a Crewmate Support role that can temporarily phase through walls. While phased they move slightly slower, cannot interact with anything, and cannot report bodies. Impostors and dead players see a dimmed ghost; living crewmates see only a faint outline. A meeting or death will always end the phase immediately.</string>
-    <string name="MiraRolePhasewalkerPhase">Phase</string>
-    <string name="MiraRolePhasewalkerPhaseWikiDescription">Temporarily phase through walls. You cannot interact with anything while phased. Press again to end early.</string>
-
-    <!-- Phasewalker Options -->
-    <string name="MiraOptionPhasewalkerPhaseCooldown">Phase Cooldown</string>
-    <string name="MiraOptionPhasewalkerPhaseDuration">Phase Duration</string>
-    <string name="MiraOptionPhasewalkerPhaseSpeedMultiplier">Phase Speed Multiplier</string>
-    <string name="MiraOptionPhasewalkerShowDistortionTrail">Show Distortion Trail</string>
-
     <!-- Shifter Options -->
     <string name="MiraOptionShifterShiftCooldown">Shift Cooldown</string>
     <string name="MiraOptionShifterShiftDeadPlayers">Can Shift Dead Players</string>
