@@ -9,6 +9,7 @@ public static class MiraModuleColors
     // Crew Colors
     public static Color Chameleon => TownOfUsColors.UseBasic ? Palette.CrewmateBlue : new Color32(81, 180, 154, 255);
     public static Color Dictator => TownOfUsColors.UseBasic ? Palette.CrewmateBlue : new Color32(220, 233, 102, 255); // Yellow Ish
+    public static Color Phasewalker => TownOfUsColors.UseBasic ? Palette.CrewmateBlue : new Color32(100, 200, 240, 255); // Cyan-Blue
     
     // Impostor Colors
     public static Color Eraser => new Color32(200, 60, 60, 255); // Deep crimson

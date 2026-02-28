@@ -19,4 +19,5 @@ public static class RoleIcons
 
     // Crewmates
     public static LoadableAsset<Sprite> Dictator { get; } = new LoadableResourceAsset($"{ShortPath}.RoleIcons.TempRoleIcon.png", 200);
+    public static LoadableAsset<Sprite> Phasewalker { get; } = new LoadableResourceAsset($"{ShortPath}.RoleIcons.TempRoleIcon.png", 200);
 }
