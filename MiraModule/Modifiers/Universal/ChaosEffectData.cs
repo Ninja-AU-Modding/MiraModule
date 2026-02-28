@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace MiraModule.Modifiers.Universal;
 
-// ── Rarity & Duration Categories ─────────────────────────────────────────────
+// ── Rarity ────────────────────────────────────────────────────────────────────
 
 public enum ChaosEffectRarity
 {
@@ -11,148 +11,77 @@ public enum ChaosEffectRarity
     Legendary,
 }
 
-public enum ChaosEffectDuration
+// ── Category ──────────────────────────────────────────────────────────────────
+
+public enum ChaosEffectCategory
 {
-    /// <summary>Lasts for a fixed number of seconds (ChaosTokenOptions.TimedEffectDuration).</summary>
-    Timed,
-    /// <summary>Lasts until the next meeting starts.</summary>
-    UntilMeeting,
-    /// <summary>Permanent for the rest of the game.</summary>
-    Permanent,
+    Positive,
+    Neutral,
+    Negative,
 }
 
 // ── Effect IDs ────────────────────────────────────────────────────────────────
 
 public enum ChaosEffect
 {
-    // Common Buffs
-    SpeedBoost,
-    VisionBoost,
-    CooldownReduction,
+    // Positive
+    Defense,
+    Speed,
+    Votes,
+    MoreTokens,
+    OneTimeKill,
+    Tasks,
+    Vision,
+    Invisible,
 
-    // Common Debuffs
-    SpeedSlow,
-    VisionReduced,
-    CooldownIncrease,
+    // Neutral
+    RevealRandomPlayer,
+    PositionSwap,
+    RoleSwap,
+    Revive,
 
-    // Rare Buffs
-    DoubleSpeedBurst,
-    PerfectVision,
+    // Negative
+    Death,
+}
 
-    // Rare Debuffs
-    BlindVision,
-    RandomTeleport,
+// ── Per-effect metadata ───────────────────────────────────────────────────────
 
-    // Legendary
-    Invincibility,
-    SuperSpeed,
+public sealed class ChaosEffectInfo
+{
+    public ChaosEffect         Effect      { get; init; }
+    public string              Name        { get; init; } = "";
+    public string              Description { get; init; } = "";
+    public ChaosEffectCategory Category    { get; init; }
+    public ChaosEffectRarity   Rarity      { get; init; } = ChaosEffectRarity.Common;
+    public Color               Color       { get; init; } = Color.white;
 }
 
 // ── Static metadata for each effect ──────────────────────────────────────────
 
 public static class ChaosEffectData
 {
-    public record EffectInfo(
-        ChaosEffect Effect,
-        string Name,
-        string Description,
-        ChaosEffectRarity Rarity,
-        ChaosEffectDuration Duration,
-        bool IsNegative,
-        Color Color);
-
-    public static readonly EffectInfo[] All =
+    public static readonly List<ChaosEffectInfo> All =
     [
-        // ── Common Buffs ──────────────────────────────────────────────────
-        new(ChaosEffect.SpeedBoost,
-            "Speed Boost",
-            "Your movement speed is increased.",
-            ChaosEffectRarity.Common, ChaosEffectDuration.Timed,
-            IsNegative: false,
-            new Color32(100, 220, 100, 255)),
+        // ── Positive ──────────────────────────────────────────────────────────
+        new() { Effect = ChaosEffect.Defense,           Name = "Defense",             Description = "You gain a temporary shield. You are protected from attacks and guesses.",                                    Category = ChaosEffectCategory.Positive, Rarity = ChaosEffectRarity.Rare,      Color = new Color32(80,  180, 255, 255) },
+        new() { Effect = ChaosEffect.Speed,             Name = "Speed",               Description = "Your speed is multiplied by a random value.",                                                                Category = ChaosEffectCategory.Positive, Rarity = ChaosEffectRarity.Common,    Color = new Color32(100, 220, 100, 255) },
+        new() { Effect = ChaosEffect.Votes,             Name = "Votes",               Description = "You gain a random amount of bonus votes during the next meeting.",                                           Category = ChaosEffectCategory.Positive, Rarity = ChaosEffectRarity.Rare,      Color = new Color32(255, 215, 0,   255) },
+        new() { Effect = ChaosEffect.MoreTokens,        Name = "More Tokens",         Description = "You gain more tokens to gamble more.",                                                                       Category = ChaosEffectCategory.Positive, Rarity = ChaosEffectRarity.Common,    Color = new Color32(255, 200, 50,  255) },
+        new() { Effect = ChaosEffect.OneTimeKill,       Name = "One Time Kill",       Description = "You gain a one-time-use kill button. There is no penalty for killing a crewmate.",                          Category = ChaosEffectCategory.Positive, Rarity = ChaosEffectRarity.Legendary, Color = new Color32(200, 50,  50,  255) },
+        new() { Effect = ChaosEffect.Tasks,             Name = "Tasks",               Description = "A random amount of tasks are completed for you.",                                                            Category = ChaosEffectCategory.Positive, Rarity = ChaosEffectRarity.Common,    Color = new Color32(130, 255, 180, 255) },
+        new() { Effect = ChaosEffect.Vision,            Name = "Vision",              Description = "Your vision is increased.",                                                                                  Category = ChaosEffectCategory.Positive, Rarity = ChaosEffectRarity.Common,    Color = new Color32(255, 255, 150, 255) },
+        new() { Effect = ChaosEffect.Invisible,         Name = "Invisible",           Description = "You become invisible after standing still.",                                                                 Category = ChaosEffectCategory.Positive, Rarity = ChaosEffectRarity.Legendary, Color = new Color32(200, 200, 255, 255) },
 
-        new(ChaosEffect.VisionBoost,
-            "Eagle Eye",
-            "Your vision range is expanded.",
-            ChaosEffectRarity.Common, ChaosEffectDuration.Timed,
-            IsNegative: false,
-            new Color32(180, 220, 255, 255)),
+        // ── Neutral ───────────────────────────────────────────────────────────
+        new() { Effect = ChaosEffect.RevealRandomPlayer, Name = "Reveal Random Player", Description = "A random person gets their role revealed to everyone.",                                                   Category = ChaosEffectCategory.Neutral,  Rarity = ChaosEffectRarity.Rare,      Color = new Color32(180, 100, 255, 255) },
+        new() { Effect = ChaosEffect.PositionSwap,       Name = "Position Swap",        Description = "You swap places with a random person.",                                                                   Category = ChaosEffectCategory.Neutral,  Rarity = ChaosEffectRarity.Common,    Color = new Color32(100, 200, 200, 255) },
+        new() { Effect = ChaosEffect.RoleSwap,           Name = "Role Swap",            Description = "You swap roles with a random person of your alignment.",                                                  Category = ChaosEffectCategory.Neutral,  Rarity = ChaosEffectRarity.Legendary, Color = new Color32(255, 150, 50,  255) },
+        new() { Effect = ChaosEffect.Revive,             Name = "Revive",               Description = "You revive a random person that died this round.",                                                        Category = ChaosEffectCategory.Neutral,  Rarity = ChaosEffectRarity.Legendary, Color = new Color32(100, 255, 100, 255) },
 
-        new(ChaosEffect.CooldownReduction,
-            "Quick Hands",
-            "Your ability cooldowns are reduced by 10 seconds.",
-            ChaosEffectRarity.Common, ChaosEffectDuration.UntilMeeting,
-            IsNegative: false,
-            new Color32(130, 255, 200, 255)),
-
-        // ── Common Debuffs ────────────────────────────────────────────────
-        new(ChaosEffect.SpeedSlow,
-            "Lead Feet",
-            "Your movement speed is reduced.",
-            ChaosEffectRarity.Common, ChaosEffectDuration.Timed,
-            IsNegative: true,
-            new Color32(180, 100, 100, 255)),
-
-        new(ChaosEffect.VisionReduced,
-            "Blurry Eyes",
-            "Your vision range is reduced.",
-            ChaosEffectRarity.Common, ChaosEffectDuration.Timed,
-            IsNegative: true,
-            new Color32(150, 80, 80, 255)),
-
-        new(ChaosEffect.CooldownIncrease,
-            "Slow Hands",
-            "Your ability cooldowns are increased by 10 seconds.",
-            ChaosEffectRarity.Common, ChaosEffectDuration.UntilMeeting,
-            IsNegative: true,
-            new Color32(220, 80, 80, 255)),
-
-        // ── Rare Buffs ────────────────────────────────────────────────────
-        new(ChaosEffect.DoubleSpeedBurst,
-            "Hyperdrive",
-            "You briefly move at double speed.",
-            ChaosEffectRarity.Rare, ChaosEffectDuration.Timed,
-            IsNegative: false,
-            new Color32(255, 200, 50, 255)),
-
-        new(ChaosEffect.PerfectVision,
-            "All-Seeing",
-            "You can see the entire map until next meeting.",
-            ChaosEffectRarity.Rare, ChaosEffectDuration.UntilMeeting,
-            IsNegative: false,
-            new Color32(255, 255, 150, 255)),
-
-        // ── Rare Debuffs ──────────────────────────────────────────────────
-        new(ChaosEffect.BlindVision,
-            "Tunnel Vision",
-            "Your vision is nearly zero.",
-            ChaosEffectRarity.Rare, ChaosEffectDuration.Timed,
-            IsNegative: true,
-            new Color32(60, 60, 60, 255)),
-
-        new(ChaosEffect.RandomTeleport,
-            "Chaos Warp",
-            "You are teleported to a random location on the map.",
-            ChaosEffectRarity.Rare, ChaosEffectDuration.Permanent,
-            IsNegative: false,   // Chaotic — neutral framing
-            new Color32(180, 80, 255, 255)),
-
-        // ── Legendary ─────────────────────────────────────────────────────
-        new(ChaosEffect.Invincibility,
-            "Invincible",
-            "You cannot be killed until the next meeting.",
-            ChaosEffectRarity.Legendary, ChaosEffectDuration.UntilMeeting,
-            IsNegative: false,
-            new Color32(255, 215, 0, 255)),
-
-        new(ChaosEffect.SuperSpeed,
-            "Sonic",
-            "You move at extreme speed until the next meeting.",
-            ChaosEffectRarity.Legendary, ChaosEffectDuration.UntilMeeting,
-            IsNegative: false,
-            new Color32(100, 255, 255, 255)),
+        // ── Negative ──────────────────────────────────────────────────────────
+        new() { Effect = ChaosEffect.Death,             Name = "Death",               Description = "You die at the end of the next meeting. No meeting ability can be used on you. Any votes on you won't count.", Category = ChaosEffectCategory.Negative, Rarity = ChaosEffectRarity.Rare,   Color = new Color32(60,  60,  60,  255) },
     ];
 
-    public static EffectInfo Get(ChaosEffect effect) =>
-        System.Array.Find(All, e => e.Effect == effect)!;
+    public static ChaosEffectInfo Get(ChaosEffect effect) =>
+        All.First(e => e.Effect == effect);
 }

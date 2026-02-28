@@ -9,6 +9,7 @@ using MiraModule.Options.Modifiers;
 using MiraModule.Options.Modifiers.Universal;
 using Reactor.Networking.Attributes;
 using Reactor.Utilities;
+using TownOfUs.Modifiers;
 using TownOfUs.Modifiers.Game;
 using TownOfUs.Utilities;
 using TownOfUs.Utilities.Appearances;
@@ -16,72 +17,10 @@ using UnityEngine;
 
 namespace MiraModule.Modifiers.Universal;
 
-// ── Effect enums & data ───────────────────────────────────────────────────────
-
-public enum ChaosEffect
-{
-    // Speed
-    SpeedBoost,
-    SpeedSlow,
-    DoubleSpeedBurst,
-    SuperSpeed,
-
-    // Vision
-    VisionBoost,
-    VisionReduced,
-    PerfectVision,
-    BlindVision,
-
-    // Cooldown
-    CooldownReduction,
-    CooldownIncrease,
-
-    // Misc
-    RandomTeleport,
-    Invincibility,
-}
-
-public enum ChaosEffectRarity  { Common, Rare, Legendary }
-public enum ChaosEffectDuration { Timed, UntilMeeting, Permanent }
-
-public sealed class ChaosEffectInfo
-{
-    public ChaosEffect Effect     { get; init; }
-    public string      Name       { get; init; } = "";
-    public string      Description{ get; init; } = "";
-    public bool        IsNegative { get; init; }
-    public ChaosEffectRarity   Rarity   { get; init; } = ChaosEffectRarity.Common;
-    public ChaosEffectDuration Duration { get; init; } = ChaosEffectDuration.Timed;
-    public Color               Color    { get; init; } = Color.white;
-}
-
-public static class ChaosEffectData
-{
-    public static readonly List<ChaosEffectInfo> All =
-    [
-        new() { Effect = ChaosEffect.SpeedBoost,       Name = "Speed Boost",       Description = "Move 50% faster for a while.",             IsNegative = false, Rarity = ChaosEffectRarity.Common,    Duration = ChaosEffectDuration.Timed,       Color = new Color32(100, 220, 100, 255) },
-        new() { Effect = ChaosEffect.SpeedSlow,        Name = "Lead Boots",         Description = "Move 40% slower for a while.",             IsNegative = true,  Rarity = ChaosEffectRarity.Common,    Duration = ChaosEffectDuration.Timed,       Color = new Color32(150, 100, 60,  255) },
-        new() { Effect = ChaosEffect.DoubleSpeedBurst, Name = "Overdrive",          Description = "Double speed until next meeting!",         IsNegative = false, Rarity = ChaosEffectRarity.Rare,      Duration = ChaosEffectDuration.UntilMeeting,Color = new Color32(80,  200, 255, 255) },
-        new() { Effect = ChaosEffect.SuperSpeed,       Name = "Chaos Sprint",       Description = "3× speed — good luck controlling it!",    IsNegative = false, Rarity = ChaosEffectRarity.Legendary, Duration = ChaosEffectDuration.Timed,       Color = new Color32(255, 200, 50,  255) },
-        new() { Effect = ChaosEffect.VisionBoost,      Name = "Eagle Eyes",         Description = "Vision boosted by 75% for a while.",       IsNegative = false, Rarity = ChaosEffectRarity.Common,    Duration = ChaosEffectDuration.Timed,       Color = new Color32(255, 255, 120, 255) },
-        new() { Effect = ChaosEffect.VisionReduced,    Name = "Tunnel Vision",      Description = "Vision cut to 40% for a while.",           IsNegative = true,  Rarity = ChaosEffectRarity.Common,    Duration = ChaosEffectDuration.Timed,       Color = new Color32(80,  80,  80,  255) },
-        new() { Effect = ChaosEffect.PerfectVision,    Name = "Omniscient",         Description = "Full map vision until next meeting!",      IsNegative = false, Rarity = ChaosEffectRarity.Legendary, Duration = ChaosEffectDuration.UntilMeeting,Color = new Color32(255, 240, 80,  255) },
-        new() { Effect = ChaosEffect.BlindVision,      Name = "Blindfolded",        Description = "Almost no vision for a while.",            IsNegative = true,  Rarity = ChaosEffectRarity.Rare,      Duration = ChaosEffectDuration.Timed,       Color = new Color32(30,  30,  30,  255) },
-        new() { Effect = ChaosEffect.CooldownReduction,Name = "Quick Hands",        Description = "All ability cooldowns -10s permanently.",  IsNegative = false, Rarity = ChaosEffectRarity.Rare,      Duration = ChaosEffectDuration.Permanent,   Color = new Color32(100, 255, 180, 255) },
-        new() { Effect = ChaosEffect.CooldownIncrease, Name = "Fumbling",           Description = "All ability cooldowns +10s permanently.",  IsNegative = true,  Rarity = ChaosEffectRarity.Common,    Duration = ChaosEffectDuration.Permanent,   Color = new Color32(200, 80,  80,  255) },
-        new() { Effect = ChaosEffect.RandomTeleport,   Name = "Warp",               Description = "Teleported to a random location!",         IsNegative = false, Rarity = ChaosEffectRarity.Rare,      Duration = ChaosEffectDuration.Permanent,   Color = new Color32(180, 100, 255, 255) },
-        new() { Effect = ChaosEffect.Invincibility,    Name = "Invincible",         Description = "Cannot be killed until next meeting!",     IsNegative = false, Rarity = ChaosEffectRarity.Legendary, Duration = ChaosEffectDuration.UntilMeeting,Color = new Color32(255, 215, 0,   255) },
-    ];
-
-    public static ChaosEffectInfo Get(ChaosEffect effect) =>
-        All.First(e => e.Effect == effect);
-}
-
-// ── The modifier itself ───────────────────────────────────────────────────────
-
 /// <summary>
 /// Chaos Tokens modifier. Grants a dice button that rolls a random effect on use.
 /// Tokens are earned via tasks, meetings, and kills (all configurable).
+/// Effects never stack — each roll replaces any previous active effect.
 /// </summary>
 public sealed class ChaosTokenModifier : UniversalGameModifier, IVisualAppearance
 {
@@ -111,27 +50,57 @@ public sealed class ChaosTokenModifier : UniversalGameModifier, IVisualAppearanc
     // ── Token state ───────────────────────────────────────────────────────────
     public int Tokens { get; private set; }
 
-    // ── Active effect tracking ────────────────────────────────────────────────
-    public ChaosEffect? ActiveEffect    { get; private set; }
-    public float EffectTimeRemaining    { get; private set; } = -1f;
+    // ── Active timed effect tracking ─────────────────────────────────────────
+    // Only one active effect at a time — effects never stack.
+    public ChaosEffect? ActiveEffect       { get; private set; }
+    public float        EffectTimeRemaining { get; private set; } = -1f;
 
-    private readonly List<ChaosEffect>   _permanentEffects = [];
-    private readonly List<ChaosEffect>   _meetingEffects   = [];
-    private readonly HashSet<ChaosEffect> _usedEffects     = [];
+    // ── Per-effect state ──────────────────────────────────────────────────────
+    // Speed
+    private float _speedMultiplier = 1f;
+    private bool  _speedDirty;
 
-    // ── Stat multipliers (local to this player) ───────────────────────────────
-    public float CooldownAdjustment { get; private set; } = 0f;
-    public float VisionMultiplier   { get; private set; } = 1f;
-    public float SpeedMultiplier    { get; private set; } = 1f;
-    public bool  IsInvincible       { get; private set; }
+    // Vision
+    private float _baseCrewVision  = -1f;
+    private float _visionMultiplier = 1f;
 
-    // ── IVisualAppearance (speed sync via TOU's appearance system) ────────────
-    private bool _appearanceDirty;
+    // Defense (shield)
+    public bool IsShielded { get; private set; }
+
+    // Votes — stored, applied when meeting starts
+    public int BonusVotesNextMeeting { get; private set; }
+
+    // One-time kill — flag checked by the kill button
+    public bool HasOneTimeKill  { get; private set; }
+    public bool OneTimeKillUsed { get; private set; }
+
+    // Invisible — handled via ConcealedModifier-compatible flag
+    public bool IsInvisible { get; private set; }
+
+    // Death sentence — resolved at end of next meeting
+    public bool HasDeathSentence { get; private set; }
+
+    // Used effects set (for no-repeat option)
+    private readonly HashSet<ChaosEffect> _usedEffects = [];
+
+    // Last rolled effect — never allowed to roll the same one twice in a row
+    private ChaosEffect? _lastRolledEffect;
+
+    // ── IVisualAppearance ─────────────────────────────────────────────────────
+    // Track whether we want invisible rendering this frame
+    private bool _wantsInvisible;
 
     public VisualAppearance GetVisualAppearance()
     {
         var appearance = Player.GetDefaultAppearance();
-        appearance.Speed = SpeedMultiplier;
+        appearance.Speed = _speedMultiplier;
+        if (_wantsInvisible)
+        {
+            var isImpostor = PlayerControl.LocalPlayer.IsImpostorAligned();
+            appearance.RendererColor = isImpostor ? new Color(0f, 0f, 0f, 0.1f) : Color.clear;
+            appearance.NameColor = Color.clear;
+            appearance.ColorBlindTextColor = Color.clear;
+        }
         return appearance;
     }
 
@@ -142,75 +111,79 @@ public sealed class ChaosTokenModifier : UniversalGameModifier, IVisualAppearanc
     // ── Lifecycle ─────────────────────────────────────────────────────────────
     public override void OnActivate()
     {
-        Tokens = (int)Opts.StartingTokens;
-        _permanentEffects.Clear();
-        _meetingEffects.Clear();
-        _usedEffects.Clear();
+        Tokens              = (int)Opts.StartingTokens;
         ActiveEffect        = null;
         EffectTimeRemaining = -1f;
-        CooldownAdjustment  = 0f;
-        VisionMultiplier    = 1f;
-        SpeedMultiplier     = 1f;
-        IsInvincible        = false;
-        _appearanceDirty    = false;
+        _speedMultiplier    = 1f;
+        _speedDirty         = false;
+        _baseCrewVision     = -1f;
+        _visionMultiplier   = 1f;
+        IsShielded          = false;
+        BonusVotesNextMeeting = 0;
+        HasOneTimeKill      = false;
+        OneTimeKillUsed     = false;
+        IsInvisible         = false;
+        HasDeathSentence    = false;
+        _usedEffects.Clear();
+        _lastRolledEffect = null;
     }
 
     public override void OnDeactivate()
     {
-        if (_appearanceDirty && Player != null)
+        if (_speedDirty && Player != null)
             Player.ResetAppearance(fullReset: true);
-
-        // Restore base vision if we changed it
         RestoreVision();
     }
 
     public override void OnMeetingStart()
     {
-        // Expire until-meeting effects
-        foreach (var effect in _meetingEffects)
-            UnapplyEffect(effect);
-        _meetingEffects.Clear();
+        // Expire the active timed effect at meeting start
+        ClearActiveEffect();
 
-        // Expire active timed effect
-        if (ActiveEffect.HasValue &&
-            ChaosEffectData.Get(ActiveEffect.Value).Duration == ChaosEffectDuration.Timed)
+        // Apply bonus votes for this meeting
+        // (We record the count; the meeting vote patch must read BonusVotesNextMeeting to honour it.)
+        // Votes reset when the next meeting starts.
+        BonusVotesNextMeeting = 0;
+
+        // Resolve death sentence — the player dies after the meeting ends
+        if (HasDeathSentence && Player.AmOwner)
         {
-            UnapplyEffect(ActiveEffect.Value);
-            ActiveEffect        = null;
-            EffectTimeRemaining = -1f;
+            // Schedule death for end of meeting via coroutine
+            Coroutines.Start(CoDeathSentenceResolve());
         }
 
-        // Meeting token gain (local only — every client independently manages their own tokens)
+        // Meeting token gain
         if (Player.AmOwner && Opts.GainOnMeeting)
             GainTokens((int)Opts.TokensPerMeeting);
     }
 
     public override void FixedUpdate()
     {
-        // Tick down timed effect
+        // Tick down timed effects
         if (ActiveEffect.HasValue && EffectTimeRemaining > 0f)
         {
             EffectTimeRemaining -= Time.fixedDeltaTime;
             if (EffectTimeRemaining <= 0f)
-            {
-                UnapplyEffect(ActiveEffect.Value);
-                ActiveEffect        = null;
-                EffectTimeRemaining = -1f;
-            }
+                ClearActiveEffect();
         }
 
-        // Apply vision multiplier each frame by patching the game options value
-        // (Among Us reads CrewLightMod every frame to set the light radius)
-        if (Player.AmOwner && VisionMultiplier != 1f && !MeetingHud.Instance)
+        // Apply vision multiplier each frame
+        if (Player.AmOwner && _visionMultiplier != 1f && !MeetingHud.Instance)
         {
             var opts = GameOptionsManager.Instance.currentNormalGameOptions;
-            opts.CrewLightMod = _baseCrewVision * VisionMultiplier;
+            opts.CrewLightMod = _baseCrewVision * _visionMultiplier;
+        }
+
+        // Invisible: auto-conceal when the player stops moving
+        if (Player.AmOwner && IsInvisible && ActiveEffect == ChaosEffect.Invisible && !MeetingHud.Instance)
+        {
+            var isMoving = Player.MyPhysics.Velocity.sqrMagnitude > 0.01f;
+            _wantsInvisible = !isMoving;
+            Player.RawSetAppearance(this);
         }
     }
 
-    // Cache the map's base vision so we can restore it later
-    private float _baseCrewVision = -1f;
-
+    // ── Vision helpers ────────────────────────────────────────────────────────
     private void CaptureBaseVision()
     {
         if (_baseCrewVision < 0f)
@@ -222,7 +195,8 @@ public sealed class ChaosTokenModifier : UniversalGameModifier, IVisualAppearanc
         if (_baseCrewVision >= 0f && Player.AmOwner)
         {
             GameOptionsManager.Instance.currentNormalGameOptions.CrewLightMod = _baseCrewVision;
-            _baseCrewVision = -1f;
+            _baseCrewVision   = -1f;
+            _visionMultiplier = 1f;
         }
     }
 
@@ -242,7 +216,7 @@ public sealed class ChaosTokenModifier : UniversalGameModifier, IVisualAppearanc
         return true;
     }
 
-    // ── Effect rolling ─────────────────────────────────────────────────────────
+    // ── Effect rolling ────────────────────────────────────────────────────────
     public void RollAndApply()
     {
         var effect = PickEffect();
@@ -255,20 +229,24 @@ public sealed class ChaosTokenModifier : UniversalGameModifier, IVisualAppearanc
         var candidates = ChaosEffectData.All.AsEnumerable();
 
         if (!Opts.AllowNegativeEffects)
-            candidates = candidates.Where(e => !e.IsNegative);
+            candidates = candidates.Where(e => e.Category != ChaosEffectCategory.Negative);
+
+        if (!Opts.AllowNeutralEffects)
+            candidates = candidates.Where(e => e.Category != ChaosEffectCategory.Neutral);
 
         if (!Opts.AllowRepeatEffects)
             candidates = candidates.Where(e => !_usedEffects.Contains(e.Effect));
 
-        if (!Opts.EffectsStack && ActiveEffect.HasValue)
-            candidates = candidates.Where(e => e.Effect != ActiveEffect.Value);
+        // Never allow the same effect two rolls in a row
+        if (_lastRolledEffect.HasValue)
+            candidates = candidates.Where(e => e.Effect != _lastRolledEffect.Value);
 
         var pool = candidates.ToList();
         if (pool.Count == 0) return null;
 
         float totalWeight = pool.Sum(e => GetWeight(e.Rarity));
-        float roll = UnityEngine.Random.Range(0f, totalWeight);
-        float cumulative = 0f;
+        float roll        = UnityEngine.Random.Range(0f, totalWeight);
+        float cumulative  = 0f;
 
         foreach (var e in pool)
         {
@@ -296,134 +274,297 @@ public sealed class ChaosTokenModifier : UniversalGameModifier, IVisualAppearanc
         modifier.ApplyEffect((ChaosEffect)effectId);
     }
 
-    // ── Apply / Unapply ───────────────────────────────────────────────────────
+    // ── Apply ─────────────────────────────────────────────────────────────────
     private void ApplyEffect(ChaosEffect effect)
     {
         var info = ChaosEffectData.Get(effect);
         _usedEffects.Add(effect);
+        _lastRolledEffect = effect;
 
-        // Clear existing timed effect if non-stacking
-        if (!Opts.EffectsStack && ActiveEffect.HasValue &&
-            info.Duration == ChaosEffectDuration.Timed)
-        {
-            UnapplyEffect(ActiveEffect.Value);
-        }
+        // Always clear the previous active timed effect before applying a new one
+        ClearActiveEffect();
 
-        // Register duration bucket
-        switch (info.Duration)
-        {
-            case ChaosEffectDuration.Timed:
-                ActiveEffect        = effect;
-                EffectTimeRemaining = Opts.TimedEffectDuration;
-                break;
-            case ChaosEffectDuration.UntilMeeting:
-                if (!_meetingEffects.Contains(effect)) _meetingEffects.Add(effect);
-                break;
-            case ChaosEffectDuration.Permanent:
-                if (!_permanentEffects.Contains(effect)) _permanentEffects.Add(effect);
-                break;
-        }
+        ActiveEffect = effect;
 
-        // Stat changes
         switch (effect)
         {
-            case ChaosEffect.SpeedBoost:        SpeedMultiplier *= 1.5f;  RefreshSpeed(); break;
-            case ChaosEffect.SpeedSlow:         SpeedMultiplier *= 0.6f;  RefreshSpeed(); break;
-            case ChaosEffect.DoubleSpeedBurst:  SpeedMultiplier *= 2.0f;  RefreshSpeed(); break;
-            case ChaosEffect.SuperSpeed:        SpeedMultiplier *= 3.0f;  RefreshSpeed(); break;
+            // ── Positive ──────────────────────────────────────────────────────
 
-            case ChaosEffect.VisionBoost:
-                CaptureBaseVision(); VisionMultiplier *= 1.75f; break;
-            case ChaosEffect.VisionReduced:
-                CaptureBaseVision(); VisionMultiplier *= 0.4f;  break;
-            case ChaosEffect.PerfectVision:
-                CaptureBaseVision(); VisionMultiplier  = 10f;   break;
-            case ChaosEffect.BlindVision:
-                CaptureBaseVision(); VisionMultiplier *= 0.05f; break;
+            case ChaosEffect.Defense:
+                IsShielded          = true;
+                EffectTimeRemaining = Opts.ShieldDuration;
+                // Add TOU invulnerability modifier — protects from attacks and guesses
+                if (Player.AmOwner || AmongUsClient.Instance.AmHost)
+                    Player.RpcAddModifier<InvulnerabilityModifier>(false, false, false);
+                break;
 
-            case ChaosEffect.CooldownReduction: CooldownAdjustment -= 10f; break;
-            case ChaosEffect.CooldownIncrease:  CooldownAdjustment += 10f; break;
+            case ChaosEffect.Speed:
+                var randomMultiplier = UnityEngine.Random.Range(Opts.SpeedMultiplierMin, Opts.SpeedMultiplierMax);
+                _speedMultiplier = randomMultiplier;
+                _speedDirty      = true;
+                EffectTimeRemaining = 30f; // Speed lasts 30 seconds
+                if (Player != null && !Player.Data.IsDead)
+                    Player.RawSetAppearance(this);
+                break;
 
-            case ChaosEffect.RandomTeleport:
-                if (Player.AmOwner) Coroutines.Start(CoTeleport()); break;
+            case ChaosEffect.Votes:
+                var bonusVotes = UnityEngine.Random.Range((int)Opts.BonusVotesMin, (int)Opts.BonusVotesMax + 1);
+                BonusVotesNextMeeting += bonusVotes;
+                ActiveEffect = null; // Instant — no timed tracking needed
+                break;
 
-            case ChaosEffect.Invincibility: IsInvincible = true; break;
+            case ChaosEffect.MoreTokens:
+                var bonusTokens = UnityEngine.Random.Range((int)Opts.BonusTokensMin, (int)Opts.BonusTokensMax + 1);
+                GainTokens(bonusTokens);
+                ActiveEffect = null; // Instant
+                break;
+
+            case ChaosEffect.OneTimeKill:
+                HasOneTimeKill  = true;
+                OneTimeKillUsed = false;
+                ActiveEffect    = null; // Lasts until used, no timer
+                break;
+
+            case ChaosEffect.Tasks:
+                if (Player.AmOwner)
+                    Coroutines.Start(CoCompleteTasks());
+                ActiveEffect = null; // Instant
+                break;
+
+            case ChaosEffect.Vision:
+                CaptureBaseVision();
+                _visionMultiplier   = Opts.VisionMultiplier;
+                EffectTimeRemaining = Opts.VisionDuration;
+                break;
+
+            case ChaosEffect.Invisible:
+                IsInvisible         = true;
+                EffectTimeRemaining = Opts.InvisibleDuration;
+                break;
+
+            // ── Neutral ───────────────────────────────────────────────────────
+
+            case ChaosEffect.RevealRandomPlayer:
+                if (Player.AmOwner || AmongUsClient.Instance.AmHost)
+                    Coroutines.Start(CoRevealRandomPlayer());
+                ActiveEffect = null; // Instant
+                break;
+
+            case ChaosEffect.PositionSwap:
+                if (Player.AmOwner)
+                    Coroutines.Start(CoPositionSwap());
+                ActiveEffect = null; // Instant
+                break;
+
+            case ChaosEffect.RoleSwap:
+                // Role swap is host-only and complex — notify only for now, stub for future
+                ActiveEffect = null;
+                break;
+
+            case ChaosEffect.Revive:
+                if (AmongUsClient.Instance.AmHost)
+                    Coroutines.Start(CoReviveRandomPlayer());
+                ActiveEffect = null; // Instant
+                break;
+
+            // ── Negative ──────────────────────────────────────────────────────
+
+            case ChaosEffect.Death:
+                HasDeathSentence = true;
+                ActiveEffect     = null; // Resolved at meeting end, not timed
+                break;
         }
 
-        // Notify local player
+        // Notify the local player of what they rolled
         if (Player.AmOwner)
         {
             var colorHex = ColorUtility.ToHtmlStringRGB(info.Color);
+            var category = info.Category switch
+            {
+                ChaosEffectCategory.Positive => "✅",
+                ChaosEffectCategory.Neutral  => "⚡",
+                ChaosEffectCategory.Negative => "💀",
+                _                             => "🎲",
+            };
+
+            // On-screen pop-up notification
+            var notif = Helpers.CreateAndShowNotification(
+                $"<b><color=#{colorHex}>{category} {info.Name}</color>\n<size=70%>{info.Description}</size></b>",
+                Color.white,
+                new Vector3(0f, 1f, -20f),
+                spr: ModifierIcons.ChaosToken.LoadAsset());
+            notif.AdjustNotification();
+
+            // Also send to chat
             MiscUtils.AddFakeChat(
                 Player.Data,
                 $"<color=#{colorHex}>🎲 Chaos Tokens</color>",
-                $"<b>{info.Name}</b> — {info.Description}",
-                showHeadsup: true);
+                $"{category} <b>{info.Name}</b> — {info.Description}",
+                showHeadsup: false);
 
             Coroutines.Start(MiscUtils.CoFlash(info.Color, 0.3f, 0.25f));
         }
     }
 
-    private void UnapplyEffect(ChaosEffect effect)
+    // ── Clear active timed effect ─────────────────────────────────────────────
+    private void ClearActiveEffect()
     {
-        switch (effect)
+        if (!ActiveEffect.HasValue) return;
+
+        switch (ActiveEffect.Value)
         {
-            case ChaosEffect.SpeedBoost:        SpeedMultiplier /= 1.5f;  RefreshSpeed(); break;
-            case ChaosEffect.SpeedSlow:         SpeedMultiplier /= 0.6f;  RefreshSpeed(); break;
-            case ChaosEffect.DoubleSpeedBurst:  SpeedMultiplier /= 2.0f;  RefreshSpeed(); break;
-            case ChaosEffect.SuperSpeed:        SpeedMultiplier /= 3.0f;  RefreshSpeed(); break;
+            case ChaosEffect.Defense:
+                IsShielded = false;
+                // Remove invulnerability modifier if it exists
+                if (Player.HasModifier<InvulnerabilityModifier>())
+                    Player.RpcRemoveModifier<InvulnerabilityModifier>();
+                break;
 
-            case ChaosEffect.VisionBoost:    VisionMultiplier /= 1.75f; CheckRestoreVision(); break;
-            case ChaosEffect.VisionReduced:  VisionMultiplier /= 0.4f;  CheckRestoreVision(); break;
-            case ChaosEffect.PerfectVision:  VisionMultiplier  = 1f;    CheckRestoreVision(); break;
-            case ChaosEffect.BlindVision:    VisionMultiplier /= 0.05f; CheckRestoreVision(); break;
+            case ChaosEffect.Speed:
+                _speedMultiplier = 1f;
+                _speedDirty      = true;
+                if (Player != null && !Player.Data.IsDead)
+                    Player.RawSetAppearance(this);
+                break;
 
-            case ChaosEffect.CooldownReduction: CooldownAdjustment += 10f; break;
-            case ChaosEffect.CooldownIncrease:  CooldownAdjustment -= 10f; break;
+            case ChaosEffect.Vision:
+                RestoreVision();
+                break;
 
-            case ChaosEffect.Invincibility: IsInvincible = false; break;
+            case ChaosEffect.Invisible:
+                IsInvisible = false;
+                _wantsInvisible = false;
+                if (Player != null && !Player.Data.IsDead)
+                    Player.ResetAppearance();
+                break;
         }
+
+        ActiveEffect        = null;
+        EffectTimeRemaining = -1f;
     }
 
-    private void CheckRestoreVision()
-    {
-        // If multiplier is back to neutral, restore the base value immediately
-        if (Math.Abs(VisionMultiplier - 1f) < 0.001f)
-            RestoreVision();
-    }
+    // ── Coroutines ────────────────────────────────────────────────────────────
 
-    private void RefreshSpeed()
-    {
-        _appearanceDirty = true;
-        if (Player != null && !Player.HasDied())
-            Player.RawSetAppearance(this);
-    }
-
-    private System.Collections.IEnumerator CoTeleport()
+    private System.Collections.IEnumerator CoCompleteTasks()
     {
         yield return new WaitForSeconds(0.1f);
-        if (!ShipStatus.Instance || Player.HasDied()) yield break;
+        if (Player.Data.IsDead) yield break;
 
-        var allSpawns = ShipStatus.Instance
-            .GetComponentsInChildren<Transform>()
-            .Where(t => t.name.Contains("Spawn", System.StringComparison.OrdinalIgnoreCase))
-            .Select(t => t.position)
+        var incompleteTasks = Player.myTasks.ToArray()
+            .Where(t => !t.IsComplete && t.TryCast<NormalPlayerTask>() != null)
             .ToList();
 
-        Vector3 dest;
-        if (allSpawns.Count > 0)
-        {
-            dest = allSpawns[UnityEngine.Random.Range(0, allSpawns.Count)];
-        }
-        else
-        {
-            var center = (Vector3)ShipStatus.Instance.InitialSpawnCenter;
-            dest = center + new Vector3(
-                UnityEngine.Random.Range(-10f, 10f),
-                UnityEngine.Random.Range(-6f,  6f),
-                0f);
-        }
+        if (incompleteTasks.Count == 0) yield break;
 
-        Player.NetTransform.SnapTo(dest);
+        incompleteTasks.Shuffle();
+
+        var count = UnityEngine.Random.Range((int)Opts.TasksMin, (int)Opts.TasksMax + 1);
+        count = Math.Min(count, incompleteTasks.Count);
+
+        for (var i = 0; i < count; i++)
+        {
+            var task = incompleteTasks[i];
+            HudManager.Instance.ShowTaskComplete();
+            Player.RpcCompleteTask(task.Id);
+            yield return new WaitForSeconds(0.3f);
+        }
+    }
+
+    private System.Collections.IEnumerator CoPositionSwap()
+    {
+        yield return new WaitForSeconds(0.1f);
+        if (!ShipStatus.Instance || Player.Data.IsDead) yield break;
+
+        var alivePlayers = PlayerControl.AllPlayerControls.ToArray()
+            .Where(p => !p.Data.IsDead && p.PlayerId != Player.PlayerId)
+            .ToList();
+
+        if (alivePlayers.Count == 0) yield break;
+
+        var target = alivePlayers[UnityEngine.Random.Range(0, alivePlayers.Count)];
+        var myPos  = Player.transform.position;
+        var theirPos = target.transform.position;
+
+        Player.NetTransform.SnapTo(theirPos);
+        target.NetTransform.SnapTo(myPos);
+    }
+
+    private System.Collections.IEnumerator CoRevealRandomPlayer()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        var alivePlayers = PlayerControl.AllPlayerControls.ToArray()
+            .Where(p => !p.Data.IsDead && p.PlayerId != Player.PlayerId)
+            .ToList();
+
+        if (alivePlayers.Count == 0) yield break;
+
+        var target = alivePlayers[UnityEngine.Random.Range(0, alivePlayers.Count)];
+
+        // Announce in chat to everyone (only local notification since this is owner-driven)
+        var roleName = target.Data.Role.GetRoleName();
+        var colorHex = ColorUtility.ToHtmlStringRGB(ModColor);
+
+        // Notify all local players of the reveal
+        foreach (var player in PlayerControl.AllPlayerControls.ToArray())
+        {
+            if (player.AmOwner)
+            {
+                MiscUtils.AddFakeChat(
+                    Player.Data,
+                    $"<color=#{colorHex}>🎲 Chaos Tokens</color>",
+                    $"⚡ <b>Chaos reveals:</b> {target.Data.PlayerName} is a <b>{roleName}</b>!",
+                    showHeadsup: true);
+            }
+        }
+    }
+
+    private System.Collections.IEnumerator CoReviveRandomPlayer()
+    {
+        yield return new WaitForSeconds(0.5f);
+        if (!ShipStatus.Instance) yield break;
+
+        // Find players who died this round (have DeathHandlerModifier marked DiedThisRound)
+        var deadThisRound = PlayerControl.AllPlayerControls.ToArray()
+            .Where(p => p.Data.IsDead && p.TryGetModifier<TownOfUs.Modifiers.DeathHandlerModifier>(out var d) && d.DiedThisRound)
+            .ToList();
+
+        if (deadThisRound.Count == 0) yield break;
+
+        var target = deadThisRound[UnityEngine.Random.Range(0, deadThisRound.Count)];
+
+        // Revive via game's revive API
+        target.Revive();
+
+        var colorHex = ColorUtility.ToHtmlStringRGB(ModColor);
+        if (Player.AmOwner)
+        {
+            MiscUtils.AddFakeChat(
+                Player.Data,
+                $"<color=#{colorHex}>🎲 Chaos Tokens</color>",
+                $"⚡ <b>Revive</b> — {target.Data.PlayerName} has been brought back to life!",
+                showHeadsup: true);
+        }
+    }
+
+    private System.Collections.IEnumerator CoDeathSentenceResolve()
+    {
+        // Wait for meeting to end
+        while (MeetingHud.Instance)
+            yield return null;
+
+        yield return new WaitForSeconds(1f);
+
+        if (!HasDeathSentence || Player.Data.IsDead) yield break;
+
+        HasDeathSentence = false;
+        // Kill the player — use the game's murder system
+        Player.RpcMurderPlayer(Player, true);
+    }
+
+    public void MarkOneTimeKillUsed()
+    {
+        OneTimeKillUsed = true;
+        HasOneTimeKill  = false;
     }
 }
