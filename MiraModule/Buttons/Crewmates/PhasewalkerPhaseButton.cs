@@ -1,4 +1,5 @@
 using MiraAPI.GameOptions;
+using MiraAPI.Keybinds;
 using MiraAPI.Utilities.Assets;
 using MiraModule.Assets;
 using MiraModule.Options.Roles.Crewmates;

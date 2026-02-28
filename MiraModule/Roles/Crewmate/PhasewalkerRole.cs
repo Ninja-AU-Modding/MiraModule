@@ -1,16 +1,16 @@
 using System.Text;
 using Il2CppInterop.Runtime.Attributes;
 using MiraAPI.GameOptions;
-using MiraAPI.Hud;
 using MiraAPI.Patches.Stubs;
 using MiraAPI.Roles;
 using MiraAPI.Utilities;
 using MiraModule.Assets;
-using MiraModule.Buttons.Crewmates;
 using MiraModule.Options.Roles.Crewmates;
 using Reactor.Networking.Attributes;
 using Reactor.Utilities;
+using TownOfUs;
 using TownOfUs.Modules.Localization;
+using TownOfUs.Modules.Wiki;
 using TownOfUs.Roles;
 using TownOfUs.Utilities;
 using TownOfUs.Utilities.Appearances;
@@ -27,24 +27,27 @@ public sealed class PhasewalkerRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITown
 {
     // ── ITownOfUsRole ────────────────────────────────────────────────────────
     public string LocaleKey => "Phasewalker";
-    public string RoleName => TouLocale.Get("MiraRolePhasewalker", "Phasewalker");
-    public string RoleDescription => TouLocale.GetParsed("MiraRolePhasewalkerIntroBlurb", "Phase through walls to escape danger or reach tasks.");
-    public string RoleLongDescription => TouLocale.GetParsed("MiraRolePhasewalkerTabDescription",
-        "Use your Phase ability to walk through walls. While phased you are semi-transparent and cannot interact with anything.");
+    public string RoleName => TouLocale.Get($"MiraRole{LocaleKey}");
+    public string RoleDescription => TouLocale.GetParsed($"MiraRole{LocaleKey}IntroBlurb");
+    public string RoleLongDescription => TouLocale.GetParsed($"MiraRole{LocaleKey}TabDescription");
 
     public string GetAdvancedDescription() =>
-        TouLocale.GetParsed("MiraRolePhasewalkerWikiDescription",
-            "The Phasewalker can temporarily phase through walls. Balance: reduced speed, no interactions, cannot report bodies.") +
+        TouLocale.GetParsed($"MiraRole{LocaleKey}WikiDescription") +
         MiscUtils.AppendOptionsText(GetType());
 
     [HideFromIl2Cpp]
-    public List<CustomButtonWikiDescription> Abilities =>
-    [
-        new(TouLocale.GetParsed("MiraRolePhasewalkerPhase", "Phase"),
-            TouLocale.GetParsed("MiraRolePhasewalkerPhaseWikiDescription",
-                "Temporarily phase through walls. Lasts a short duration. You cannot interact with anything while phased."),
-            RoleIcons.Phasewalker),
-    ];
+    public List<CustomButtonWikiDescription> Abilities
+    {
+        get
+        {
+            return
+            [
+                new(TouLocale.GetParsed($"MiraRole{LocaleKey}Phase"),
+                    TouLocale.GetParsed($"MiraRole{LocaleKey}PhaseWikiDescription"),
+                    RoleIcons.Phasewalker),
+            ];
+        }
+    }
 
     public Color RoleColor => MiraModuleColors.Phasewalker;
     public ModdedRoleTeams Team => ModdedRoleTeams.Crewmate;
@@ -58,8 +61,9 @@ public sealed class PhasewalkerRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITown
     // ── Phase state ──────────────────────────────────────────────────────────
     public bool IsPhased { get; private set; }
 
-    // Trail particle system — created on demand
-    private ParticleSystem? _trailPs;
+    // Trail renderer — created on demand during phase
+    private TrailRenderer? _trailRenderer;
+    private GameObject? _trailGo;
 
     // ── IVisualAppearance ────────────────────────────────────────────────────
     // We implement IVisualAppearance on the role directly so the TOU appearance
@@ -113,7 +117,7 @@ public sealed class PhasewalkerRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITown
     {
         var sb = ITownOfUsRole.SetNewTabText(this);
         if (IsPhased)
-            sb.AppendLine(TownOfUsPlugin.Culture, "<b><color=#64C8F0>⬡ Phasing</color></b>");
+            sb.AppendLine(TownOfUsPlugin.Culture, $"<b><color=#64C8F0>⬡ Phasing</color></b>");
         return sb;
     }
 
@@ -161,7 +165,8 @@ public sealed class PhasewalkerRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITown
         else
         {
             DisableWallPass();
-            StopDistortionTrail();
+            if (Player.AmOwner)
+                StopDistortionTrail();
 
             // If we ended up inside geometry, nudge to the nearest open tile
             if (Player.AmOwner)
@@ -248,53 +253,35 @@ public sealed class PhasewalkerRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITown
     {
         var opts = OptionGroupSingleton<PhasewalkerOptions>.Instance;
         if (!opts.ShowDistortionTrail) return;
-        if (_trailPs != null) return;
+        if (_trailGo != null) return;
 
-        var go = new GameObject("PhasewalkerTrail");
-        go.transform.SetParent(Player.transform, false);
-        go.transform.localPosition = Vector3.zero;
+        _trailGo = new GameObject("PhasewalkerTrail");
+        _trailGo.transform.SetParent(Player.transform, false);
+        _trailGo.transform.localPosition = Vector3.zero;
 
-        _trailPs = go.AddComponent<ParticleSystem>();
+        _trailRenderer = _trailGo.AddComponent<TrailRenderer>();
+        _trailRenderer.time = 0.35f;
+        _trailRenderer.startWidth = 0.18f;
+        _trailRenderer.endWidth = 0f;
+        _trailRenderer.minVertexDistance = 0.05f;
+        _trailRenderer.autodestruct = false;
+        _trailRenderer.sortingLayerName = "Players";
+        _trailRenderer.sortingOrder = -1;
 
-        var main = _trailPs.main;
-        main.loop = true;
-        main.duration = 1f;
-        main.startLifetime = 0.4f;
-        main.startSpeed = 0f;
-        main.startSize = 0.18f;
-        main.startColor = new ParticleSystem.MinMaxGradient(
-            new Color(0.4f, 0.78f, 0.94f, 0.7f),  // cyan-blue start
-            new Color(0.4f, 0.78f, 0.94f, 0f));    // fade to transparent
+        var c = new Color(0.4f, 0.78f, 0.94f);
+        _trailRenderer.startColor = new Color(c.r, c.g, c.b, 0.65f);
+        _trailRenderer.endColor   = new Color(c.r, c.g, c.b, 0f);
 
-        var emission = _trailPs.emission;
-        emission.rateOverTime = 20f;
-
-        var shape = _trailPs.shape;
-        shape.enabled = true;
-        shape.shapeType = ParticleSystemShapeType.Circle;
-        shape.radius = 0.15f;
-
-        var colorOverLifetime = _trailPs.colorOverLifetime;
-        colorOverLifetime.enabled = true;
-        var gradient = new Gradient();
-        gradient.SetKeys(
-            new[] { new GradientColorKey(new Color(0.4f, 0.78f, 0.94f), 0f), new GradientColorKey(new Color(0.4f, 0.78f, 0.94f), 1f) },
-            new[] { new GradientAlphaKey(0.65f, 0f), new GradientAlphaKey(0f, 1f) });
-        colorOverLifetime.color = new ParticleSystem.MinMaxGradient(gradient);
-
-        // Render below the player
-        var renderer = _trailPs.GetComponent<ParticleSystemRenderer>();
-        renderer.sortingLayerName = "Players";
-        renderer.sortingOrder = -1;
-
-        _trailPs.Play();
+        var mat = new Material(Shader.Find("Sprites/Default") ?? Shader.Find("Unlit/Transparent"));
+        mat.color = c;
+        _trailRenderer.material = mat;
     }
 
     private void StopDistortionTrail()
     {
-        if (_trailPs == null) return;
-        _trailPs.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-        UnityEngine.Object.Destroy(_trailPs.gameObject);
-        _trailPs = null;
+        if (_trailGo == null) return;
+        UnityEngine.Object.Destroy(_trailGo);
+        _trailGo = null;
+        _trailRenderer = null;
     }
 }
