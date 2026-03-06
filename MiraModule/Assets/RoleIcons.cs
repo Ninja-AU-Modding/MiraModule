@@ -1,4 +1,4 @@
-using MiraAPI.Utilities.Assets;
+﻿using MiraAPI.Utilities.Assets;
 using UnityEngine;
 
 namespace MiraModule.Assets;
@@ -16,6 +16,7 @@ public static class RoleIcons
 
     // Impostors
     public static LoadableAsset<Sprite> Eraser { get; } = new LoadableResourceAsset($"{ShortPath}.RoleIcons.TempRoleIcon.png", 200);
+    public static LoadableAsset<Sprite> Distorter { get; } = new LoadableResourceAsset($"{ShortPath}.RoleIcons.TempRoleIcon.png", 200);
 
     // Crewmates
     public static LoadableAsset<Sprite> Dictator { get; } = new LoadableResourceAsset($"{ShortPath}.RoleIcons.TempRoleIcon.png", 200);

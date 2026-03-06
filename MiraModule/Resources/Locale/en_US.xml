@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+﻿<?xml version='1.0' encoding='UTF-8'?>
 <resources>
     <!-- Player Colors -->
     <string name="PlayerColorSpiderman">Spiderman</string>
@@ -25,7 +25,7 @@
     <string name="MiraRoleAbyssTabDescription">Use your Gulp ability to swallow players whole!\%nl\%Swallowed players vanish with \%b\%no body\%/b\% left behind. They die for good when a meeting is called.</string>
 
     <!-- Abyss Wiki -->
-    <string name="MiraRoleAbyssWikiDescription">The Abyss is a Neutral Killing role that swallows other players, hiding them from the game entirely. Swallowed players leave no corpse and do not appear in the meeting dead list — until the next meeting is called, at which point they die for good. If the Abyss dies, any swallowed players are released alive.</string>
+    <string name="MiraRoleAbyssWikiDescription">The Abyss is a Neutral Killing role that swallows other players, hiding them from the game entirely. Swallowed players leave no corpse and do not appear in the meeting dead list â€” until the next meeting is called, at which point they die for good. If the Abyss dies, any swallowed players are released alive.</string>
     <string name="MiraRoleAbyssGulp">Gulp</string>
     <string name="MiraRoleAbyssGulpWikiDescription">Swallow a nearby player. They vanish from the map and are hidden until the next meeting.</string>
 
@@ -48,7 +48,7 @@
     <string name="MiraRoleEraserTabDescription">Use your Erase ability to mark players.\%nl\%Their role will be wiped at the \%b\%next meeting\%/b\%, no matter what happens in between.</string>
 
     <!-- Eraser Wiki -->
-    <string name="MiraRoleEraserWikiDescription">The Eraser is an Impostor role that can target players and erase their roles. Erased players lose their role at the start of the next meeting — the erase is permanent and cannot be undone, even if the Eraser dies before the meeting. Each erase increases the Erase cooldown. By default, the Eraser cannot erase other Impostors. If a Neutral player is erased, the host can configure whether they become a Crewmate or die outright.</string>
+    <string name="MiraRoleEraserWikiDescription">The Eraser is an Impostor role that can target players and erase their roles. Erased players lose their role at the start of the next meeting â€” the erase is permanent and cannot be undone, even if the Eraser dies before the meeting. Each erase increases the Erase cooldown. By default, the Eraser cannot erase other Impostors. If a Neutral player is erased, the host can configure whether they become a Crewmate or die outright.</string>
     <string name="MiraRoleEraserErase">Erase</string>
     <string name="MiraRoleEraserEraseWikiDescription">Mark a player for erasure. Their role will be removed at the start of the next meeting.</string>
 
@@ -66,10 +66,10 @@
     <!-- Shifter - Neutral Benign -->
     <string name="MiraRoleShifter">Shifter</string>
     <string name="MiraRoleShifterIntroBlurb">Take someone's place before they even know it.</string>
-    <string name="MiraRoleShifterTabDescription">Use your Shift ability to target a player.\%nl\%At the \%b\%end of the next meeting\%/b\%, you'll swap roles with them — they become the Shifter, and you become whatever they were.\%nl\%The swap happens \%b\%even if either of you is dead\%/b\% before the meeting ends.</string>
+    <string name="MiraRoleShifterTabDescription">Use your Shift ability to target a player.\%nl\%At the \%b\%end of the next meeting\%/b\%, you'll swap roles with them â€” they become the Shifter, and you become whatever they were.\%nl\%The swap happens \%b\%even if either of you is dead\%/b\% before the meeting ends.</string>
 
     <!-- Shifter Wiki -->
-    <string name="MiraRoleShifterWikiDescription">The Shifter is a Neutral Benign role that can swap roles with another player. The target must be chosen during the round, and the swap always occurs at the end of the next meeting — the target will not know until after the meeting who shifted with them. The shift is guaranteed even if the Shifter or the target dies before the meeting ends. The player who was shifted becomes the Shifter in their place.</string>
+    <string name="MiraRoleShifterWikiDescription">The Shifter is a Neutral Benign role that can swap roles with another player. The target must be chosen during the round, and the swap always occurs at the end of the next meeting â€” the target will not know until after the meeting who shifted with them. The shift is guaranteed even if the Shifter or the target dies before the meeting ends. The player who was shifted becomes the Shifter in their place.</string>
     <string name="MiraRoleShifterShift">Shift</string>
     <string name="MiraRoleShifterShiftWikiDescription">Target a player to swap roles with. The swap takes effect at the end of the next meeting, no matter what.</string>
 
@@ -96,4 +96,24 @@
     <string name="MiraOptionShifterShiftCooldown">Shift Cooldown</string>
     <string name="MiraOptionShifterShiftDeadPlayers">Can Shift Dead Players</string>
 
+
+    <!-- Distorter - Impostor Concealing -->
+    <string name="MiraRoleDistorter">Distorter</string>
+    <string name="MiraRoleDistorterIntroBlurb">Choose a player and drag them to their death.</string>
+    <string name="MiraRoleDistorterTabDescription">Use Distort to open a player menu and choose your target. The target is pulled toward you while still visible, then automatically killed once they reach you. After the kill, you become invisible for a set duration and then return visible.</string>
+
+    <!-- Distorter Wiki -->
+    <string name="MiraRoleDistorterWikiDescription">The Distorter is an Impostor Concealing role that selects targets through a player menu. Distort visibly drags the chosen target toward the Distorter, then executes them automatically on arrival. The Distorter then enters temporary invisibility with bonus speed, cannot kill during that invisibility, and a HUD countdown shows how long invisibility remains.</string>
+    <string name="MiraRoleDistorterDistort">Distort</string>
+    <string name="MiraRoleDistorterDistortWikiDescription">Mark a nearby player. After wind-up, pull them to you, enter phase, then gain brief invisibility and speed.</string>
+
+    <!-- Distorter Options -->
+    <string name="MiraOptionDistorterDistortCooldown">Distort Cooldown</string>
+    <string name="MiraOptionDistorterPullSpeed">Pull Speed</string>
+    <string name="MiraOptionDistorterInvisibilityDuration">Post-Kill Invisibility Duration</string>
+    <string name="MiraOptionDistorterInvisibilityDuration">Post-Kill Invisibility Duration</string>
+    <string name="MiraOptionDistorterInvisibleSpeedMultiplier">Invisible Speed Multiplier</string>
+    <string name="MiraOptionDistorterCanVent">Distorter Can Vent</string>
 </resources>
+
+
