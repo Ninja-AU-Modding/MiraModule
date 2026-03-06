@@ -26,13 +26,15 @@ namespace MiraModule.Roles.Impostor;
 public sealed class DistorterRole(IntPtr cppPtr)
     : ImpostorRole(cppPtr), ITownOfUsRole, IWikiDiscoverable
 {
+    private const float PullKillWindowSeconds = 10f;
+
     [HideFromIl2Cpp] public byte PullTargetId { get; private set; } = byte.MaxValue;
     [HideFromIl2Cpp] public bool PullActive { get; private set; }
+    [HideFromIl2Cpp] public bool KillWindowActive { get; private set; }
+    [HideFromIl2Cpp] public float KillWindowEndTime { get; private set; }
 
     [HideFromIl2Cpp] public bool PostInvisibilityActive { get; private set; }
     [HideFromIl2Cpp] public float InvisibilityEndTime { get; private set; }
-
-    [HideFromIl2Cpp] public bool PendingInvisibilityFromAutoKill { get; private set; }
 
     private float _speedCache = 1f;
     private bool _speedBoostApplied;
@@ -123,6 +125,11 @@ public sealed class DistorterRole(IntPtr cppPtr)
             }
         }
 
+        if (KillWindowActive)
+        {
+            TickKillWindow();
+        }
+
         if (PostInvisibilityActive)
         {
             TickPostInvisibility();
@@ -161,7 +168,9 @@ public sealed class DistorterRole(IntPtr cppPtr)
 
         PullTargetId = targetId;
         PullActive = true;
-        PendingInvisibilityFromAutoKill = false;
+        KillWindowActive = true;
+        KillWindowEndTime = Time.time + PullKillWindowSeconds;
+        UpdateInvisibilityCountdown();
     }
 
     [MethodRpc((uint)MiraModuleRpc.DistorterStart)]
@@ -175,14 +184,16 @@ public sealed class DistorterRole(IntPtr cppPtr)
         role.StartPull(targetId);
     }
 
-    public void OnAutoKillResolved()
+    public void OnMurderResolved()
     {
-        if (!PendingInvisibilityFromAutoKill)
+        if (!KillWindowActive || Time.time > KillWindowEndTime)
         {
             return;
         }
 
-        PendingInvisibilityFromAutoKill = false;
+        KillWindowActive = false;
+        KillWindowEndTime = 0f;
+        RemoveInvisibilityCountdown();
         StartPostInvisibility();
     }
 
@@ -190,7 +201,8 @@ public sealed class DistorterRole(IntPtr cppPtr)
     {
         PullActive = false;
         PullTargetId = byte.MaxValue;
-        PendingInvisibilityFromAutoKill = false;
+        KillWindowActive = false;
+        KillWindowEndTime = 0f;
 
         EndPostInvisibility();
         SetPlayerVisibility(Player, true);
@@ -204,7 +216,6 @@ public sealed class DistorterRole(IntPtr cppPtr)
         {
             PullActive = false;
             PullTargetId = byte.MaxValue;
-            PendingInvisibilityFromAutoKill = false;
             return;
         }
 
@@ -228,7 +239,7 @@ public sealed class DistorterRole(IntPtr cppPtr)
         const float killDistance = 0.42f;
         if (distToSource <= killDistance)
         {
-            ResolvePullKill(target);
+            ResolvePullArrival();
             return;
         }
 
@@ -244,22 +255,29 @@ public sealed class DistorterRole(IntPtr cppPtr)
             return;
         }
 
-        ResolvePullKill(target);
+        ResolvePullArrival();
     }
 
-    private void ResolvePullKill(PlayerControl target)
+    private void ResolvePullArrival()
     {
         PullActive = false;
         PullTargetId = byte.MaxValue;
+    }
 
-        if (!target.HasDied() && AmongUsClient.Instance != null && AmongUsClient.Instance.AmHost)
+    private void TickKillWindow()
+    {
+        UpdateInvisibilityCountdown();
+
+        if (Time.time < KillWindowEndTime)
         {
-            PendingInvisibilityFromAutoKill = true;
-            Player.RpcCustomMurder(target);
+            return;
         }
-        else if (target.HasDied())
+
+        KillWindowActive = false;
+        KillWindowEndTime = 0f;
+        if (!PostInvisibilityActive)
         {
-            StartPostInvisibility();
+            RemoveInvisibilityCountdown();
         }
     }
 
@@ -341,8 +359,22 @@ public sealed class DistorterRole(IntPtr cppPtr)
             _invisText.color = MiraModuleColors.Distorter;
         }
 
-        var remaining = Math.Max(0f, InvisibilityEndTime - Time.time);
-        _invisText.text = string.Format(CultureInfo.InvariantCulture, "Invisible: {0:0.0}s", remaining);
+        if (KillWindowActive && !PostInvisibilityActive)
+        {
+            var killRemaining = Math.Max(0f, KillWindowEndTime - Time.time);
+            _invisText.text = string.Format(CultureInfo.InvariantCulture, "Kill Window: {0:0.0}s", killRemaining);
+            _invisText.enabled = true;
+            return;
+        }
+
+        if (PostInvisibilityActive)
+        {
+            var invisRemaining = Math.Max(0f, InvisibilityEndTime - Time.time);
+            _invisText.text = string.Format(CultureInfo.InvariantCulture, "Invisible: {0:0.0}s", invisRemaining);
+            _invisText.enabled = true;
+            return;
+        }
+
         _invisText.enabled = true;
     }
 

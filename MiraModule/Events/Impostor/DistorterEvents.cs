@@ -28,6 +28,6 @@ public static class DistorterEvents
             return;
         }
 
-        distorter.OnAutoKillResolved();
+        distorter.OnMurderResolved();
     }
 }
