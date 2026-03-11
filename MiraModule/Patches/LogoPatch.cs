@@ -1,7 +1,5 @@
 using HarmonyLib;
 using MiraAPI.Utilities.Assets;
-using MiraModule.Assets;
-using TownOfUs.Assets;
 using UnityEngine;
 
 namespace MiraModule.Patches;

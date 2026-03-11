@@ -1,6 +1,9 @@
 bin/
 obj/
+.vs/
+*.binlog
 /packages/
+packages.lock.json
 riderModule.iml
 /_ReSharper.Caches/
 .idea

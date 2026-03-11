@@ -7,12 +7,7 @@ using MiraModule.Assets;
 using MiraModule.Buttons.Impostor;
 using MiraModule.Options.Roles.Impostor;
 using MiraAPI.Patches.Freeplay;
-using TownOfUs;
 using AmongUs.GameOptions;
-using TownOfUs.Modules.Localization;
-using TownOfUs.Modules.Wiki;
-using TownOfUs.Roles;
-using TownOfUs.Utilities;
 using UnityEngine;
 using Reactor.Utilities;
 
