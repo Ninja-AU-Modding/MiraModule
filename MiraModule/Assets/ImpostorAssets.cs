@@ -12,4 +12,7 @@ public static class ImpostorAssets
 
     // Distorter Assets (temp)
     public static LoadableAsset<Sprite> DistorterDistortSprite { get; } = new LoadableResourceAsset($"{ShortPath}.Tempbutton.png");
+
+    public static LoadableAsset<Sprite> ArbiterMarkSprite { get; } = new LoadableResourceAsset($"{ShortPath}.Tempbutton.png");
+    public static LoadableAsset<Sprite> ArbiterSabotageSprite { get; } = new LoadableResourceAsset($"{ShortPath}.Tempbutton.png");
 }
