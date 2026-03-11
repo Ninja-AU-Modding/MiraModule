@@ -25,10 +25,14 @@ public sealed class ArbiterRole(IntPtr cppPtr)
 {
     [HideFromIl2Cpp] public byte TargetId { get; private set; } = byte.MaxValue;
     [HideFromIl2Cpp] public bool RewardActive { get; private set; }
-    [HideFromIl2Cpp] public int SabotageUses { get; private set; }
+    [HideFromIl2Cpp] public int InvisUses { get; private set; }
+    [HideFromIl2Cpp] public int SpeedUses { get; private set; }
+    [HideFromIl2Cpp] public bool InvisActive { get; private set; }
+    [HideFromIl2Cpp] public float InvisEndTime { get; private set; }
+    [HideFromIl2Cpp] public bool SpeedActive { get; private set; }
 
-    private string? _sabotageLabelCache;
-    private bool _sabotageLabelReady;
+    private float _speedCache = 1f;
+    private bool _speedBoostApplied;
 
     public string LocaleKey => "Arbiter";
     public string RoleName => TouLocale.Get($"MiraRole{LocaleKey}");
@@ -51,9 +55,12 @@ public sealed class ArbiterRole(IntPtr cppPtr)
                 new(TouLocale.GetParsed($"MiraRole{LocaleKey}Mark", "Mark"),
                     TouLocale.GetParsed($"MiraRole{LocaleKey}MarkWikiDescription"),
                     ImpostorAssets.ArbiterMarkSprite),
-                new(TouLocale.GetParsed($"MiraRole{LocaleKey}Sabotage", "Sabotage"),
-                    TouLocale.GetParsed($"MiraRole{LocaleKey}SabotageWikiDescription"),
-                    ImpostorAssets.ArbiterSabotageSprite),
+                new(TouLocale.GetParsed($"MiraRole{LocaleKey}Invisibility", "Invisibility"),
+                    TouLocale.GetParsed($"MiraRole{LocaleKey}InvisibilityWikiDescription"),
+                    ImpostorAssets.ArbiterInvisSprite),
+                new(TouLocale.GetParsed($"MiraRole{LocaleKey}Speed", "Speed Boost"),
+                    TouLocale.GetParsed($"MiraRole{LocaleKey}SpeedWikiDescription"),
+                    ImpostorAssets.ArbiterSpeedSprite),
             ];
         }
     }
@@ -81,9 +88,13 @@ public sealed class ArbiterRole(IntPtr cppPtr)
         {
             Coroutines.Start(MiscUtils.CoMoveButtonIndex(CustomButtonSingleton<ArbiterMarkButton>.Instance,
                 !OptionGroupSingleton<ArbiterOptions>.Instance.CanVent));
+            Coroutines.Start(MiscUtils.CoMoveButtonIndex(CustomButtonSingleton<ArbiterInvisButton>.Instance,
+                !OptionGroupSingleton<ArbiterOptions>.Instance.CanVent));
+            Coroutines.Start(MiscUtils.CoMoveButtonIndex(CustomButtonSingleton<ArbiterSpeedButton>.Instance,
+                !OptionGroupSingleton<ArbiterOptions>.Instance.CanVent));
             HudManager.Instance.ImpostorVentButton.buttonLabelText.SetOutlineColor(MiraModuleColors.Arbiter);
-            CacheSabotageLabel();
-            UpdateSabotageLabel();
+            UpdateInvisButtonUses();
+            UpdateSpeedButtonUses();
         }
     }
 
@@ -95,27 +106,50 @@ public sealed class ArbiterRole(IntPtr cppPtr)
         if (Player.AmOwner)
         {
             HudManager.Instance.ImpostorVentButton.buttonLabelText.SetOutlineColor(TownOfUsColors.Impostor);
-            RestoreSabotageLabel();
         }
     }
 
     public void FixedUpdate()
     {
-        if (Player == null || Player.Data.Role is not ArbiterRole || !Player.AmOwner)
+        if (Player == null || Player.Data.Role is not ArbiterRole || Player.HasDied())
         {
+            EndInvisibility();
+            EndSpeedBoost();
             return;
         }
 
-        EnsureSabotageLabel();
-        UpdateSabotageButtonState();
+        if (MeetingHud.Instance != null || ExileController.Instance != null)
+        {
+            EndInvisibility();
+            EndSpeedBoost();
+            return;
+        }
+
+        if (InvisActive)
+        {
+            SetPlayerVisibility(Player, false);
+            if (Time.time >= InvisEndTime)
+            {
+                EndInvisibility();
+            }
+        }
+
+        if (SpeedActive)
+        {
+            ApplySpeedBoost();
+        }
     }
 
     public void ResetState()
     {
         TargetId = byte.MaxValue;
         RewardActive = false;
-        SabotageUses = GetBaseSabotageUses();
-        _sabotageLabelReady = false;
+        InvisUses = 0;
+        SpeedUses = 0;
+        InvisActive = false;
+        InvisEndTime = 0f;
+        SpeedActive = false;
+        _speedBoostApplied = false;
     }
 
     public void SetTarget(byte targetId)
@@ -131,7 +165,8 @@ public sealed class ArbiterRole(IntPtr cppPtr)
         }
 
         RewardActive = true;
-        AddSabotageUses(GetBaseSabotageUses());
+        AddInvisUses(GetInvisUsesGain());
+        AddSpeedUses(GetSpeedUsesGain());
         ApplyKillCooldownBonus();
     }
 
@@ -148,107 +183,140 @@ public sealed class ArbiterRole(IntPtr cppPtr)
         Player.SetKillTimer(reduced);
     }
 
-    public bool TryConsumeSabotageUse()
+    public bool TryUseInvisibility()
     {
-        if (SabotageUses <= 0)
+        if (InvisUses <= 0 || InvisActive || Player.inVent || Minigame.Instance)
         {
-            UpdateSabotageLabel();
             return false;
         }
 
-        SabotageUses = Math.Max(0, SabotageUses - 1);
-        UpdateSabotageLabel();
+        InvisUses = Math.Max(0, InvisUses - 1);
+        UpdateInvisButtonUses();
+        InvisActive = true;
+        InvisEndTime = Time.time + OptionGroupSingleton<ArbiterOptions>.Instance.InvisDuration;
+        SetPlayerVisibility(Player, false);
         return true;
     }
 
-    public void AddSabotageUses(int amount)
+    public bool TryUseSpeedBoost()
+    {
+        if (SpeedUses <= 0 || SpeedActive || Player.inVent || Minigame.Instance)
+        {
+            return false;
+        }
+
+        SpeedUses = Math.Max(0, SpeedUses - 1);
+        UpdateSpeedButtonUses();
+        SpeedActive = true;
+        ApplySpeedBoost();
+        return true;
+    }
+
+    public void AddInvisUses(int amount)
     {
         if (amount <= 0)
         {
             return;
         }
 
-        SabotageUses = Math.Clamp(SabotageUses + amount, 0, 99);
-        UpdateSabotageLabel();
+        InvisUses = Math.Clamp(InvisUses + amount, 0, 99);
+        UpdateInvisButtonUses();
     }
 
-    private int GetBaseSabotageUses()
+    public void AddSpeedUses(int amount)
     {
-        return (int)Math.Clamp(OptionGroupSingleton<ArbiterOptions>.Instance.BaseSabotageUses, 0f, 99f);
+        if (amount <= 0)
+        {
+            return;
+        }
+
+        SpeedUses = Math.Clamp(SpeedUses + amount, 0, 99);
+        UpdateSpeedButtonUses();
     }
 
-    private void CacheSabotageLabel()
+    private int GetInvisUsesGain()
     {
-        if (_sabotageLabelCache != null || !HudManager.InstanceExists)
-        {
-            return;
-        }
-
-        _sabotageLabelCache = HudManager.Instance.SabotageButton?.buttonLabelText?.text;
+        return (int)Math.Clamp(OptionGroupSingleton<ArbiterOptions>.Instance.InvisUses, 0f, 99f);
     }
 
-    private void RestoreSabotageLabel()
+    private int GetSpeedUsesGain()
     {
-        if (!HudManager.InstanceExists || _sabotageLabelCache == null)
+        return (int)Math.Clamp(OptionGroupSingleton<ArbiterOptions>.Instance.SpeedUses, 0f, 99f);
+    }
+
+    private void UpdateInvisButtonUses()
+    {
+        if (!Player.AmOwner)
         {
             return;
         }
 
-        var label = HudManager.Instance.SabotageButton?.buttonLabelText;
-        if (label != null)
+        var btn = CustomButtonSingleton<ArbiterInvisButton>.Instance;
+        if (btn != null)
         {
-            label.text = _sabotageLabelCache;
+            btn.SetUses(InvisUses);
         }
     }
 
-    private void UpdateSabotageLabel()
+    private void UpdateSpeedButtonUses()
     {
-        if (!Player.AmOwner || !HudManager.InstanceExists)
+        if (!Player.AmOwner)
         {
             return;
         }
 
-        var label = HudManager.Instance.SabotageButton?.buttonLabelText;
-        if (label == null)
+        var btn = CustomButtonSingleton<ArbiterSpeedButton>.Instance;
+        if (btn != null)
         {
-            return;
+            btn.SetUses(SpeedUses);
         }
-
-        var baseText = TouLocale.GetParsed("MiraRoleArbiterSabotage", "Sabotage").ToUpperInvariant();
-        var usesText = SabotageUses == 1 ? "USE" : "USES";
-        label.text = $"{baseText} ({SabotageUses} {usesText})";
-        label.SetOutlineColor(MiraModuleColors.Arbiter);
-        _sabotageLabelReady = true;
     }
 
-    private void EnsureSabotageLabel()
+    private void ApplySpeedBoost()
     {
-        if (_sabotageLabelReady)
+        if (_speedBoostApplied || Player?.MyPhysics == null)
         {
             return;
         }
 
-        CacheSabotageLabel();
-        UpdateSabotageLabel();
+        _speedCache = Player.MyPhysics.Speed;
+        Player.MyPhysics.Speed = _speedCache * OptionGroupSingleton<ArbiterOptions>.Instance.SpeedMultiplier;
+        _speedBoostApplied = true;
     }
 
-    private void UpdateSabotageButtonState()
+    private void EndSpeedBoost()
     {
-        if (!HudManager.InstanceExists)
+        if (!_speedBoostApplied || Player?.MyPhysics == null)
+        {
+            SpeedActive = false;
+            return;
+        }
+
+        Player.MyPhysics.Speed = _speedCache;
+        _speedBoostApplied = false;
+        SpeedActive = false;
+    }
+
+    private void EndInvisibility()
+    {
+        if (!InvisActive)
         {
             return;
         }
 
-        var btn = HudManager.Instance.SabotageButton;
-        if (btn == null)
+        InvisActive = false;
+        InvisEndTime = 0f;
+        SetPlayerVisibility(Player, true);
+    }
+
+    private static void SetPlayerVisibility(PlayerControl player, bool visible)
+    {
+        if (player == null || player.Data == null || player.Data.Disconnected)
         {
             return;
         }
 
-        if (SabotageUses <= 0)
-        {
-            btn.SetDisabled();
-        }
+        player.Visible = visible;
     }
 
     [MethodRpc((uint)MiraModuleRpc.ArbiterSetTarget)]

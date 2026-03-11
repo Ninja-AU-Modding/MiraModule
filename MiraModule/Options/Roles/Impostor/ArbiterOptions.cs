@@ -20,11 +20,17 @@ public sealed class ArbiterOptions : AbstractOptionGroup<ArbiterRole>
     [ModdedNumberOption("MiraOptionArbiterKillCooldownMultiplier", 0.25f, 1f, 0.05f, MiraNumberSuffixes.Multiplier, "0.00")]
     public float KillCooldownMultiplier { get; set; } = 0.5f;
 
-    [ModdedNumberOption("MiraOptionArbiterBaseSabotageUses", 0f, 5f, 1f, MiraNumberSuffixes.None)]
-    public float BaseSabotageUses { get; set; } = 2f;
+    [ModdedNumberOption("MiraOptionArbiterInvisUses", 0f, 5f, 1f, MiraNumberSuffixes.None)]
+    public float InvisUses { get; set; } = 1f;
 
-    [ModdedToggleOption("MiraOptionArbiterDoorsCountAsUse")]
-    public bool DoorsCountAsUse { get; set; } = true;
+    [ModdedNumberOption("MiraOptionArbiterInvisDuration", 1f, 30f, 0.5f, MiraNumberSuffixes.Seconds)]
+    public float InvisDuration { get; set; } = 8f;
+
+    [ModdedNumberOption("MiraOptionArbiterSpeedUses", 0f, 5f, 1f, MiraNumberSuffixes.None)]
+    public float SpeedUses { get; set; } = 1f;
+
+    [ModdedNumberOption("MiraOptionArbiterSpeedMultiplier", 1f, 2f, 0.05f, MiraNumberSuffixes.Multiplier, "0.00")]
+    public float SpeedMultiplier { get; set; } = 1.25f;
 
     [ModdedToggleOption("MiraOptionArbiterCanVent")]
     public bool CanVent { get; set; } = false;

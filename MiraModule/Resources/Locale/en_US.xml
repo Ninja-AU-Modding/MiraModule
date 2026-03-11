@@ -82,19 +82,23 @@
 
     <string name="MiraRoleArbiter">Arbiter</string>
     <string name="MiraRoleArbiterIntroBlurb">Choose a target and sway the vote.</string>
-    <string name="MiraRoleArbiterTabDescription">Choose a target from the Arbiter menu.\%nl\%If that player is voted out, you gain a faster kill cooldown and an extra sabotage.</string>
+    <string name="MiraRoleArbiterTabDescription">Choose a target from the Arbiter menu.\%nl\%If that player is voted out, you gain a faster kill cooldown, an invisibility use, and a speed boost use.</string>
 
-    <string name="MiraRoleArbiterWikiDescription">The Arbiter is an Impostor role that selects a target through a GUI. If the target is exiled by vote, the Arbiter gains a faster kill cooldown and additional sabotage uses. The target cannot be changed unless the option allows it.</string>
+    <string name="MiraRoleArbiterWikiDescription">The Arbiter is an Impostor role that selects a target through a GUI. If the target is exiled by vote, the Arbiter gains a faster kill cooldown plus one-time uses for invisibility and a speed boost. The target cannot be changed unless the option allows it.</string>
     <string name="MiraRoleArbiterMark">Mark</string>
     <string name="MiraRoleArbiterMarkWikiDescription">Choose a target from the player menu.</string>
-    <string name="MiraRoleArbiterSabotage">Sabotage</string>
-    <string name="MiraRoleArbiterSabotageWikiDescription">You have limited sabotage uses. Exiling your target grants more uses.</string>
+    <string name="MiraRoleArbiterInvisibility">Invisibility</string>
+    <string name="MiraRoleArbiterInvisibilityWikiDescription">Become invisible for a short duration.</string>
+    <string name="MiraRoleArbiterSpeed">Speed Boost</string>
+    <string name="MiraRoleArbiterSpeedWikiDescription">Gain a speed boost for the remainder of the round.</string>
 
     <string name="MiraOptionArbiterTargetCooldown">Target Cooldown</string>
     <string name="MiraOptionArbiterCanChangeTarget">Can Change Target</string>
     <string name="MiraOptionArbiterKillCooldownMultiplier">Kill Cooldown Multiplier</string>
-    <string name="MiraOptionArbiterBaseSabotageUses">Base Sabotage Uses</string>
-    <string name="MiraOptionArbiterDoorsCountAsUse">Doors Count As Use</string>
+    <string name="MiraOptionArbiterInvisUses">Invisibility Uses</string>
+    <string name="MiraOptionArbiterInvisDuration">Invisibility Duration</string>
+    <string name="MiraOptionArbiterSpeedUses">Speed Boost Uses</string>
+    <string name="MiraOptionArbiterSpeedMultiplier">Speed Boost Multiplier</string>
     <string name="MiraOptionArbiterCanVent">Arbiter Can Vent</string>
 
     <!-- Shifter - Neutral Benign -->

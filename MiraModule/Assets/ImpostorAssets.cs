@@ -14,5 +14,6 @@ public static class ImpostorAssets
     public static LoadableAsset<Sprite> DistorterDistortSprite { get; } = new LoadableResourceAsset($"{ShortPath}.Tempbutton.png");
 
     public static LoadableAsset<Sprite> ArbiterMarkSprite { get; } = new LoadableResourceAsset($"{ShortPath}.Tempbutton.png");
-    public static LoadableAsset<Sprite> ArbiterSabotageSprite { get; } = new LoadableResourceAsset($"{ShortPath}.Tempbutton.png");
+    public static LoadableAsset<Sprite> ArbiterInvisSprite { get; } = new LoadableResourceAsset($"{ShortPath}.Tempbutton.png");
+    public static LoadableAsset<Sprite> ArbiterSpeedSprite { get; } = new LoadableResourceAsset($"{ShortPath}.Tempbutton.png");
 }
