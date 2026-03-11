@@ -12,12 +12,12 @@ namespace MiraModule.Buttons.Impostor;
 public sealed class ArbiterSpeedButton : TownOfUsButton
 {
     public override string Name => TouLocale.GetParsed("MiraRoleArbiterSpeed", "Speed Boost");
-    public override BaseKeybind Keybind => Keybinds.ModifierAction;
+    public override BaseKeybind Keybind => Keybinds.PrimaryAction;
     public override Color TextOutlineColor => MiraModuleColors.Arbiter;
     public override float Cooldown => 0f;
     public override float InitialCooldown => 0f;
     public override LoadableAsset<Sprite> Sprite => ImpostorAssets.ArbiterSpeedSprite;
-    public override ButtonLocation Location => ButtonLocation.BottomLeft;
+    public override ButtonLocation Location => ButtonLocation.BottomRight;
     public override bool ZeroIsInfinite { get; set; } = false;
     public override int MaxUses => -1;
 

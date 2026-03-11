@@ -29,6 +29,9 @@ public sealed class ArbiterOptions : AbstractOptionGroup<ArbiterRole>
     [ModdedNumberOption("MiraOptionArbiterSpeedUses", 0f, 5f, 1f, MiraNumberSuffixes.None)]
     public float SpeedUses { get; set; } = 1f;
 
+    [ModdedNumberOption("MiraOptionArbiterSpeedDuration", 1f, 30f, 0.5f, MiraNumberSuffixes.Seconds)]
+    public float SpeedDuration { get; set; } = 10f;
+
     [ModdedNumberOption("MiraOptionArbiterSpeedMultiplier", 1f, 2f, 0.05f, MiraNumberSuffixes.Multiplier, "0.00")]
     public float SpeedMultiplier { get; set; } = 1.25f;
 

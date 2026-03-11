@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using AmongUs.GameOptions;
 using Il2CppInterop.Runtime.Attributes;
 using MiraAPI.GameOptions;
@@ -16,6 +17,7 @@ using TownOfUs.Modules.Localization;
 using TownOfUs.Modules.Wiki;
 using TownOfUs.Roles;
 using TownOfUs.Utilities;
+using TMPro;
 using UnityEngine;
 
 namespace MiraModule.Roles.Impostor;
@@ -30,9 +32,12 @@ public sealed class ArbiterRole(IntPtr cppPtr)
     [HideFromIl2Cpp] public bool InvisActive { get; private set; }
     [HideFromIl2Cpp] public float InvisEndTime { get; private set; }
     [HideFromIl2Cpp] public bool SpeedActive { get; private set; }
+    [HideFromIl2Cpp] public float SpeedEndTime { get; private set; }
 
     private float _speedCache = 1f;
     private bool _speedBoostApplied;
+    private TextMeshPro? _invisText;
+    private TextMeshPro? _speedText;
 
     public string LocaleKey => "Arbiter";
     public string RoleName => TouLocale.Get($"MiraRole{LocaleKey}");
@@ -137,7 +142,13 @@ public sealed class ArbiterRole(IntPtr cppPtr)
         if (SpeedActive)
         {
             ApplySpeedBoost();
+            if (Time.time >= SpeedEndTime)
+            {
+                EndSpeedBoost();
+            }
         }
+
+        UpdateDurationText();
     }
 
     public void ResetState()
@@ -149,7 +160,9 @@ public sealed class ArbiterRole(IntPtr cppPtr)
         InvisActive = false;
         InvisEndTime = 0f;
         SpeedActive = false;
+        SpeedEndTime = 0f;
         _speedBoostApplied = false;
+        RemoveDurationText();
     }
 
     public void SetTarget(byte targetId)
@@ -208,6 +221,7 @@ public sealed class ArbiterRole(IntPtr cppPtr)
         SpeedUses = Math.Max(0, SpeedUses - 1);
         UpdateSpeedButtonUses();
         SpeedActive = true;
+        SpeedEndTime = Time.time + OptionGroupSingleton<ArbiterOptions>.Instance.SpeedDuration;
         ApplySpeedBoost();
         return true;
     }
@@ -295,6 +309,7 @@ public sealed class ArbiterRole(IntPtr cppPtr)
         Player.MyPhysics.Speed = _speedCache;
         _speedBoostApplied = false;
         SpeedActive = false;
+        SpeedEndTime = 0f;
     }
 
     private void EndInvisibility()
@@ -307,6 +322,84 @@ public sealed class ArbiterRole(IntPtr cppPtr)
         InvisActive = false;
         InvisEndTime = 0f;
         SetPlayerVisibility(Player, true);
+    }
+
+    [HideFromIl2Cpp]
+    public StringBuilder SetTabText()
+    {
+        var text = ITownOfUsRole.SetNewTabText(this);
+        var name = TargetId == byte.MaxValue
+            ? "None"
+            : (GameData.Instance?.GetPlayerById(TargetId)?.PlayerName ?? "??");
+        text.AppendLine(TownOfUsPlugin.Culture, $"Marked: {name}");
+        return text;
+    }
+
+    private void UpdateDurationText()
+    {
+        if (!Player.AmOwner || !HudManager.InstanceExists)
+        {
+            return;
+        }
+
+        if (_invisText == null)
+        {
+            var go = new GameObject("ArbiterInvisText");
+            go.transform.SetParent(HudManager.Instance.transform, false);
+            go.transform.localPosition = new Vector3(0f, -2.35f, -20f);
+            _invisText = go.AddComponent<TextMeshPro>();
+            _invisText.fontSize = 2.5f;
+            _invisText.alignment = TextAlignmentOptions.Center;
+            _invisText.color = MiraModuleColors.Arbiter;
+        }
+
+        if (_speedText == null)
+        {
+            var go = new GameObject("ArbiterSpeedText");
+            go.transform.SetParent(HudManager.Instance.transform, false);
+            go.transform.localPosition = new Vector3(0f, -2.75f, -20f);
+            _speedText = go.AddComponent<TextMeshPro>();
+            _speedText.fontSize = 2.5f;
+            _speedText.alignment = TextAlignmentOptions.Center;
+            _speedText.color = MiraModuleColors.Arbiter;
+        }
+
+        if (InvisActive)
+        {
+            var remaining = Math.Max(0f, InvisEndTime - Time.time);
+            _invisText.text = $"Invis: {remaining:0.0}s";
+            _invisText.enabled = true;
+        }
+        else
+        {
+            _invisText.enabled = false;
+        }
+
+        if (SpeedActive)
+        {
+            var remaining = Math.Max(0f, SpeedEndTime - Time.time);
+            _speedText.text = $"Speed: {remaining:0.0}s";
+            _speedText.enabled = true;
+        }
+        else
+        {
+            _speedText.enabled = false;
+        }
+    }
+
+    private void RemoveDurationText()
+    {
+        if (_invisText != null)
+        {
+            UnityEngine.Object.Destroy(_invisText.gameObject);
+            _invisText = null;
+        }
+
+        if (_speedText != null)
+        {
+            UnityEngine.Object.Destroy(_speedText.gameObject);
+            _speedText = null;
+        }
     }
 
     private static void SetPlayerVisibility(PlayerControl player, bool visible)

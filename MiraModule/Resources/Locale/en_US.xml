@@ -98,6 +98,7 @@
     <string name="MiraOptionArbiterInvisUses">Invisibility Uses</string>
     <string name="MiraOptionArbiterInvisDuration">Invisibility Duration</string>
     <string name="MiraOptionArbiterSpeedUses">Speed Boost Uses</string>
+    <string name="MiraOptionArbiterSpeedDuration">Speed Boost Duration</string>
     <string name="MiraOptionArbiterSpeedMultiplier">Speed Boost Multiplier</string>
     <string name="MiraOptionArbiterCanVent">Arbiter Can Vent</string>
 
