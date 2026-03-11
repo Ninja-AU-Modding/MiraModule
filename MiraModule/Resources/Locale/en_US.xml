@@ -60,8 +60,42 @@
     <string name="MiraOptionEraserCanVent">Eraser Can Vent</string>
     <string name="MiraOptionEraserHasAssassin">Eraser Has Assassin Ability</string>
 
+    <!-- Distorter - Impostor -->
+    <string name="MiraRoleDistorter">Distorter</string>
+    <string name="MiraRoleDistorterIntroBlurb">Pull them in and vanish.</string>
+    <string name="MiraRoleDistorterTabDescription">Use Distort to reel a target toward you.\%nl\%After a quick kill window, you become invisible for a short time.</string>
+
+    <!-- Distorter Wiki -->
+    <string name="MiraRoleDistorterWikiDescription">The Distorter is an Impostor role that can pull a target toward themselves. After using Distort, they get a brief kill window and then turn invisible for a duration, moving faster while hidden.</string>
+    <string name="MiraRoleDistorterDistort">Distort</string>
+    <string name="MiraRoleDistorterDistortWikiDescription">Target a player from the menu and pull them toward you.</string>
+
+    <!-- Distorter Options -->
+    <string name="MiraOptionDistorterDistortCooldown">Distort Cooldown</string>
+    <string name="MiraOptionDistorterPullSpeed">Pull Speed</string>
+    <string name="MiraOptionDistorterInvisibilityDuration">Invisibility Duration</string>
+    <string name="MiraOptionDistorterInvisibleSpeedMultiplier">Invisible Speed Multiplier</string>
+    <string name="MiraOptionDistorterCanVent">Distorter Can Vent</string>
+
     <!-- Cause of Deaths -->
     <string name="DiedToEraser">Erased</string>
+
+    <string name="MiraRoleArbiter">Arbiter</string>
+    <string name="MiraRoleArbiterIntroBlurb">Choose a target and sway the vote.</string>
+    <string name="MiraRoleArbiterTabDescription">Choose a target from the Arbiter menu.\%nl\%If that player is voted out, you gain a faster kill cooldown and an extra sabotage.</string>
+
+    <string name="MiraRoleArbiterWikiDescription">The Arbiter is an Impostor role that selects a target through a GUI. If the target is exiled by vote, the Arbiter gains a faster kill cooldown and additional sabotage uses. The target cannot be changed unless the option allows it.</string>
+    <string name="MiraRoleArbiterMark">Mark</string>
+    <string name="MiraRoleArbiterMarkWikiDescription">Choose a target from the player menu.</string>
+    <string name="MiraRoleArbiterSabotage">Sabotage</string>
+    <string name="MiraRoleArbiterSabotageWikiDescription">You have limited sabotage uses. Exiling your target grants more uses.</string>
+
+    <string name="MiraOptionArbiterTargetCooldown">Target Cooldown</string>
+    <string name="MiraOptionArbiterCanChangeTarget">Can Change Target</string>
+    <string name="MiraOptionArbiterKillCooldownMultiplier">Kill Cooldown Multiplier</string>
+    <string name="MiraOptionArbiterBaseSabotageUses">Base Sabotage Uses</string>
+    <string name="MiraOptionArbiterDoorsCountAsUse">Doors Count As Use</string>
+    <string name="MiraOptionArbiterCanVent">Arbiter Can Vent</string>
 
     <!-- Shifter - Neutral Benign -->
     <string name="MiraRoleShifter">Shifter</string>
