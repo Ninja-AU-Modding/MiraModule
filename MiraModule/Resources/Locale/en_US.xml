@@ -96,4 +96,17 @@
     <string name="MiraOptionShifterShiftCooldown">Shift Cooldown</string>
     <string name="MiraOptionShifterShiftDeadPlayers">Can Shift Dead Players</string>
 
+	<!-- Fake-poster - Neutral Killing -->
+	<string name="MiraRoleFakeposter">Fake-poster</string>
+	<string name="MiraRoleFakeposterIntroBlurb">Unlucky, man. Unlucky.</string>
+	<string name="MiraRoleFakeposterTabDescription">A killing role with no abilities, and no allies. Good luck!</string>
+
+	<!-- Fake-poster Wiki -->
+	<string name="MiraRoleFakeposterWikiDescription">The Fake-poster is a Neutral Killing role that has no abilites but to kill. Pretty uninteresting, right?</string>
+	
+	<!-- Fake-poster Options -->
+	<string name="MiraOptionFakeposterKillCooldown">Kill cooldown</string>
+	<string name="MiraOptionFakeposterCanVent">Can vent</string>
+	<string name="MiraOptionFakeposterHasImposterVision">Imposter vision</string>
+	
 </resources>

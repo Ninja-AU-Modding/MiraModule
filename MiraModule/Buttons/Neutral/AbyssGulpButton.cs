@@ -1,5 +1,4 @@
 using MiraAPI.GameOptions;
-using MiraAPI.Hud;
 using MiraAPI.Keybinds;
 using MiraAPI.Modifiers;
 using MiraAPI.Utilities.Assets;
@@ -8,10 +7,7 @@ using MiraModule.Modifiers;
 using MiraModule.Options.Roles.Neutral;
 using MiraModule.Roles.Neutral;
 using TownOfUs.Buttons;
-using TownOfUs.Networking;
 using TownOfUs.Options.Modifiers.Alliance;
-using TownOfUs.Modules.Localization;
-using TownOfUs.Utilities;
 using UnityEngine;
 
 namespace MiraModule.Buttons.Neutral;

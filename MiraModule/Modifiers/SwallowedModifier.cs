@@ -1,7 +1,6 @@
 using MiraAPI.Modifiers;
 using MiraModule.Roles.Neutral;
 using TMPro;
-using TownOfUs.Utilities;
 using TownOfUs.Utilities.Appearances;
 using UnityEngine;
 using Object = UnityEngine.Object;

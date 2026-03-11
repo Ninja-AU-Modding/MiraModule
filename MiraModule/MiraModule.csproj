@@ -18,6 +18,10 @@
 	  <Folder Include="Buttons\Crewmates\" />
 	  <Folder Include="Options\Roles\Crewmates\" />
 	</ItemGroup>
+	
+	<PropertyGroup>
+		<NoWarn>CS1591;CA1707</NoWarn>
+	</PropertyGroup>
 
 	<Import Project="../AmongUs.props" />
 </Project>

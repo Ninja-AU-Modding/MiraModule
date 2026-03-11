@@ -17,5 +17,5 @@ public static class MiraModuleColors
     public static Color Sentinel => new Color32(143, 162, 141, 255);
     public static Color Abyss => new Color32(75, 45, 120, 255); // Purple
     public static Color Shifter => new Color32(12, 11, 6, 255); // Greyish Black
+    public static Color Fakeposter => new Color32(145, 145, 145, 255); // Grey
 }
- 

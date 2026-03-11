@@ -1,19 +1,9 @@
 using AmongUs.GameOptions;
 using Il2CppInterop.Runtime.Attributes;
-using MiraAPI.GameOptions;
-using MiraAPI.Hud;
 using MiraAPI.Patches.Stubs;
 using MiraAPI.Roles;
 using MiraModule.Assets;
-using MiraModule.Buttons.Neutral;
-using MiraModule.Options.Roles.Neutral;
-using TownOfUs;
-using TownOfUs.Assets;
-using TownOfUs.Modules.Localization;
-using TownOfUs.Modules.Wiki;
-using TownOfUs.Roles;
 using TownOfUs.Roles.Neutral;
-using TownOfUs.Utilities;
 using UnityEngine;
 
 namespace MiraModule.Roles.Neutral;
