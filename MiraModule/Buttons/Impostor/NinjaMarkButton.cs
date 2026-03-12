@@ -1,21 +1,19 @@
 using System;
 using MiraAPI.GameOptions;
-using MiraAPI.Hud;
 using MiraAPI.Keybinds;
 using MiraAPI.Utilities.Assets;
 using MiraModule.Assets;
 using MiraModule.Options.Roles.Impostor;
 using MiraModule.Roles.Impostor;
 using TownOfUs.Buttons;
-using TownOfUs.Modules.Localization;
 using TownOfUs.Utilities;
 using UnityEngine;
 
 namespace MiraModule.Buttons.Impostor;
 
-public sealed class NinjaMarkButton : TownOfUsRoleButton<NinjaRole>
+public sealed class NinjaMarkButton : TownOfUsKillRoleButton<NinjaRole, PlayerControl>
 {
-    public override string Name => TouLocale.GetParsed("MiraRoleNinjaMark", "Mark");
+    public override string Name => string.Empty;
     public override BaseKeybind Keybind => Keybinds.SecondaryAction;
     public override Color TextOutlineColor => MiraModuleColors.Ninja;
     public override float Cooldown => Math.Clamp(OptionGroupSingleton<NinjaOptions>.Instance.MarkCooldown + MapCooldown, 0f, 120f);
@@ -35,7 +33,17 @@ public sealed class NinjaMarkButton : TownOfUsRoleButton<NinjaRole>
             return false;
         }
 
+        if (Role.MarkedTargetId != byte.MaxValue)
+        {
+            return false;
+        }
+
         return !Minigame.Instance;
+    }
+
+    public override PlayerControl? GetTarget()
+    {
+        return PlayerControl.LocalPlayer.GetClosestLivingPlayer(true, Distance, false);
     }
 
     protected override void OnClick()
@@ -45,38 +53,12 @@ public sealed class NinjaMarkButton : TownOfUsRoleButton<NinjaRole>
             return;
         }
 
-        var playerMenu = CustomPlayerMenu.Create();
-        playerMenu.transform.FindChild("PhoneUI").GetChild(0).GetComponent<SpriteRenderer>().material =
-            PlayerControl.LocalPlayer.cosmetics.currentBodySprite.BodySprite.material;
-        playerMenu.transform.FindChild("PhoneUI").GetChild(1).GetComponent<SpriteRenderer>().material =
-            PlayerControl.LocalPlayer.cosmetics.currentBodySprite.BodySprite.material;
-
-        playerMenu.Begin(
-            plr => plr != null &&
-                   plr.Data != null &&
-                   !plr.Data.IsDead &&
-                   !plr.Data.Disconnected &&
-                   plr.PlayerId != PlayerControl.LocalPlayer.PlayerId,
-            plr =>
-            {
-                playerMenu.ForceClose();
-                if (plr == null)
-                {
-                    return;
-                }
-
-                NinjaRole.RpcSetTarget(PlayerControl.LocalPlayer, plr.PlayerId);
-                SetTimer(Cooldown);
-            }
-        );
-
-        foreach (var panel in playerMenu.potentialVictims)
+        if (Target == null)
         {
-            panel.PlayerIcon.cosmetics.SetPhantomRoleAlpha(1f);
-            if (panel.NameText.text != PlayerControl.LocalPlayer.Data.PlayerName)
-            {
-                panel.NameText.color = Color.white;
-            }
+            return;
         }
+
+        NinjaRole.RpcSetTarget(PlayerControl.LocalPlayer, Target.PlayerId);
+        SetTimer(Cooldown);
     }
 }

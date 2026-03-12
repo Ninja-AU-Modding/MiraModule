@@ -14,7 +14,7 @@ public static class MiraModuleColors
     public static Color Eraser => new Color32(200, 60, 60, 255); // Deep crimson
     public static Color Distorter => new Color32(176, 65, 214, 255);
     public static Color Arbiter => new Color32(200, 60, 60, 255);
-    public static Color Ninja => new Color32(40, 170, 110, 255);
+    public static Color Ninja => new Color32(200, 60, 60, 255);
 
     // Neutral Colors
     public static Color Sentinel => new Color32(143, 162, 141, 255);

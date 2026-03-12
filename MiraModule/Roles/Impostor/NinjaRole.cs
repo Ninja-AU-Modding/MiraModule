@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Text;
 using AmongUs.GameOptions;
 using Il2CppInterop.Runtime.Attributes;
 using MiraAPI.GameOptions;
@@ -17,6 +18,7 @@ using TownOfUs.Modules.Localization;
 using TownOfUs.Modules.Wiki;
 using TownOfUs.Roles;
 using TownOfUs.Utilities;
+using TMPro;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -28,6 +30,8 @@ public sealed class NinjaRole(IntPtr cppPtr)
     [HideFromIl2Cpp] public byte MarkedTargetId { get; private set; } = byte.MaxValue;
     [HideFromIl2Cpp] public bool InvisActive { get; private set; }
     [HideFromIl2Cpp] public float InvisEndTime { get; private set; }
+
+    private TextMeshPro? _invisText;
 
     public string LocaleKey => "Ninja";
     public string RoleName => TouLocale.Get($"MiraRole{LocaleKey}");
@@ -104,12 +108,14 @@ public sealed class NinjaRole(IntPtr cppPtr)
         if (Player == null || Player.Data.Role is not NinjaRole || Player.HasDied())
         {
             EndInvisibility();
+            RemoveInvisText();
             return;
         }
 
         if (MeetingHud.Instance != null || ExileController.Instance != null)
         {
             EndInvisibility();
+            RemoveInvisText();
             return;
         }
 
@@ -123,6 +129,8 @@ public sealed class NinjaRole(IntPtr cppPtr)
                 EndInvisibility();
             }
         }
+
+        UpdateInvisText();
     }
 
     public void ResetState()
@@ -131,11 +139,13 @@ public sealed class NinjaRole(IntPtr cppPtr)
         InvisActive = false;
         InvisEndTime = 0f;
         SetPlayerVisibility(Player, true);
+        RemoveInvisText();
     }
 
     public void SetTarget(byte targetId)
     {
         MarkedTargetId = targetId;
+        StartAssassinateCooldown();
     }
 
     public bool CanAssassinate()
@@ -214,6 +224,7 @@ public sealed class NinjaRole(IntPtr cppPtr)
         SpawnLeaves(targetPos);
         SpawnTrace(targetPos);
         StartInvisibility();
+        StartMarkCooldown();
     }
 
     private void UpdateMarkedTarget()
@@ -247,6 +258,86 @@ public sealed class NinjaRole(IntPtr cppPtr)
         InvisActive = false;
         InvisEndTime = 0f;
         SetPlayerVisibility(Player, true);
+    }
+
+    [HideFromIl2Cpp]
+    public StringBuilder SetTabText()
+    {
+        var text = ITownOfUsRole.SetNewTabText(this);
+        var name = MarkedTargetId == byte.MaxValue
+            ? "None"
+            : (GameData.Instance?.GetPlayerById(MarkedTargetId)?.PlayerName ?? "??");
+        text.AppendLine(TownOfUsPlugin.Culture, $"Marked: {name}");
+        return text;
+    }
+
+    private void UpdateInvisText()
+    {
+        if (!Player.AmOwner || !HudManager.InstanceExists)
+        {
+            return;
+        }
+
+        if (_invisText == null)
+        {
+            var go = new GameObject("NinjaInvisText");
+            go.transform.SetParent(HudManager.Instance.transform, false);
+            go.transform.localPosition = new Vector3(0f, -2.35f, -20f);
+
+            _invisText = go.AddComponent<TextMeshPro>();
+            _invisText.fontSize = 2.5f;
+            _invisText.alignment = TextAlignmentOptions.Center;
+            _invisText.color = MiraModuleColors.Ninja;
+        }
+
+        if (InvisActive)
+        {
+            var remaining = Math.Max(0f, InvisEndTime - Time.time);
+            _invisText.text = $"Invisible: {remaining:0.0}s";
+            _invisText.enabled = true;
+            return;
+        }
+
+        _invisText.enabled = false;
+    }
+
+    private void RemoveInvisText()
+    {
+        if (_invisText != null)
+        {
+            Object.Destroy(_invisText.gameObject);
+            _invisText = null;
+        }
+    }
+
+    private void StartAssassinateCooldown()
+    {
+        if (!Player.AmOwner)
+        {
+            return;
+        }
+
+        var btn = CustomButtonSingleton<NinjaAssassinateButton>.Instance;
+        if (btn != null)
+        {
+            btn.SetTimer(OptionGroupSingleton<NinjaOptions>.Instance.AssassinateCooldown +
+                         TownOfUs.Buttons.TownOfUsButton.MapCooldown);
+        }
+    }
+
+    private void StartMarkCooldown()
+    {
+        if (!Player.AmOwner)
+        {
+            return;
+        }
+
+        var btn = CustomButtonSingleton<NinjaMarkButton>.Instance;
+        if (btn != null)
+        {
+            btn.SetTimer(OptionGroupSingleton<NinjaOptions>.Instance.MarkCooldown +
+                         TownOfUs.Buttons.TownOfUsTargetButton<PlayerControl>.MapCooldown);
+        }
     }
 
     private static void SpawnTrace(Vector2 position)
