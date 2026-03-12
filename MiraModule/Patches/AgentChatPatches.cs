@@ -6,7 +6,6 @@ using MiraModule.Modifiers.Alliance;
 using Reactor.Networking.Attributes;
 using TownOfUs.Modifiers;
 using TownOfUs.Options;
-using TownOfUs.Patches.Options;
 using UnityEngine;
 
 namespace MiraModule.Patches;
@@ -14,34 +13,28 @@ namespace MiraModule.Patches;
 [HarmonyPatch]
 public static class AgentChatPatches
 {
-    // Lower number = higher priority. Impostor chat is 30.
-    private const int ChatPriority = 25;
     private const string AnonymousLabel = "Anonymous";
     private const string AgentLabel = "Agent";
 
-    private static readonly Color AgentChatColor = new AgentModifier().FreeplayFileColor;
+    internal static readonly Color AgentChatColor = new AgentModifier().FreeplayFileColor;
 
-    private static TeamChatPatches.ExtensionTeamChatHandler? _handler;
+    internal static bool IsAgentChatActiveOutsideMeeting =>
+        PlayerControl.LocalPlayer != null &&
+        !PlayerControl.LocalPlayer.HasDied() &&
+        MeetingHud.Instance == null &&
+        (PlayerControl.LocalPlayer.HasModifier<AgentModifier>() ||
+         PlayerControl.LocalPlayer.HasModifier<AgentAwareModifier>());
 
-    public static void RegisterAgentChat()
+    internal static void ApplyAgentSprites()
     {
-        if (_handler != null) return;
-
-        _handler = new TeamChatPatches.ExtensionTeamChatHandler
-        {
-            Priority = ChatPriority,
-            IsForced = true,
-            IsChatAvailable = () =>
-                (MeetingHud.Instance != null) &&
-                !PlayerControl.LocalPlayer.HasDied() &&
-                (PlayerControl.LocalPlayer.HasModifier<AgentModifier>() ||
-                 PlayerControl.LocalPlayer.HasModifier<AgentAwareModifier>()),
-            SendMessage = (sender, msg) => RpcSendAgentChat(sender, msg),
-            GetDisplayText = () => "Agent Chat",
-            DisplayTextColor = AgentChatColor,
-        };
-
-        TeamChatPatches.ExtensionTeamChatRegistry.RegisterHandler(_handler);
+        if (!HudManager.InstanceExists || HudManager.Instance.Chat == null) return;
+        var chatButton = HudManager.Instance.Chat.chatButton;
+        chatButton.transform.Find("Inactive").GetComponent<SpriteRenderer>().sprite =
+            TouChatAssets.LoveChatIdle.LoadAsset();
+        chatButton.transform.Find("Active").GetComponent<SpriteRenderer>().sprite =
+            TouChatAssets.LoveChatHover.LoadAsset();
+        chatButton.transform.Find("Selected").GetComponent<SpriteRenderer>().sprite =
+            TouChatAssets.LoveChatOpen.LoadAsset();
     }
 
     [MethodRpc((uint)MiraModuleRpc.SendAgentChat)]
@@ -58,32 +51,25 @@ public static class AgentChatPatches
         if (!canSee) return;
 
         var senderIsAgent = sender.HasModifier<AgentModifier>();
-        var senderIsAgentAware = sender.HasModifier<AgentAwareModifier>();
 
         string displayName;
 
         if (sender.AmOwner)
         {
-            // You always see your own messages with your real name
             displayName = sender.Data.PlayerName;
         }
         else if (local.HasModifier<AgentAwareModifier>() && senderIsAgent)
         {
-            // AgentAware can identify the Agent
-            displayName = AgentLabel;
+            displayName = $"{AgentLabel} ({sender.Data.PlayerName})";
         }
         else
         {
-            // Everyone else is anonymous to everyone else
             displayName = AnonymousLabel;
         }
 
         var title = $"<color=#{ColorUtility.ToHtmlStringRGBA(AgentChatColor)}>{displayName}</color>";
-        var inMeeting = MeetingHud.Instance != null;
-        var blackout = inMeeting; // private-like during meetings
-        var bubbleType = inMeeting ? TownOfUs.Utilities.BubbleType.Other : TownOfUs.Utilities.BubbleType.None;
-        // Show outside meetings (like Lover), keep private styling in meetings.
-        MiscUtils.AddTeamChat(sender.Data, title, text, blackoutText: blackout, bubbleType: bubbleType, onLeft: !sender.AmOwner);
+        MiscUtils.AddTeamChat(sender.Data, title, text, blackoutText: false,
+            bubbleType: BubbleType.None, onLeft: !sender.AmOwner);
     }
 
     [HarmonyPatch(typeof(ChatController), nameof(ChatController.SendChat))]
@@ -105,5 +91,13 @@ public static class AgentChatPatches
         __instance.quickChatField.Clear();
         __instance.UpdateChatMode();
         return false;
+    }
+
+    [HarmonyPatch(typeof(ChatController), nameof(ChatController.Toggle))]
+    [HarmonyPostfix]
+    public static void TogglePatch(ChatController __instance)
+    {
+        if (!__instance.IsOpenOrOpening || !IsAgentChatActiveOutsideMeeting) return;
+        ApplyAgentSprites();
     }
 }

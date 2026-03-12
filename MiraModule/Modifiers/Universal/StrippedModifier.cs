@@ -6,6 +6,7 @@ using MiraModule.Assets;
 using MiraModule.Options.Modifiers.Universal;
 using MiraModule.Roles.Neutral;
 using TownOfUs.Modifiers.Game;
+using TownOfUs.Roles.Neutral;
 using UnityEngine;
 
 namespace MiraModule.Modifiers.Universal;
@@ -49,6 +50,9 @@ public sealed class StrippedModifier : UniversalGameModifier
                 case NeutralBenignBehavier.BecomeFakeposter:
                     Player.RpcSetRole((RoleTypes)RoleId.Get<FakeposterRole>());
                     break;
+                case NeutralBenignBehavier.BecomeAmni:
+                    Player.RpcSetRole((RoleTypes)RoleId.Get<AmnesiacRole>());
+                    break;
                 default:
                     Player.Die(DeathReason.Kill, true);
                     break;
@@ -57,7 +61,18 @@ public sealed class StrippedModifier : UniversalGameModifier
         }
         else if (isNeutral) // ONLY a neutral. Not a benign role
         {
-            Player.RpcSetRole((RoleTypes)RoleId.Get<FakeposterRole>());
+            switch (OptionGroupSingleton<StrippedOptions>.Instance.NeutralOther)
+            {
+                case NeutralBehavier.BecomeFakeposter:
+                    Player.RpcSetRole((RoleTypes)RoleId.Get<FakeposterRole>());
+                    break;
+                case NeutralBehavier.BecomeAmni:
+                    Player.RpcSetRole((RoleTypes)RoleId.Get<AmnesiacRole>());
+                    break;
+                default:
+                    Player.Die(DeathReason.Kill, true);
+                    break;
+            }
         }
         else if (isImp)
         {
