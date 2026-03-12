@@ -10,4 +10,5 @@ public enum MiraModuleRpc : uint
     ArbiterSetTarget = 10205,
     ChaosTokenRoll = 10210,
     ChaosTokenGain = 10211,
+    SendAgentChat = 10212,
 }

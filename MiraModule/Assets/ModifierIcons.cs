@@ -15,4 +15,6 @@ public static class ModifierIcons
 
     public static LoadableAsset<Sprite> Stripped { get; } =
         new LoadableResourceAsset($"{ShortPath}.TempIcon.png", 200);
+    public static LoadableAsset<Sprite> Agent { get; } =
+        new LoadableResourceAsset($"{ShortPath}.TempIcon.png", 200);
 }

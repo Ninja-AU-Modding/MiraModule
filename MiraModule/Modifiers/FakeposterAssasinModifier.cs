@@ -1,7 +1,6 @@
 ﻿using AmongUs.GameOptions;
 using MiraAPI.GameOptions;
 using MiraAPI.Roles;
-using MiraModule.Options.Roles.Impostor;
 using MiraModule.Options.Roles.Neutral;
 using MiraModule.Roles.Neutral;
 using TownOfUs.Modifiers.Game;
