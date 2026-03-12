@@ -14,7 +14,8 @@ namespace MiraModule.Patches;
 [HarmonyPatch]
 public static class AgentChatPatches
 {
-    private const int ChatPriority = 50;
+    // Lower number = higher priority. Impostor chat is 30.
+    private const int ChatPriority = 25;
     private const string AnonymousLabel = "Anonymous";
     private const string AgentLabel = "Agent";
 
@@ -31,7 +32,7 @@ public static class AgentChatPatches
             Priority = ChatPriority,
             IsForced = true,
             IsChatAvailable = () =>
-                (!MeetingHud.Instance || !ExileController.Instance) &&
+                (MeetingHud.Instance != null) &&
                 !PlayerControl.LocalPlayer.HasDied() &&
                 (PlayerControl.LocalPlayer.HasModifier<AgentModifier>() ||
                  PlayerControl.LocalPlayer.HasModifier<AgentAwareModifier>()),
@@ -78,7 +79,11 @@ public static class AgentChatPatches
         }
 
         var title = $"<color=#{ColorUtility.ToHtmlStringRGBA(AgentChatColor)}>{displayName}</color>";
-        MiscUtils.AddTeamChat(sender.Data, title, text, bubbleType: TownOfUs.Utilities.BubbleType.Other, onLeft: !sender.AmOwner);
+        var inMeeting = MeetingHud.Instance != null;
+        var blackout = inMeeting; // private-like during meetings
+        var bubbleType = inMeeting ? TownOfUs.Utilities.BubbleType.Other : TownOfUs.Utilities.BubbleType.None;
+        // Show outside meetings (like Lover), keep private styling in meetings.
+        MiscUtils.AddTeamChat(sender.Data, title, text, blackoutText: blackout, bubbleType: bubbleType, onLeft: !sender.AmOwner);
     }
 
     [HarmonyPatch(typeof(ChatController), nameof(ChatController.SendChat))]
@@ -93,8 +98,6 @@ public static class AgentChatPatches
 
         var local = PlayerControl.LocalPlayer;
         if (!local.HasModifier<AgentModifier>() && !local.HasModifier<AgentAwareModifier>()) return true;
-
-        if (!TeamChatPatches.TeamChatActive) return true;
 
         RpcSendAgentChat(local, text);
         __instance.freeChatField.Clear();

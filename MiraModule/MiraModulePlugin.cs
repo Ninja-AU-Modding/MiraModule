@@ -50,5 +50,9 @@ public partial class MiraModulePlugin : BasePlugin, IMiraPlugin
         IL2CPPChainloader.Instance.Finished += Modules.ExtensionLocale.SearchInternalLocale;
         
         Harmony.PatchAll();
+
+        // Ensure Agent chat handler is registered (now and after mod load completes).
+        Patches.AgentChatPatches.RegisterAgentChat();
+        IL2CPPChainloader.Instance.Finished += Patches.AgentChatPatches.RegisterAgentChat;
     }
 }
