@@ -36,6 +36,11 @@ public sealed class NinjaAssassinateButton : TownOfUsRoleButton<NinjaRole>
         return Role.CanAssassinate();
     }
 
+    public override bool Enabled(RoleBehaviour? role)
+    {
+        return role is NinjaRole ninja && ninja.MarkedTargetId != byte.MaxValue;
+    }
+
     protected override void OnClick()
     {
         if (Role == null)

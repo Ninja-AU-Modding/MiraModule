@@ -21,5 +21,4 @@ public static class ImpostorAssets
     public static LoadableAsset<Sprite> NinjaMarkSprite { get; } = new LoadableResourceAsset($"{ShortPath}.NinjaMarkButton.png");
     public static LoadableAsset<Sprite> NinjaAssassinateSprite { get; } = new LoadableResourceAsset($"{ShortPath}.NinjaAssassinateButton.png");
     public static LoadableAsset<Sprite> NinjaTraceSprite { get; } = new LoadableResourceAsset($"{ShortPath}.NinjaTraceW.png");
-    public static LoadableAsset<Sprite> NinjaLeavesSprite { get; } = new LoadableResourceAsset($"{ShortPath}.NinjaLeaves.png");
 }

@@ -20,12 +20,6 @@ public sealed class NinjaOptions : AbstractOptionGroup<NinjaRole>
     [ModdedNumberOption("MiraOptionNinjaInvisibilityDuration", 1f, 30f, 0.5f, MiraNumberSuffixes.Seconds)]
     public float InvisibilityDuration { get; set; } = 6f;
 
-    [ModdedNumberOption("MiraOptionNinjaLeafDuration", 1f, 30f, 0.5f, MiraNumberSuffixes.Seconds)]
-    public float LeafDuration { get; set; } = 10f;
-
-    [ModdedNumberOption("MiraOptionNinjaLeafCount", 0f, 12f, 1f, MiraNumberSuffixes.None)]
-    public float LeafCount { get; set; } = 5f;
-
     [ModdedNumberOption("MiraOptionNinjaTraceDuration", 1f, 30f, 0.5f, MiraNumberSuffixes.Seconds)]
     public float TraceDuration { get; set; } = 10f;
 

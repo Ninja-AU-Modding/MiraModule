@@ -41,6 +41,11 @@ public sealed class NinjaMarkButton : TownOfUsKillRoleButton<NinjaRole, PlayerCo
         return !Minigame.Instance;
     }
 
+    public override bool Enabled(RoleBehaviour? role)
+    {
+        return role is NinjaRole ninja && ninja.MarkedTargetId == byte.MaxValue;
+    }
+
     public override PlayerControl? GetTarget()
     {
         return PlayerControl.LocalPlayer.GetClosestLivingPlayer(true, Distance, false);

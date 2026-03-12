@@ -221,7 +221,6 @@ public sealed class NinjaRole(IntPtr cppPtr)
             Player.RpcMurderPlayer(target, true);
         }
 
-        SpawnLeaves(targetPos);
         SpawnTrace(targetPos);
         StartInvisibility();
         StartMarkCooldown();
@@ -325,6 +324,11 @@ public sealed class NinjaRole(IntPtr cppPtr)
         }
     }
 
+    public void TriggerAssassinateCooldown()
+    {
+        StartAssassinateCooldown();
+    }
+
     private void StartMarkCooldown()
     {
         if (!Player.AmOwner)
@@ -351,26 +355,6 @@ public sealed class NinjaRole(IntPtr cppPtr)
         var sprite = ImpostorAssets.NinjaTraceSprite.LoadAsset();
         var trace = CreateWorldSprite("NinjaTrace", sprite, position, 1f, 2);
         Coroutines.Start(CoDestroyAfter(trace, duration));
-    }
-
-    private static void SpawnLeaves(Vector2 position)
-    {
-        var duration = OptionGroupSingleton<NinjaOptions>.Instance.LeafDuration;
-        var count = (int)Math.Clamp(OptionGroupSingleton<NinjaOptions>.Instance.LeafCount, 0f, 20f);
-        if (duration <= 0f || count <= 0)
-        {
-            return;
-        }
-
-        var sprite = ImpostorAssets.NinjaLeavesSprite.LoadAsset();
-        for (var i = 0; i < count; i++)
-        {
-            var offset = UnityEngine.Random.insideUnitCircle * 0.45f;
-            var leafPos = position + offset;
-            var leaf = CreateWorldSprite("NinjaLeaf", sprite, leafPos, 1f, 1);
-            leaf.transform.eulerAngles = new Vector3(0f, 0f, UnityEngine.Random.Range(0f, 360f));
-            Coroutines.Start(CoDestroyAfter(leaf, duration));
-        }
     }
 
     private static GameObject CreateWorldSprite(string name, Sprite sprite, Vector2 position, float scale, int sortingOrder)

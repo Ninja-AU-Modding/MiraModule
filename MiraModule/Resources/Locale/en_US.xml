@@ -80,10 +80,10 @@
     <!-- Ninja - Impostor -->
     <string name="MiraRoleNinja">Ninja</string>
     <string name="MiraRoleNinjaIntroBlurb">Mark your prey and strike from anywhere.</string>
-    <string name="MiraRoleNinjaTabDescription">Mark a target, then Assassinate to instantly teleport and kill.\%nl\%Leaves and trace marks are left behind, and you turn invisible to escape.</string>
+    <string name="MiraRoleNinjaTabDescription">Mark a target, then Assassinate to instantly teleport and kill.\%nl\%Trace marks are left behind, and you turn invisible to escape.</string>
 
     <!-- Ninja Wiki -->
-    <string name="MiraRoleNinjaWikiDescription">The Ninja is an Impostor-aligned role that can mark a target and later assassinate them from anywhere on the map. When the assassination occurs, the Ninja teleports to the target, kills instantly, drops leaves at the body, and becomes invisible for a short time. Trace markers reveal the teleport origin and destination.</string>
+    <string name="MiraRoleNinjaWikiDescription">The Ninja is an Impostor-aligned role that can mark a target and later assassinate them from anywhere on the map. When the assassination occurs, the Ninja teleports to the target, kills instantly, and becomes invisible for a short time. Trace markers reveal the teleport origin and destination.</string>
     <string name="MiraRoleNinjaMark">Mark</string>
     <string name="MiraRoleNinjaMarkWikiDescription">Select a player to mark as your assassination target. Only one target can be marked at a time.</string>
     <string name="MiraRoleNinjaAssassinate">Assassinate</string>
@@ -93,8 +93,6 @@
     <string name="MiraOptionNinjaMarkCooldown">Mark Cooldown</string>
     <string name="MiraOptionNinjaAssassinateCooldown">Assassinate Cooldown</string>
     <string name="MiraOptionNinjaInvisibilityDuration">Invisibility Duration</string>
-    <string name="MiraOptionNinjaLeafDuration">Leaf Duration</string>
-    <string name="MiraOptionNinjaLeafCount">Leaf Count</string>
     <string name="MiraOptionNinjaTraceDuration">Trace Duration</string>
     <string name="MiraOptionNinjaCanVent">Ninja Can Vent</string>
 
