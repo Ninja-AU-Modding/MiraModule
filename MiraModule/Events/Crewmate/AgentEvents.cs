@@ -5,6 +5,7 @@ using MiraAPI.Modifiers;
 using MiraAPI.Utilities;
 using MiraModule.Modifiers;
 using MiraModule.Modifiers.Alliance;
+using MiraModule.Patches;
 using MiraModule.Options.Modifiers.Alliance;
 using TownOfUs.Modifiers.Game.Alliance;
 using UnityEngine;
@@ -50,17 +51,7 @@ public static class AgentEvents
 
         HudManager.Instance.Chat.gameObject.SetActive(true);
 
-        var buttonArray = new[]
-        {
-            TouChatAssets.LoveChatIdle.LoadAsset(),
-            TouChatAssets.LoveChatHover.LoadAsset(),
-            TouChatAssets.LoveChatOpen.LoadAsset()
-        };
-
-        var chatButton = HudManager.Instance.Chat.chatButton.transform;
-        chatButton.Find("Inactive").GetComponent<SpriteRenderer>().sprite = buttonArray[0];
-        chatButton.Find("Active").GetComponent<SpriteRenderer>().sprite = buttonArray[1];
-        chatButton.Find("Selected").GetComponent<SpriteRenderer>().sprite = buttonArray[2];
+        AgentChatPatches.ApplyAgentSprites();
         HudManager.Instance.Chat.SetVisible(true);
     }
 }

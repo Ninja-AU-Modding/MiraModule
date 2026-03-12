@@ -1,4 +1,5 @@
-﻿using MiraAPI.Modifiers.Types;
+using MiraAPI.Modifiers.Types;
+using MiraModule.Patches;
 using UnityEngine;
 
 namespace MiraModule.Modifiers;
@@ -28,11 +29,7 @@ public sealed class AgentAwareModifier : GameModifier
         }
 
         HudManager.Instance.Chat.gameObject.SetActive(true);
-        var buttonArray = new[]
-            { TouChatAssets.LoveChatIdle.LoadAsset(), TouChatAssets.LoveChatHover.LoadAsset(), TouChatAssets.LoveChatOpen.LoadAsset()};
-        HudManager.Instance.Chat.chatButton.transform.Find("Inactive").GetComponent<SpriteRenderer>().sprite = buttonArray[0];
-        HudManager.Instance.Chat.chatButton.transform.Find("Active").GetComponent<SpriteRenderer>().sprite = buttonArray[1];
-        HudManager.Instance.Chat.chatButton.transform.Find("Selected").GetComponent<SpriteRenderer>().sprite = buttonArray[2];
+        AgentChatPatches.ApplyAgentSprites();
     }
 
     public override void OnDeactivate()
@@ -47,16 +44,17 @@ public sealed class AgentAwareModifier : GameModifier
             return;
         }
 
-        var buttonArray = new Sprite[]
-        {
-            TouChatAssets.NormalChatIdle.LoadAsset(), TouChatAssets.NormalChatHover.LoadAsset(),
-            TouChatAssets.NormalChatOpen.LoadAsset()
-        };
-        HudManager.Instance.Chat.chatButton.transform.Find("Inactive").GetComponent<SpriteRenderer>().sprite =
-            buttonArray[0];
-        HudManager.Instance.Chat.chatButton.transform.Find("Active").GetComponent<SpriteRenderer>().sprite =
-            buttonArray[1];
-        HudManager.Instance.Chat.chatButton.transform.Find("Selected").GetComponent<SpriteRenderer>().sprite =
-            buttonArray[2];
+        var inactive = HudManager.Instance.Chat.chatButton.transform.Find("Inactive").GetComponent<SpriteRenderer>();
+        var active = HudManager.Instance.Chat.chatButton.transform.Find("Active").GetComponent<SpriteRenderer>();
+        var selected = HudManager.Instance.Chat.chatButton.transform.Find("Selected").GetComponent<SpriteRenderer>();
+
+        inactive.sprite = TouChatAssets.NormalChatIdle.LoadAsset();
+        active.sprite = TouChatAssets.NormalChatHover.LoadAsset();
+        selected.sprite = TouChatAssets.NormalChatOpen.LoadAsset();
+
+        inactive.color = Color.white;
+        active.color = Color.white;
+        selected.color = Color.white;
     }
 }
+

@@ -5,6 +5,7 @@ using MiraAPI.Utilities;
 using MiraAPI.Utilities.Assets;
 using MiraModule.Assets;
 using MiraModule.Options.Modifiers;
+using MiraModule.Patches;
 using Reactor.Utilities;
 using TownOfUs.Modifiers;
 using TownOfUs.Modifiers.Crewmate;
@@ -77,11 +78,7 @@ public sealed class AgentModifier : AllianceGameModifier, IWikiDiscoverable, IAs
         }
 
         HudManager.Instance.Chat.gameObject.SetActive(true);
-        var buttonArray = new[]
-            { TouChatAssets.LoveChatIdle.LoadAsset(), TouChatAssets.LoveChatHover.LoadAsset(), TouChatAssets.LoveChatOpen.LoadAsset()};
-        HudManager.Instance.Chat.chatButton.transform.Find("Inactive").GetComponent<SpriteRenderer>().sprite = buttonArray[0];
-        HudManager.Instance.Chat.chatButton.transform.Find("Active").GetComponent<SpriteRenderer>().sprite = buttonArray[1];
-        HudManager.Instance.Chat.chatButton.transform.Find("Selected").GetComponent<SpriteRenderer>().sprite = buttonArray[2];
+        AgentChatPatches.ApplyAgentSprites();
     }
 
     public override void OnDeactivate()
@@ -110,17 +107,17 @@ public sealed class AgentModifier : AllianceGameModifier, IWikiDiscoverable, IAs
             return;
         }
 
-        var buttonArray = new Sprite[]
-        {
-            TouChatAssets.NormalChatIdle.LoadAsset(), TouChatAssets.NormalChatHover.LoadAsset(),
-            TouChatAssets.NormalChatOpen.LoadAsset()
-        };
-        HudManager.Instance.Chat.chatButton.transform.Find("Inactive").GetComponent<SpriteRenderer>().sprite =
-            buttonArray[0];
-        HudManager.Instance.Chat.chatButton.transform.Find("Active").GetComponent<SpriteRenderer>().sprite =
-            buttonArray[1];
-        HudManager.Instance.Chat.chatButton.transform.Find("Selected").GetComponent<SpriteRenderer>().sprite =
-            buttonArray[2];
+        var inactive = HudManager.Instance.Chat.chatButton.transform.Find("Inactive").GetComponent<SpriteRenderer>();
+        var active = HudManager.Instance.Chat.chatButton.transform.Find("Active").GetComponent<SpriteRenderer>();
+        var selected = HudManager.Instance.Chat.chatButton.transform.Find("Selected").GetComponent<SpriteRenderer>();
+
+        inactive.sprite = TouChatAssets.NormalChatIdle.LoadAsset();
+        active.sprite = TouChatAssets.NormalChatHover.LoadAsset();
+        selected.sprite = TouChatAssets.NormalChatOpen.LoadAsset();
+
+        inactive.color = Color.white;
+        active.color = Color.white;
+        selected.color = Color.white;
     }
 
     public override bool? DidWin(GameOverReason reason)
