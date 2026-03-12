@@ -2,7 +2,6 @@ using MiraAPI.GameOptions;
 using MiraAPI.GameOptions.Attributes;
 using MiraAPI.Utilities;
 using MiraModule.Modifiers.Universal;
-using MiraModule.Options.Modifiers;
 using UnityEngine;
 
 namespace MiraModule.Options.Modifiers.Universal;

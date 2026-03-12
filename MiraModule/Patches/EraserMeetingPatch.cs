@@ -1,11 +1,10 @@
-using AmongUs.GameOptions;
 using HarmonyLib;
 using MiraAPI.GameOptions;
+using MiraAPI.Modifiers;
 using MiraAPI.Roles;
+using MiraModule.Modifiers.Universal;
 using MiraModule.Options.Roles.Impostor;
 using MiraModule.Roles.Impostor;
-using TownOfUs.Networking;
-using TownOfUs.Utilities;
 
 namespace MiraModule.Patches;
 
@@ -40,25 +39,10 @@ public static class EraserMeetingPatch
             bool isNeutral = currentRole is ICustomRole customRole &&
                              customRole.Team == ModdedRoleTeams.Custom;
 
-            if (isNeutral && opts.NeutralOutcome == NeutralEraseOutcome.Die)
-            {
-                // Kill the neutral player outright
-                var eraser = MiscUtils.PlayerById(eraserId);
-                (eraser ?? victim).RpcSpecialMurder(
-                    victim,
-                    createDeadBody: true,
-                    teleportMurderer: false,
-                    showKillAnim: false,
-                    causeOfDeath: "Erased");
-            }
-            else
-            {
-                // Wipe the role — assign Crewmate
-                victim.RpcSetRole(RoleTypes.Crewmate, false);
-            }
+            victim.RpcAddModifier<StrippedModifier>();
 
             EraserRole.ErasedPlayerIds.Add(victimId);
-            Info($"[Eraser] Erased {victim.Data.PlayerName} (id={victimId}), isNeutral={isNeutral}, outcome={opts.NeutralOutcome}");
+            Info($"[Eraser] Erased {victim.Data.PlayerName} (id={victimId}), isNeutral={isNeutral}");
         }
     }
 

@@ -105,8 +105,8 @@
 	<string name="MiraRoleFakeposterWikiDescription">The Fake-poster is a Neutral Killing role that has no abilites but to kill. Pretty uninteresting, right?</string>
 	
 	<!-- Fake-poster Options -->
-	<string name="MiraOptionFakeposterKillCooldown">Kill cooldown</string>
-	<string name="MiraOptionFakeposterCanVent">Can vent</string>
-	<string name="MiraOptionFakeposterHasImposterVision">Imposter vision</string>
-	
+	<string name="MiraOptionFakeposterKillCooldown">Kill Cooldown</string>
+	<string name="MiraOptionFakeposterCanVent">Can Vent</string>
+	<string name="MiraOptionFakeposterHasImposterVision">Imposter Vision</string>
+	<string name="MiraOptionFakeposterHasAssassin">Has Assassin</string>
 </resources>

@@ -6,15 +6,6 @@ using MiraModule.Roles.Impostor;
 
 namespace MiraModule.Options.Roles.Impostor;
 
-/// <summary>
-/// Describes what happens to a Neutral player who gets erased.
-/// </summary>
-public enum NeutralEraseOutcome
-{
-    BecomeCrewmate = 0,
-    Die = 1,
-}
-
 public sealed class EraserOptions : AbstractOptionGroup<EraserRole>
 {
     public override string GroupName => TouLocale.Get("MiraRoleEraser", "Eraser");
@@ -27,9 +18,6 @@ public sealed class EraserOptions : AbstractOptionGroup<EraserRole>
 
     [ModdedToggleOption("MiraOptionEraserCanEraseImpostors")]
     public bool CanEraseImpostors { get; set; } = false;
-
-    [ModdedEnumOption("MiraOptionEraserNeutralOutcome", typeof(NeutralEraseOutcome))]
-    public NeutralEraseOutcome NeutralOutcome { get; set; } = NeutralEraseOutcome.BecomeCrewmate;
 
     [ModdedToggleOption("MiraOptionEraserCanVent")]
     public bool CanVent { get; set; } = false;

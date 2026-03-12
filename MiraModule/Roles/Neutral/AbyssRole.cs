@@ -11,14 +11,7 @@ using Reactor.Utilities;
 using MiraModule.Assets;
 using MiraModule.Buttons.Neutral;
 using MiraModule.Options.Roles.Neutral;
-using TownOfUs;
-using TownOfUs.Assets;
-using TownOfUs.Extensions;
-using TownOfUs.Modules.Localization;
-using TownOfUs.Modules.Wiki;
-using TownOfUs.Roles;
 using TownOfUs.Roles.Neutral;
-using TownOfUs.Utilities;
 using UnityEngine;
 
 namespace MiraModule.Roles.Neutral;
