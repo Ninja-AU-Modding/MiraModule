@@ -12,7 +12,7 @@
 
 	<ItemGroup>
 		<EmbeddedResource Include="Resources\**\*.*" />
-		<EmbeddedResource Include="ModInfo.json" />
+		<EmbeddedResource Include="modinfo.json" />
 	</ItemGroup>
 
 	<ItemGroup>

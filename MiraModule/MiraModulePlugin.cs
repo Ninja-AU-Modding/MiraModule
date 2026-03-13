@@ -12,7 +12,7 @@ using Reactor.Utilities;
 
 namespace MiraModule;
 
-[BepInAutoPlugin("greys.miramodule", "Mira Module")]
+[BepInAutoPlugin("com.naum.miramodule", "Mira Module")]
 [BepInProcess("Among Us.exe")]
 [BepInDependency(ReactorPlugin.Id)]
 [BepInDependency(MiraApiPlugin.Id)]
