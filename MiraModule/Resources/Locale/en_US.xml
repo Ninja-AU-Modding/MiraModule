@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+﻿<?xml version='1.0' encoding='UTF-8'?>
 <resources>
     <!-- Player Colors -->
     <string name="PlayerColorSpiderman">Spiderman</string>
@@ -7,24 +7,166 @@
     <!-- Cause of Deaths -->
     <string name="DiedToSentinel">Terminated</string>
     <string name="DiedToSentinelExplosion">Disintegrated</string>
-    <string name="DiedToHacker">Hacked</string>
-    <string name="DiedToHackerMindControl">Mind Controlled</string>
+    <string name="DiedToAbyss">Swallowed</string>
     
     <!-- Sentinel - Neutral Killing -->
-    <string name="ExampleRoleSentinel">Sentinel</string>
-    <string name="ExampleRoleSentinelIntroBlurb">Eliminate those who stand in your path.</string>
-    <string name="ExampleRoleSentinelTabDescription">Kill players by using your dope abilities!\%nl\%Preferably, explode \%b\%only\%/b\% in a secluded area.</string>
+    <string name="MiraRoleSentinel">Sentinel</string>
+    <string name="MiraRoleSentinelIntroBlurb">Eliminate those who stand in your path.</string>
+    <string name="MiraRoleSentinelTabDescription">Kill players by using your dope abilities!\%nl\%Preferably, explode \%b\%only\%/b\% in a secluded area.</string>
     
     <!-- Sentinel Wiki -->
-    <string name="ExampleRoleSentinelWikiDescription">The Sentinel is a Neutral Killing role that can explode themselves to kill anyone nearby. They may also kill normally, but where's the fun in that?</string>
-    <string name="ExampleRoleSentinelExplode">Explode</string>
-    <string name="ExampleRoleSentinelExplodeWikiDescription">Explode all players nearby.</string>
+    <string name="MiraRoleSentinelWikiDescription">The Sentinel is a Neutral Killing role that can explode themselves to kill anyone nearby. They may also kill normally, but where's the fun in that?</string>
+    <string name="MiraRoleSentinelExplode">Explode</string>
+    <string name="MiraRoleSentinelExplodeWikiDescription">Explode all players nearby.</string>
     
+    <!-- Abyss - Neutral Killing -->
+    <string name="MiraRoleAbyss">Abyss</string>
+    <string name="MiraRoleAbyssIntroBlurb">Gulp down every last one of them.</string>
+    <string name="MiraRoleAbyssTabDescription">Use your Gulp ability to swallow players whole!\%nl\%Swallowed players vanish with \%b\%no body\%/b\% left behind. They die for good when a meeting is called.</string>
+
+    <!-- Abyss Wiki -->
+    <string name="MiraRoleAbyssWikiDescription">The Abyss is a Neutral Killing role that swallows other players, hiding them from the game entirely. Swallowed players leave no corpse and do not appear in the meeting dead list â€” until the next meeting is called, at which point they die for good. If the Abyss dies, any swallowed players are released alive.</string>
+    <string name="MiraRoleAbyssGulp">Gulp</string>
+    <string name="MiraRoleAbyssGulpWikiDescription">Swallow a nearby player. They vanish from the map and are hidden until the next meeting.</string>
+
+    <!-- Abyss Options -->
+    <string name="MiraOptionAbyssGulpCooldown">Gulp Cooldown</string>
+    <string name="MiraOptionAbyssCanVent">Abyss Can Vent</string>
+    <string name="MiraOptionAbyssHasAssassin">Abyss Has Assassin Ability</string>
+    <string name="MiraOptionAbyssImpostorVision">Abyss Has Impostor Vision</string>
+
     <!-- Sentinel Options -->
-    <string name="ExampleOptionSentinelKillCooldown">Kill Cooldown</string>
-    <string name="ExampleOptionSentinelExplodeCooldown">Explode Cooldown</string>
-    <string name="ExampleOptionSentinelExplosionRadius">Explosion Radius</string>
-    <string name="ExampleOptionSentinelCanVent">Sentinel Can Vent</string>
-    <string name="ExampleOptionSentinelImpostorVision">Sentinel Has Impostor Vision</string>
-   
+    <string name="MiraOptionSentinelKillCooldown">Kill Cooldown</string>
+    <string name="MiraOptionSentinelExplodeCooldown">Explode Cooldown</string>
+    <string name="MiraOptionSentinelExplosionRadius">Explosion Radius</string>
+    <string name="MiraOptionSentinelCanVent">Sentinel Can Vent</string>
+    <string name="MiraOptionSentinelImpostorVision">Sentinel Has Impostor Vision</string>
+
+    <!-- Eraser - Impostor -->
+    <string name="MiraRoleEraser">Eraser</string>
+    <string name="MiraRoleEraserIntroBlurb">Wipe their roles from existence.</string>
+    <string name="MiraRoleEraserTabDescription">Use your Erase ability to mark players.\%nl\%Their role will be wiped at the \%b\%next meeting\%/b\%, no matter what happens in between.</string>
+
+    <!-- Eraser Wiki -->
+    <string name="MiraRoleEraserWikiDescription">The Eraser is an Impostor role that can target players and erase their roles. Erased players lose their role at the start of the next meeting â€” the erase is permanent and cannot be undone, even if the Eraser dies before the meeting. Each erase increases the Erase cooldown. By default, the Eraser cannot erase other Impostors. If a Neutral player is erased, the host can configure whether they become a Crewmate or die outright.</string>
+    <string name="MiraRoleEraserErase">Erase</string>
+    <string name="MiraRoleEraserEraseWikiDescription">Mark a player for erasure. Their role will be removed at the start of the next meeting.</string>
+
+    <!-- Eraser Options -->
+    <string name="MiraOptionEraserEraseCooldown">Erase Cooldown</string>
+    <string name="MiraOptionEraserCooldownIncrease">Cooldown Increase Per Erase</string>
+    <string name="MiraOptionEraserCanEraseImpostors">Eraser Can Erase Impostors</string>
+    <string name="MiraOptionEraserNeutralOutcome">Neutral Erase Outcome</string>
+    <string name="MiraOptionEraserCanVent">Eraser Can Vent</string>
+    <string name="MiraOptionEraserHasAssassin">Eraser Has Assassin Ability</string>
+
+    <!-- Distorter - Impostor -->
+    <string name="MiraRoleDistorter">Distorter</string>
+    <string name="MiraRoleDistorterIntroBlurb">Pull them in and vanish.</string>
+    <string name="MiraRoleDistorterTabDescription">Use Distort to reel a target toward you.\%nl\%After a quick kill window, you become invisible for a short time.</string>
+
+    <!-- Distorter Wiki -->
+    <string name="MiraRoleDistorterWikiDescription">The Distorter is an Impostor role that can pull a target toward themselves. After using Distort, they get a brief kill window and then turn invisible for a duration, moving faster while hidden.</string>
+    <string name="MiraRoleDistorterDistort">Distort</string>
+    <string name="MiraRoleDistorterDistortWikiDescription">Target a player from the menu and pull them toward you.</string>
+
+    <!-- Distorter Options -->
+    <string name="MiraOptionDistorterDistortCooldown">Distort Cooldown</string>
+    <string name="MiraOptionDistorterPullSpeed">Pull Speed</string>
+    <string name="MiraOptionDistorterInvisibilityDuration">Invisibility Duration</string>
+    <string name="MiraOptionDistorterInvisibleSpeedMultiplier">Invisible Speed Multiplier</string>
+    <string name="MiraOptionDistorterCanVent">Distorter Can Vent</string>
+
+    <!-- Ninja - Impostor -->
+    <string name="MiraRoleNinja">Ninja</string>
+    <string name="MiraRoleNinjaIntroBlurb">Mark your prey and strike from anywhere.</string>
+    <string name="MiraRoleNinjaTabDescription">Mark a target, then Assassinate to instantly teleport and kill.\%nl\%Trace marks are left behind, and you turn invisible to escape.</string>
+
+    <!-- Ninja Wiki -->
+    <string name="MiraRoleNinjaWikiDescription">The Ninja is an Impostor-aligned role that can mark a target and later assassinate them from anywhere on the map. When the assassination occurs, the Ninja teleports to the target, kills instantly, and becomes invisible for a short time. Trace markers reveal the teleport origin and destination.</string>
+    <string name="MiraRoleNinjaMark">Mark</string>
+    <string name="MiraRoleNinjaMarkWikiDescription">Select a player to mark as your assassination target. Only one target can be marked at a time.</string>
+    <string name="MiraRoleNinjaAssassinate">Assassinate</string>
+    <string name="MiraRoleNinjaAssassinateWikiDescription">Teleport to your marked target and kill them instantly, leaving traces and leaves behind.</string>
+
+    <!-- Ninja Options -->
+    <string name="MiraOptionNinjaMarkCooldown">Mark Cooldown</string>
+    <string name="MiraOptionNinjaAssassinateCooldown">Assassinate Cooldown</string>
+    <string name="MiraOptionNinjaInvisibilityDuration">Invisibility Duration</string>
+    <string name="MiraOptionNinjaTraceDuration">Trace Duration</string>
+    <string name="MiraOptionNinjaCanVent">Ninja Can Vent</string>
+
+    <!-- Cause of Deaths -->
+    <string name="DiedToEraser">Erased</string>
+
+    <string name="MiraRoleArbiter">Arbiter</string>
+    <string name="MiraRoleArbiterIntroBlurb">Choose a target and sway the vote.</string>
+    <string name="MiraRoleArbiterTabDescription">Choose a target from the Arbiter menu.\%nl\%If that player is voted out, you gain a faster kill cooldown, an invisibility use, and a speed boost use.</string>
+
+    <string name="MiraRoleArbiterWikiDescription">The Arbiter is an Impostor role that selects a target through a GUI. If the target is exiled by vote, the Arbiter gains a faster kill cooldown plus one-time uses for invisibility and a speed boost. The target cannot be changed unless the option allows it.</string>
+    <string name="MiraRoleArbiterMark">Mark</string>
+    <string name="MiraRoleArbiterMarkWikiDescription">Choose a target from the player menu.</string>
+    <string name="MiraRoleArbiterInvisibility">Invisibility</string>
+    <string name="MiraRoleArbiterInvisibilityWikiDescription">Become invisible for a short duration.</string>
+    <string name="MiraRoleArbiterSpeed">Speed Boost</string>
+    <string name="MiraRoleArbiterSpeedWikiDescription">Gain a speed boost for the remainder of the round.</string>
+
+    <string name="MiraOptionArbiterTargetCooldown">Target Cooldown</string>
+    <string name="MiraOptionArbiterCanChangeTarget">Can Change Target</string>
+    <string name="MiraOptionArbiterKillCooldownMultiplier">Kill Cooldown Multiplier</string>
+    <string name="MiraOptionArbiterInvisUses">Invisibility Uses</string>
+    <string name="MiraOptionArbiterInvisDuration">Invisibility Duration</string>
+    <string name="MiraOptionArbiterSpeedUses">Speed Boost Uses</string>
+    <string name="MiraOptionArbiterSpeedDuration">Speed Boost Duration</string>
+    <string name="MiraOptionArbiterSpeedMultiplier">Speed Boost Multiplier</string>
+    <string name="MiraOptionArbiterCanVent">Arbiter Can Vent</string>
+
+    <!-- Shifter - Neutral Benign -->
+    <string name="MiraRoleShifter">Shifter</string>
+    <string name="MiraRoleShifterIntroBlurb">Take someone's place before they even know it.</string>
+    <string name="MiraRoleShifterTabDescription">Use your Shift ability to target a player.\%nl\%At the \%b\%end of the next meeting\%/b\%, you'll swap roles with them â€” they become the Shifter, and you become whatever they were.\%nl\%The swap happens \%b\%even if either of you is dead\%/b\% before the meeting ends.</string>
+
+    <!-- Shifter Wiki -->
+    <string name="MiraRoleShifterWikiDescription">The Shifter is a Neutral Benign role that can swap roles with another player. The target must be chosen during the round, and the swap always occurs at the end of the next meeting â€” the target will not know until after the meeting who shifted with them. The shift is guaranteed even if the Shifter or the target dies before the meeting ends. The player who was shifted becomes the Shifter in their place.</string>
+    <string name="MiraRoleShifterShift">Shift</string>
+    <string name="MiraRoleShifterShiftWikiDescription">Target a player to swap roles with. The swap takes effect at the end of the next meeting, no matter what.</string>
+
+    <!-- Dictator - Crewmate Power -->
+    <string name="MiraRoleDictator">Dictator</string>
+    <string name="MiraRoleDictatorIntroBlurb">Your word is law. Enforce it.</string>
+    <string name="MiraRoleDictatorTabDescription">As the Dictator you hold ultimate authority in meetings.\%nl\%Use \%b\%End Meeting\%/b\% to instantly dismiss a meeting with no exile.\%nl\%Use \%b\%Condemn\%/b\% to force all votes onto a chosen player, ensuring their exile.\%nl\%Each use costs one of your limited charges.</string>
+
+    <!-- Dictator Wiki -->
+    <string name="MiraRoleDictatorWikiDescription">The Dictator is a Crewmate Power role with limited uses. During a meeting they have two special buttons: End Meeting, which immediately closes the meeting with no exile, and Condemn, which forces 15 votes onto any chosen player guaranteeing their removal. Depending on settings, the Dictator may sacrifice themselves after using Condemn, or once their uses are exhausted.</string>
+    <string name="MiraRoleDictatorEndMeeting">End Meeting</string>
+    <string name="MiraRoleDictatorEndMeetingWikiDescription">Instantly end the meeting with no exile. Costs one use.</string>
+    <string name="MiraRoleDictatorCondemn">Condemn</string>
+    <string name="MiraRoleDictatorCondemnWikiDescription">Click Condemn, then click a player to force all votes onto them. They will be exiled. Costs one use.</string>
+
+    <!-- Dictator Options -->
+    <string name="MiraOptionDictatorMaxUses">Max Uses</string>
+    <string name="MiraOptionDictatorUsesLeft">Uses Remaining</string>
+    <string name="MiraOptionDictatorSacrificeOnUse">Dictator Sacrifices On Each Use</string>
+    <string name="MiraOptionDictatorSacrificeOnEmpty">Dictator Sacrifices When Uses Run Out</string>
+    <string name="MiraOptionDictatorCanCondemnCrew">Dictator Can Condemn Crewmates</string>
+
+    <!-- Shifter Options -->
+    <string name="MiraOptionShifterShiftCooldown">Shift Cooldown</string>
+    <string name="MiraOptionShifterShiftDeadPlayers">Can Shift Dead Players</string>
+
+	<!-- Fake-poster - Neutral Killing -->
+	<string name="MiraRoleFakeposter">Fake-poster</string>
+	<string name="MiraRoleFakeposterIntroBlurb">Unlucky, man. Unlucky.</string>
+	<string name="MiraRoleFakeposterTabDescription">A killing role with no abilities, and no allies. Good luck!</string>
+
+	<!-- Fake-poster Wiki -->
+	<string name="MiraRoleFakeposterWikiDescription">The Fake-poster is a Neutral Killing role that has no abilites but to kill. Pretty uninteresting, right?</string>
+	
+	<!-- Fake-poster Options -->
+	<string name="MiraOptionFakeposterKillCooldown">Kill Cooldown</string>
+	<string name="MiraOptionFakeposterCanVent">Can Vent</string>
+	<string name="MiraOptionFakeposterHasImposterVision">Imposter Vision</string>
+	<string name="MiraOptionFakeposterHasAssassin">Has Assassin</string>
 </resources>
+
+

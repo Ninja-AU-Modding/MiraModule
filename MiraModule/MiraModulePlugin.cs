@@ -9,7 +9,7 @@ using Reactor;
 using Reactor.Networking;
 using Reactor.Networking.Attributes;
 using Reactor.Utilities;
-using TownOfUs;
+using MiraModule.Patches;
 
 namespace MiraModule;
 

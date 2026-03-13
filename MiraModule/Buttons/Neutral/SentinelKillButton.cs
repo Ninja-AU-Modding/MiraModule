@@ -22,7 +22,7 @@ public sealed class SentinelKillButton : TownOfUsKillRoleButton<SentinelRole, Pl
     public override BaseKeybind Keybind => Keybinds.PrimaryAction;
     public override Color TextOutlineColor => MiraModuleColors.Sentinel;
     public override float Cooldown => Math.Clamp(OptionGroupSingleton<SentinelOptions>.Instance.KillCooldown + MapCooldown, 5f, 120f);
-    public override LoadableAsset<Sprite> Sprite => ExampleNeutAssets.SentinelKillSprite;
+    public override LoadableAsset<Sprite> Sprite => NeutAssets.SentinelKillSprite;
 
     public override void CreateButton(Transform parent)
     {

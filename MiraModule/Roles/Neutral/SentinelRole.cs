@@ -10,15 +10,8 @@ using Reactor.Utilities;
 using MiraModule.Assets;
 using MiraModule.Buttons.Neutral;
 using MiraModule.Options.Roles.Neutral;
-using TownOfUs;
-using TownOfUs.Assets;
-using TownOfUs.Extensions;
-using TownOfUs.Modules.Localization;
-using TownOfUs.Modules.Wiki;
-using TownOfUs.Roles;
 using TownOfUs.Roles.Crewmate;
 using TownOfUs.Roles.Neutral;
-using TownOfUs.Utilities;
 using UnityEngine;
 
 namespace MiraModule.Roles.Neutral;
@@ -29,14 +22,14 @@ public sealed class SentinelRole(IntPtr cppPtr)
     public RoleBehaviour CrewVariant => RoleManager.Instance.GetRole((RoleTypes)RoleId.Get<TrapperRole>());
     public DoomableType DoomHintType => DoomableType.Relentless;
     public string LocaleKey => "Sentinel";
-    public string RoleName => TouLocale.Get($"ExampleRole{LocaleKey}");
-    public string RoleDescription => TouLocale.GetParsed($"ExampleRole{LocaleKey}IntroBlurb");
-    public string RoleLongDescription => TouLocale.GetParsed($"ExampleRole{LocaleKey}TabDescription");
+    public string RoleName => TouLocale.Get($"MiraRole{LocaleKey}");
+    public string RoleDescription => TouLocale.GetParsed($"MiraRole{LocaleKey}IntroBlurb");
+    public string RoleLongDescription => TouLocale.GetParsed($"MiraRole{LocaleKey}TabDescription");
 
     public string GetAdvancedDescription()
     {
         return
-            TouLocale.GetParsed($"ExampleRole{LocaleKey}WikiDescription") +
+            TouLocale.GetParsed($"MiraRole{LocaleKey}WikiDescription") +
             MiscUtils.AppendOptionsText(GetType());
     }
 
@@ -47,9 +40,9 @@ public sealed class SentinelRole(IntPtr cppPtr)
         {
             return new List<CustomButtonWikiDescription>
             {
-                new(TouLocale.GetParsed($"ExampleRole{LocaleKey}Explode", "Explode"),
-                    TouLocale.GetParsed($"ExampleRole{LocaleKey}ExplodeWikiDescription"),
-                    ExampleNeutAssets.SentinelExplodeSprite),
+                new(TouLocale.GetParsed($"MiraRole{LocaleKey}Explode", "Explode"),
+                    TouLocale.GetParsed($"MiraRole{LocaleKey}ExplodeWikiDescription"),
+                    NeutAssets.SentinelExplodeSprite),
             };
         }
     }
@@ -62,7 +55,7 @@ public sealed class SentinelRole(IntPtr cppPtr)
     {
         CanUseVent = OptionGroupSingleton<SentinelOptions>.Instance.CanVent,
         IntroSound = TouAudio.GlitchSound,
-        Icon = ExampleRoleIcons.Sentinel,
+        Icon = RoleIcons.Sentinel,
         GhostRole = (RoleTypes)RoleId.Get<NeutralGhostRole>()
     };
 
@@ -95,7 +88,7 @@ public sealed class SentinelRole(IntPtr cppPtr)
         if (Player.AmOwner)
         {
             OffsetButtons();
-            HudManager.Instance.ImpostorVentButton.graphic.sprite = ExampleNeutAssets.SentinelVentSprite.LoadAsset();
+            HudManager.Instance.ImpostorVentButton.graphic.sprite = NeutAssets.SentinelVentSprite.LoadAsset();
             HudManager.Instance.ImpostorVentButton.buttonLabelText.SetOutlineColor(MiraModuleColors.Sentinel);
         }
     }

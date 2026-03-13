@@ -1,1 +1,8 @@
 global using static Reactor.Utilities.Logger<MiraModule.MiraModulePlugin>;
+global using TownOfUs.Modules.Wiki;
+global using TownOfUs.Extensions;
+global using TownOfUs.Modules.Localization;
+global using TownOfUs;
+global using TownOfUs.Assets;
+global using TownOfUs.Utilities;
+global using TownOfUs.Roles;

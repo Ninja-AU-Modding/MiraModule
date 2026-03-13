@@ -1,7 +1,5 @@
 using HarmonyLib;
 using MiraAPI.Utilities.Assets;
-using MiraModule.Assets;
-using TownOfUs.Assets;
 using UnityEngine;
 
 namespace MiraModule.Patches;
@@ -13,7 +11,7 @@ public static class LogoPatch
     [HarmonyPrefix]
     public static bool Prefix(ref LoadableAsset<Sprite> __result)
     {
-        __result = ExampleAssets.Banner;
+        __result = Assets.Assets.Banner;
         return false;
     }
 }

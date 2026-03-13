@@ -1,7 +1,6 @@
 using System.Reflection;
 using BepInEx.Logging;
 using MiraAPI.Utilities;
-using TownOfUs.Modules.Localization;
 
 namespace MiraModule.Modules;
 
