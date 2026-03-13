@@ -12,7 +12,6 @@
 
 	<ItemGroup>
 		<EmbeddedResource Include="Resources\**\*.*" />
-		<EmbeddedResource Include="Resources\SquareLogo.png" />
 		<EmbeddedResource Include="ModInfo.json" />
 	</ItemGroup>
 
