@@ -21,7 +21,8 @@ public static class AgentChatPatches
     private const string AgentLabel = "Agent";
     private const string AgentBubblePrefix = "TOU_TeamChatBubble_Agent";
 
-    internal static readonly Color AgentChatColor = new AgentModifier().FreeplayFileColor;
+    private static Color? _agentChatColor;
+    internal static Color AgentChatColor => _agentChatColor ??= new AgentModifier().FreeplayFileColor;
     private static GameObject? _agentChatButton;
     private static bool _lastAgentChatActive;
     private static bool _agentFilterActive;
@@ -102,18 +103,31 @@ public static class AgentChatPatches
 
     private static void ApplyAgentChatFilter(bool enable)
     {
-        var bubbleItems = GameObject.Find("Items");
-        if (bubbleItems == null) return;
+        var chat = HudManager.Instance?.Chat;
+        if (chat?.scroller?.Inner == null) return;
 
-        foreach (var t in bubbleItems.GetAllChildren())
+        for (var i = 0; i < chat.scroller.Inner.childCount; i++)
         {
-            if (t == null) continue;
-            var go = t.gameObject;
+            var go = chat.scroller.Inner.GetChild(i)?.gameObject;
             if (go == null) continue;
 
             var isPrivate = go.name.StartsWith(AgentBubblePrefix, StringComparison.OrdinalIgnoreCase);
-            go.SetActive(enable ? isPrivate : true);
+            go.SetActive(!enable || isPrivate);
         }
+    }
+    private static void ApplyCamouflageBubbleCosmetics(ChatBubble bubble)
+    {
+        var icon = bubble.GetComponentInChildren<PoolablePlayer>(true);
+        if (icon == null) return;
+
+        PlayerMaterial.SetColors(Color.grey, icon.cosmetics.currentBodySprite.BodySprite);
+        icon.cosmetics.hat.gameObject.SetActive(false);
+        icon.cosmetics.skin.gameObject.SetActive(false);
+        icon.cosmetics.visor.gameObject.SetActive(false);
+        icon.cosmetics.currentPet.gameObject.SetActive(false);
+
+        var nameText = icon.GetComponentInChildren<TMPro.TextMeshPro>(true);
+        if (nameText != null) nameText.text = string.Empty;
     }
 
     [MethodRpc((uint)MiraModuleRpc.SendAgentChat)]
@@ -133,7 +147,7 @@ public static class AgentChatPatches
 
         string displayName;
 
-        if (sender.AmOwner && senderIsAgent)
+        if (sender.AmOwner)
         {
             displayName = sender.Data.PlayerName;
         }
@@ -151,11 +165,11 @@ public static class AgentChatPatches
         AddAgentChat(sender.Data, title, text, onLeft: !sender.AmOwner, anonymizeIcon: anonymizeIcon);
     }
 
-    private static void AddAgentChat(NetworkedPlayerInfo basePlayer, string nameText, string message, bool onLeft = true, bool anonymizeIcon = false)
+    internal static void AddAgentChat(NetworkedPlayerInfo basePlayer, string nameText, string message, bool onLeft = true, bool anonymizeIcon = false)
     {
+        if (!HudManager.InstanceExists || HudManager.Instance.Chat == null) return;
         var chat = HudManager.Instance.Chat;
         var pooledBubble = chat.GetPooledBubble();
-
         pooledBubble.transform.SetParent(chat.scroller.Inner);
         pooledBubble.transform.localScale = Vector3.one;
         if (onLeft)
@@ -166,7 +180,6 @@ public static class AgentChatPatches
         {
             pooledBubble.SetRight();
         }
-
         pooledBubble.SetCosmetics(basePlayer);
         pooledBubble.NameText.text = nameText;
         pooledBubble.NameText.ForceMeshUpdate(true, true);
@@ -177,23 +190,19 @@ public static class AgentChatPatches
         pooledBubble.Background.size = new Vector2(5.52f,
             0.2f + pooledBubble.NameText.GetNotDumbRenderedHeight() + pooledBubble.TextArea.GetNotDumbRenderedHeight());
         pooledBubble.MaskArea.size = pooledBubble.Background.size - new Vector2(0, 0.03f);
-
         pooledBubble.Background.color = new Color(0.2f, 0.2f, 0.27f, 1f);
         pooledBubble.NameText.color = Color.white;
         pooledBubble.TextArea.color = Color.white;
-
         pooledBubble.gameObject.name = AgentBubblePrefix;
-
         if (anonymizeIcon)
         {
             ApplyAnonymousBubbleCosmetics(pooledBubble);
+            ApplyCamouflageBubbleCosmetics(pooledBubble);
         }
-
         pooledBubble.AlignChildren();
         var pos = pooledBubble.NameText.transform.localPosition;
         pooledBubble.NameText.transform.localPosition = pos;
         chat.AlignAllBubbles();
-
         if (chat is { IsOpenOrOpening: false, notificationRoutine: null })
         {
             chat.notificationRoutine = chat.StartCoroutine(chat.BounceDot());
