@@ -4,9 +4,7 @@ using MiraModule.Utilities;
 
 namespace MiraModule.Patches;
 
-/// <summary>
-/// Allows people with the AgentAware modifier to see the Agent
-/// </summary>
+
 [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
 [HarmonyPriority(Priority.Last)]
 public static class AgentNameplatePatch
