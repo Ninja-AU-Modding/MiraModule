@@ -41,10 +41,7 @@ public readonly struct MiraModuleRainbowDef
 
 public static class MiraModulePlayerColors
 {
-    // Add new colors here in the exact order you want them to appear.
-    // If Colors has 1 entry => solid.
-    // If Colors has 2+ entries and Blend == Gradient => gradient uses first + last (smooth blend).
-    // If Colors has 2+ entries and Blend == Solid => uses only the first color.
+  
     public static readonly MiraModuleColorDef[] ColorDefs =
     [
         new MiraModuleColorDef(
@@ -61,8 +58,7 @@ public static class MiraModulePlayerColors
             new Color32(20, 20, 20, 255))
     ];
 
-    // Custom rainbows (name must match a color in ColorDefs).
-    // Speed: higher = faster
+
     public static readonly MiraModuleRainbowDef[] RainbowDefs =
     [
         new MiraModuleRainbowDef(
