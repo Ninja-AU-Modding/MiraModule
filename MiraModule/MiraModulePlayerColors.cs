@@ -41,21 +41,60 @@ public readonly struct MiraModuleRainbowDef
 
 public static class MiraModulePlayerColors
 {
-  
+
     public static readonly MiraModuleColorDef[] ColorDefs =
     [
         new MiraModuleColorDef(
             "Sunset-Split",
             MiraModuleColorBlend.Gradient,
             CustomColorBrightness.Lighter,
-            new Color32(200, 60, 60, 255),   // orange (start)
-            new Color32(120, 40, 200, 255)),  // purple (end)
+            new Color32(120, 40, 200, 255),
+            new Color32(255, 172, 28, 255)),
+
+        new MiraModuleColorDef(
+            "Void-Shift",
+            MiraModuleColorBlend.Gradient,
+            CustomColorBrightness.Lighter,
+            new Color32(10, 10, 10, 255),
+            new Color32(90, 0, 140, 255)),
+
+        new MiraModuleColorDef(
+            "Toxic-Split",
+            MiraModuleColorBlend.Gradient,
+            CustomColorBrightness.Lighter,
+            new Color32(20, 120, 20, 255),
+            new Color32(120, 255, 60, 255)),
+
+        new MiraModuleColorDef(
+            "Ocean-Split",
+            MiraModuleColorBlend.Gradient,
+            CustomColorBrightness.Lighter,
+            new Color32(0, 60, 140, 255),
+            new Color32(0, 200, 255, 255)),
 
         new MiraModuleColorDef(
             "Dead-Rainbow",
             MiraModuleColorBlend.Solid,
             CustomColorBrightness.Lighter,
-            new Color32(20, 20, 20, 255))
+            new Color32(20, 20, 20, 255)),
+
+        new MiraModuleColorDef(
+            "Blood-Pulse",
+            MiraModuleColorBlend.Solid,
+            CustomColorBrightness.Lighter,
+            new Color32(20, 0, 0, 255)),
+
+        new MiraModuleColorDef(
+            "Void-Rainbow",
+            MiraModuleColorBlend.Solid,
+            CustomColorBrightness.Lighter,
+            new Color32(10, 10, 10, 255)),
+
+        new MiraModuleColorDef(
+            "Toxic-Rainbow",
+            MiraModuleColorBlend.Solid,
+            CustomColorBrightness.Lighter,
+            new Color32(30, 120, 20, 255))
     ];
 
 
@@ -64,11 +103,40 @@ public static class MiraModulePlayerColors
         new MiraModuleRainbowDef(
             "Dead-Rainbow",
             0.5f,
-            new Color32(20, 20, 20, 255),    // near black
-            new Color32(45, 45, 45, 255),    // dark gray
-            new Color32(70, 70, 70, 255),    // gray
-            new Color32(90, 20, 20, 255),    // dark crimson
-            new Color32(120, 0, 0, 255),     // deep blood red
-            new Color32(60, 0, 0, 255))      // dried blood
-];
+            new Color32(20, 20, 20, 255),
+            new Color32(45, 45, 45, 255),
+            new Color32(70, 70, 70, 255),
+            new Color32(90, 20, 20, 255),
+            new Color32(120, 0, 0, 255),
+            new Color32(60, 0, 0, 255)),
+
+        new MiraModuleRainbowDef(
+            "Blood-Pulse",
+            0.45f,
+            new Color32(20, 0, 0, 255),
+            new Color32(60, 0, 0, 255),
+            new Color32(120, 0, 0, 255),
+            new Color32(180, 20, 20, 255),
+            new Color32(120, 0, 0, 255),
+            new Color32(60, 0, 0, 255)),
+
+        new MiraModuleRainbowDef(
+            "Void-Rainbow",
+            0.55f,
+            new Color32(10, 10, 10, 255),
+            new Color32(40, 0, 80, 255),
+            new Color32(80, 0, 120, 255),
+            new Color32(120, 0, 180, 255),
+            new Color32(60, 0, 120, 255),
+            new Color32(20, 0, 60, 255)),
+
+        new MiraModuleRainbowDef(
+            "Toxic-Rainbow",
+            0.6f,
+            new Color32(30, 120, 20, 255),
+            new Color32(80, 200, 40, 255),
+            new Color32(150, 255, 60, 255),
+            new Color32(80, 200, 40, 255),
+            new Color32(30, 120, 20, 255))
+    ];
 }
