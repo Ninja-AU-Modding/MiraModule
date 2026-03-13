@@ -9,6 +9,7 @@ using Reactor;
 using Reactor.Networking;
 using Reactor.Networking.Attributes;
 using Reactor.Utilities;
+using UnityEngine;
 
 namespace MiraModule;
 
@@ -49,5 +50,10 @@ public partial class MiraModulePlugin : BasePlugin, IMiraPlugin
         IL2CPPChainloader.Instance.Finished += Modules.ExtensionLocale.SearchInternalLocale;
         
         Harmony.PatchAll();
+
+        // Debug gradient bundle contents.
+        Assets.MiraModuleGradientAssets.DumpBundleInfo();
+
+        // (Rainbow animation handled per-renderer; no global updater needed.)
     }
 }
