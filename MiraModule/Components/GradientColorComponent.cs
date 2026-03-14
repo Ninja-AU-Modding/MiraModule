@@ -6,7 +6,7 @@ using UnityEngine;
 namespace MiraModule.Components;
 
 [RegisterInIl2Cpp]
-public class GradientColorComponent(IntPtr ptr) : MonoBehaviour(ptr)
+public class GradientColorComponent(IntPtr cppPtr) : MonoBehaviour(cppPtr)
 {
     private SpriteRenderer? _renderer;
     private Material? _mat;
@@ -91,14 +91,14 @@ public class GradientColorComponent(IntPtr ptr) : MonoBehaviour(ptr)
             return;
         }
 
-        _mat.SetFloat(ShaderID.Get("_Flip"), _renderer.flipX ? 1 : 0);
+        _mat?.SetFloat(ShaderID.Get("_Flip"), _renderer?.flipX == true ? 1 : 0);
 
         if (_followPrimary)
         {
-            var primary = _mat.GetColor(BodyColorId);
-            var shadow = _mat.GetColor(BackColorId);
-            _mat.SetColor(BodyColor2Id, primary);
-            _mat.SetColor(BackColor2Id, shadow);
+            var primary = _mat?.GetColor(BodyColorId);
+            var shadow = _mat?.GetColor(BackColorId);
+            _mat?.SetColor(BodyColor2Id, primary ?? Color.white);
+            _mat?.SetColor(BackColor2Id, shadow ?? Color.white);
         }
     }
 

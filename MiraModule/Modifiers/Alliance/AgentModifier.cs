@@ -41,7 +41,7 @@ public sealed class AgentModifier : AllianceGameModifier, IWikiDiscoverable, IAs
     public override Color FreeplayFileColor => new Color32(114, 179, 202, 255);
     public override LoadableAsset<Sprite>? ModifierIcon => ModifierIcons.Agent;
 
-    public int Priority { get; set; } = -1;
+    public new int Priority { get; set; } = -1;
     public List<CustomButtonWikiDescription> Abilities { get; } = [];
 
     public void AssignTargets()

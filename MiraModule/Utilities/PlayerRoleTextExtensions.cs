@@ -5,7 +5,7 @@ using TownOfUs.Options;
 
 namespace MiraModule.Utilities;
 
-public static class AgentNameplateExtensions
+public static class PlayerRoleTextExtensions
 {
     public static string UpdateAgentSymbols(this string name, PlayerControl player, bool hidden = false)
     {

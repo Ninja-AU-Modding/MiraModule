@@ -12,35 +12,38 @@ public static class AgentNameplatePatch
     [HarmonyPostfix]
     public static void Postfix()
     {
-        if (PlayerControl.LocalPlayer == null ||
-            PlayerControl.LocalPlayer.Data?.Role == null ||
-            !ShipStatus.Instance ||
-            AmongUsClient.Instance.GameState != InnerNetClient.GameStates.Started)
-        {
-            return;
-        }
+        if (!IsGameActive()) return;
 
         if (MeetingHud.Instance)
-        {
-            foreach (var playerVA in MeetingHud.Instance.playerStates)
-            {
-                if (!playerVA.gameObject.active) continue;
-
-                var player = MiscUtils.PlayerById(playerVA.TargetPlayerId);
-                if (player == null || player.Data?.Role == null) continue;
-
-                playerVA.NameText.text = playerVA.NameText.text.UpdateAgentSymbols(player);
-            }
-        }
+            PatchMeeting();
         else
-        {
-            foreach (var player in PlayerControl.AllPlayerControls)
-            {
-                if (player == null || player.Data?.Role == null) continue;
-                if (player.cosmetics?.nameText == null) continue;
+            PatchInGame();
+    }
 
-                player.cosmetics.nameText.text = player.cosmetics.nameText.text.UpdateAgentSymbols(player);
-            }
+    private static bool IsGameActive() =>
+        PlayerControl.LocalPlayer != null &&
+        PlayerControl.LocalPlayer.Data?.Role != null &&
+        ShipStatus.Instance &&
+        AmongUsClient.Instance.GameState == InnerNetClient.GameStates.Started;
+
+    private static void PatchMeeting()
+    {
+        foreach (var playerVA in MeetingHud.Instance.playerStates)
+        {
+            if (!playerVA.gameObject.active) continue;
+            var player = MiscUtils.PlayerById(playerVA.TargetPlayerId);
+            if (player?.Data?.Role == null) continue;
+            playerVA.NameText.text = playerVA.NameText.text.UpdateAgentSymbols(player);
+        }
+    }
+
+    private static void PatchInGame()
+    {
+        foreach (var player in PlayerControl.AllPlayerControls)
+        {
+            if (player?.Data?.Role == null) continue;
+            if (player.cosmetics?.nameText == null) continue;
+            player.cosmetics.nameText.text = player.cosmetics.nameText.text.UpdateAgentSymbols(player);
         }
     }
 }

@@ -4,6 +4,7 @@ using TMPro;
 using TownOfUs.Utilities.Appearances;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MiraModule.Modifiers;
 
@@ -95,6 +96,8 @@ public sealed class SwallowedModifier : BaseModifier, IVisualAppearance
     }
 
     // Set to true just before Visible = true so the visibility patch lets it through
+    [SuppressMessage("Design", "S2386:Use immutable collection", Justification = "Mutated at runtime to track players being released")]
+    [SuppressMessage("Design", "S3887:Use immutable collection", Justification = "Mutated at runtime to track players being released")]
     public static readonly HashSet<byte> ReleasingPlayers = new();
 
     public override void OnDeactivate()

@@ -23,7 +23,7 @@ public sealed class AbyssRole(IntPtr cppPtr)
     /// Tracks all players currently swallowed by any active Abyss instance.
     /// Keyed by victim PlayerId → Abyss PlayerId.
     /// </summary>
-    public static readonly Dictionary<byte, byte> SwallowedPlayers = new();
+    internal static readonly Dictionary<byte, byte> SwallowedPlayers = new();
 
     public DoomableType DoomHintType => DoomableType.Relentless;
     public string LocaleKey => "Abyss";

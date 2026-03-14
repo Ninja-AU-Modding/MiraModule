@@ -36,8 +36,8 @@ public static class ShifterMeetingPatch
             }
 
             // Capture roles BEFORE any changes
-            var shifterRole = (RoleTypes)shifter.Data.Role.Role;
-            var targetRole = (RoleTypes)target.Data.Role.Role;
+            var shifterRole = shifter.Data.Role.Role;
+            var targetRole = target.Data.Role.Role;
 
             Info($"[Shifter] Swapping roles: {shifter.Data.PlayerName} ({shifterRole}) ↔ {target.Data.PlayerName} ({targetRole})");
 

@@ -102,36 +102,23 @@ public sealed class DictatorRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOfU
                      meeting.state == MeetingHud.VoteStates.NotVoted &&
                      !SelectingCondemnTarget;
 
-        bool inDiscussion = meeting.state == MeetingHud.VoteStates.Discussion &&
-                            meeting.discussionTimer < GameOptionsManager.Instance.currentNormalGameOptions.DiscussionTime;
+        var inDiscussion = meeting.state == MeetingHud.VoteStates.Discussion &&
+                           meeting.discussionTimer < GameOptionsManager.Instance.currentNormalGameOptions.DiscussionTime;
 
-        // ── End Meeting Button ────────────────────────────────────────
-        if (EndMeetingButton != null)
-        {
-            EndMeetingButton.gameObject.SetActive(canUse);
-            if (EndMeetingButton.gameObject.active)
-            {
-                if (inDiscussion) EndMeetingButton.SetDisabled(); else EndMeetingButton.SetEnabled();
-                EndMeetingButton.voteComplete = meeting.SkipVoteButton.voteComplete;
-            }
-        }
+        UpdateButton(EndMeetingButton, canUse, inDiscussion, meeting);
+        UpdateButton(CondemnButton, canUse && !SelectingCondemnTarget, inDiscussion, meeting);
+    }
 
-        // ── Condemn Button ────────────────────────────────────────────
-        if (CondemnButton != null)
-        {
-            // Once SelectingCondemnTarget is true the button was manually hidden;
-            // don't let FixedUpdate override that by showing it again.
-            if (!SelectingCondemnTarget)
-            {
-                var condemnVisible = canUse && !HasActed && UsesRemaining > 0;
-                CondemnButton.gameObject.SetActive(condemnVisible);
-            }
-            if (CondemnButton.gameObject.active)
-            {
-                if (inDiscussion) CondemnButton.SetDisabled(); else CondemnButton.SetEnabled();
-                CondemnButton.voteComplete = meeting.SkipVoteButton.voteComplete;
-            }
-        }
+    private static void UpdateButton(PlayerVoteArea? button, bool visible, bool inDiscussion, MeetingHud meeting)
+    {
+        if (button == null) return;
+
+        button.gameObject.SetActive(visible);
+
+        if (!button.gameObject.active) return;
+
+        if (inDiscussion) button.SetDisabled(); else button.SetEnabled();
+        button.voteComplete = meeting.SkipVoteButton.voteComplete;
     }
 
     // ── OnMeetingStart ───────────────────────────────────────────────────

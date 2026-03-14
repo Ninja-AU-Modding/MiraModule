@@ -10,6 +10,7 @@ using TownOfUs.Utilities;
 
 namespace MiraModule.Events.Crewmate;
 
+#pragma warning disable S125
 public static class DictatorEvents
 {
     // MiraAPI's internal skip-vote ID (see VotingUtils.SkipVoteId)
@@ -80,8 +81,6 @@ public static class DictatorEvents
     {
         if (PlayerControl.LocalPlayer.Data.Role is not DictatorRole dictator) return;
 
-        var meeting = MeetingHud.Instance;
-
         // Not in targeting mode: only allow selecting our own special buttons
         // (EndMeeting = id 252, Condemn = id 253). Block selecting any real player.
         if (!dictator.SelectingCondemnTarget)
@@ -105,35 +104,16 @@ public static class DictatorEvents
 
         if (dictator == null) return;
 
-        bool isSkip = dictator.CondemnVictim == CondemnSkipId;
+        var voteTarget = dictator.CondemnVictim == CondemnSkipId ? SkipVoteId : dictator.CondemnVictim;
 
-        // Clear everyone's votes
         foreach (var plr in PlayerControl.AllPlayerControls.ToArray())
         {
             var data = plr.GetVoteData();
             data.Votes.Clear();
             data.VotesRemaining = 0;
-        }
 
-        if (isSkip)
-        {
-            // Force a skip result: record SkipVoteId (253) for every living player
-            foreach (var plr in PlayerControl.AllPlayerControls.ToArray())
-            {
-                if (plr.HasDied()) continue;
-                var data = plr.GetVoteData();
-                data.VoteForPlayer(SkipVoteId);
-            }
-        }
-        else
-        {
-            // Stuff condemned slot with votes from every living player
-            foreach (var plr in PlayerControl.AllPlayerControls.ToArray())
-            {
-                if (plr.HasDied()) continue;
-                var data = plr.GetVoteData();
-                data.VoteForPlayer(dictator.CondemnVictim);
-            }
+            if (!plr.HasDied())
+                data.VoteForPlayer(voteTarget);
         }
     }
 

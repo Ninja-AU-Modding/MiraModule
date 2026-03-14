@@ -117,12 +117,9 @@ public sealed class DistorterRole(IntPtr cppPtr)
             return;
         }
 
-        if (PullActive)
+        if (PullActive && AmongUsClient.Instance != null && AmongUsClient.Instance.AmHost)
         {
-            if (AmongUsClient.Instance != null && AmongUsClient.Instance.AmHost)
-            {
-                TickPull();
-            }
+            TickPull();
         }
 
         if (KillWindowActive)

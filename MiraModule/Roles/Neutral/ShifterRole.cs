@@ -15,7 +15,7 @@ public sealed class ShifterRole(IntPtr cppPtr)
     /// Maps ShifterPlayerId → TargetPlayerId for pending shifts (applied at next meeting end).
     /// Persists through death — the shift always goes through.
     /// </summary>
-    public static readonly Dictionary<byte, byte> PendingShifts = new();
+    internal static readonly Dictionary<byte, byte> PendingShifts = new();  
 
     public string LocaleKey => "Shifter";
     public string RoleName => TouLocale.Get($"MiraRole{LocaleKey}");

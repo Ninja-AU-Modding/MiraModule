@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using HarmonyLib;
 using MiraAPI.Colors;
 
@@ -7,7 +8,9 @@ namespace MiraModule.Patches.Gradient;
 [HarmonyPatch]
 public static class CustomColorRegistrationPatch
 {
-    private static System.Reflection.MethodBase? TargetMethod()
+    [HarmonyTargetMethod]
+    [SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "Called by Harmony via reflection")]
+    private static System.Reflection.MethodInfo? TargetMethod()
     {
         return AccessTools.Method("MiraAPI.Colors.PaletteManager:RegisterAllColors");
     }
@@ -28,12 +31,9 @@ public static class CustomColorRegistrationPatch
             existing.Add(color.Name);
         }
 
-        foreach (var color in MiraModuleColorRegistry.CustomColors)
+        foreach (var color in MiraModuleColorRegistry.CustomColors.Where(color => !existing.Contains(color.Name)))
         {
-            if (!existing.Contains(color.Name))
-            {
-                list.Add(color);
-            }
+            list.Add(color);
         }
     }
 }

@@ -2,13 +2,16 @@ using System.Collections.Generic;
 using System.Reflection;
 using HarmonyLib;
 using UnityEngine;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MiraModule.Patches.Gradient;
 
 [HarmonyPatch]
 public static class CustomColorOrderPatch
 {
-    private static MethodBase? TargetMethod()
+    [HarmonyTargetMethod]
+    [SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "Called by Harmony via reflection")]
+    private static MethodInfo? TargetMethod()
     {
         return AccessTools.Method("MiraAPI.Colors.PaletteManager:RegisterAllColors");
     }

@@ -18,7 +18,7 @@ public sealed class ArbiterInvisButton : TownOfUsButton
     public override float InitialCooldown => 0f;
     public override LoadableAsset<Sprite> Sprite => ImpostorAssets.ArbiterInvisSprite;
     public override ButtonLocation Location => ButtonLocation.BottomRight;
-    public override bool ZeroIsInfinite { get; set; } = false;
+    public override bool ZeroIsInfinite { get; set; }
     public override int MaxUses => -1;
 
     public override bool Enabled(RoleBehaviour? role)

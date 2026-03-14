@@ -78,7 +78,7 @@ public sealed class ChaosTokenModifier : UniversalGameModifier, IVisualAppearanc
     }
 
     // ── Helpers ───────────────────────────────────────────────────────────────
-    private ChaosTokenButton? FindButton() =>
+    private static ChaosTokenButton? FindButton() =>
         CustomButtonManager.Buttons.OfType<ChaosTokenButton>().FirstOrDefault();
 
     // ── Lifecycle ─────────────────────────────────────────────────────────────
@@ -125,7 +125,7 @@ public sealed class ChaosTokenModifier : UniversalGameModifier, IVisualAppearanc
                 ClearActiveEffect();
         }
 
-        if (Player.AmOwner && _visionMultiplier != 1f && !MeetingHud.Instance)
+        if (Player.AmOwner && _visionMultiplier is not 1f && !MeetingHud.Instance)
         {
             GameOptionsManager.Instance.currentNormalGameOptions.CrewLightMod =
                 _baseCrewVision * _visionMultiplier;
@@ -204,7 +204,7 @@ public sealed class ChaosTokenModifier : UniversalGameModifier, IVisualAppearanc
         return pool[^1].Effect;
     }
 
-    private float GetWeight(ChaosEffectRarity rarity) => rarity switch
+    private static float GetWeight(ChaosEffectRarity rarity) => rarity switch
     {
         ChaosEffectRarity.Common    => Opts.CommonWeight,
         ChaosEffectRarity.Rare      => Opts.RareWeight,
@@ -284,7 +284,7 @@ public sealed class ChaosTokenModifier : UniversalGameModifier, IVisualAppearanc
         }
 
         // On-screen notification
-        if (Player.AmOwner)
+        if (Player is not null && Player.AmOwner)
         {
             var colorHex = ColorUtility.ToHtmlStringRGB(info.Color);
             var emoji = info.Category switch

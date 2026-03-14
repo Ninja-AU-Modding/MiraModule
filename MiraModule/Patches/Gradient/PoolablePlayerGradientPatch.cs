@@ -22,10 +22,8 @@ public static class PoolablePlayerGradientPatch
         }
 
         var renderer = instance.cosmetics?.currentBodySprite?.BodySprite;
-        if (!renderer)
-        {
-            return;
-        }
+        if (!renderer || renderer == null) return;
+        
 
         var mat = renderer.material;
         var target = mat.HasProperty(ShaderID.Mask)

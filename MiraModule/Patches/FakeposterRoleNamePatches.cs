@@ -16,26 +16,29 @@ public static class FakeposterRoleNamePatches
     public static void Postfix()
     {
         if (MeetingHud.Instance)
-        {
-            foreach (var playerVA in MeetingHud.Instance.playerStates)
-            {
-                var player = MiscUtils.PlayerById(playerVA.TargetPlayerId);
-                if (player?.Data?.Role is not FakeposterRole fp) continue;
-                if (fp.RoleName != ExpectedLocaleName) continue;
-
-                playerVA.NameText.text = playerVA.NameText.text.Replace(ExpectedLocaleName, ColoredName);
-            }
-        }
+            PatchMeeting();
         else
-        {
-            foreach (var player in PlayerControl.AllPlayerControls)
-            {
-                if (player?.Data?.Role is not FakeposterRole fp) continue;
-                if (fp.RoleName != ExpectedLocaleName) continue;
+            PatchInGame();
+    }
 
-                player.cosmetics.nameText.text =
-                    player.cosmetics.nameText.text.Replace(ExpectedLocaleName, ColoredName);
-            }
+    private static void PatchMeeting()
+    {
+        foreach (var playerVA in MeetingHud.Instance.playerStates)
+        {
+            if (!IsFakeposter(MiscUtils.PlayerById(playerVA.TargetPlayerId))) continue;
+            playerVA.NameText.text = playerVA.NameText.text.Replace(ExpectedLocaleName, ColoredName);
         }
     }
+
+    private static void PatchInGame()
+    {
+        foreach (var player in PlayerControl.AllPlayerControls)
+        {
+            if (!IsFakeposter(player)) continue;
+            player.cosmetics.nameText.text = player.cosmetics.nameText.text.Replace(ExpectedLocaleName, ColoredName);
+        }
+    }
+
+    private static bool IsFakeposter(PlayerControl? player) =>
+        player?.Data?.Role is FakeposterRole fp && fp.RoleName == ExpectedLocaleName;
 }

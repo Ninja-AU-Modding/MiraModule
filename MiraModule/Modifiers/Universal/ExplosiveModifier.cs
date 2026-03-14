@@ -63,7 +63,6 @@ public sealed class ExplosiveModifier : UniversalGameModifier
     {
         var opts = OptionGroupSingleton<ExplosiveOptions>.Instance;
         float killDistance = opts.KillDistance;
-        float duration = opts.ExplosiveDuration;
         int maxKills = (int)opts.MaxKills;
 
         // Announce the explosion to all clients

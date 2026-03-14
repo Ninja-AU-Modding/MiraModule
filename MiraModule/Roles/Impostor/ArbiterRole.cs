@@ -19,6 +19,7 @@ using TownOfUs.Roles;
 using TownOfUs.Utilities;
 using TMPro;
 using UnityEngine;
+using Epic.OnlineServices.Stats;
 
 namespace MiraModule.Roles.Impostor;
 
@@ -248,12 +249,12 @@ public sealed class ArbiterRole(IntPtr cppPtr)
         UpdateSpeedButtonUses();
     }
 
-    private int GetInvisUsesGain()
+    private static int GetInvisUsesGain()
     {
         return (int)Math.Clamp(OptionGroupSingleton<ArbiterOptions>.Instance.InvisUses, 0f, 99f);
     }
 
-    private int GetSpeedUsesGain()
+    private static int GetSpeedUsesGain()
     {
         return (int)Math.Clamp(OptionGroupSingleton<ArbiterOptions>.Instance.SpeedUses, 0f, 99f);
     }

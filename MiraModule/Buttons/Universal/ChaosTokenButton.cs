@@ -26,7 +26,7 @@ public sealed class ChaosTokenButton : TownOfUsButton
     public override ButtonLocation Location => ButtonLocation.BottomLeft;
 
     // ZeroIsInfinite = false: 0 shows as "0" (disabled), not infinite.
-    public override bool ZeroIsInfinite { get; set; } = false;
+    public override bool ZeroIsInfinite { get; set; }
     // MaxUses = -1 with ZeroIsInfinite=false = no hard cap; SetUses() drives the counter display.
     public override int MaxUses => -1;
 
