@@ -160,7 +160,7 @@
 	<string name="MiraRoleFakeposterTabDescription">A killing role with no abilities, and no allies. Good luck!</string>
 
 	<!-- Fake-poster Wiki -->
-	<string name="MiraRoleFakeposterWikiDescription">The %coloredName% is a Neutral Killing role that has no abilites but to kill. Pretty uninteresting, right?</string>
+	<string name="MiraRoleFakeposterWikiDescription">The Fake-poster is a Neutral Killing role that has no abilites but to kill. Pretty uninteresting, right?</string>
 
 	<!-- Fake-poster Options -->
 	<string name="MiraOptionFakeposterKillCooldown">Kill Cooldown</string>
