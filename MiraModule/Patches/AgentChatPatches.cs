@@ -118,16 +118,35 @@ public static class AgentChatPatches
     private static void ApplyCamouflageBubbleCosmetics(ChatBubble bubble)
     {
         var icon = bubble.GetComponentInChildren<PoolablePlayer>(true);
-        if (icon == null) return;
+        if (icon == null || icon.cosmetics == null) return;
 
-        PlayerMaterial.SetColors(Color.grey, icon.cosmetics.currentBodySprite.BodySprite);
-        icon.cosmetics.hat.gameObject.SetActive(false);
-        icon.cosmetics.skin.gameObject.SetActive(false);
-        icon.cosmetics.visor.gameObject.SetActive(false);
-        icon.cosmetics.currentPet.gameObject.SetActive(false);
+        if (icon.cosmetics.currentBodySprite != null && icon.cosmetics.currentBodySprite.BodySprite != null)
+        {
+            PlayerMaterial.SetColors(Color.grey, icon.cosmetics.currentBodySprite.BodySprite);
+        }
+        if (icon.cosmetics.hat != null) icon.cosmetics.hat.gameObject.SetActive(false);
+        if (icon.cosmetics.skin != null) icon.cosmetics.skin.gameObject.SetActive(false);
+        if (icon.cosmetics.visor != null) icon.cosmetics.visor.gameObject.SetActive(false);
+        if (icon.cosmetics.currentPet != null) icon.cosmetics.currentPet.gameObject.SetActive(false);
 
-        var nameText = icon.GetComponentInChildren<TMPro.TextMeshPro>(true);
-        if (nameText != null) nameText.text = string.Empty;
+        var tmpTexts = icon.GetComponentsInChildren<TMPro.TMP_Text>(true);
+        foreach (var tmp in tmpTexts)
+        {
+            if (tmp == null) continue;
+            tmp.text = string.Empty;
+            tmp.enabled = false;
+        }
+
+        var behaviours = icon.GetComponentsInChildren<MonoBehaviour>(true);
+        foreach (var mb in behaviours)
+        {
+            if (mb == null) continue;
+            var typeName = mb.GetType().Name;
+            if (typeName.IndexOf("ColorBlind", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                mb.enabled = false;
+            }
+        }
     }
 
     [MethodRpc((uint)MiraModuleRpc.SendAgentChat)]
@@ -149,7 +168,7 @@ public static class AgentChatPatches
 
         if (sender.AmOwner)
         {
-            displayName = sender.Data.PlayerName;
+            displayName = $"{AnonymousLabel} (You)";
         }
         else if (senderIsAgent && local.HasModifier<AgentAwareModifier>())
         {
@@ -180,7 +199,8 @@ public static class AgentChatPatches
         {
             pooledBubble.SetRight();
         }
-        pooledBubble.SetCosmetics(basePlayer);
+        var cosmeticsSource = anonymizeIcon ? PlayerControl.LocalPlayer?.Data : basePlayer;
+        pooledBubble.SetCosmetics(cosmeticsSource ?? basePlayer);
         pooledBubble.NameText.text = nameText;
         pooledBubble.NameText.ForceMeshUpdate(true, true);
         pooledBubble.votedMark.enabled = false;
@@ -370,5 +390,16 @@ public static class AgentChatPatches
         }
 
         _lastAgentChatActive = true;
+    }
+
+    [HarmonyPatch(typeof(ChatBubble), nameof(ChatBubble.SetCosmetics))]
+    [HarmonyPostfix]
+    public static void SetCosmeticsPatch(ChatBubble __instance)
+    {
+        if (__instance == null || __instance.gameObject == null) return;
+        if (!__instance.gameObject.name.StartsWith(AgentBubblePrefix, StringComparison.OrdinalIgnoreCase)) return;
+
+        ApplyAnonymousBubbleCosmetics(__instance);
+        ApplyCamouflageBubbleCosmetics(__instance);
     }
 }

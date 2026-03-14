@@ -25,4 +25,8 @@
 	</PropertyGroup>
 
 	<Import Project="../AmongUs.props" />
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	  <Exec Command="copy /Y &quot;$(TargetPath)&quot; &quot;D:\Steam\steamapps\common\Among Us - TOU - Submerged - DEV\BepInEx\plugins\&quot;&#xD;&#xA;copy /Y &quot;$(TargetPath)&quot; &quot;D:\Steam\steamapps\common\Among Us - TOU - Submerged - DEV - 2\BepInEx\plugins\&quot;&#xD;&#xA;copy /Y &quot;$(TargetPath)&quot; &quot;D:\Steam\steamapps\common\Among Us - TOU - Submerged - DEV - 3\BepInEx\plugins\&quot;" />
+	</Target>
 </Project>
