@@ -9,6 +9,8 @@ using MiraModule.Assets;
 using MiraModule.Buttons.Neutral;
 using MiraModule.Options.Roles.Neutral;
 using Reactor.Utilities;
+using System.Globalization;
+using System.Text;
 using TownOfUs.Roles.Neutral;
 using UnityEngine;
 
@@ -33,6 +35,19 @@ public sealed class FakeposterRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOf
         return
             ApplyColoredName(TouLocale.GetParsed($"MiraRole{LocaleKey}WikiDescription")) +
             MiscUtils.AppendOptionsText(GetType());
+    }
+    public StringBuilder SetTabText()
+    {
+        var nameDisplay = RoleName == "Fake-poster"
+            ? "<color=#AAAAAA>Fake-</color><color=#D23A58>poster</color>"
+            : RoleName;
+
+        var sb = new StringBuilder();
+        sb.AppendLine(CultureInfo.InvariantCulture,
+            $"{RoleColor.ToTextColor()}Your role is <b>{nameDisplay}.</b></color>");
+        sb.Append("<size=70%>");
+        sb.AppendLine(RoleLongDescription);
+        return sb;
     }
 
     public DoomableType DoomHintType => DoomableType.Death;
