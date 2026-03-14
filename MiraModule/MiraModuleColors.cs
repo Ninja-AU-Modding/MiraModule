@@ -20,6 +20,5 @@ public static class MiraModuleColors
     public static Color Sentinel => new Color32(143, 162, 141, 255);
     public static Color Abyss => new Color32(75, 45, 120, 255); 
     public static Color Shifter => new Color32(232, 131, 43, 255); 
-
-    public static Color Fakeposter => new Color32(210, 58, 88, 255); 
+    public static Color Fakeposter => new Color32(170, 170, 170, 255); 
 }
