@@ -35,6 +35,21 @@
     <string name="MiraOptionAbyssHasAssassin">Abyss Has Assassin Ability</string>
     <string name="MiraOptionAbyssImpostorVision">Abyss Has Impostor Vision</string>
 
+    <!-- Harvester - Neutral Killer Support -->
+    <string name="MiraRoleHarvester">Harvester</string>
+    <string name="MiraRoleHarvesterIntroBlurb">Collect their tricks. Use them once.</string>
+    <string name="MiraRoleHarvesterTabDescription">Eliminate Crewmates to steal a random one-time ability.\%nl\%Stolen abilities look real but only provide limited, fake effects.</string>
+
+    <!-- Harvester Wiki -->
+    <string name="MiraRoleHarvesterWikiDescription">The Harvester is a killer-adjacent Neutral role that steals a compatible ability from a killed Crewmate. The stolen ability appears identical to the original but only provides limited, fake effects and can be used once.</string>
+    <string name="MiraRoleHarvesterHarvest">Harvest</string>
+    <string name="MiraRoleHarvesterHarvestWikiDescription">Use your stolen ability once before it fades away.</string>
+
+    <!-- Harvester Options -->
+    <string name="MiraOptionHarvesterKillCooldown">Kill Cooldown</string>
+    <string name="MiraOptionHarvesterCanVent">Harvester Can Vent</string>
+    <string name="MiraOptionHarvesterImpostorVision">Harvester Has Impostor Vision</string>
+
     <!-- Sentinel Options -->
     <string name="MiraOptionSentinelKillCooldown">Kill Cooldown</string>
     <string name="MiraOptionSentinelExplodeCooldown">Explode Cooldown</string>
