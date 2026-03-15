@@ -1,26 +1,23 @@
 using MiraAPI.GameOptions;
-using MiraAPI.Keybinds;
-using MiraAPI.Roles;
 using MiraAPI.Networking;
-using MiraAPI.Modifiers;
 using MiraAPI.Utilities.Assets;
-using MiraModule.Modifiers.Neutral;
-using MiraModule.Options.Roles.Neutral;
-using MiraModule.Roles.Neutral;
 using Reactor.Utilities;
-using TownOfUs.Buttons;
 using TownOfUs.Options.Modifiers.Alliance;
+using TownOfUs.Options.Roles.Neutral;
+using TownOfUs.Roles.Neutral;
+using TownOfUs.Utilities;
 using UnityEngine;
 
-namespace MiraModule.Buttons.Neutral;
+namespace MiraModule.HarvesterAbilities.Buttons.Neutral;
 
-public sealed class HarvesterKillButton : TownOfUsKillRoleButton<HarvesterRole, PlayerControl>, IKillButton
+public sealed class PestilenceKillButton : TownOfUsKillRoleButton<PestilenceRole, PlayerControl>, IDiseaseableButton,
+    IKillButton
 {
     public override string Name => TranslationController.Instance.GetStringWithDefault(StringNames.KillLabel, "Kill");
     public override BaseKeybind Keybind => Keybinds.PrimaryAction;
-    public override Color TextOutlineColor => MiraModuleColors.Harvester;
-    public override float Cooldown => Math.Clamp(OptionGroupSingleton<HarvesterOptions>.Instance.KillCooldown + MapCooldown, 5f, 120f);
-    public override LoadableAsset<Sprite> Sprite => TouAssets.KillSprite;
+    public override Color TextOutlineColor => TownOfUsColors.Pestilence;
+    public override float Cooldown => Math.Clamp(OptionGroupSingleton<PlaguebearerOptions>.Instance.PestKillCooldown + MapCooldown, 5f, 120f);
+    public override LoadableAsset<Sprite> Sprite => TouNeutAssets.PestKillSprite;
 
     public override void CreateButton(Transform parent)
     {
@@ -28,15 +25,9 @@ public sealed class HarvesterKillButton : TownOfUsKillRoleButton<HarvesterRole, 
         Coroutines.Start(MiscUtils.CoMoveButtonIndex(this, false));
     }
 
-    public override bool Enabled(RoleBehaviour? role)
+    public void SetDiseasedTimer(float multiplier)
     {
-        if (role is HarvesterRole)
-        {
-            return true;
-        }
-
-        var player = PlayerControl.LocalPlayer;
-        return player != null && player.HasModifier<HarvesterCacheModifier>();
+        SetTimer(Cooldown * multiplier);
     }
 
     public override PlayerControl? GetTarget()
@@ -53,10 +44,10 @@ public sealed class HarvesterKillButton : TownOfUsKillRoleButton<HarvesterRole, 
     {
         if (Target == null)
         {
-            Error("Harvester Kill: Target is null");
+            Error("Pestilence Shoot: Target is null");
             return;
         }
 
-        PlayerControl.LocalPlayer.RpcCustomMurder(Target);
+        PlayerControl.LocalPlayer.RpcCustomMurder(Target, MeetingCheck.OutsideMeeting);
     }
 }
