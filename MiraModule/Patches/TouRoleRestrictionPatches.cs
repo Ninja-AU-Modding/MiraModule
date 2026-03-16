@@ -26,12 +26,7 @@ public static class TouRoleRestrictionPatches
     {
         private static bool Prefix(object __instance, RoleBehaviour? role, ref bool __result)
         {
-            if (__instance is not TownOfUsButton button)
-            {
-                return true;
-            }
-
-            if (!TouRoleRestrictions.ShouldAllowButton(role, button))
+            if (!TouRoleRestrictions.ShouldAllowButton(role, __instance))
             {
                 __result = false;
                 return false;
@@ -46,12 +41,37 @@ public static class TouRoleRestrictionPatches
     {
         private static bool Prefix(object __instance, RoleBehaviour? role, ref bool __result)
         {
-            if (__instance is not TownOfUsButton button)
+            if (!TouRoleRestrictions.ShouldAllowButton(role, __instance))
             {
-                return true;
+                __result = false;
+                return false;
             }
 
-            if (!TouRoleRestrictions.ShouldAllowButton(role, button))
+            return true;
+        }
+    }
+
+    [HarmonyPatch(typeof(MiraModule.HarvesterAbilities.Buttons.TownOfUsRoleButton<>), "Enabled")]
+    private static class HarvesterRoleButtonEnabledPatch
+    {
+        private static bool Prefix(object __instance, RoleBehaviour? role, ref bool __result)
+        {
+            if (!TouRoleRestrictions.ShouldAllowButton(role, __instance))
+            {
+                __result = false;
+                return false;
+            }
+
+            return true;
+        }
+    }
+
+    [HarmonyPatch(typeof(MiraModule.HarvesterAbilities.Buttons.TownOfUsRoleButton<,>), "Enabled")]
+    private static class HarvesterRoleTargetButtonEnabledPatch
+    {
+        private static bool Prefix(object __instance, RoleBehaviour? role, ref bool __result)
+        {
+            if (!TouRoleRestrictions.ShouldAllowButton(role, __instance))
             {
                 __result = false;
                 return false;

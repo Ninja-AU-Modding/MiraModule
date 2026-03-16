@@ -46,69 +46,70 @@ public static class TouRoleRestrictions
         RoleId.Get<SpectreRole>(),
         RoleId.Get<VampireRole>(),
         RoleId.Get<VigilanteRole>(),
+        RoleId.Get<TimeLordRole>(),
+        RoleId.Get<PlumberRole>(),
     };
 
     // For roles listed here, ONLY these buttons are allowed.
     // Roles not present in this map are left unchanged.
-    private static readonly Dictionary<Type, HashSet<Type>> AllowedButtonsByRole = new()
+    private static readonly Dictionary<Type, HashSet<string>> AllowedButtonsByRole = new()
     {
         // Crewmate
-        { typeof(AltruistRole), new HashSet<Type> { typeof(AltruistReviveButton) } },
-        { typeof(ClericRole), new HashSet<Type> { typeof(ClericBarrierButton), typeof(ClericCleanseButton) } },
-        { typeof(EngineerTouRole), new HashSet<Type> { typeof(EngineerFixButton) } },
-        { typeof(ForensicRole), new HashSet<Type> { typeof(DetectiveInspectButton), typeof(DetectiveExamineButton) } },
-        { typeof(LookoutRole), new HashSet<Type> { typeof(WatchButton) } },
-        { typeof(MedicRole), new HashSet<Type> { typeof(MedicShieldButton) } },
-        { typeof(MediumRole), new HashSet<Type> { typeof(MediumMediateButton) } },
-        { typeof(MysticRole), new HashSet<Type>() },
-        { typeof(OracleRole), new HashSet<Type> { typeof(OracleConfessButton) } },
-        { typeof(PlumberRole), new HashSet<Type> { typeof(PlumberFlushButton), typeof(PlumberBlockButton) } },
-        { typeof(SeerRole), new HashSet<Type> { typeof(SeerRevealButton), typeof(SeerGazeButton), typeof(SeerIntuitButton) } },
-        { typeof(SentryRole), new HashSet<Type>
+        { typeof(AltruistRole), new HashSet<string> { nameof(AltruistReviveButton) } },
+        { typeof(ClericRole), new HashSet<string> { nameof(ClericBarrierButton), nameof(ClericCleanseButton) } },
+        { typeof(EngineerTouRole), new HashSet<string> { nameof(EngineerFixButton) } },
+        { typeof(ForensicRole), new HashSet<string> { nameof(DetectiveInspectButton), nameof(DetectiveExamineButton) } },
+        { typeof(LookoutRole), new HashSet<string> { nameof(WatchButton) } },
+        { typeof(MedicRole), new HashSet<string> { nameof(MedicShieldButton) } },
+        { typeof(MediumRole), new HashSet<string> { nameof(MediumMediateButton) } },
+        { typeof(MysticRole), new HashSet<string>() },
+        { typeof(OracleRole), new HashSet<string> { nameof(OracleConfessButton) } },
+        { typeof(SeerRole), new HashSet<string> { nameof(SeerRevealButton), nameof(SeerGazeButton), nameof(SeerIntuitButton) } },
+        { typeof(SentryRole), new HashSet<string>
             {
-                typeof(SentryPlaceCameraButton),
-                typeof(SentryPortableCameraButton),
-                typeof(SentryPortableCameraSecondaryButton),
+                nameof(SentryPlaceCameraButton),
+                nameof(SentryPortableCameraButton),
+                nameof(SentryPortableCameraSecondaryButton),
             }
         },
-        { typeof(SonarRole), new HashSet<Type> { typeof(TrackerTrackButton) } },
-        { typeof(SpyRole), new HashSet<Type>() },
-        { typeof(TimeLordRole), new HashSet<Type> { typeof(TimeLordRewindButton) } },
-        { typeof(TransporterRole), new HashSet<Type> { typeof(TransporterTransportButton) } },
-        { typeof(TrapperRole), new HashSet<Type> { typeof(TrapperTrapButton) } },
-        { typeof(VeteranRole), new HashSet<Type> { typeof(VeteranAlertButton) } },
-        { typeof(WardenRole), new HashSet<Type> { typeof(WardenFortifyButton) } },
+        { typeof(SonarRole), new HashSet<string> { nameof(TrackerTrackButton) } },
+        { typeof(SpyRole), new HashSet<string>() },
+        { typeof(TimeLordRole), new HashSet<string> { nameof(TimeLordRewindButton) } },
+        { typeof(TransporterRole), new HashSet<string> { nameof(TransporterTransportButton) } },
+        { typeof(TrapperRole), new HashSet<string> { nameof(TrapperTrapButton) } },
+        { typeof(VeteranRole), new HashSet<string> { nameof(VeteranAlertButton) } },
+        { typeof(WardenRole), new HashSet<string> { nameof(WardenFortifyButton) } },
 
         // Impostor
-        { typeof(AmbusherRole), new HashSet<Type> { typeof(AmbusherPursueButton), typeof(AmbusherAmbushButton) } },
-        { typeof(BlackmailerRole), new HashSet<Type> { typeof(BlackmailerBlackmailButton) } },
-        { typeof(BomberRole), new HashSet<Type> { typeof(BomberPlantButton) } },
-        { typeof(EclipsalRole), new HashSet<Type> { typeof(EclipsalBlindButton) } },
-        { typeof(EscapistRole), new HashSet<Type> { typeof(EscapistMarkButton), typeof(EscapistRecallButton) } },
-        { typeof(GrenadierRole), new HashSet<Type> { typeof(GrenadierFlashButton) } },
-        { typeof(JanitorRole), new HashSet<Type> { typeof(JanitorCleanButton) } },
-        { typeof(MinerRole), new HashSet<Type> { typeof(MinerPlaceVentButton) } },
-        { typeof(MorphlingRole), new HashSet<Type> { typeof(MorphlingSampleButton), typeof(MorphlingMorphButton) } },
-        { typeof(ParasiteRole), new HashSet<Type> { typeof(ParasiteOvertakeButton) } },
-        { typeof(PuppeteerRole), new HashSet<Type> { typeof(PuppeteerControlButton) } },
-        { typeof(ScavengerRole), new HashSet<Type>() },
-        { typeof(SwooperRole), new HashSet<Type> { typeof(SwooperSwoopButton) } },
-        { typeof(UndertakerRole), new HashSet<Type> { typeof(UndertakerDragDropButton) } },
-        { typeof(VenererRole), new HashSet<Type> { typeof(VenererAbilityButton) } },
-        { typeof(WarlockRole), new HashSet<Type> { typeof(WarlockKillButton) } },
+        { typeof(AmbusherRole), new HashSet<string> { nameof(AmbusherPursueButton), nameof(AmbusherAmbushButton) } },
+        { typeof(BlackmailerRole), new HashSet<string> { nameof(BlackmailerBlackmailButton) } },
+        { typeof(BomberRole), new HashSet<string> { nameof(BomberPlantButton) } },
+        { typeof(EclipsalRole), new HashSet<string> { nameof(EclipsalBlindButton) } },
+        { typeof(EscapistRole), new HashSet<string> { nameof(EscapistMarkButton), nameof(EscapistRecallButton) } },
+        { typeof(GrenadierRole), new HashSet<string> { nameof(GrenadierFlashButton) } },
+        { typeof(JanitorRole), new HashSet<string> { nameof(JanitorCleanButton) } },
+        { typeof(MinerRole), new HashSet<string> { nameof(MinerPlaceVentButton) } },
+        { typeof(MorphlingRole), new HashSet<string> { nameof(MorphlingSampleButton), nameof(MorphlingMorphButton) } },
+        { typeof(ParasiteRole), new HashSet<string> { nameof(ParasiteOvertakeButton) } },
+        { typeof(PuppeteerRole), new HashSet<string> { nameof(PuppeteerControlButton) } },
+        { typeof(ScavengerRole), new HashSet<string>() },
+        { typeof(SwooperRole), new HashSet<string> { nameof(SwooperSwoopButton) } },
+        { typeof(UndertakerRole), new HashSet<string> { nameof(UndertakerDragDropButton) } },
+        { typeof(VenererRole), new HashSet<string> { nameof(VenererAbilityButton) } },
+        { typeof(WarlockRole), new HashSet<string> { nameof(WarlockKillButton) } },
 
         // Neutral
-        { typeof(ChefRole), new HashSet<Type> { typeof(ChefCookButton) } },
-        { typeof(DoomsayerRole), new HashSet<Type> { typeof(DoomsayerObserveButton) } },
-        { typeof(GlitchRole), new HashSet<Type> { typeof(GlitchMimicButton), typeof(GlitchHackButton) } },
-        { typeof(JuggernautRole), new HashSet<Type>() },
-        { typeof(MercenaryRole), new HashSet<Type> { typeof(MercenaryGuardButton), typeof(MercenaryBribeButton) } },
-        { typeof(NeutralRole), new HashSet<Type>() },
-        { typeof(PestilenceRole), new HashSet<Type>() },
-        { typeof(PlaguebearerRole), new HashSet<Type> { typeof(PlaguebearerInfectButton) } },
-        { typeof(SoulCollectorRole), new HashSet<Type> { typeof(SoulCollectorReapButton) } },
-        { typeof(SurvivorRole), new HashSet<Type> { typeof(SurvivorVestButton) } },
-        { typeof(WerewolfRole), new HashSet<Type> { typeof(WerewolfRampageButton) } },
+        { typeof(ChefRole), new HashSet<string> { nameof(ChefCookButton) } },
+        { typeof(DoomsayerRole), new HashSet<string> { nameof(DoomsayerObserveButton) } },
+        { typeof(GlitchRole), new HashSet<string> { nameof(GlitchMimicButton), nameof(GlitchHackButton) } },
+        { typeof(JuggernautRole), new HashSet<string>() },
+        { typeof(MercenaryRole), new HashSet<string> { nameof(MercenaryGuardButton), nameof(MercenaryBribeButton) } },
+        { typeof(NeutralRole), new HashSet<string>() },
+        { typeof(PestilenceRole), new HashSet<string>() },
+        { typeof(PlaguebearerRole), new HashSet<string> { nameof(PlaguebearerInfectButton) } },
+        { typeof(SoulCollectorRole), new HashSet<string> { nameof(SoulCollectorReapButton) } },
+        { typeof(SurvivorRole), new HashSet<string> { nameof(SurvivorVestButton) } },
+        { typeof(WerewolfRole), new HashSet<string> { nameof(WerewolfRampageButton) } },
     };
 
     public static bool IsRoleDisallowed(ushort roleId)
@@ -126,7 +127,7 @@ public static class TouRoleRestrictions
         roles.RemoveAll(IsRoleDisallowed);
     }
 
-    public static bool ShouldAllowButton(RoleBehaviour? role, TownOfUsButton button)
+    public static bool ShouldAllowButton(RoleBehaviour? role, object button)
     {
         if (role == null)
         {
@@ -138,6 +139,6 @@ public static class TouRoleRestrictions
             return true;
         }
 
-        return allowedButtons.Contains(button.GetType());
+        return allowedButtons.Contains(button.GetType().Name);
     }
 }
