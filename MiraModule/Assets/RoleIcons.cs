@@ -14,7 +14,7 @@ public static class RoleIcons
     public static LoadableAsset<Sprite> Abyss { get; } = new LoadableResourceAsset($"{ShortPath}.RoleIcons.Abyss.png", 200);
     public static LoadableAsset<Sprite> Shifter { get; } = new LoadableResourceAsset($"{ShortPath}.RoleIcons.Shifter.png", 200);
     public static LoadableAsset<Sprite> Fakeposter { get; } = new LoadableResourceAsset($"{ShortPath}.RoleIcons.Fakeposter.png", 200);
-    public static LoadableAsset<Sprite> Harvester { get; } = new LoadableResourceAsset($"{ShortPath}.RoleIcons.TempRoleIcon.png", 200);
+
 
     // Impostors
     public static LoadableAsset<Sprite> Eraser { get; } = new LoadableResourceAsset($"{ShortPath}.RoleIcons.Eraser.png", 200);

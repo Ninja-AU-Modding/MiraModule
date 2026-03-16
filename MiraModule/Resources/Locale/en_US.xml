@@ -35,21 +35,6 @@
     <string name="MiraOptionAbyssHasAssassin">Abyss Has Assassin Ability</string>
     <string name="MiraOptionAbyssImpostorVision">Abyss Has Impostor Vision</string>
 
-    <!-- Harvester - Neutral Killer Support -->
-    <string name="MiraRoleHarvester">Harvester</string>
-    <string name="MiraRoleHarvesterIntroBlurb">Take what they leave behind.</string>
-    <string name="MiraRoleHarvesterTabDescription">Kill a player to inherit their Town Of Us role abilities.\%nl\%Their ability buttons appear exactly as normal, but you only get one use before it fades.</string>
-
-    <!-- Harvester Wiki -->
-    <string name="MiraRoleHarvesterWikiDescription">The Harvester is a killer-adjacent Neutral role that steals the victim's Town Of Us role abilities on kill. The stolen ability buttons appear identical to the original role. After using any stolen ability once, they disappear.</string>
-    <string name="MiraRoleHarvesterHarvest">Harvest</string>
-    <string name="MiraRoleHarvesterHarvestWikiDescription">Use the stolen role abilities once before they fade.</string>
-
-    <!-- Harvester Options -->
-    <string name="MiraOptionHarvesterKillCooldown">Kill Cooldown</string>
-    <string name="MiraOptionHarvesterCanVent">Harvester Can Vent</string>
-    <string name="MiraOptionHarvesterImpostorVision">Harvester Has Impostor Vision</string>
-
     <!-- Sentinel Options -->
     <string name="MiraOptionSentinelKillCooldown">Kill Cooldown</string>
     <string name="MiraOptionSentinelExplodeCooldown">Explode Cooldown</string>

@@ -11,5 +11,4 @@ public static class NeutAssets
     public static LoadableAsset<Sprite> SentinelKillSprite { get; } = new LoadableResourceAsset($"{ShortPath}.SentinelKillButton.png");
     public static LoadableAsset<Sprite> AbyssGulpSprite { get; } = new LoadableResourceAsset($"{ShortPath}.AbyssGulpButton.png");
     public static LoadableAsset<Sprite> ShifterShiftSprite { get; } = new LoadableResourceAsset($"{ShortPath}.Tempbutton.png");
-    public static LoadableAsset<Sprite> HarvesterHarvestSprite { get; } = new LoadableResourceAsset($"{ShortPath}.Tempbutton.png");
 }

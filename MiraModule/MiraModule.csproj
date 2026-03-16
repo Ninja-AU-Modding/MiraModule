@@ -12,13 +12,13 @@
 
 	<ItemGroup>
 		<EmbeddedResource Include="Resources\**\*.*" />
-		<EmbeddedResource Include="HarvesterAbilities\Resources\**\*.*" />
 		<EmbeddedResource Include="modinfo.json" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Folder Include="Buttons\Crewmates\" />
 	  <Folder Include="Options\Roles\Crewmates\" />
+	  <Folder Include="Rules\" />
 	</ItemGroup>
 	
 	<PropertyGroup>
