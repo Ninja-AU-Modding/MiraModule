@@ -135,6 +135,26 @@ public static class TouRoleRestrictionPatches
         }
     }
 
+    [HarmonyPatch(typeof(TownOfUs.Buttons.Crewmate.OracleBlessButton), "Enabled")]
+    private static class OracleBlessDisabledPatch
+    {
+        private static bool Prefix(ref bool __result)
+        {
+            __result = false;
+            return false;
+        }
+    }
+
+    [HarmonyPatch(typeof(MiraModule.HarvesterAbilities.Buttons.Crewmate.OracleBlessButton), "Enabled")]
+    private static class OracleBlessDisabledHarvesterPatch
+    {
+        private static bool Prefix(ref bool __result)
+        {
+            __result = false;
+            return false;
+        }
+    }
+
     private static IEnumerator Empty()
     {
         yield break;
