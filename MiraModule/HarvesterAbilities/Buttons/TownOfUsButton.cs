@@ -255,6 +255,30 @@ public abstract class TownOfUsButton : CustomActionButton
         return cachedRole is TRole;
     }
 
+    protected internal static bool TryGetHarvestedRole<TRole>(out TRole role) where TRole : RoleBehaviour
+    {
+        role = null!;
+        var player = PlayerControl.LocalPlayer;
+        if (player == null)
+        {
+            return false;
+        }
+
+        if (!player.TryGetModifier<HarvesterCacheModifier>(out var cache))
+        {
+            return false;
+        }
+
+        var cachedRole = RoleManager.Instance.GetRole((RoleTypes)cache.CachedRoleId);
+        if (cachedRole is TRole typed)
+        {
+            role = typed;
+            return true;
+        }
+
+        return false;
+    }
+
     protected internal static void RunAsHarvestedRole(Action action)
     {
         var player = PlayerControl.LocalPlayer;
@@ -508,7 +532,19 @@ public abstract class TownOfUsTargetButton<T> : CustomActionButton<T> where T : 
 [MiraIgnore]
 public abstract class TownOfUsRoleButton<TRole> : TownOfUsButton where TRole : RoleBehaviour
 {
-    public TRole Role => PlayerControl.LocalPlayer.GetRole<TRole>()!;
+    public TRole Role
+    {
+        get
+        {
+            if (TownOfUsButton.TryGetHarvestedRole<TRole>(out var harvested))
+            {
+                return harvested;
+            }
+
+            var local = PlayerControl.LocalPlayer;
+            return local != null ? local.GetRole<TRole>()! : null!;
+        }
+    }
 
     public override bool Enabled(RoleBehaviour? role)
     {
@@ -528,6 +564,16 @@ public abstract class TownOfUsRoleButton<TRole> : TownOfUsButton where TRole : R
         }
 
         return TownOfUsButton.IsHarvestedRoleActive<TRole>();
+    }
+
+    public override bool CanUse()
+    {
+        if (!TownOfUsButton.IsHarvestedRoleActive<TRole>())
+        {
+            return false;
+        }
+
+        return base.CanUse();
     }
 
     protected virtual bool ShouldTrackKillCooldown()
@@ -540,7 +586,19 @@ public abstract class TownOfUsRoleButton<TRole> : TownOfUsButton where TRole : R
 public abstract class TownOfUsRoleButton<TRole, TTarget> : TownOfUsTargetButton<TTarget>
     where TTarget : MonoBehaviour where TRole : RoleBehaviour
 {
-    public TRole Role => PlayerControl.LocalPlayer.GetRole<TRole>()!;
+    public TRole Role
+    {
+        get
+        {
+            if (TownOfUsButton.TryGetHarvestedRole<TRole>(out var harvested))
+            {
+                return harvested;
+            }
+
+            var local = PlayerControl.LocalPlayer;
+            return local != null ? local.GetRole<TRole>()! : null!;
+        }
+    }
 
     public override bool Enabled(RoleBehaviour? role)
     {
@@ -562,6 +620,16 @@ public abstract class TownOfUsRoleButton<TRole, TTarget> : TownOfUsTargetButton<
         return TownOfUsButton.IsHarvestedRoleActive<TRole>();
     }
 
+    public override bool CanUse()
+    {
+        if (!TownOfUsButton.IsHarvestedRoleActive<TRole>())
+        {
+            return false;
+        }
+
+        return base.CanUse();
+    }
+
     protected virtual bool ShouldTrackKillCooldown()
     {
         return false;
@@ -569,19 +637,24 @@ public abstract class TownOfUsRoleButton<TRole, TTarget> : TownOfUsTargetButton<
 
     public override void SetOutline(bool active)
     {
+        if (!TownOfUsButton.TryGetHarvestedRole<TRole>(out var role))
+        {
+            return;
+        }
+
         if (Target != null && !PlayerControl.LocalPlayer.HasDied())
         {
             if (Target is PlayerControl target)
             {
-                target.cosmetics.currentBodySprite.BodySprite.SetOutline(active ? Role.TeamColor : null);
+                target.cosmetics.currentBodySprite.BodySprite.SetOutline(active ? role.TeamColor : null);
             }
             else if (Target is DeadBody body)
             {
-                body.bodyRenderers.Do(x => x.SetOutline(active ? Role.TeamColor : null));
+                body.bodyRenderers.Do(x => x.SetOutline(active ? role.TeamColor : null));
             }
             else if (Target is Vent vent)
             {
-                vent.SetOutline(active, true, Role.TeamColor);
+                vent.SetOutline(active, true, role.TeamColor);
             }
         }
     }
