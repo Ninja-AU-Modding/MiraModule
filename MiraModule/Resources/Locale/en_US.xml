@@ -37,13 +37,13 @@
 
     <!-- Harvester - Neutral Killer Support -->
     <string name="MiraRoleHarvester">Harvester</string>
-    <string name="MiraRoleHarvesterIntroBlurb">Collect their tricks. Use them once.</string>
-    <string name="MiraRoleHarvesterTabDescription">Eliminate Crewmates to steal a random one-time ability.\%nl\%Stolen abilities look real but only provide limited, fake effects.</string>
+    <string name="MiraRoleHarvesterIntroBlurb">Take what they leave behind.</string>
+    <string name="MiraRoleHarvesterTabDescription">Kill a player to inherit their Town Of Us role abilities.\%nl\%Their ability buttons appear exactly as normal, but you only get one use before it fades.</string>
 
     <!-- Harvester Wiki -->
-    <string name="MiraRoleHarvesterWikiDescription">The Harvester is a killer-adjacent Neutral role that steals a compatible ability from a killed Crewmate. The stolen ability appears identical to the original but only provides limited, fake effects and can be used once.</string>
+    <string name="MiraRoleHarvesterWikiDescription">The Harvester is a killer-adjacent Neutral role that steals the victim's Town Of Us role abilities on kill. The stolen ability buttons appear identical to the original role. After using any stolen ability once, they disappear.</string>
     <string name="MiraRoleHarvesterHarvest">Harvest</string>
-    <string name="MiraRoleHarvesterHarvestWikiDescription">Use your stolen ability once before it fades away.</string>
+    <string name="MiraRoleHarvesterHarvestWikiDescription">Use the stolen role abilities once before they fade.</string>
 
     <!-- Harvester Options -->
     <string name="MiraOptionHarvesterKillCooldown">Kill Cooldown</string>

@@ -6,8 +6,8 @@ namespace MiraModule.HarvesterAbilities.Assets;
 
 public static class TouAssets
 {
-    private const string ShortPath = "TownOfUs.Resources";
-    private const string CounterPath = "TownOfUs.Resources.AbilityCounters";
+    private const string ShortPath = "MiraModule.HarvesterAbilities.Resources";
+    private const string CounterPath = "MiraModule.HarvesterAbilities.Resources.AbilityCounters";
     private static string BetaIdentifier => TownOfUsPlugin.IsDevBuild ? "Beta" : string.Empty;
 
     public static readonly AssetBundle MainBundle = AssetBundleManager.Load("tou-assets");

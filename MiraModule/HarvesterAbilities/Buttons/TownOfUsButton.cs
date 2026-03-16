@@ -1,11 +1,15 @@
+using AmongUs.GameOptions;
 using HarmonyLib;
 using MiraAPI.GameOptions;
 using MiraAPI.Hud;
 using MiraAPI.Modifiers;
 using MiraAPI.PluginLoading;
+using MiraAPI.Roles;
 using MiraAPI.Utilities;
 using Reactor.Utilities.Extensions;
 using System.Globalization;
+using MiraModule.Modifiers.Neutral;
+using MiraModule.Roles.Neutral;
 using TownOfUs.Modifiers;
 using TownOfUs.Modifiers.Neutral;
 using TownOfUs.Modules;
@@ -221,7 +225,7 @@ public abstract class TownOfUsButton : CustomActionButton
                 .UseCrewmateTeamColorToggle.Value;
         }
 
-        OnClick();
+        RunAsHarvestedRole(OnClick);
 
         if (HasEffect)
         {
@@ -232,6 +236,50 @@ public abstract class TownOfUsButton : CustomActionButton
         {
             Timer = Cooldown;
         }
+    }
+
+    protected internal static bool IsHarvestedRoleActive<TRole>() where TRole : RoleBehaviour
+    {
+        var player = PlayerControl.LocalPlayer;
+        if (player == null)
+        {
+            return false;
+        }
+
+        if (!player.TryGetModifier<HarvesterCacheModifier>(out var cache))
+        {
+            return false;
+        }
+
+        var cachedRole = RoleManager.Instance.GetRole((RoleTypes)cache.CachedRoleId);
+        return cachedRole is TRole;
+    }
+
+    protected internal static void RunAsHarvestedRole(Action action)
+    {
+        var player = PlayerControl.LocalPlayer;
+        if (player == null || action == null)
+        {
+            return;
+        }
+
+        if (!player.TryGetModifier<HarvesterCacheModifier>(out var cache) ||
+            player.Data.Role is not HarvesterRole)
+        {
+            action();
+            return;
+        }
+
+        if (!AmongUsClient.Instance.AmHost)
+        {
+            action();
+            return;
+        }
+
+        var harvestedRole = (RoleTypes)cache.CachedRoleId;
+        player.RpcSetRole(harvestedRole, true);
+        action();
+        player.RpcSetRole((RoleTypes)RoleId.Get<HarvesterRole>(), true);
     }
 }
 
@@ -432,7 +480,7 @@ public abstract class TownOfUsTargetButton<T> : CustomActionButton<T> where T : 
                     .UseCrewmateTeamColorToggle.Value;
             }
 
-            OnClick();
+            TownOfUsButton.RunAsHarvestedRole(OnClick);
             if (HasEffect)
             {
                 EffectActive = true;
@@ -464,7 +512,22 @@ public abstract class TownOfUsRoleButton<TRole> : TownOfUsButton where TRole : R
 
     public override bool Enabled(RoleBehaviour? role)
     {
-        return !Disabled && role is TRole;
+        if (Disabled)
+        {
+            return false;
+        }
+
+        if (this is IKillButton)
+        {
+            return false;
+        }
+
+        if (this is FakeVentButton || this is Crewmate.EngineerVentButton)
+        {
+            return TownOfUsButton.IsHarvestedRoleActive<TRole>() && this is Crewmate.EngineerVentButton;
+        }
+
+        return TownOfUsButton.IsHarvestedRoleActive<TRole>();
     }
 
     protected virtual bool ShouldTrackKillCooldown()
@@ -481,7 +544,22 @@ public abstract class TownOfUsRoleButton<TRole, TTarget> : TownOfUsTargetButton<
 
     public override bool Enabled(RoleBehaviour? role)
     {
-        return !Disabled && role is TRole;
+        if (Disabled)
+        {
+            return false;
+        }
+
+        if (this is IKillButton)
+        {
+            return false;
+        }
+
+        if (this is FakeVentButton || this is Crewmate.EngineerVentButton)
+        {
+            return TownOfUsButton.IsHarvestedRoleActive<TRole>() && this is Crewmate.EngineerVentButton;
+        }
+
+        return TownOfUsButton.IsHarvestedRoleActive<TRole>();
     }
 
     protected virtual bool ShouldTrackKillCooldown()

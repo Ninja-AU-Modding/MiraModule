@@ -13,6 +13,4 @@ public enum MiraModuleRpc : uint
     ChaosTokenRoll = 10210,
     ChaosTokenGain = 10211,
     SendAgentChat = 10212,
-    HarvesterSetAbility = 10213,
-    HarvesterUseAbility = 10214,
 }

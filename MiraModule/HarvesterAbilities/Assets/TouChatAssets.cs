@@ -5,7 +5,7 @@ namespace MiraModule.HarvesterAbilities.Assets;
 
 public static class TouChatAssets
 {
-    private const string ChatPath = "TownOfUs.Resources.Chat";
+    private const string ChatPath = "MiraModule.HarvesterAbilities.Resources.Chat";
 
     public static LoadableAsset<Sprite> ImpBubble { get; } = new LoadableResourceAsset($"{ChatPath}.ChatImpBubble.png");
     public static LoadableAsset<Sprite> JailBubble { get; } = new LoadableResourceAsset($"{ChatPath}.ChatJailBubble.png");
