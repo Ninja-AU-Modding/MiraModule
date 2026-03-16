@@ -12,6 +12,7 @@
 
 	<ItemGroup>
 		<EmbeddedResource Include="Resources\**\*.*" />
+		<EmbeddedResource Include="HarvesterAbilities\Resources\**\*.*" />
 		<EmbeddedResource Include="modinfo.json" />
 	</ItemGroup>
 
