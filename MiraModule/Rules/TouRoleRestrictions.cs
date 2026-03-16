@@ -129,12 +129,13 @@ public static class TouRoleRestrictions
 
     public static bool ShouldAllowButton(RoleBehaviour? role, object button)
     {
-        if (role == null)
+        var effectiveRole = role ?? PlayerControl.LocalPlayer?.Data?.Role;
+        if (effectiveRole == null)
         {
             return true;
         }
 
-        if (!AllowedButtonsByRole.TryGetValue(role.GetType(), out var allowedButtons))
+        if (!AllowedButtonsByRole.TryGetValue(effectiveRole.GetType(), out var allowedButtons))
         {
             return true;
         }
