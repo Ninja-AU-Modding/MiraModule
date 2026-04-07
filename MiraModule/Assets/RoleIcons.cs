@@ -23,5 +23,4 @@ public static class RoleIcons
     public static LoadableAsset<Sprite> Ninja { get; } = new LoadableResourceAsset($"{ShortPath}.RoleIcons.Ninja.png", 200);
 
     // Crewmates
-    public static LoadableAsset<Sprite> Dictator { get; } = new LoadableResourceAsset($"{ShortPath}.RoleIcons.TempRoleIcon.png", 200);
 }

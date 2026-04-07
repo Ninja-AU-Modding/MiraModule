@@ -18,6 +18,7 @@
 	<ItemGroup>
 	  <Folder Include="Buttons\Crewmates\" />
 	  <Folder Include="Options\Roles\Crewmates\" />
+	  <Folder Include="Roles\Crewmate\" />
 	  <Folder Include="Rules\" />
 	</ItemGroup>
 	
