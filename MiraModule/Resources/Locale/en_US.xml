@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='UTF-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
     <!-- Player Colors -->
     <string name="PlayerColorSpiderman">Spiderman</string>
@@ -167,6 +167,57 @@
 	<string name="MiraOptionFakeposterCanVent">Can Vent</string>
 	<string name="MiraOptionFakeposterHasImposterVision">Imposter Vision</string>
 	<string name="MiraOptionFakeposterHasAssassin">Has Assassin</string>
+
+    <!-- Baiter - Neutral Evil -->
+    <string name="MiraRoleBaiter">Baiter</string>
+    <string name="MiraRoleBaiterIntroBlurb">Fool them with a corpse. Make them call it in.</string>
+    <string name="MiraRoleBaiterTabDescription">Spawn fake dead bodies near a chosen player.\%nl\%Get enough bait bodies \%b\%reported\%/b\% to win — but don't get caught!</string>
+
+    <!-- Baiter Wiki -->
+    <string name="MiraRoleBaiterWikiDescription">The Baiter is a Neutral Evil role that wins by planting fake dead bodies and having them reported by other players. Each successful report counts toward the required number of baits. The Baiter has no kill ability and must rely entirely on deception to win.</string>
+    <string name="MiraRoleBaiterSpawn">Spawn Bait</string>
+    <string name="MiraRoleBaiterSpawnWikiDescription">Plant a fake dead body styled after a chosen player at your current position.</string>
+
+    <!-- Baiter Options -->
+    <string name="MiraOptionBaiterSpawnCooldown">Spawn Cooldown</string>
+    <string name="MiraOptionBaiterBaitsNeeded">Baits Needed to Win</string>
+    <string name="MiraOptionBaiterCanVent">Baiter Can Vent</string>
+    <string name="MiraOptionBaiterImpostorVision">Baiter Has Impostor Vision</string>
+    <string name="MiraOptionBaiterHasAssassin">Baiter Has Assassin Ability</string>
+
+    <!-- Poisoner - Impostor -->
+    <string name="MiraRolePoisoner">Poisoner</string>
+    <string name="MiraRolePoisonerIntroBlurb">Poison them and watch it spread.</string>
+    <string name="MiraRolePoisonerTabDescription">Poison a target to turn their name dark green.\%nl\%The poison is \%b\%contagious\%/b\% and spreads when players touch.\%nl\%Setting determines if meetings save or kill victims.</string>
+
+    <!-- Poisoner Wiki -->
+    <string name="MiraRolePoisonerWikiDescription">The Poisoner is an Impostor role that can poison players. Poisoned players have dark green names visible only to Impostors. The poison spreads to healthy players on contact. If a poisoned player's timer runs out, they die. Meetings can either save victims or trigger their deaths.</string>
+    <string name="MiraRolePoisonerPoison">Poison</string>
+    <string name="MiraRolePoisonerPoisonWikiDescription">Poison a nearby player. The poison will spread and eventually kill.</string>
+
+    <!-- Poisoner Options -->
+    <string name="MiraOptionPoisonerTimer">Poison Timer</string>
+    <string name="MiraOptionPoisonerMeetingAction">Meeting Interaction</string>
+    <string name="MiraOptionPoisonerMeetingActionSavesVictims">Saves Victims</string>
+    <string name="MiraOptionPoisonerMeetingActionKillsAllVictims">Kills All Victims</string>
+    <string name="MiraOptionPoisonerMeetingActionKillsFirstVictim">Kills First Victim</string>
+    <string name="MiraOptionPoisonerKillCooldown">Kill Cooldown</string>
+    <string name="MiraOptionPoisonerCanVent">Poisoner Can Vent</string>
+
+    <!-- Revenant - Impostor -->
+    <string name="MiraRoleRevenant">Revenant</string>
+    <string name="MiraRoleRevenantIntroBlurb">Strike from the afterlife.</string>
+    <string name="MiraRoleRevenantTabDescription">Use Fake Death to die and turn into a ghost.\%nl\%As a ghost, you can continue killing a limited number of crewmates.\%nl\%Your ghost kills are silent and deadly.</string>
+
+    <!-- Revenant Wiki -->
+    <string name="MiraRoleRevenantWikiDescription">The Revenant is an Impostor role that can fake its death using the Fake Death button. Once used, the Revenant becomes a ghost but retains the ability to kill a limited number of players. This allows the Revenant to strike from safety, though they can no longer sabotaging or perform other physical tasks.</string>
+    <string name="MiraRoleRevenantFakeDeath">Fake Death</string>
+    <string name="MiraRoleRevenantFakeDeathWikiDescription">Instantly die and leave a body behind, turning into a ghost.</string>
+    <string name="MiraRoleRevenantGhostKill">Ghost Kill</string>
+    <string name="MiraRoleRevenantGhostKillWikiDescription">Kill a player while in ghost form. You have a limited number of these kills.</string>
+
+    <!-- Revenant Options -->
+    <string name="MiraOptionRevenantGhostKills">Ghost Kills Allowed</string>
+    <string name="MiraOptionRevenantFakeDeathCooldown">Fake Death Cooldown</string>
+    <string name="MiraOptionRevenantGhostKillCooldown">Ghost Kill Cooldown</string>
 </resources>
-
-

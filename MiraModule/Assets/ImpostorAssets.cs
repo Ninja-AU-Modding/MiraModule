@@ -1,4 +1,4 @@
-﻿using MiraAPI.Utilities.Assets;
+using MiraAPI.Utilities.Assets;
 using UnityEngine;
 
 namespace MiraModule.Assets;
@@ -21,4 +21,8 @@ public static class ImpostorAssets
     public static LoadableAsset<Sprite> NinjaMarkSprite { get; } = new LoadableResourceAsset($"{ShortPath}.NinjaMarkButton.png");
     public static LoadableAsset<Sprite> NinjaAssassinateSprite { get; } = new LoadableResourceAsset($"{ShortPath}.NinjaAssassinateButton.png");
     public static LoadableAsset<Sprite> NinjaTraceSprite { get; } = new LoadableResourceAsset($"{ShortPath}.NinjaTraceW.png");
+
+    // Poisoner Assets
+    public static LoadableAsset<Sprite> PoisonerPoisonSprite { get; } = new LoadableResourceAsset($"{ShortPath}.PoisonerPoison.png");
+    public static LoadableAsset<Sprite> RevenantFakeDeathSprite { get; } = new LoadableResourceAsset($"{ShortPath}.Tempbutton.png");
 }
