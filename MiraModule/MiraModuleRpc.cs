@@ -1,4 +1,4 @@
-﻿namespace MiraModule;
+namespace MiraModule;
 
 public enum MiraModuleRpc : uint
 {
@@ -13,4 +13,12 @@ public enum MiraModuleRpc : uint
     ChaosTokenRoll = 10210,
     ChaosTokenGain = 10211,
     SendAgentChat = 10212,
+    BaiterSpawnBait = 10213,
+    BaiterWin = 10214,
+    BaiterFooled = 10215,
+    BaiterReportBait = 10216,
+    BaiterDestroyBait = 10217,
+    PoisonerPoison = 10218,
+    RevenantFakeDeath = 10219,
+    RevenantGhostKill = 10220
 }

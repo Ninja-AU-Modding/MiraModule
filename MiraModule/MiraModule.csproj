@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<LangVersion>latest</LangVersion>
@@ -8,6 +8,7 @@
 		<RootNamespace>MiraModule</RootNamespace>
 		<Description>Mira Module addon for Town of Us Mira</Description>
 		<Authors>Ninja AU Modding, Goober, Ninja</Authors>
+		<EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
 	</PropertyGroup>
 
 	<ItemGroup>
