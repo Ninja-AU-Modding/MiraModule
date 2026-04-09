@@ -22,13 +22,11 @@ public static class EraserMeetingPatch
         if (EraserRole.PendingErases.Count == 0) return;
         if (!AmongUsClient.Instance.AmHost) return;
 
-        var opts = OptionGroupSingleton<EraserOptions>.Instance;
-
         // Snapshot the list so we can safely remove while iterating
         var toProcess = EraserRole.PendingErases.ToList();
         EraserRole.PendingErases.Clear();
 
-        foreach (var (victimId, eraserId) in toProcess)
+        foreach (var (victimId, _) in toProcess)
         {
             var victim = MiscUtils.PlayerById(victimId);
             if (victim == null) continue;

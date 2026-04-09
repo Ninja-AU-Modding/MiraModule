@@ -6,3 +6,5 @@ global using TownOfUs;
 global using TownOfUs.Assets;
 global using TownOfUs.Utilities;
 global using TownOfUs.Roles;
+global using MiraAPI.Keybinds;
+global using MiraAPI.LocalSettings;

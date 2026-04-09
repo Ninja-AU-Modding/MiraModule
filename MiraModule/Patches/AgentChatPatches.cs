@@ -21,7 +21,8 @@ public static class AgentChatPatches
     private const string AgentLabel = "Agent";
     private const string AgentBubblePrefix = "TOU_TeamChatBubble_Agent";
 
-    internal static readonly Color AgentChatColor = new AgentModifier().FreeplayFileColor;
+    private static Color? _agentChatColor;
+    internal static Color AgentChatColor => _agentChatColor ??= new AgentModifier().FreeplayFileColor;
     private static GameObject? _agentChatButton;
     private static bool _lastAgentChatActive;
     private static bool _agentFilterActive;
@@ -83,10 +84,8 @@ public static class AgentChatPatches
             _agentChatButton = UnityEngine.Object.Instantiate(chat.chatButton.gameObject, chat.chatButton.transform.parent);
             _agentChatButton.name = "AgentChatButton";
 
-            var pbs = _agentChatButton.GetComponentsInChildren<PassiveButton>(true);
-            foreach (var pb in pbs)
+            foreach (var pb in _agentChatButton.GetComponentsInChildren<PassiveButton>(true).Where(pb => pb != null))
             {
-                if (pb == null) continue;
                 pb.OverrideOnClickListeners(() =>
                 {
                     if (MeetingHud.Instance || ExileController.Instance != null) return;
@@ -95,24 +94,52 @@ public static class AgentChatPatches
             }
         }
 
-        // Keep position/scale aligned with the original button
         _agentChatButton.transform.localPosition = chat.chatButton.transform.localPosition;
         _agentChatButton.transform.localScale = chat.chatButton.transform.localScale;
     }
 
+    private static bool IsBackgroundOrMask(string name) =>
+        name.Contains("background", StringComparison.OrdinalIgnoreCase) ||
+        name.Contains("mask", StringComparison.OrdinalIgnoreCase);
+
     private static void ApplyAgentChatFilter(bool enable)
     {
-        var bubbleItems = GameObject.Find("Items");
-        if (bubbleItems == null) return;
+        var chat = HudManager.Instance?.Chat;
+        if (chat?.scroller?.Inner == null) return;
 
-        foreach (var t in bubbleItems.GetAllChildren())
+        for (var i = 0; i < chat.scroller.Inner.childCount; i++)
         {
-            if (t == null) continue;
-            var go = t.gameObject;
+            var go = chat.scroller.Inner.GetChild(i)?.gameObject;
             if (go == null) continue;
 
             var isPrivate = go.name.StartsWith(AgentBubblePrefix, StringComparison.OrdinalIgnoreCase);
-            go.SetActive(enable ? isPrivate : true);
+            go.SetActive(!enable || isPrivate);
+        }
+    }
+
+    private static void ApplyCamouflageBubbleCosmetics(ChatBubble bubble)
+    {
+        var icon = bubble.GetComponentInChildren<PoolablePlayer>(true);
+        if (icon?.cosmetics == null) return;
+
+        if (icon.cosmetics.currentBodySprite?.BodySprite != null)
+            PlayerMaterial.SetColors(Color.grey, icon.cosmetics.currentBodySprite.BodySprite);
+
+        icon.cosmetics.hat?.gameObject.SetActive(false);
+        icon.cosmetics.skin?.gameObject.SetActive(false);
+        icon.cosmetics.visor?.gameObject.SetActive(false);
+        icon.cosmetics.currentPet?.gameObject.SetActive(false);
+
+        foreach (var tmp in icon.GetComponentsInChildren<TMPro.TMP_Text>(true).Where(t => t != null))
+        {
+            tmp.text = string.Empty;
+            tmp.enabled = false;
+        }
+
+        foreach (var mb in icon.GetComponentsInChildren<MonoBehaviour>(true)
+                     .Where(mb => mb != null && mb.GetType().Name.Contains("ColorBlind", StringComparison.OrdinalIgnoreCase)))
+        {
+            mb.enabled = false;
         }
     }
 
@@ -133,41 +160,28 @@ public static class AgentChatPatches
 
         string displayName;
 
-        if (sender.AmOwner && senderIsAgent)
-        {
-            displayName = sender.Data.PlayerName;
-        }
+        if (sender.AmOwner)
+            displayName = $"{AnonymousLabel} (You)";
         else if (senderIsAgent && local.HasModifier<AgentAwareModifier>())
-        {
             displayName = $"{AgentLabel} ({sender.Data.PlayerName})";
-        }
         else
-        {
             displayName = AnonymousLabel;
-        }
 
         var title = $"<color=#{ColorUtility.ToHtmlStringRGBA(AgentChatColor)}>{displayName}</color>";
-        var anonymizeIcon = !senderIsAgent;
-        AddAgentChat(sender.Data, title, text, onLeft: !sender.AmOwner, anonymizeIcon: anonymizeIcon);
+        AddAgentChat(sender.Data, title, text, onLeft: !sender.AmOwner, anonymizeIcon: !senderIsAgent);
     }
 
-    private static void AddAgentChat(NetworkedPlayerInfo basePlayer, string nameText, string message, bool onLeft = true, bool anonymizeIcon = false)
+    internal static void AddAgentChat(NetworkedPlayerInfo basePlayer, string nameText, string message, bool onLeft = true, bool anonymizeIcon = false)
     {
+        if (!HudManager.InstanceExists || HudManager.Instance.Chat == null) return;
         var chat = HudManager.Instance.Chat;
         var pooledBubble = chat.GetPooledBubble();
-
         pooledBubble.transform.SetParent(chat.scroller.Inner);
         pooledBubble.transform.localScale = Vector3.one;
-        if (onLeft)
-        {
-            pooledBubble.SetLeft();
-        }
-        else
-        {
-            pooledBubble.SetRight();
-        }
+        if (onLeft) pooledBubble.SetLeft(); else pooledBubble.SetRight();
 
-        pooledBubble.SetCosmetics(basePlayer);
+        var cosmeticsSource = anonymizeIcon ? PlayerControl.LocalPlayer?.Data : basePlayer;
+        pooledBubble.SetCosmetics(cosmeticsSource ?? basePlayer);
         pooledBubble.NameText.text = nameText;
         pooledBubble.NameText.ForceMeshUpdate(true, true);
         pooledBubble.votedMark.enabled = false;
@@ -177,65 +191,40 @@ public static class AgentChatPatches
         pooledBubble.Background.size = new Vector2(5.52f,
             0.2f + pooledBubble.NameText.GetNotDumbRenderedHeight() + pooledBubble.TextArea.GetNotDumbRenderedHeight());
         pooledBubble.MaskArea.size = pooledBubble.Background.size - new Vector2(0, 0.03f);
-
         pooledBubble.Background.color = new Color(0.2f, 0.2f, 0.27f, 1f);
         pooledBubble.NameText.color = Color.white;
         pooledBubble.TextArea.color = Color.white;
-
         pooledBubble.gameObject.name = AgentBubblePrefix;
 
         if (anonymizeIcon)
         {
             ApplyAnonymousBubbleCosmetics(pooledBubble);
+            ApplyCamouflageBubbleCosmetics(pooledBubble);
         }
 
         pooledBubble.AlignChildren();
-        var pos = pooledBubble.NameText.transform.localPosition;
-        pooledBubble.NameText.transform.localPosition = pos;
         chat.AlignAllBubbles();
 
         if (chat is { IsOpenOrOpening: false, notificationRoutine: null })
-        {
             chat.notificationRoutine = chat.StartCoroutine(chat.BounceDot());
-        }
     }
 
     private static void ApplyAnonymousBubbleCosmetics(ChatBubble bubble)
     {
         var gray = new Color(0.6f, 0.6f, 0.6f, 1f);
-        var sprites = bubble.GetComponentsInChildren<SpriteRenderer>(true);
-        foreach (var sr in sprites)
-        {
-            if (sr == null) continue;
-            var name = sr.gameObject.name;
-            if (name.IndexOf("background", StringComparison.OrdinalIgnoreCase) >= 0 ||
-                name.IndexOf("mask", StringComparison.OrdinalIgnoreCase) >= 0)
-            {
-                continue;
-            }
 
+        foreach (var sr in bubble.GetComponentsInChildren<SpriteRenderer>(true)
+                     .Where(sr => sr != null && !IsBackgroundOrMask(sr.gameObject.name)))
+        {
             sr.color = gray;
             if (sr.material != null && sr.material.HasProperty("_Color"))
-            {
                 sr.material.color = gray;
-            }
         }
 
-        var meshes = bubble.GetComponentsInChildren<MeshRenderer>(true);
-        foreach (var mr in meshes)
+        foreach (var mr in bubble.GetComponentsInChildren<MeshRenderer>(true)
+                     .Where(mr => mr != null && !IsBackgroundOrMask(mr.gameObject.name) && mr.material != null && mr.material.HasProperty("_Color")))
         {
-            if (mr == null) continue;
-            var name = mr.gameObject.name;
-            if (name.IndexOf("background", StringComparison.OrdinalIgnoreCase) >= 0 ||
-                name.IndexOf("mask", StringComparison.OrdinalIgnoreCase) >= 0)
-            {
-                continue;
-            }
-
-            if (mr.material != null && mr.material.HasProperty("_Color"))
-            {
-                mr.material.color = gray;
-            }
+            mr.material.color = gray;
         }
     }
 
@@ -279,26 +268,29 @@ public static class AgentChatPatches
 
         if (!isActive)
         {
-            if (_agentChatButton != null && _agentChatButton)
-            {
-                _agentChatButton.SetActive(false);
-            }
-
-            if (chat.chatButton != null)
-            {
-                chat.chatButton.gameObject.SetActive(true);
-            }
-
-            if (_agentFilterActive)
-            {
-                ApplyAgentChatFilter(false);
-                _agentFilterActive = false;
-            }
-
-            _lastAgentChatActive = false;
+            DeactivateAgentChat(chat);
             return;
         }
 
+        ActivateAgentChat(chat);
+    }
+
+    private static void DeactivateAgentChat(ChatController chat)
+    {
+        _agentChatButton?.SetActive(false);
+        chat.chatButton?.gameObject.SetActive(true);
+
+        if (_agentFilterActive)
+        {
+            ApplyAgentChatFilter(false);
+            _agentFilterActive = false;
+        }
+
+        _lastAgentChatActive = false;
+    }
+
+    private static void ActivateAgentChat(ChatController chat)
+    {
         if (!_lastAgentChatActive)
         {
             chat.gameObject.SetActive(true);
@@ -311,45 +303,22 @@ public static class AgentChatPatches
         {
             _agentChatButton.SetActive(true);
 
-            var agentTransform = _agentChatButton.transform;
-            var buttonPbs = _agentChatButton.GetComponentsInChildren<PassiveButton>(true);
-            foreach (var pb in buttonPbs)
-            {
-                if (pb != null)
-                {
-                    pb.enabled = true;
-                }
-            }
+            foreach (var pb in _agentChatButton.GetComponentsInChildren<PassiveButton>(true).Where(pb => pb != null))
+                pb.enabled = true;
 
-            var colliders = _agentChatButton.GetComponentsInChildren<Collider2D>(true);
-            foreach (var col in colliders)
-            {
-                if (col != null)
-                {
-                    col.enabled = true;
-                }
-            }
+            foreach (var col in _agentChatButton.GetComponentsInChildren<Collider2D>(true).Where(col => col != null))
+                col.enabled = true;
 
-            var sprites = _agentChatButton.GetComponentsInChildren<SpriteRenderer>(true);
-            foreach (var sr in sprites)
-            {
-                if (sr != null)
-                {
-                    sr.enabled = true;
-                }
-            }
+            foreach (var sr in _agentChatButton.GetComponentsInChildren<SpriteRenderer>(true).Where(sr => sr != null))
+                sr.enabled = true;
 
-            ApplyAgentSprites(agentTransform);
+            ApplyAgentSprites(_agentChatButton.transform);
         }
 
-        if (chat.chatButton != null)
-        {
-            chat.chatButton.gameObject.SetActive(false);
-        }
-
+        chat.chatButton?.gameObject.SetActive(false);
         EnsureAgentChatClick();
-        var shouldFilter = chat.IsOpenOrOpening;
-        if (shouldFilter)
+
+        if (chat.IsOpenOrOpening)
         {
             ApplyAgentChatFilter(true);
             _agentFilterActive = true;
@@ -362,4 +331,15 @@ public static class AgentChatPatches
 
         _lastAgentChatActive = true;
     }
-}
+
+    [HarmonyPatch(typeof(ChatBubble), nameof(ChatBubble.SetCosmetics))]
+    [HarmonyPostfix]
+    public static void SetCosmeticsPatch(ChatBubble __instance)
+    {
+        if (__instance?.gameObject == null) return;
+        if (!__instance.gameObject.name.StartsWith(AgentBubblePrefix, StringComparison.OrdinalIgnoreCase)) return;
+
+        ApplyAnonymousBubbleCosmetics(__instance);
+        ApplyCamouflageBubbleCosmetics(__instance);
+    }
+}   

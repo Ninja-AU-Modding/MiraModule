@@ -19,12 +19,12 @@ public sealed class EraserRole(IntPtr cppPtr)
     /// <summary>
     /// Maps victim PlayerId → EraserPlayerId for pending erases (applied at next meeting).
     /// </summary>
-    public static readonly Dictionary<byte, byte> PendingErases = new();
+    internal static readonly Dictionary<byte, byte> PendingErases = new();
 
     /// <summary>
     /// All PlayerId's that have been fully erased (post-meeting), used to scale cooldown.
     /// </summary>
-    public static readonly List<byte> ErasedPlayerIds = new();
+    internal static readonly List<byte> ErasedPlayerIds = new();
 
     public string LocaleKey => "Eraser";
     public string RoleName => TouLocale.Get($"MiraRole{LocaleKey}");

@@ -9,6 +9,8 @@ using MiraModule.Assets;
 using MiraModule.Buttons.Neutral;
 using MiraModule.Options.Roles.Neutral;
 using Reactor.Utilities;
+using System.Globalization;
+using System.Text;
 using TownOfUs.Roles.Neutral;
 using UnityEngine;
 
@@ -18,18 +20,37 @@ public sealed class FakeposterRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOf
 {
     public string LocaleKey => "Fakeposter";
     public string RoleName => TouLocale.Get($"MiraRole{LocaleKey}");
-    public string RoleDescription => TouLocale.GetParsed($"MiraRole{LocaleKey}IntroBlurb");
-    public string RoleLongDescription => TouLocale.GetParsed($"MiraRole{LocaleKey}TabDescription");
+    private string ColoredName => RoleName == "Fake-poster"
+        ? "<color=#AAAAAA>Fake-</color><color=#D23A58>poster</color>"
+        : RoleName;
 
-    public DoomableType DoomHintType => DoomableType.Death;
+    private string ApplyColoredName(string str) =>
+        str.Contains("%coloredName%") ? str.Replace("%coloredName%", ColoredName) : str;
+
+    public string RoleDescription => ApplyColoredName(TouLocale.GetParsed($"MiraRole{LocaleKey}IntroBlurb"));
+    public string RoleLongDescription => ApplyColoredName(TouLocale.GetParsed($"MiraRole{LocaleKey}TabDescription"));
 
     public string GetAdvancedDescription()
     {
         return
-            TouLocale.GetParsed($"MiraRole{LocaleKey}WikiDescription") +
+            ApplyColoredName(TouLocale.GetParsed($"MiraRole{LocaleKey}WikiDescription")) +
             MiscUtils.AppendOptionsText(GetType());
     }
+    public StringBuilder SetTabText()
+    {
+        var nameDisplay = RoleName == "Fake-poster"
+            ? "<color=#AAAAAA>Fake-</color><color=#D23A58>poster</color>"
+            : RoleName;
 
+        var sb = new StringBuilder();
+        sb.AppendLine(CultureInfo.InvariantCulture,
+            $"{RoleColor.ToTextColor()}Your role is <b>{nameDisplay}.</b></color>");
+        sb.Append("<size=70%>");
+        sb.AppendLine(RoleLongDescription);
+        return sb;
+    }
+
+    public DoomableType DoomHintType => DoomableType.Death;
     public Color RoleColor => MiraModuleColors.Fakeposter;
     public ModdedRoleTeams Team => ModdedRoleTeams.Custom;
     public RoleAlignment RoleAlignment => RoleAlignment.NeutralKilling;

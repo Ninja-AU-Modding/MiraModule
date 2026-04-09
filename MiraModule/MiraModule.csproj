@@ -13,12 +13,14 @@
 
 	<ItemGroup>
 		<EmbeddedResource Include="Resources\**\*.*" />
-		<EmbeddedResource Include="ModInfo.json" />
+		<EmbeddedResource Include="modinfo.json" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Folder Include="Buttons\Crewmates\" />
 	  <Folder Include="Options\Roles\Crewmates\" />
+	  <Folder Include="Roles\Crewmate\" />
+	  <Folder Include="Rules\" />
 	</ItemGroup>
 	
 	<PropertyGroup>
@@ -26,4 +28,8 @@
 	</PropertyGroup>
 
 	<Import Project="../AmongUs.props" />
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="copy /Y &quot;$(TargetPath)&quot; &quot;D:\Steam\steamapps\common\Among Us - TOU - MiraModule\BepInEx\plugins\&quot;" ContinueOnError="true" />
+	</Target>
 </Project>

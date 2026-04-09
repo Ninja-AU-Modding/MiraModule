@@ -9,11 +9,11 @@ using Reactor;
 using Reactor.Networking;
 using Reactor.Networking.Attributes;
 using Reactor.Utilities;
-using MiraModule.Patches;
+using UnityEngine;
 
 namespace MiraModule;
 
-[BepInAutoPlugin("greys.miramodule", "Mira Module")]
+[BepInAutoPlugin("com.naum.miramodule", "Mira Module")]
 [BepInProcess("Among Us.exe")]
 [BepInDependency(ReactorPlugin.Id)]
 [BepInDependency(MiraApiPlugin.Id)]
@@ -50,5 +50,10 @@ public partial class MiraModulePlugin : BasePlugin, IMiraPlugin
         IL2CPPChainloader.Instance.Finished += Modules.ExtensionLocale.SearchInternalLocale;
         
         Harmony.PatchAll();
+
+        // Debug gradient bundle contents.
+        Assets.MiraModuleGradientAssets.DumpBundleInfo();
+
+        // (Rainbow animation handled per-renderer; no global updater needed.)
     }
 }

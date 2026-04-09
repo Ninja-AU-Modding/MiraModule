@@ -9,7 +9,12 @@ namespace MiraModule.Modules;
 
 public sealed class Explode
 {
-    public Transform Transform { get; set; }
+    public Transform Transform { get; }
+
+    private Explode(Transform transform)
+    {
+        Transform = transform;
+    }
 
     public void Clear()
     {
@@ -23,11 +28,6 @@ public sealed class Explode
         var gameObject = MiscUtils.CreateSpherePrimitive(location, igniteRadius);
         gameObject.GetComponent<MeshRenderer>().material = AuAvengersAnims.IgniteMaterial.LoadAsset();
 
-        var ignite = new Explode
-        {
-            Transform = gameObject.transform
-        };
-
-        return ignite;
+        return new Explode(gameObject.transform);
     }
 }
