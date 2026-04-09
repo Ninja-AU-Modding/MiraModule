@@ -17,7 +17,7 @@ public sealed class PoisonerPoison : TownOfUsKillRoleButton<PoisonerRole, Player
     public override BaseKeybind Keybind => Keybinds.PrimaryAction;
     public override Color TextOutlineColor => new Color32(0, 50, 0, 255);
     public override float Cooldown => Math.Clamp(OptionGroupSingleton<PoisonerOptions>.Instance.KillCooldown + MapCooldown, 5f, 120f);
-    public override LoadableAsset<Sprite> Sprite => ImpostorAssets.NinjaAssassinateSprite;
+    public override LoadableAsset<Sprite> Sprite => ImpostorAssets.PoisonerPoisonSprite;
 
     public override void CreateButton(Transform parent)
     {
