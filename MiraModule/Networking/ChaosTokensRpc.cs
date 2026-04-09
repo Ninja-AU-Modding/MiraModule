@@ -13,6 +13,7 @@ using MiraModule.Modifiers.ChaosTokens;
 using MiraModule.Modifiers.ChaosTokens.Effects;
 using MiraModule.Options.Modifiers;
 using MiraModule.Utilities;
+using ModuleHelpers = MiraModule.Utilities.Helpers;
 using Reactor.Networking.Attributes;
 using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
@@ -364,7 +365,7 @@ public static class ChaosTokensRpc
                     break;
                 }
 
-                var revealVictims = Helpers.GetAlivePlayers()
+                var revealVictims = ModuleHelpers.GetAlivePlayers()
                     .Where(x => x.PlayerId != player.PlayerId)
                     .Where(x => !x.HasModifier<MiraModule.Modifiers.ChaosTokens.RevealModifier>())
                     .ToList();
@@ -380,7 +381,7 @@ public static class ChaosTokensRpc
                 _revealsLeft--;
                 break;
             case ChaosEffects.PositionSwap:
-                var swapVictim = Helpers.GetAlivePlayers()
+                var swapVictim = ModuleHelpers.GetAlivePlayers()
                     .Where(x => !x.Data.IsDead)
                     .Where(x => x.PlayerId != player.PlayerId)
                     .Random();
@@ -398,7 +399,7 @@ public static class ChaosTokensRpc
                     playerTeam = (ModdedRoleTeams)playerRole.TeamType;
                 }
 
-                var roleSwapVictims = Helpers.GetAlivePlayers().Where(potentialVictim =>
+                var roleSwapVictims = ModuleHelpers.GetAlivePlayers().Where(potentialVictim =>
                 {
                     if (potentialVictim.PlayerId == player.PlayerId) return false;
 

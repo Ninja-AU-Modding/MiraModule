@@ -16,6 +16,7 @@ using MiraModule.Modifiers.ChaosTokens.Effects;
 using MiraModule.Options.Modifiers;
 using MiraModule.Utilities;
 using MiraModule.Networking;
+using ModuleHelpers = MiraModule.Utilities.Helpers;
 using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
 using TownOfUs.Modifiers;
@@ -149,7 +150,7 @@ public static class ChaosTokenEvents
             min = max;
         }
 
-        var potentialPlayers = Helpers.GetAlivePlayers();
+        var potentialPlayers = ModuleHelpers.GetAlivePlayers();
         potentialPlayers.Do(p =>
         {
             // Just to be sure

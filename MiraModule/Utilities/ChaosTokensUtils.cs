@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using MiraAPI.Utilities;
+using MiraApiHelpers = MiraAPI.Utilities.Helpers;
 using UnityEngine;
 
 namespace MiraModule.Utilities;
@@ -9,7 +10,7 @@ public static class ChaosTokensUtils
 {
     public static LobbyNotificationMessage Notification(string text, bool negative = false)
     {
-        var notif = Helpers.CreateAndShowNotification(text, negative ? Color.red : MiraModuleColors.ChaosTokens,
+        var notif = MiraApiHelpers.CreateAndShowNotification(text, negative ? Color.red : MiraModuleColors.ChaosTokens,
             spr: ChaosTokensAssets.DiceSprite.LoadAsset());
         notif.Text.SetOutlineThickness(0.35f);
         notif.transform.localPosition = new Vector3(0f, 1f, -20f);

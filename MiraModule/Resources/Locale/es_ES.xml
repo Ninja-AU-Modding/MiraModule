@@ -131,25 +131,6 @@
     <string name="MiraRoleShifterShift">Cambiar</string>
     <string name="MiraRoleShifterShiftWikiDescription">Selecciona un jugador para intercambiar roles con él. El cambio se hace efectivo al final de la próxima reunión, sin importar qué.</string>
 
-    <!-- Dictator - Crewmate Power -->
-    <string name="MiraRoleDictator">Dictador</string>
-    <string name="MiraRoleDictatorIntroBlurb">Tu palabra es ley. Hazla cumplir.</string>
-    <string name="MiraRoleDictatorTabDescription">Como Dictador, tienes la máxima autoridad en las reuniones.\%nl\%Usa \%b\%Terminar reunión\%/b\% para cerrar la reunión instantáneamente sin exiliar a nadie.\%nl\%Usa \%b\%Condenar\%/b\% para forzar todos los votos sobre un jugador elegido, asegurando su exilio.\%nl\%Cada uso cuesta una de tus cargas limitadas.</string>
-
-    <!-- Dictator Wiki -->
-    <string name="MiraRoleDictatorWikiDescription">El Dictador es un rol de poder de Tripulante con usos limitados. Durante una reunión, tiene dos botones especiales: Terminar reunión, que cierra inmediatamente la reunión sin exiliar a nadie, y Condenar, que fuerza 15 votos sobre cualquier jugador elegido garantizando su eliminación. Dependiendo de la configuración, el Dictador puede sacrificarse después de usar Condenar, o una vez que sus usos se agotan.</string>
-    <string name="MiraRoleDictatorEndMeeting">Terminar reunión</string>
-    <string name="MiraRoleDictatorEndMeetingWikiDescription">Cierra la reunión instantáneamente sin exiliar a nadie. Cuesta un uso.</string>
-    <string name="MiraRoleDictatorCondemn">Condenar</string>
-    <string name="MiraRoleDictatorCondemnWikiDescription">Haz clic en Condenar, luego haz clic en un jugador para forzar todos los votos sobre él. Será exiliado. Cuesta un uso.</string>
-
-    <!-- Dictator Options -->
-    <string name="MiraOptionDictatorMaxUses">Usos máximos</string>
-    <string name="MiraOptionDictatorUsesLeft">Usos restantes</string>
-    <string name="MiraOptionDictatorSacrificeOnUse">El Dictador se sacrifica en cada uso</string>
-    <string name="MiraOptionDictatorSacrificeOnEmpty">El Dictador se sacrifica cuando se agotan los usos</string>
-    <string name="MiraOptionDictatorCanCondemnCrew">El Dictador puede condenar a los Tripulantes</string>
-
     <!-- Shifter Options -->
     <string name="MiraOptionShifterShiftCooldown">Tiempo de recarga de cambio</string>
     <string name="MiraOptionShifterShiftDeadPlayers">Puede cambiar jugadores muertos</string>
