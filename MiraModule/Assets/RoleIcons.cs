@@ -15,6 +15,7 @@ public static class RoleIcons
     public static LoadableAsset<Sprite> Shifter { get; } = new LoadableResourceAsset($"{IconsPath}.TempRoleIcon.png", 200);
     public static LoadableAsset<Sprite> Fakeposter { get; } = new LoadableResourceAsset($"{IconsPath}.TempRoleIcon.png", 200);
     public static LoadableAsset<Sprite> Baiter { get; } = new LoadableResourceAsset($"{IconsPath}.Baiter.png", 200);
+    public static LoadableAsset<Sprite> HiveMind { get; } = new LoadableResourceAsset($"{IconsPath}.HiveMind.png", 200);
 
     // Crewmates
     public static LoadableAsset<Sprite> Lifter { get; } = new LoadableResourceAsset($"{IconsPath}.TempRoleIcon.png", 200);
@@ -26,4 +27,5 @@ public static class RoleIcons
     public static LoadableAsset<Sprite> Ninja { get; } = new LoadableResourceAsset($"{IconsPath}.TempRoleIcon.png", 200);
     public static LoadableAsset<Sprite> Poisoner { get; } = new LoadableResourceAsset($"{IconsPath}.Poisoner.png", 200);
     public static LoadableAsset<Sprite> Revenant { get; } = new LoadableResourceAsset($"{IconsPath}.TempRoleIcon.png", 200);
+   
 }

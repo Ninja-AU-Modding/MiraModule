@@ -11,8 +11,8 @@ public sealed class AgentModifierOptions : AbstractOptionGroup
     public override uint GroupPriority => 1;
     public override bool ShowInModifiersMenu => true;
 
-    [ModdedNumberOption("Agent Amount", 0, 5)]
-    public float AgentAmount { get; set; } = 0;
+    [ModdedNumberOption("Agent Amount", 0f, 5f)]
+    public float AgentAmount { get; set; } = 0f;
 
     public ModdedNumberOption AgentChance { get; } =
         new("Agent Chance", 50f, 0, 100f, 10f, MiraNumberSuffixes.Percent)
