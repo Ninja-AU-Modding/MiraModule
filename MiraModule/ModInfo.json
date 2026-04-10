@@ -14,11 +14,13 @@
   ],
   "Icon": "MiraModule.Resources.SquareLogo.png",
   "License": "GPLv3",
-  "Authors": [
-    "Ninja AU Modding",
-    "Goober",
-    "Ninja"
-  ],
+    "Authors": [
+        "Ninja AU Modding",
+        "Ninja",
+        "Goober",
+        "The Glitch",
+        "Washed Bac"
+    ],
   "Links": {
     "Source": "https://github.com/Ninja-AU-Modding/MiraModule",
     "Discord": "https://discord.gg/JpXFCZQWnc",
