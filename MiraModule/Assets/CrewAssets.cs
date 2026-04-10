@@ -7,6 +7,6 @@ public static class CrewAssets
 {
     private const string ShortPath = "MiraModule.Resources.CrewButtons";
 
-
+    public static LoadableAsset<Sprite> LifterLiftSprite { get; } = new LoadableResourceAsset($"{ShortPath}.Tempbutton.png");
 
 }
