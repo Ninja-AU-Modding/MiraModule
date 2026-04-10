@@ -201,6 +201,18 @@
     <string name="MiraOptionRevenantGhostKills">Asesinatos de fantasma permitidos</string>
     <string name="MiraOptionRevenantFakeDeathCooldown">Recarga de Muerte Falsa</string>
     <string name="MiraOptionRevenantGhostKillCooldown">Recarga de Asesinato de Fantasma</string>
-</resources>
 
+    <!-- Lifter - Crewmate -->
+    <string name="MiraRoleLifter">Lifter</string>
+    <string name="MiraRoleLifterIntroBlurb">Lift votes and stack your influence.</string>
+    <string name="MiraRoleLifterTabDescription">Use Lift on a nearby player to gain a \%b\%permanent extra vote\%/b\% each time you lift.</string>
+
+    <!-- Lifter Wiki -->
+    <string name="MiraRoleLifterWikiDescription">The Lifter is a Crewmate Support role that can lift votes from nearby players. Each lift grants the Lifter a permanent extra vote, stacking for the rest of the game.</string>
+    <string name="MiraRoleLifterLift">Lift</string>
+    <string name="MiraRoleLifterLiftWikiDescription">Lift a vote from a nearby player to gain a permanent extra vote.</string>
+
+    <!-- Lifter Options -->
+    <string name="MiraOptionLifterLiftCooldown">Lift Cooldown</string>
+</resources>
 
