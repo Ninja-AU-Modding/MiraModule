@@ -21,6 +21,7 @@ public static class MiraModuleColors
     public static Color Shifter => new Color32(12, 11, 6, 255); // Greyish Black
     public static Color Baiter => new Color(0f, 0.45f, 1f, 1f); // Vivid blue
     public static Color Fakeposter => new Color32(170, 170, 170, 255); 
+    public static Color HiveMind => new Color32(221, 178, 68, 255); // Golden Yellow
 
     // Modifier Colors
     public static Color ChaosTokens => new Color32(221, 178, 68, 255);

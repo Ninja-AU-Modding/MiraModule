@@ -17,5 +17,8 @@ public enum MiraModuleRpc : uint
     BaiterDestroyBait = 10217,
     PoisonerPoison = 10218,
     RevenantFakeDeath = 10219,
-    RevenantGhostKill = 10220
+    RevenantGhostKill = 10220,
+    HiveMindDeath = 10221,
+    HiveMindKill = 10222,
+
 }
