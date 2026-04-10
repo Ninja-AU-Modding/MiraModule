@@ -20,9 +20,9 @@ public static class LifterEvents
     public static void HandleVotesEventHandler(HandleVoteEvent @event)
     {
         var owner = @event.VoteData.Owner;
-        if (owner?.Data?.Role is not LifterRole lifter) return;
+        if (owner == null) return;
 
-        var extraVotes = lifter.ExtraVotes;
+        var extraVotes = LifterRole.GetExtraVotes(owner.PlayerId);
         if (extraVotes <= 0) return;
 
         @event.VoteData.SetRemainingVotes(0);

@@ -60,6 +60,7 @@ public sealed class LifterLiftButton : TownOfUsRoleButton<LifterRole>
         foreach (var body in bodies)
         {
             if (body == null) continue;
+            if (!LifterRole.CanLiftBody(player.PlayerId, body.ParentId)) continue;
             var dist = Vector2.Distance(pos, body.transform.position);
             if (dist <= best)
             {

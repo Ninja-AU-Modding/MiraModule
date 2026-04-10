@@ -21,6 +21,7 @@ public sealed class LifterRole(IntPtr cppPtr)
     : CrewmateRole(cppPtr), ITownOfUsRole, IWikiDiscoverable
 {
     private static readonly Dictionary<byte, int> ExtraVotesById = new();
+    private static readonly Dictionary<byte, HashSet<byte>> LiftedBodiesByLifter = new();
 
     [HideFromIl2Cpp] public int ExtraVotes => GetExtraVotes(Player?.PlayerId ?? byte.MaxValue);
 
@@ -89,9 +90,31 @@ public sealed class LifterRole(IntPtr cppPtr)
         return ExtraVotesById.TryGetValue(playerId, out var value) ? value : 0;
     }
 
+    public static bool CanLiftBody(byte lifterId, byte bodyParentId)
+    {
+        if (!LiftedBodiesByLifter.TryGetValue(lifterId, out var set))
+        {
+            return true;
+        }
+
+        return !set.Contains(bodyParentId);
+    }
+
+    private static void MarkBodyLifted(byte lifterId, byte bodyParentId)
+    {
+        if (!LiftedBodiesByLifter.TryGetValue(lifterId, out var set))
+        {
+            set = new HashSet<byte>();
+            LiftedBodiesByLifter[lifterId] = set;
+        }
+
+        set.Add(bodyParentId);
+    }
+
     public static void ClearAllVotes()
     {
         ExtraVotesById.Clear();
+        LiftedBodiesByLifter.Clear();
     }
 
     [MethodRpc((uint)MiraModuleRpc.LifterLiftVote)]
@@ -101,7 +124,9 @@ public sealed class LifterRole(IntPtr cppPtr)
         if (source.HasDied()) return;
         var target = MiscUtils.PlayerById(targetId);
         if (target == null || target.HasDied()) return;
+        if (!CanLiftBody(source.PlayerId, targetId)) return;
 
+        MarkBodyLifted(source.PlayerId, targetId);
         role.AddExtraVotes(1);
     }
 }
