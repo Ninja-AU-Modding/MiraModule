@@ -123,7 +123,7 @@ public sealed class LifterRole(IntPtr cppPtr)
         if (source.Data.Role is not LifterRole role) return;
         if (source.HasDied()) return;
         var target = MiscUtils.PlayerById(targetId);
-        if (target == null || target.HasDied()) return;
+        if (target == null) return;
         if (!CanLiftBody(source.PlayerId, targetId)) return;
 
         MarkBodyLifted(source.PlayerId, targetId);
