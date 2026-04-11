@@ -9,5 +9,5 @@ public static class MiraModuleAudio
 {
     private const string ShortPath = "MiraModule.Resources.Audio";
     public static LoadableAsset<AudioClip> HiveMind =>
-        new LoadableAudioResourceAsset($"{ShortPath}.HiveMind.mp3");
+        new LoadableAudioResourceAsset($"{ShortPath}.HiveMind.wav");
 }
