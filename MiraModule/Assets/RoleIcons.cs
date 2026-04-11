@@ -19,6 +19,8 @@ public static class RoleIcons
 
     // Crewmates
     public static LoadableAsset<Sprite> Lifter { get; } = new LoadableResourceAsset($"{IconsPath}.TempRoleIcon.png", 200);
+    public static LoadableAsset<Sprite> InspectorGeneral { get; } = new LoadableResourceAsset($"{IconsPath}.TempRoleIcon.png", 200);
+    public static LoadableAsset<Sprite> CommandSpecialist { get; } = new LoadableResourceAsset($"{IconsPath}.TempRoleIcon.png", 200);
 
     // Impostors
     public static LoadableAsset<Sprite> Eraser { get; } = new LoadableResourceAsset($"{IconsPath}.TempRoleIcon.png", 200);

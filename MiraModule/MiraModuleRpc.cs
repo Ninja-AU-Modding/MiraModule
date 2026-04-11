@@ -20,5 +20,8 @@ public enum MiraModuleRpc : uint
     RevenantGhostKill = 10220,
     HiveMindDeath = 10221,
     HiveMindKill = 10222,
-    LifterLiftVote = 10223
+    LifterLiftVote = 10223,
+    InspectorGeneralConvert = 10224,
+    InspectorGeneralStrike = 10225,
+    CommandSpecialistStrike = 10226
 }

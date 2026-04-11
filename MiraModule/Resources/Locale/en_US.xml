@@ -214,4 +214,32 @@
 
     <!-- Lifter Options -->
     <string name="MiraOptionLifterLiftCooldown">Lift Cooldown</string>
+
+    <!-- Inspector General - Crewmate Killing -->
+    <string name="MiraRoleInspectorGeneral">Inspector General</string>
+    <string name="MiraRoleInspectorGeneralIntroBlurb">Build a command unit and eliminate threats.</string>
+    <string name="MiraRoleInspectorGeneralTabDescription">Convert crewmates into Command Specialists.\%nl\%You and your specialists can kill neutrals and impostors, but killing a crewmate causes you to die.\%nl\%If you kill an evil target, you can no longer convert.</string>
+
+    <!-- Inspector General Wiki -->
+    <string name="MiraRoleInspectorGeneralWikiDescription">The Inspector General is a Crewmate Killing role that can convert a limited number of crewmates into Command Specialists. Converting a neutral or impostor kills them instead. If the Inspector General kills a neutral or impostor with their kill button, they lose the ability to convert further.</string>
+    <string name="MiraRoleInspectorGeneralConvert">Convert</string>
+    <string name="MiraRoleInspectorGeneralConvertWikiDescription">Attempt to convert a nearby crewmate into a Command Specialist. Neutral or impostor targets die instead.</string>
+    <string name="MiraRoleInspectorGeneralKill">Kill</string>
+    <string name="MiraRoleInspectorGeneralKillWikiDescription">Kill a neutral or impostor. If you kill a crewmate, you die.</string>
+
+    <!-- Inspector General Options -->
+    <string name="MiraOptionInspectorGeneralKillCooldown">Kill Cooldown</string>
+    <string name="MiraOptionInspectorGeneralConvertCooldown">Convert Cooldown</string>
+    <string name="MiraOptionInspectorGeneralMaxConversions">Max Conversions</string>
+    <string name="MiraOptionCommandSpecialistKillCooldown">Command Specialist Kill Cooldown</string>
+
+    <!-- Command Specialist - Crewmate Killing -->
+    <string name="MiraRoleCommandSpecialist">Command Specialist</string>
+    <string name="MiraRoleCommandSpecialistIntroBlurb">Enforce the inspector's will.</string>
+    <string name="MiraRoleCommandSpecialistTabDescription">You can kill neutrals and impostors, but killing a crewmate causes you to die.\%nl\%After killing an evil target, you return to your original role.</string>
+
+    <!-- Command Specialist Wiki -->
+    <string name="MiraRoleCommandSpecialistWikiDescription">Command Specialists are temporary crewmate killers created by the Inspector General. They may kill neutrals and impostors safely, but die if they kill a crewmate. After killing an evil target, they revert to their original role.</string>
+    <string name="MiraRoleCommandSpecialistKill">Kill</string>
+    <string name="MiraRoleCommandSpecialistKillWikiDescription">Kill a neutral or impostor. If you kill a crewmate, you die and cannot revert.</string>
 </resources>
