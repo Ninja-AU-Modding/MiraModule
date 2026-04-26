@@ -1,4 +1,4 @@
-﻿<Project>
+<Project>
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <LangVersion>latest</LangVersion>
@@ -14,8 +14,8 @@
         <VersionSuffix>dev</VersionSuffix>
 
         <Authors>greys</Authors>
-        <Company>MiraModule</Company>
-        <RepositoryUrl>https://github.com/your-repo/MiraModule</RepositoryUrl>
+        <Company>MiraOverloaded</Company>
+        <RepositoryUrl>https://github.com/SabotagedAU/MiraOverloaded</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
 
         <!-- SourceLink -->

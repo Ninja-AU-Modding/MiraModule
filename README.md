@@ -1,10 +1,10 @@
-# Mira Module
+# Mira Overloaded
 
 An addon module for Town of Us Mira that extends gameplay with additional roles and features.
 
 ## Description
 
-MiraModule is a plugin addon for Town of Us Mira that uses the MiraAPI framework to add new content to the game.
+MiraOverloaded is a plugin addon for Town of Us Mira that uses the MiraAPI framework to add new content to the game.
 
 ## Requirements
 
@@ -26,14 +26,14 @@ MiraModule is a plugin addon for Town of Us Mira that uses the MiraAPI framework
 ### Building
 
 1. Clone this repository
-2. Open `MiraModule.sln` in your IDE
+2. Open `MiraOverloaded.sln` in your IDE
 3. Configure your Among Us installation path in `AmongUs.props` (optional, for auto-copy)
 4. Build the solution
 
 ### Project Structure
 
 ```
-MiraModule/
+MiraOverloaded/
 ├── Assets/           # Asset loading classes
 ├── Buttons/          # Custom action buttons
 ├── Modules/          # Core module logic
