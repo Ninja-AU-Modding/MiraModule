@@ -15,16 +15,15 @@
   "Icon": "MiraModule.Resources.SquareLogo.png",
   "License": "GPLv3",
     "Authors": [
-        "Ninja AU Modding",
+        "Sabotaged AU Modding",
         "Ninja",
         "Goober",
         "The Glitch",
-        "Washed Bac",
-        "Atony"
+        "Washed Bac"
     ],
   "Links": {
-    "Source": "https://github.com/Ninja-AU-Modding/MiraModule",
+    "Source": "https://github.com/SabotagedAU/MiraModule",
     "Discord": "https://discord.gg/JpXFCZQWnc",
-    "Ninja AU Modding": "https://github.com/Ninja-AU-Modding/"
+    "Sabotaged AU Modding": "https://github.com/SabotagedAU/"
   }
 }

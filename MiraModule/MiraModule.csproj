@@ -7,7 +7,7 @@
 		<VersionSuffix>dev</VersionSuffix>
 		<RootNamespace>MiraModule</RootNamespace>
 		<Description>Mira Module addon for Town of Us Mira</Description>
-		<Authors>Ninja AU Modding, Goober, Ninja</Authors>
+		<Authors>Sabotaged AU Modding, Ninja, Goober, The Glitch, Washed Bac</Authors>
 		<EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
 	</PropertyGroup>
 
