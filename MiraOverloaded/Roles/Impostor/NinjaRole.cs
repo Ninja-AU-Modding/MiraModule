@@ -21,6 +21,8 @@ using TownOfUs.Utilities;
 using TMPro;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using MiraAPI.Modifiers;
+using TownOfUs.Modifiers.Impostor;
 
 namespace MiraOverloaded.Roles.Impostor;
 
@@ -244,7 +246,7 @@ public sealed class NinjaRole(IntPtr cppPtr)
     {
         InvisActive = true;
         InvisEndTime = Time.time + OptionGroupSingleton<NinjaOptions>.Instance.InvisibilityDuration;
-        SetPlayerVisibility(Player, false);
+        PlayerControl.LocalPlayer.RpcAddModifier<SwoopModifier>();
     }
 
     private void EndInvisibility()
@@ -256,7 +258,7 @@ public sealed class NinjaRole(IntPtr cppPtr)
 
         InvisActive = false;
         InvisEndTime = 0f;
-        SetPlayerVisibility(Player, true);
+        PlayerControl.LocalPlayer.RpcRemoveModifier<SwoopModifier>();
     }
 
     [HideFromIl2Cpp]
@@ -292,7 +294,7 @@ public sealed class NinjaRole(IntPtr cppPtr)
         if (InvisActive)
         {
             var remaining = Math.Max(0f, InvisEndTime - Time.time);
-            _invisText.text = $"Invisible: {remaining:0.0}s";
+            _invisText.text = $"You're Invisible for {remaining:0.0}s";
             _invisText.enabled = true;
             return;
         }

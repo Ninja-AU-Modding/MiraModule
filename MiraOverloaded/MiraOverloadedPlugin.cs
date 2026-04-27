@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace MiraOverloaded;
 
-[BepInAutoPlugin("com.saboau.MiraOverloaded", "Mira Overloaded")]
+[BepInAutoPlugin("com.saboau.miraoverloaded", "Mira Overloaded")]
 [BepInProcess("Among Us.exe")]
 [BepInDependency(ReactorPlugin.Id)]
 [BepInDependency(MiraApiPlugin.Id)]

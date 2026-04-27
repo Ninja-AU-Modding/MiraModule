@@ -1,8 +1,8 @@
 using HarmonyLib;
 using MiraAPI.GameOptions;
 using MiraAPI.Modifiers;
-using MiraModule.Modifiers;
-using MiraModule.Modifiers.Alliance;
+using MiraOverloaded.Modifiers;
+using MiraOverloaded.Modifiers.Alliance;
 using Reactor.Networking.Attributes;
 using Reactor.Utilities.Extensions;
 using TownOfUs.Modifiers;
@@ -12,7 +12,7 @@ using TownOfUs.Utilities;
 using UnityEngine;
 using System;
 
-namespace MiraModule.Patches;
+namespace MiraOverloaded.Patches;
 
 [HarmonyPatch]
 public static class AgentChatPatches
@@ -143,7 +143,7 @@ public static class AgentChatPatches
         }
     }
 
-    [MethodRpc((uint)MiraModuleRpc.SendAgentChat)]
+    [MethodRpc((uint)MiraOverloadedRpc.SendAgentChat)]
     public static void RpcSendAgentChat(PlayerControl sender, string text)
     {
         var local = PlayerControl.LocalPlayer;

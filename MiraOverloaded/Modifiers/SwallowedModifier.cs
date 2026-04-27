@@ -25,6 +25,7 @@ namespace MiraOverloaded.Modifiers;
 /// </summary>
 public sealed class SwallowedModifier : BaseModifier, IVisualAppearance
 {
+    public static readonly Vector2 ShadowOffset = new(2000f, 2000f);
     public byte AbyssPlayerId { get; private set; }
 
     private SpriteRenderer? _tintOverlay;
@@ -143,6 +144,9 @@ public sealed class SwallowedModifier : BaseModifier, IVisualAppearance
             // OnDeactivate will be called via RpcRemoveModifier from Deinitialize
             return;
         }
+
+        // Keep player snapped to the Abyss (including the offset if the Abyss is in the Shadow Realm)
+        Player.NetTransform.SnapTo(abyss.transform.position);
 
         // Keep camera locked on Abyss every frame in case something resets it
         if (HudManager.InstanceExists)

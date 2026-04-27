@@ -5,14 +5,14 @@ using MiraAPI.GameOptions;
 using MiraAPI.Modifiers;
 using MiraAPI.Roles;
 using MiraAPI.Utilities;
-using MiraModule.Options.Roles.Neutral;
-using MiraModule.Patches;
-using MiraModule.Roles.Neutral;
+using MiraOverloaded.Options.Roles.Neutral;
+using MiraOverloaded.Patches;
+using MiraOverloaded.Roles.Neutral;
 using Reactor.Utilities.Extensions;
 using TownOfUs.Modifiers.Game.Alliance;
 using UnityEngine;
 
-namespace MiraModule.Events;
+namespace MiraOverloaded.Events;
 
 public static class HiveMindEvents
 {

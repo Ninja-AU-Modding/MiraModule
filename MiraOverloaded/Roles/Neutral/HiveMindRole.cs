@@ -5,9 +5,9 @@ using MiraAPI.LocalSettings;
 using MiraAPI.Patches.Stubs;
 using MiraAPI.Roles;
 using MiraAPI.Utilities;
-using MiraModule.Assets;
-using MiraModule.Buttons.Neutral;
-using MiraModule.Options.Roles.Neutral;
+using MiraOverloaded.Assets;
+using MiraOverloaded.Buttons.Neutral;
+using MiraOverloaded.Options.Roles.Neutral;
 using Reactor.Utilities;
 using System.Globalization;
 using System.Text;
@@ -15,7 +15,7 @@ using TownOfUs.Buttons.Crewmate;
 using TownOfUs.Roles.Neutral;
 using UnityEngine;
 
-namespace MiraModule.Roles.Neutral;
+namespace MiraOverloaded.Roles.Neutral;
 
 public sealed class HiveMindRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUsRole, IWikiDiscoverable, IDoomable
 {
@@ -30,14 +30,14 @@ public sealed class HiveMindRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUs
             MiscUtils.AppendOptionsText(GetType());
     }
     public DoomableType DoomHintType => DoomableType.Fearmonger;
-    public Color RoleColor => MiraModuleColors.HiveMind;
+    public Color RoleColor => MiraOverloadedColors.HiveMind;
     public ModdedRoleTeams Team => ModdedRoleTeams.Custom;
     public RoleAlignment RoleAlignment => RoleAlignment.NeutralKilling;
 
     public CustomRoleConfiguration Configuration => new(this)
     {
         CanUseVent = OptionGroupSingleton<HiveMindOptions>.Instance.CanVent,
-        IntroSound = MiraModuleAudio.HiveMind,
+        IntroSound = MiraOverloadedAudio.HiveMind,
         Icon = RoleIcons.HiveMind,
         GhostRole = (RoleTypes)RoleId.Get<NeutralGhostRole>()
     };
@@ -70,7 +70,7 @@ public sealed class HiveMindRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUs
         if (Player.AmOwner)
         {
             HudManager.Instance.ImpostorVentButton.graphic.sprite = TouAssets.VentSprite.LoadAsset();
-            HudManager.Instance.ImpostorVentButton.buttonLabelText.SetOutlineColor(MiraModuleColors.HiveMind);
+            HudManager.Instance.ImpostorVentButton.buttonLabelText.SetOutlineColor(MiraOverloadedColors.HiveMind);
         }
     }
 

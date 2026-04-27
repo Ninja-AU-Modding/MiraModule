@@ -7,7 +7,7 @@
 		<VersionSuffix>dev</VersionSuffix>
 		<RootNamespace>MiraOverloaded</RootNamespace>
 		<Description>Mira Overloaded addon for Town of Us Mira</Description>
-		<Authors>Sabotaged AU Modding, Ninja, Goober, The Glitch, Washed Bac</Authors>
+		<Authors>Goober, Asterisk, The Glitch, washed bac, Atony</Authors>
 		<EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
 	</PropertyGroup>
 
@@ -17,9 +17,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Buttons\Crewmates\" />
-	  <Folder Include="Options\Roles\Crewmates\" />
-	  <Folder Include="Roles\Crewmate\" />
+	  <Folder Include="Buttons\Crewmate\" />
+	  <Folder Include="Modifiers\Crewmate\" />
 	  <Folder Include="Rules\" />
 	</ItemGroup>
 	

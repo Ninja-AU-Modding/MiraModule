@@ -1,8 +1,8 @@
 using HarmonyLib;
 using InnerNet;
-using MiraModule.Utilities;
+using MiraOverloaded.Utilities;
 
-namespace MiraModule.Patches;
+namespace MiraOverloaded.Patches;
 
 
 [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]

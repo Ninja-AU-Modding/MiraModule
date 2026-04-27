@@ -10,8 +10,18 @@ using UnityEngine;
 
 namespace MiraOverloaded.Modifiers.ChaosTokens;
 
-public class ChaosTokenModifier(int amount = 1, bool showNotification = true) : UniversalGameModifier
+public class ChaosTokenModifier : UniversalGameModifier
 {
+    public ChaosTokenModifier() : this(amount: 1, showNotification: true) { }
+
+    public ChaosTokenModifier(int amount = 1, bool showNotification = true)
+    {
+        this.amount = amount;
+        this.showNotification = showNotification;
+    }
+
+    private readonly int amount;
+    private readonly bool showNotification;
     public override string ModifierName => $"Chaos Token{(Tokens > 1 ? "s" : string.Empty)}";
     public override LoadableAsset<Sprite> ModifierIcon => ChaosTokensAssets.DiceSprite;
     public override string GetDescription() => $"Take your chances!\n<b>Tokens left: {Tokens}</b>";

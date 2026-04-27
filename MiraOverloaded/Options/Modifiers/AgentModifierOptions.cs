@@ -3,7 +3,7 @@ using MiraAPI.GameOptions.Attributes;
 using MiraAPI.GameOptions.OptionTypes;
 using MiraAPI.Utilities;
 
-namespace MiraModule.Options.Modifiers;
+namespace MiraOverloaded.Options.Modifiers;
 
 public sealed class AgentModifierOptions : AbstractOptionGroup
 {

@@ -1,9 +1,9 @@
 using MiraAPI.GameOptions;
 using MiraAPI.GameOptions.Attributes;
-using MiraModule.Modifiers.Alliance;
+using MiraOverloaded.Modifiers.Alliance;
 using UnityEngine;
 
-namespace MiraModule.Options.Modifiers.Alliance;
+namespace MiraOverloaded.Options.Modifiers.Alliance;
 public sealed class AgentOptions : AbstractOptionGroup<AgentModifier>
 {
     public override Func<bool> GroupVisible =>

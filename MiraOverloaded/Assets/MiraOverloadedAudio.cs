@@ -1,4 +1,4 @@
-﻿using AmongUs.GameOptions;
+using AmongUs.GameOptions;
 using MiraAPI.Roles;
 using MiraAPI.Utilities.Assets;
 using UnityEngine;

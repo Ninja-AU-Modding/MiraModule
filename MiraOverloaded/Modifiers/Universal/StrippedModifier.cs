@@ -2,14 +2,14 @@ using AmongUs.GameOptions;
 using MiraAPI.GameOptions;
 using MiraAPI.Roles;
 using MiraAPI.Utilities.Assets;
-using MiraModule.Assets;
-using MiraModule.Options.Modifiers.Universal;
-using MiraModule.Roles.Neutral;
+using MiraOverloaded.Assets;
+using MiraOverloaded.Options.Modifiers.Universal;
+using MiraOverloaded.Roles.Neutral;
 using TownOfUs.Modifiers.Game;
 using TownOfUs.Roles.Neutral;
 using UnityEngine;
 
-namespace MiraModule.Modifiers.Universal;
+namespace MiraOverloaded.Modifiers.Universal;
 
 public sealed class StrippedModifier : UniversalGameModifier
 {
@@ -47,9 +47,6 @@ public sealed class StrippedModifier : UniversalGameModifier
                 case NeutralBenignBehavier.BecomeCrewmate:
                     Player.RpcSetRole(RoleTypes.Crewmate);
                     break;
-                case NeutralBenignBehavier.BecomeFakeposter:
-                    Player.RpcSetRole((RoleTypes)RoleId.Get<FakeposterRole>());
-                    break;
                 case NeutralBenignBehavier.BecomeAmni:
                     Player.RpcSetRole((RoleTypes)RoleId.Get<AmnesiacRole>());
                     break;
@@ -63,9 +60,6 @@ public sealed class StrippedModifier : UniversalGameModifier
         {
             switch (OptionGroupSingleton<StrippedOptions>.Instance.NeutralOther)
             {
-                case NeutralBehavier.BecomeFakeposter:
-                    Player.RpcSetRole((RoleTypes)RoleId.Get<FakeposterRole>());
-                    break;
                 case NeutralBehavier.BecomeAmni:
                     Player.RpcSetRole((RoleTypes)RoleId.Get<AmnesiacRole>());
                     break;

@@ -2,9 +2,9 @@ using MiraAPI.GameOptions;
 using MiraAPI.GameOptions.Attributes;
 using MiraAPI.GameOptions.OptionTypes;
 using MiraAPI.Utilities;
-using MiraModule.Roles.Neutral;
+using MiraOverloaded.Roles.Neutral;
 
-namespace MiraModule.Options.Roles.Neutral;
+namespace MiraOverloaded.Options.Roles.Neutral;
 
 public sealed class HiveMindOptions : AbstractOptionGroup<HiveMindRole>
 {

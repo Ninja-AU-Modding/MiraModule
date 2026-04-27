@@ -1,6 +1,6 @@
 {
   "Name": "Mira Overloaded",
-  "Description": "Mira Overloaded is an addon mod for Town Of Us: Mira adding many more roles to the base-game.",
+  "Description": "Mira Overloaded is an overhaul of the original mod, keeping only the best roles and modifiers.",
   "Tags": [
     "Mira",
     "Town",
@@ -8,22 +8,22 @@
     "Us",
     "Role",
     "Extension",
-    "Module",
-    "Ninja",
-    "Goober"
+    "Overloaded",
+    "Goober",
+    "Asterisk"
   ],
   "Icon": "MiraOverloaded.Resources.SquareLogo.png",
   "License": "GPLv3",
-    "Authors": [
-        "Sabotaged AU Modding",
-        "Ninja",
-        "Goober",
-        "The Glitch",
-        "Washed Bac"
-    ],
+  "Authors": [
+    "Goober",
+    "Asterisk",
+    "The Glitch",
+    "washed bac",
+    "Atony"
+  ],
   "Links": {
-    "Source": "https://github.com/SabotagedAU/MiraOverloaded",
+    "Source": "https://github.com/SaboAU/MiraOverloaded",
     "Discord": "https://discord.gg/JpXFCZQWnc",
-    "Sabotaged AU Modding": "https://github.com/SabotagedAU/"
+    "SaboAU": "https://github.com/SaboAU/"
   }
 }

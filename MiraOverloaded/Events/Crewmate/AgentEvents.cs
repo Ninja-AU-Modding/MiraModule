@@ -3,14 +3,14 @@ using MiraAPI.Events.Vanilla.Gameplay;
 using MiraAPI.GameOptions;
 using MiraAPI.Modifiers;
 using MiraAPI.Utilities;
-using MiraModule.Modifiers;
-using MiraModule.Modifiers.Alliance;
-using MiraModule.Patches;
-using MiraModule.Options.Modifiers.Alliance;
+using MiraOverloaded.Modifiers;
+using MiraOverloaded.Modifiers.Alliance;
+using MiraOverloaded.Patches;
+using MiraOverloaded.Options.Modifiers.Alliance;
 using TownOfUs.Modifiers.Game.Alliance;
 using UnityEngine;
 
-namespace MiraModule.Events;
+namespace MiraOverloaded.Events;
 
 public static class AgentEvents
 {

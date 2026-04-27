@@ -1,14 +1,14 @@
 using HarmonyLib;
 using JetBrains.Annotations;
 using MiraAPI.Roles;
-using MiraModule.Roles.Neutral;
-using MiraModule.Assets;
-using MiraModule.Utilities;
+using MiraOverloaded.Roles.Neutral;
+using MiraOverloaded.Assets;
+using MiraOverloaded.Utilities;
 using Reactor.Networking.Attributes;
 using MiraAPI.GameOptions;
-using MiraModule.Options.Roles.Neutral;
+using MiraOverloaded.Options.Roles.Neutral;
 
-namespace MiraModule.Patches;
+namespace MiraOverloaded.Patches;
 
 [HarmonyPatch]
 public static class HiveMindDeathPatch
@@ -23,7 +23,7 @@ public static class HiveMindDeathPatch
         RpcHiveMindDeath(__instance);
     }
 
-    [MethodRpc((uint)MiraModuleRpc.HiveMindDeath)]
+    [MethodRpc((uint)MiraOverloadedRpc.HiveMindDeath)]
     public static void RpcHiveMindDeath(PlayerControl sender)
     {
         if (sender.AmOwner) { return; }
@@ -35,7 +35,7 @@ public static class HiveMindDeathPatch
             if (role is not ICustomRole customRole) return;
             if (customRole is not HiveMindRole) return;
 
-            SoundManager.Instance.PlaySound(MiraModuleAudio.HiveMind.LoadAsset(), false, 1f);
+            SoundManager.Instance.PlaySound(MiraOverloadedAudio.HiveMind.LoadAsset(), false, 1f);
             var dotheyknow = OptionGroupSingleton<HiveMindOptions>.Instance.HiveMindKnows;
             string extraMessage = "";
             if (!dotheyknow)

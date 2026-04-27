@@ -1,9 +1,9 @@
 using MiraAPI.GameOptions;
 using MiraAPI.Modifiers;
-using MiraModule.Modifiers.Alliance;
+using MiraOverloaded.Modifiers.Alliance;
 using TownOfUs.Options;
 
-namespace MiraModule.Utilities;
+namespace MiraOverloaded.Utilities;
 
 public static class PlayerRoleTextExtensions
 {
