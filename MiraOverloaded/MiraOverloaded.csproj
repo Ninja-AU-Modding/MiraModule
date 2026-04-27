@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<DebugType>embedded</DebugType>
+		<VersionPrefix>1.0.3</VersionPrefix>
+		<VersionSuffix>dev</VersionSuffix>
+		<RootNamespace>MiraOverloaded</RootNamespace>
+		<Description>Mira Overloaded addon for Town of Us Mira</Description>
+		<Authors>Sabotaged AU Modding, Ninja, Goober, The Glitch, Washed Bac</Authors>
+		<EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\**\*.*" />
+		<EmbeddedResource Include="modinfo.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Buttons\Crewmates\" />
+	  <Folder Include="Options\Roles\Crewmates\" />
+	  <Folder Include="Roles\Crewmate\" />
+	  <Folder Include="Rules\" />
+	</ItemGroup>
+	
+	<PropertyGroup>
+		<NoWarn>CS1591;CA1707</NoWarn>
+	</PropertyGroup>
+
+	<Import Project="../AmongUs.props" />
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="copy /Y &quot;$(TargetPath)&quot; &quot;D:\Steam\steamapps\common\Among Us - TOU - MiraOverloaded\BepInEx\plugins\&quot;" ContinueOnError="true" />
+	</Target>
+</Project>

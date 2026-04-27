@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <!-- Player Colors -->
+    <string name="PlayerColorSpiderman">Spiderman</string>
+    <string name="PlayerColorSunburn">Bronceado</string>
+    
+    <!-- Cause of Deaths -->
+    <string name="DiedToSentinel">Finalizado</string>
+    <string name="DiedToSentinelExplosion">Desintegrado</string>
+    <string name="DiedToAbyss">Tragado</string>
+    
+    <!-- Sentinel - Neutral Killing -->
+    <string name="MiraRoleSentinel">Sentinel</string>
+    <string name="MiraRoleSentinelIntroBlurb">Mata a esos que se atraviesen en tu camino.</string>
+    <string name="MiraRoleSentinelTabDescription">Mata jugadores usando tus habilidades!\%nl\%Preferiblemente, explota \%b\%solo\%/b\% en un área apartada.</string>
+    
+    <!-- Sentinel Wiki -->
+    <string name="MiraRoleSentinelWikiDescription">El Sentinel es un rol de Asesino Neutral que puede explotarse a sí mismo para matar a cualquiera que esté cerca. También puede matar normalmente, pero ¿dónde está la diversión en eso?</string>
+    <string name="MiraRoleSentinelExplode">Explosión</string>
+    <string name="MiraRoleSentinelExplodeWikiDescription">Explota a todos los jugadores cercanos.</string>
+    
+    <!-- Abyss - Neutral Killing -->
+    <string name="MiraRoleAbyss">Abismo</string>
+    <string name="MiraRoleAbyssIntroBlurb">Traga a todos los que se te pongan enfrente.</string>
+    <string name="MiraRoleAbyssTabDescription">¡Usa tu habilidad Tragar para tragarte a los jugadores enteros!\%nl\%Los jugadores tragados desaparecen sin dejar rastro. Mueren para siempre cuando se convoca una reunión.</string>
+
+    <!-- Abyss Wiki -->
+    <string name="MiraRoleAbyssWikiDescription">El Abismo es un rol de Asesino Neutral que se traga a otros jugadores, ocultándolos por completo del juego. Los jugadores tragados no dejan cadáver y no aparecen en la lista de muertos de la reunión, hasta que se convoca la siguiente reunión, momento en el que mueren definitivamente. Si el Abismo muere, los jugadores tragados son liberados con vida.</string>
+    <string name="MiraRoleAbyssGulp">Tragar</string>
+    <string name="MiraRoleAbyssGulpWikiDescription">Traga a un jugador cercano. Desaparece del mapa y queda oculto hasta la próxima reunión.</string>
+
+    <!-- Abyss Options -->
+    <string name="MiraOptionAbyssGulpCooldown">Tiempo de recarga de Tragar</string>
+    <string name="MiraOptionAbyssCanVent">Abismo Puede entrar a ductos de ventilación</string>
+    <string name="MiraOptionAbyssHasAssassin">Abismo Tiene Habilidad de Asesino</string>
+    <string name="MiraOptionAbyssImpostorVision">Abismo Tiene Visión de Impostor</string>
+
+    <!-- Sentinel Options -->
+    <string name="MiraOptionSentinelKillCooldown">Tiempo de recarga de matar</string>
+    <string name="MiraOptionSentinelExplodeCooldown">Tiempo de recarga de explotar</string>
+    <string name="MiraOptionSentinelExplosionRadius">Radio de explosión</string>
+    <string name="MiraOptionSentinelCanVent">El Sentinel Puede entrar a ductos de ventilación</string>
+    <string name="MiraOptionSentinelImpostorVision">El Sentinel Tiene Visión de Impostor</string>
+
+    <!-- Eraser - Impostor -->
+    <string name="MiraRoleEraser">Borrador</string>
+    <string name="MiraRoleEraserIntroBlurb">Borra sus roles de la existencia.</string>
+    <string name="MiraRoleEraserTabDescription">Usa tu habilidad Borrar para marcar jugadores.\%nl\%Su rol será borrado en la \%b\%próxima reunión\%/b\%, sin importar lo que pase en medio.</string>
+
+    <!-- Eraser Wiki -->
+    <string name="MiraRoleEraserWikiDescription">El Borrador es un rol de Impostor que puede apuntar a jugadores y borrar sus roles. Los jugadores borrados pierden su rol al comienzo de la próxima reunión, el borrado es permanente y no se puede deshacer, incluso si el Borrador muere antes de la reunión. Cada borrado aumenta el tiempo de recarga de Borrar. Por defecto, el Borrador no puede borrar a otros Impostores. Si un jugador Neutral es borrado, el anfitrión puede configurar si se convierte en un Tripulante o muere directamente.</string>
+    <string name="MiraRoleEraserErase">Borrar</string>
+    <string name="MiraRoleEraserEraseWikiDescription">Marca a un jugador para borrarlo. Su rol será eliminado al comienzo de la próxima reunión.</string>
+
+    <!-- Eraser Options -->
+    <string name="MiraOptionEraserEraseCooldown">Tiempo de recarga de borrar</string>
+    <string name="MiraOptionEraserCooldownIncrease">Aumento de tiempo de recarga por borrado</string>
+    <string name="MiraOptionEraserCanEraseImpostors">El Borrador puede borrar Impostores</string>
+    <string name="MiraOptionEraserNeutralOutcome">Resultado del borrado neutral</string>
+    <string name="MiraOptionEraserCanVent">El Borrador puede entrar a ductos de ventilación</string>
+    <string name="MiraOptionEraserHasAssassin">El Borrador tiene habilidad de asesino</string>
+
+    <!-- Distorter - Impostor -->
+    <string name="MiraRoleDistorter">Distorsionador</string>
+    <string name="MiraRoleDistorterIntroBlurb">Tirarlos hacia ti y desaparecer.</string>
+    <string name="MiraRoleDistorterTabDescription">Usa Distorsionar para atraer a un objetivo hacia ti.\%nl\%Después de una breve ventana de asesinato, te vuelves invisible por un corto tiempo.</string>
+
+    <!-- Distorter Wiki -->
+    <string name="MiraRoleDistorterWikiDescription">El Distorsionador es un rol de Impostor que puede atraer a un objetivo hacia sí mismo. Después de usar Distorsionar, obtiene una breve ventana de asesinato y luego se vuelve invisible durante un tiempo, moviéndose más rápido mientras está oculto.</string>
+    <string name="MiraRoleDistorterDistort">Distorsionar</string>
+    <string name="MiraRoleDistorterDistortWikiDescription">Selecciona un jugador del menú y atrápalo hacia ti.</string>
+
+    <!-- Distorter Options -->
+    <string name="MiraOptionDistorterDistortCooldown">Tiempo de recarga de Distorsionar</string>
+    <string name="MiraOptionDistorterPullSpeed">Velocidad de atracción</string>
+    <string name="MiraOptionDistorterInvisibilityDuration">Duración de invisibilidad</string>
+    <string name="MiraOptionDistorterInvisibleSpeedMultiplier">Multiplicador de velocidad invisible</string>
+    <string name="MiraOptionDistorterCanVent">El Distorsionador puede entrar a ductos de ventilación</string>
+
+    <!-- Ninja - Impostor -->
+    <string name="MiraRoleNinja">Ninja</string>
+    <string name="MiraRoleNinjaIntroBlurb">Marca a tu presa y ataca desde cualquier lugar.</string>
+    <string name="MiraRoleNinjaTabDescription">Marca a un objetivo, luego Asesina para teletransportarte y matar instantáneamente.\%nl\%Quedan rastros de la marca, y te vuelves invisible para escapar.</string>
+
+    <!-- Ninja Wiki -->
+    <string name="MiraRoleNinjaWikiDescription">El Ninja es un rol alineado con el Impostor que puede marcar a un objetivo y luego asesinarlo desde cualquier lugar del mapa. Cuando ocurre el asesinato, el Ninja se teletransporta al objetivo, mata instantáneamente y se vuelve invisible por un corto tiempo. Los rastros revelan el origen y el destino del teletransporte.</string>
+    <string name="MiraRoleNinjaMark">Marcar</string>
+    <string name="MiraRoleNinjaMarkWikiDescription">Selecciona un jugador para marcarlo como objetivo de asesinato. Solo se puede marcar un objetivo a la vez.</string>
+    <string name="MiraRoleNinjaAssassinate">Asesinar</string>
+    <string name="MiraRoleNinjaAssassinateWikiDescription">Teletranspórtate a tu objetivo marcado y mátalo instantáneamente, dejando rastros.</string>
+
+    <!-- Ninja Options -->
+    <string name="MiraOptionNinjaMarkCooldown">Tiempo de recarga de marcar</string>
+    <string name="MiraOptionNinjaAssassinateCooldown">Tiempo de recarga de asesinar</string>
+    <string name="MiraOptionNinjaInvisibilityDuration">Duración de invisibilidad</string>
+    <string name="MiraOptionNinjaTraceDuration">Duración de rastros</string>
+    <string name="MiraOptionNinjaCanVent">El Ninja puede entrar a ductos de ventilación</string>
+
+    <!-- Cause of Deaths -->
+    <string name="DiedToEraser">Borrado</string>
+
+    <string name="MiraRoleArbiter">Árbitro</string>
+    <string name="MiraRoleArbiterIntroBlurb">Elige un objetivo e influye en su voto.</string>
+    <string name="MiraRoleArbiterTabDescription">Elige un objetivo del menú del Árbitro.\%nl\%Si ese jugador es votado, obtienes un tiempo de recarga de asesinato más rápido, un uso de invisibilidad y un uso de mejora de velocidad.</string>
+
+    <string name="MiraRoleArbiterWikiDescription">El Árbitro es un rol de Impostor que selecciona un objetivo a través de una GUI. Si el objetivo es exiliado por voto, el Árbitro obtiene un tiempo de recarga de asesinato más rápido más usos únicos para invisibilidad y mejora de velocidad. El objetivo no se puede cambiar a menos que la opción lo permita.</string>
+    <string name="MiraRoleArbiterMark">Marcar</string>
+    <string name="MiraRoleArbiterMarkWikiDescription">Selecciona un jugador del menú de jugadores.</string>
+    <string name="MiraRoleArbiterInvisibility">Invisibilidad</string>
+    <string name="MiraRoleArbiterInvisibilityWikiDescription">Vuelve invisible por un corto tiempo.</string>
+    <string name="MiraRoleArbiterSpeed">Mejora de velocidad</string>
+    <string name="MiraRoleArbiterSpeedWikiDescription">Obtén una mejora de velocidad por el resto de la ronda.</string>
+
+    <string name="MiraOptionArbiterTargetCooldown">Tiempo de recarga de objetivo</string>
+    <string name="MiraOptionArbiterCanChangeTarget">Puede cambiar objetivo</string>
+    <string name="MiraOptionArbiterKillCooldownMultiplier">Multiplicador de tiempo de recarga de asesinato</string>
+    <string name="MiraOptionArbiterInvisUses">Usos de invisibilidad</string>
+    <string name="MiraOptionArbiterInvisDuration">Duración de invisibilidad</string>
+    <string name="MiraOptionArbiterSpeedUses">Usos de mejora de velocidad</string>
+    <string name="MiraOptionArbiterSpeedDuration">Duración de mejora de velocidad</string>
+    <string name="MiraOptionArbiterSpeedMultiplier">Multiplicador de mejora de velocidad</string>
+    <string name="MiraOptionArbiterCanVent">El Árbitro puede entrar a ductos de ventilación</string>
+
+    <!-- Shifter - Neutral Benign -->
+    <string name="MiraRoleShifter">Shifter</string>
+    <string name="MiraRoleShifterIntroBlurb">Toma el lugar de alguien antes de que se den cuenta.</string>
+    <string name="MiraRoleShifterTabDescription">Usa tu habilidad de Cambio para seleccionar un jugador.\%nl\%Al \%b\%final de la próxima reunión\%/b\%, cambiarás de rol con él: él se convierte en el Shifter, y tú te conviertes en lo que él era.\%nl\%El cambio ocurre \%b\%incluso si alguno de ustedes muere\%/b\% antes de que termine la reunión.</string>
+
+    <!-- Shifter Wiki -->
+    <string name="MiraRoleShifterWikiDescription">El Shifter es un rol Neutral Benigno que puede intercambiar roles con otro jugador. El objetivo debe ser elegido durante la ronda, y el intercambio siempre ocurre al final de la próxima reunión: el objetivo no sabrá hasta después de la reunión quién cambió con él. El cambio está garantizado incluso si el Shifter o el objetivo mueren antes de que termine la reunión. El jugador que fue cambiado se convierte en el Shifter en su lugar.</string>
+    <string name="MiraRoleShifterShift">Cambiar</string>
+    <string name="MiraRoleShifterShiftWikiDescription">Selecciona un jugador para intercambiar roles con él. El cambio se hace efectivo al final de la próxima reunión, sin importar qué.</string>
+
+    <!-- Shifter Options -->
+    <string name="MiraOptionShifterShiftCooldown">Tiempo de recarga de cambio</string>
+    <string name="MiraOptionShifterShiftDeadPlayers">Puede cambiar jugadores muertos</string>
+
+	<!-- Fake-poster - Neutral Killing -->
+	<string name="MiraRoleFakeposter">Falso-postor</string>
+	<string name="MiraRoleFakeposterIntroBlurb">Desafortunado, hombre. Desafortunado.</string>
+	<string name="MiraRoleFakeposterTabDescription">Un rol asesino sin habilidades, y sin aliados. ¡Buena suerte!</string>
+
+	<!-- Fake-poster Wiki -->
+	<string name="MiraRoleFakeposterWikiDescription">El Falso-postor es un rol de Asesino Neutral que no tiene habilidades más que matar. Bastante poco interesante, ¿verdad?</string>
+	
+	<!-- Fake-poster Options -->
+	<string name="MiraOptionFakeposterKillCooldown">Tiempo de recarga de asesinato</string>
+	<string name="MiraOptionFakeposterCanVent">El Falso-postor puede entrar a ductos de ventilación</string>
+	<string name="MiraOptionFakeposterHasImposterVision">El Falso-postor tiene visión de impostor</string>
+	<string name="MiraOptionFakeposterHasAssassin">El Falso-postor tiene habilidad de asesinato</string>
+
+    <!-- Baiter - Neutral Evil -->
+    <string name="MiraRoleBaiter">Provocador</string>
+    <string name="MiraRoleBaiterIntroBlurb">Engáñalos con un cadáver. Haz que lo reporten.</string>
+    <string name="MiraRoleBaiterTabDescription">Genera cadáveres falsos cerca de un jugador elegido.\%nl\%Consigue suficientes cadáveres falsos \%b\%reportados\%/b\% para ganar, ¡pero no te dejes atrapar!</string>
+
+    <!-- Baiter Wiki -->
+    <string name="MiraRoleBaiterWikiDescription">El Provocador es un rol Maligno Neutral que gana plantando cadáveres falsos y haciendo que otros jugadores los reporten. Cada reporte exitoso cuenta para el número requerido de cebos. El Provocador no tiene habilidad de asesinato y debe confiar enteramente en el engaño para ganar.</string>
+    <string name="MiraRoleBaiterSpawn">Generar cebo</string>
+    <string name="MiraRoleBaiterSpawnWikiDescription">Genera un cadáver falso con el estilo de un jugador elegido en tu posición actual.</string>
+
+    <!-- Baiter Options -->
+    <string name="MiraOptionBaiterSpawnCooldown">Tiempo de recarga de generación</string>
+    <string name="MiraOptionBaiterBaitsNeeded">Cebos necesarios para ganar</string>
+    <string name="MiraOptionBaiterCanVent">El Provocador puede entrar a ductos de ventilación</string>
+    <string name="MiraOptionBaiterImpostorVision">El Provocador tiene visión de impostor</string>
+    <string name="MiraOptionBaiterHasAssassin">El Provocador tiene habilidad de asesinato</string>
+
+    <!-- Poisoner - Impostor -->
+    <string name="MiraRolePoisoner">Envenenador</string>
+    <string name="MiraRolePoisonerIntroBlurb">Envenénalos y observa cómo se propaga.</string>
+    <string name="MiraRolePoisonerTabDescription">Envenena a un objetivo para poner su nombre verde oscuro.\%nl\%El veneno es \%b\%contagioso\%/b\% y se propaga cuando los jugadores se tocan.\%nl\%La configuración determina si las reuniones salvan o matan a las víctimas.</string>
+
+    <!-- Poisoner Wiki -->
+    <string name="MiraRolePoisonerWikiDescription">El Envenenador es un rol de Impostor que puede envenenar jugadores. Los jugadores envenenados tienen nombres verde oscuro visibles solo para los Impostores. El veneno se propaga a jugadores sanos al contacto. Si el temporizador de un jugador envenenado se agota, muere. Las reuniones pueden salvar a las víctimas o desencadenar sus muertes.</string>
+    <string name="MiraRolePoisonerPoison">Envenenar</string>
+    <string name="MiraRolePoisonerPoisonWikiDescription">Envenena a un jugador cercano. El veneno se propagará y eventualmente matará.</string>
+
+    <!-- Poisoner Options -->
+    <string name="MiraOptionPoisonerTimer">Temporizador de veneno</string>
+    <string name="MiraOptionPoisonerMeetingAction">Interacción en reunión</string>
+    <string name="MiraOptionPoisonerMeetingActionSavesVictims">Salva a las víctimas</string>
+    <string name="MiraOptionPoisonerMeetingActionKillsAllVictims">Mata a todas las víctimas</string>
+    <string name="MiraOptionPoisonerMeetingActionKillsFirstVictim">Mata a la primera víctima</string>
+    <string name="MiraOptionPoisonerKillCooldown">Tiempo de recarga de asesinato</string>
+    <string name="MiraOptionPoisonerCanVent">El Envenenador puede entrar a ductos de ventilación</string>
+
+    <!-- Revenant - Impostor -->
+    <string name="MiraRoleRevenant">Revenant</string>
+    <string name="MiraRoleRevenantIntroBlurb">Ataca desde el más allá.</string>
+    <string name="MiraRoleRevenantTabDescription">Usa Muerte Falsa para morir y convertirte en fantasma.\%nl\%Como fantasma, puedes seguir matando a un número limitado de tripulantes.\%nl\%Tus asesinatos de fantasma son silenciosos y mortales.</string>
+
+    <!-- Revenant Wiki -->
+    <string name="MiraRoleRevenantWikiDescription">El Revenant es un rol de Impostor que puede fingir su muerte usando el botón Muerte Falsa. Una vez usado, el Revenant se convierte en fantasma pero conserva la habilidad de matar a un número limitado de jugadores. Esto le permite al Revenant atacar desde la seguridad, aunque ya no puede sabotear ni realizar otras tareas físicas.</string>
+    <string name="MiraRoleRevenantFakeDeath">Muerte Falsa</string>
+    <string name="MiraRoleRevenantFakeDeathWikiDescription">Muere instantáneamente y deja un cuerpo atrás, convirtiéndote en fantasma.</string>
+    <string name="MiraRoleRevenantGhostKill">Asesinato de Fantasma</string>
+    <string name="MiraRoleRevenantGhostKillWikiDescription">Mata a un jugador mientras estás en forma de fantasma. Tienes un número limitado de estos asesinatos.</string>
+
+    <!-- Revenant Options -->
+    <string name="MiraOptionRevenantGhostKills">Asesinatos de fantasma permitidos</string>
+    <string name="MiraOptionRevenantFakeDeathCooldown">Recarga de Muerte Falsa</string>
+    <string name="MiraOptionRevenantGhostKillCooldown">Recarga de Asesinato de Fantasma</string>
+
+    <!-- Lifter - Crewmate -->
+    <string name="MiraRoleLifter">Lifter</string>
+    <string name="MiraRoleLifterIntroBlurb">Lift votes and stack your influence.</string>
+    <string name="MiraRoleLifterTabDescription">Use Lift on a nearby player to gain a \%b\%permanent extra vote\%/b\% each time you lift.</string>
+
+    <!-- Lifter Wiki -->
+    <string name="MiraRoleLifterWikiDescription">The Lifter is a Crewmate Support role that can lift votes from nearby players. Each lift grants the Lifter a permanent extra vote, stacking for the rest of the game.</string>
+    <string name="MiraRoleLifterLift">Lift</string>
+    <string name="MiraRoleLifterLiftWikiDescription">Lift a vote from a nearby player to gain a permanent extra vote.</string>
+
+    <!-- Lifter Options -->
+    <string name="MiraOptionLifterLiftCooldown">Lift Cooldown</string>
+</resources>
+

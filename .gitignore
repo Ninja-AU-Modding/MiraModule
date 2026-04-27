@@ -7,7 +7,7 @@ packages.lock.json
 riderModule.iml
 /_ReSharper.Caches/
 .idea
-.vs/MiraModule/FileContentIndex/b499fadc-e738-42c9-a1df-c7365868ada2.vsidx
+.vs/MiraOverloaded/FileContentIndex/b499fadc-e738-42c9-a1df-c7365868ada2.vsidx
 *.vsidx
 *.patch
-MiraModule/Resources/miramodule-assets-win.bundle
+MiraOverloaded/Resources/MiraOverloaded-assets-win.bundle
