@@ -1,18 +1,35 @@
-# Mira Overloaded
+> [!WARNING]
+> This is not a standalone mod! It runs on [Town of Us Mira](https://github.com/AU-Avengers/TOU-Mira), [Reactor](https://github.com/NuclearPowered/Reactor), and [MiraAPI](https://github.com/All-Of-Us-Mods/MiraAPI)!
+> The ZIP files released with every MiraOverloaded update contain these 3, but PLEASE PLEASE PLEASE check them out :D
 
-An addon module for Town of Us Mira that extends gameplay with additional roles and features.
+-----------------------
 
-## Description
+<div align="center">
+  <img src="https://raw.githubusercontent.com/SabotagedAU/MiraOverloaded/refs/heads/first-release/MiraOverloaded/Resources/Banner.png" alt="MiraOverloaded"/>
+  <a href="https://github.com/AU-Avengers/TOU-Mira/releases/"> <img alt="Latest Release" src="https://badgen.net/github/release/SabotagedAU/MiraOverloaded?icon=github"></a>
+  <a href="https://github.com/AU-Avengers/TOU-Mira/releases"> <img alt="GitHub Downloads" src="https://img.shields.io/github/downloads/SabotagedAU/MiraOverloaded/total"></a>
+  <a href="https://discord.gg/rVruMxTfJK"><img alt="Mod Discord" src="https://img.shields.io/discord/1279057211339051079.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2"></a>
+</div>
+<br/>
 
-MiraOverloaded is a plugin addon for Town of Us Mira that uses the MiraAPI framework to add new content to the game.
+The largest extension mod for [Town Of Us Mira](https://github.com/AU-Avengers/TOU-Mira), featuring 14 new roles, and over 5 new modifiers!
+
+Currently, we have 59 roles planned in total for future releases
 
 ## Requirements
 
-- Among Us (latest version)
-- BepInEx 6.0.0-be.735 or higher
-- Reactor 2.5.0-ci.371 or higher
-- MiraAPI 0.3.5 or higher
-- Town of Us Mira 1.5.0 or higher
+> [!NOTE]
+> Pirated versions of Among Us are not, and never will be supported.
+
+[![Latest Among Us Version](https://badgen.net/badge/icon/Latest%20Among%20Us%20Version?icon=steam&label=)](https://www.innersloth.com/games/among-us/)
+
+[![BepInEx Il2cpp](https://github.com/SabotagedAU/MiraOverloaded/blob/first-release/bepinbadge.svg)](https://docs.bepinex.dev/master/articles/user_guide/installation/unity_il2cpp.html)
+
+[![Reactor](https://github.com/SabotagedAU/MiraOverloaded/blob/first-release/reactorbadge.svg)](https://github.com/NuclearPowered/Reactor)
+
+[![MiraAPI](https://github.com/SabotagedAU/MiraOverloaded/blob/first-release/miraapibadge.svg)](https://github.com/All-Of-Us-Mods/MiraAPI)
+
+[![Town Of Us Mira](https://github.com/SabotagedAU/MiraOverloaded/blob/first-release/toubadge.svg)](https://github.com/AU-Avengers/TOU-Mira)
 
 ## Installation
 
