@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using HarmonyLib;
 using MiraAPI.Modifiers;
 using Reactor.Utilities;
@@ -32,7 +33,7 @@ public class TokenScreenFlip : TokenEffect
         Player.RemoveModifier(this);
     }
 
-    public IEnumerator CoFlipCamera(float value)
+    public static IEnumerator CoFlipCamera(float value)
     {
         var cam = Camera.main!;
         var quad = HudManager.Instance.ShadowQuad;
@@ -52,9 +53,9 @@ public class TokenScreenFlip : TokenEffect
         var bp = HudManager.Instance.transform.FindChild("Buttons");
         buttons.AddRange(bp.FindChild("BottomRight").GetComponentsInChildren<ActionButton>());
         buttons.AddRange(bp.FindChild("BottomLeft").GetComponentsInChildren<ActionButton>());
-        foreach (var button in buttons)
+        foreach (var transform in buttons.Select(button => button.transform))
         {
-            button.transform.localPosition = button.transform.localPosition with { y = button.transform.localPosition.y * value };
+            transform.localPosition = transform.localPosition with { y = transform.localPosition.y * value };
         }
     }
 }

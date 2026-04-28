@@ -19,37 +19,25 @@ public static class AbyssShadowRealmPatch
     /// 2. Visuals still render them on the map.
     /// 3. Colliders stay on the map.
     /// </summary>
-    
-    [HarmonyPatch(typeof(PlayerControl), "FixedUpdate")]
+
+    [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.FixedUpdate))]
     [HarmonyPrefix]
     public static void PlayerControl_FixedUpdate_Prefix(PlayerControl __instance)
     {
-        if (!ShouldShift(__instance)) return;
-        __instance.transform.position += (Vector3)SwallowedModifier.ShadowOffset;
+        ApplyShadowShift(__instance, 1f);
     }
 
-    [HarmonyPatch(typeof(PlayerControl), "FixedUpdate")]
+    [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.FixedUpdate))]
     [HarmonyPostfix]
     public static void PlayerControl_FixedUpdate_Postfix(PlayerControl __instance)
     {
-        if (!ShouldShift(__instance)) return;
-        __instance.transform.position -= (Vector3)SwallowedModifier.ShadowOffset;
+        ApplyShadowShift(__instance, -1f);
     }
 
-    [HarmonyPatch(typeof(PlayerControl), "Update")]
-    [HarmonyPrefix]
-    public static void PlayerControl_Update_Prefix(PlayerControl __instance)
+    private static void ApplyShadowShift(PlayerControl player, float direction)
     {
-        if (!ShouldShift(__instance)) return;
-        __instance.transform.position += (Vector3)SwallowedModifier.ShadowOffset;
-    }
-
-    [HarmonyPatch(typeof(PlayerControl), "Update")]
-    [HarmonyPostfix]
-    public static void PlayerControl_Update_Postfix(PlayerControl __instance)
-    {
-        if (!ShouldShift(__instance)) return;
-        __instance.transform.position -= (Vector3)SwallowedModifier.ShadowOffset;
+        if (!ShouldShift(player)) return;
+        player.transform.position += (Vector3)(SwallowedModifier.ShadowOffset * direction);
     }
 
     private static bool ShouldShift(PlayerControl player)
@@ -60,7 +48,7 @@ public static class AbyssShadowRealmPatch
         if (player.AmOwner && player.IsRole<AbyssRole>()) return true;
 
         // Shift if the local player is swallowed BY this player
-        if (PlayerControl.LocalPlayer != null && 
+        if (PlayerControl.LocalPlayer != null &&
             AbyssRole.SwallowedPlayers.TryGetValue(PlayerControl.LocalPlayer.PlayerId, out var abyssId) &&
             abyssId == player.PlayerId)
         {

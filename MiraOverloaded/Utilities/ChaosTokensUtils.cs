@@ -31,6 +31,18 @@ public static class ChaosTokensUtils
         return renderer;
     }
 
+    public static SpriteRenderer CreateScreenOverlay(string name, Color color, float zPosition = -49f)
+    {
+        var gameObject = new GameObject(name);
+        gameObject.transform.position = new Vector3(0, 0, zPosition);
+        gameObject.transform.localScale = new Vector3(1000, 1000, 1);
+
+        var renderer = gameObject.AddComponent<SpriteRenderer>();
+        renderer.sprite = ChaosTokensAssets.FilterSprite.LoadAsset();
+        renderer.color = color;
+        return renderer;
+    }
+
     public static List<PlayerTask> GetUncompletedTasks(PlayerControl player)
     {
         return player.myTasks

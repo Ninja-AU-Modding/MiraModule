@@ -9,5 +9,8 @@ public enum MiraOverloadedRpc : uint
     ChaosTokenGain = 10211,
     SendAgentChat = 10212,
     HiveMindDeath = 10221,
-    HiveMindKill = 10222
+    HiveMindKill = 10222,
+    HiveMindLinkedCooldown = 10223,
+    HiveMindAwaken = 10224,
+    HiveMindTimeout = 10225
 }

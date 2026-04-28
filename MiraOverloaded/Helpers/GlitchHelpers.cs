@@ -193,24 +193,6 @@ public static class Helpers
         player.transform.localScale = Vector3.one;
     }
 
-    //commented for now, since uhh im tired right now and dont wanna deal with the errors
-
-    // public static void TriggerWin(GameOverReason reason)
-    // {
-    //     if (AmHost())
-    //     {
-    //         ShipStatus.Instance.EndGame(reason, false);
-    //     }
-    // }
-
-    // public static void EndGame()
-    // {
-    //     if (AmHost())
-    //     {
-    //         ShipStatus.Instance.EndGame(GameOverReason.Impostors, false);
-    //     }
-    // }
-
     public static void StartMeeting(PlayerControl reporter, PlayerControl? body = null)
     {
         reporter.RpcStartMeeting(body?.Data);
@@ -253,7 +235,7 @@ public static class Helpers
 
     public static Vent? GetClosestVent(Vector2 position)
     {
-        return ShipStatus.Instance.AllVents.ToArray()
+        return ShipStatus.Instance.AllVents
             .OrderBy(v => GetDistance(position, (Vector2)v.transform.position))
             .FirstOrDefault();
     }

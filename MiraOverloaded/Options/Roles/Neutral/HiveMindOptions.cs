@@ -42,4 +42,10 @@ public sealed class HiveMindOptions : AbstractOptionGroup<HiveMindRole>
 
     [ModdedToggleOption("MiraOptiomHiveMindScreenDarkenAfterKill")]
     public bool ScreenDarkenAfterKill { get; set; } = true;
+
+    [ModdedNumberOption("MiraOptionHiveMindEffectDuration", 0f, 30f, 0.5f, MiraNumberSuffixes.Seconds)]
+    public float EffectDuration { get; set; } = 5f;
+
+    [ModdedNumberOption("MiraOptionHiveMindAwakeningWindow", 5f, 120f, 5f, MiraNumberSuffixes.Seconds)]
+    public float AwakeningWindow { get; set; } = 30f;
 }

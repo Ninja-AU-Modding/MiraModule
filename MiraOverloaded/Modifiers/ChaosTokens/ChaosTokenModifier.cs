@@ -14,7 +14,7 @@ public class ChaosTokenModifier : UniversalGameModifier
 {
     public ChaosTokenModifier() : this(amount: 1, showNotification: true) { }
 
-    public ChaosTokenModifier(int amount = 1, bool showNotification = true)
+    public ChaosTokenModifier(int amount, bool showNotification = true)
     {
         this.amount = amount;
         this.showNotification = showNotification;
@@ -28,7 +28,7 @@ public class ChaosTokenModifier : UniversalGameModifier
     public override ModifierFaction FactionType => ModifierFaction.UniversalUtility;
     public override Color FreeplayFileColor => MiraOverloadedColors.ChaosTokens;
 
-    public int Tokens { get; private set; } = 0;
+    public int Tokens { get; private set; }
 
     // Spawn configuration - makes it appear in modifier settings
     public override int GetAssignmentChance() => 
@@ -54,7 +54,7 @@ public class ChaosTokenModifier : UniversalGameModifier
     {
         if (Player.AmOwner)
         {
-            CustomButtonSingleton<ChaosTokenRollButton>.Instance?.Button.gameObject.SetActive(false);
+            CustomButtonSingleton<ChaosTokenRollButton>.Instance?.Button?.gameObject.SetActive(false);
         }
     }
 
@@ -70,7 +70,7 @@ public class ChaosTokenModifier : UniversalGameModifier
         Tokens -= amount;
     }
 
-    private void TokensReceived(int amount)
+    private static void TokensReceived(int amount)
     {
         ChaosTokensUtils.Notification($"<b>You received {amount} token{(amount > 1 ? "s" : string.Empty)}!</b>");
     }

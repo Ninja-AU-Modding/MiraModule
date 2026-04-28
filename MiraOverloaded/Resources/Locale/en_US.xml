@@ -238,6 +238,31 @@
     <string name="MiraRoleCommandSpecialistIntroBlurb">Enforce the inspector's will.</string>
     <string name="MiraRoleCommandSpecialistTabDescription">You can kill neutrals and impostors, but killing a crewmate causes you to die.\%nl\%After killing an evil target, you return to your original role.</string>
 
+    <!-- Hive Mind - Neutral Killing -->
+    <string name="MiraRoleHiveMind">Hive Mind</string>
+    <string name="MiraRoleHiveMindIntroBlurb">Link your minds and dominate together.</string>
+    <string name="MiraRoleHiveMindTabDescription">You are the main Hive Mind.\%nl\%Awaken your linked minds before time runs out, or you will die.\%nl\%Kill or be killed: each death harms the hive.</string>
+
+    <!-- Hive Mind Wiki -->
+    <string name="MiraRoleHiveMindWikiDescription">The Hive Mind is a Neutral Killing role that starts linked to several other players. At the start of the game, the Hive Mind must use the Awaken button before the countdown expires. Failure to do so causes the main Hive Mind to die. Once awakened, linked minds become full Hive Minds. Kills and cooldowns are shared across the entire hive (optional), and deaths within the hive impose cooldown penalties and debuffs on surviving members.</string>
+    <string name="MiraRoleHiveMindAwaken">Awaken</string>
+    <string name="MiraRoleHiveMindAwakenWikiDescription">Awaken your linked minds, converting them into full Hive Minds. Must be used before the countdown reaches zero.</string>
+
+    <!-- Hive Mind Options -->
+    <string name="MiraOptionHiveMindKillCooldown">Kill Cooldown</string>
+    <string name="MiraOptionHiveMindCanVent">Hive Mind Can Vent</string>
+    <string name="MiraOptionHiveMindHasImposterVision">Hive Mind Has Impostor Vision</string>
+    <string name="MiraOptionHiveMindHasAssasin">Hive Mind Has Assassin Ability</string>
+    <string name="MiraOptionOtherConnectedMinds">Connected Minds</string>
+    <string name="MiraOptionHiveMindDeathCooldownAddition">Cooldown Addition on Death</string>
+    <string name="MiraOptionHiveMindKnowsEachother">Hive Mind Members Know Each Other</string>
+    <string name="MiraOptionHiveMindCooldownsLinked">Hive Mind Cooldowns Linked</string>
+    <string name="MiraOptionHiveMindKnowsDeath">Hive Mind Members Know of Deaths</string>
+    <string name="MiraOptionHiveMindSlowdownAfterKill">Slowdown After Kill</string>
+    <string name="MiraOptiomHiveMindScreenDarkenAfterKill">Screen Darken After Kill</string>
+    <string name="MiraOptionHiveMindEffectDuration">Kill Effect Duration</string>
+    <string name="MiraOptionHiveMindAwakeningWindow">Awakening Window</string>
+
     <!-- Command Specialist Wiki -->
     <string name="MiraRoleCommandSpecialistWikiDescription">Command Specialists are temporary crewmate killers created by the Inspector General. They may kill neutrals and impostors safely, but die if they kill a crewmate. After killing an evil target, they revert to their original role.</string>
     <string name="MiraRoleCommandSpecialistKill">Kill</string>

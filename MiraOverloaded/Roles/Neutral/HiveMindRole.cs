@@ -7,11 +7,11 @@ using MiraAPI.Roles;
 using MiraAPI.Utilities;
 using MiraOverloaded.Assets;
 using MiraOverloaded.Buttons.Neutral;
+using MiraOverloaded.Events;
 using MiraOverloaded.Options.Roles.Neutral;
 using Reactor.Utilities;
 using System.Globalization;
 using System.Text;
-using TownOfUs.Buttons.Crewmate;
 using TownOfUs.Roles.Neutral;
 using UnityEngine;
 
@@ -59,9 +59,20 @@ public sealed class HiveMindRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUs
 
     public void OffsetButtons()
     {
-        var kill = CustomButtonSingleton<SheriffShootButton>.Instance;
+        var kill = CustomButtonSingleton<HiveMindKillButton>.Instance;
+        var awaken = CustomButtonSingleton<HiveMindAwakenButton>.Instance;
+
         var canVent = OptionGroupSingleton<HiveMindOptions>.Instance.CanVent || LocalSettingsTabSingleton<TownOfUsLocalSettings>.Instance.OffsetButtonsToggle.Value;
-        Coroutines.Start(MiscUtils.CoMoveButtonIndex(kill, !canVent));
+
+        if (kill != null)
+        {
+            Coroutines.Start(MiscUtils.CoMoveButtonIndex(kill, !canVent));
+        }
+
+        if (awaken != null)
+        {
+            Coroutines.Start(MiscUtils.CoMoveButtonIndex(awaken, !canVent));
+        }
     }
 
     public override void Initialize(PlayerControl player)
@@ -69,6 +80,9 @@ public sealed class HiveMindRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUs
         RoleBehaviourStubs.Initialize(this, player);
         if (Player.AmOwner)
         {
+            OffsetButtons();
+            HiveMindEvents.ResetTimedDebuffs(Player);
+            HiveMindEvents.SetSharedCooldown(Player, Player.killTimer > 0f ? Player.killTimer : OptionGroupSingleton<HiveMindOptions>.Instance.KillCooldown);
             HudManager.Instance.ImpostorVentButton.graphic.sprite = TouAssets.VentSprite.LoadAsset();
             HudManager.Instance.ImpostorVentButton.buttonLabelText.SetOutlineColor(MiraOverloadedColors.HiveMind);
         }
@@ -79,6 +93,7 @@ public sealed class HiveMindRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUs
         RoleBehaviourStubs.Deinitialize(this, targetPlayer);
         if (Player.AmOwner)
         {
+            HiveMindEvents.ResetTimedDebuffs(Player);
             HudManager.Instance.ImpostorVentButton.graphic.sprite = TouAssets.VentSprite.LoadAsset();
             HudManager.Instance.ImpostorVentButton.buttonLabelText.SetOutlineColor(TownOfUsColors.Impostor);
         }

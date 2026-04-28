@@ -27,7 +27,7 @@ public class ChaosTokenRollButton : TownOfUsButton
         PlayerControl.LocalPlayer.RpcChaosTokenRoll();
     }
 
-    public override bool Enabled(RoleBehaviour role)
+    public override bool Enabled(RoleBehaviour? role)
     {
         if (PlayerControl.LocalPlayer == null || PlayerControl.LocalPlayer.Data.IsDead)
         {

@@ -6,7 +6,7 @@ namespace MiraOverloaded.Modifiers.ChaosTokens;
 
 /// <summary>
 /// Simplified Invisible modifier for TokenInvisible effect
-/// </summary
+/// </summary>
 public class InvisibleModifier(float duration) : BaseModifier
 {
     public override string ModifierName => "Invisible";

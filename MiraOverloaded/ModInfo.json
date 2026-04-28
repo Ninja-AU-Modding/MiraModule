@@ -1,6 +1,6 @@
 {
   "Name": "Mira Overloaded",
-  "Description": "Mira Overloaded is an overhaul of the original mod, keeping only the best roles and modifiers.",
+  "Description": "Mira Overloaded (formerly MiraModule) is the largest Mira Extension mod to-date, featuring game-changing role additions for the base game!.",
   "Tags": [
     "Mira",
     "Town",
@@ -24,6 +24,6 @@
   "Links": {
     "Source": "https://github.com/SaboAU/MiraOverloaded",
     "Discord": "https://discord.gg/JpXFCZQWnc",
-    "SaboAU": "https://github.com/SaboAU/"
+    "Website": "https://saboau.org/"
   }
 }

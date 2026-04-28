@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using HarmonyLib;
 using MiraAPI.GameOptions;
@@ -24,16 +25,16 @@ using UnityEngine;
 
 namespace MiraOverloaded.Modifiers.ChaosTokens.Effects;
 
+[SuppressMessage("Usage", "CA1001", Justification = "MeetingMenu is created and disposed through the modifier lifecycle.")]
 public class TokenAssassin : TokenEffect
 {
     public override string ModifierName => "Token Assassin";
     public override ChaosEffects Effect => ChaosEffects.Assassin;
     public override bool Negative => false;
     
-    private MeetingMenu meetingMenu;
-    public string LastGuessedItem { get; set; }
+    private MeetingMenu? meetingMenu;
+    public string LastGuessedItem { get; set; } = string.Empty;
     public PlayerControl? LastAttemptedVictim { get; set; }
-    private bool shot;
     
     public override void OnActivate()
     {
@@ -56,7 +57,7 @@ public class TokenAssassin : TokenEffect
         base.OnMeetingStart();
         if (Player.AmOwner)
         {
-            meetingMenu.GenButtons(MeetingHud.Instance,
+            meetingMenu?.GenButtons(MeetingHud.Instance,
                 Player.AmOwner && !Player.HasDied() && !Player.HasModifier<JailedModifier>());
         }
     }
@@ -181,8 +182,7 @@ public class TokenAssassin : TokenEffect
             }
 
             shapeMenu.Close();
-            meetingMenu.HideButtons();
-            shot = true;
+            meetingMenu?.HideButtons();
         }
     }
 

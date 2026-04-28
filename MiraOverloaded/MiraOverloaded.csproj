@@ -24,11 +24,12 @@
 	
 	<PropertyGroup>
 		<NoWarn>CS1591;CA1707</NoWarn>
+		<LocalPluginsPath>D:\Steam\steamapps\common\Among Us - TOU - MiraOverloaded\BepInEx\plugins\</LocalPluginsPath>
 	</PropertyGroup>
 
 	<Import Project="../AmongUs.props" />
 
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-		<Exec Command="copy /Y &quot;$(TargetPath)&quot; &quot;D:\Steam\steamapps\common\Among Us - TOU - MiraOverloaded\BepInEx\plugins\&quot;" ContinueOnError="true" />
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="Exists('$(LocalPluginsPath)')">
+		<Exec Command="copy /Y &quot;$(TargetPath)&quot; &quot;$(LocalPluginsPath)&quot;" />
 	</Target>
 </Project>

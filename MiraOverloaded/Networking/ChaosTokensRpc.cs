@@ -46,14 +46,14 @@ public static class ChaosTokensRpc
             return;
         }
         
-        bool reroll = true;
-        do
+        while (true)
         {
-            reroll = false;
             int random = Random.RandomRangeInt(0, Enum.GetValues<ChaosEffects>().Length);
-            reroll = ApplyEffect(player, (ChaosEffects)random);
-
-        } while (reroll);
+            if (!ApplyEffect(player, (ChaosEffects)random))
+            {
+                break;
+            }
+        }
 
         RpcChaosTokenDecrease(player, 1);
     }
@@ -63,7 +63,7 @@ public static class ChaosTokensRpc
     {
         if (!player.TryGetModifier<ChaosTokenModifier>(out var chaosTokenModifier))
         {
-            chaosTokenModifier = player.AddModifier<ChaosTokenModifier>(amount, showNotification);
+            player.AddModifier<ChaosTokenModifier>(amount, showNotification);
         }
         else
         {
@@ -225,7 +225,7 @@ public static class ChaosTokensRpc
                     break;
                 }
                 
-                if (!ChaosTokensUtils.GetUncompletedTasks(player).Any())
+                if (ChaosTokensUtils.GetUncompletedTasks(player).Count == 0)
                 {
                     Reroll();
                     break;
@@ -335,7 +335,16 @@ public static class ChaosTokensRpc
 
                 var validRoles = CustomRoleManager.CustomMiraRoles
                     .Where(r => r.Team != player.GetTownOfUsRole()?.Team)
-                    .Select(r => (r as RoleBehaviour).Role);
+                    .Select(r => r as RoleBehaviour)
+                    .OfType<RoleBehaviour>()
+                    .Select(r => r.Role)
+                    .ToList();
+                if (validRoles.Count == 0)
+                {
+                    Reroll();
+                    break;
+                }
+
                 player.RpcAddModifier<TokenReveal>(validRoles.Random(), player.Data.PlayerId);
                 _revealsLeft--;
                 break;
@@ -349,7 +358,9 @@ public static class ChaosTokensRpc
                 player.RpcAddModifier<TokenHyperactive>();
                 break;
             case ChaosEffects.Colorblind:
-                if (player.HasModifier<TokenColorblind>() || player.HasModifier<TokenNausea>())
+                if (player.HasModifier<TokenColorblind>() ||
+                    player.HasModifier<MiraOverloaded.Modifiers.Universal.ColorblindModifier>() ||
+                    player.HasModifier<TokenNausea>())
                 {
                     Reroll();
                     break;
@@ -377,6 +388,12 @@ public static class ChaosTokensRpc
                 }
 
                 var revealVictim = revealVictims.Random();
+                if (revealVictim == null)
+                {
+                    Reroll();
+                    break;
+                }
+
                 revealVictim.RpcAddModifier<TokenReveal>(revealVictim.Data.Role.Role, player.PlayerId);
                 _revealsLeft--;
                 break;
@@ -385,6 +402,12 @@ public static class ChaosTokensRpc
                     .Where(x => !x.Data.IsDead)
                     .Where(x => x.PlayerId != player.PlayerId)
                     .Random();
+                if (swapVictim == null)
+                {
+                    Reroll();
+                    break;
+                }
+
                 RpcTokenPositionSwap(player, swapVictim);
                 break;
             case ChaosEffects.RoleSwap:
@@ -421,7 +444,14 @@ public static class ChaosTokensRpc
                     break;
                 }
 
-                RpcTokenRoleSwap(player, roleSwapVictims.Random());
+                var roleSwapVictim = roleSwapVictims.Random();
+                if (roleSwapVictim == null)
+                {
+                    Reroll();
+                    break;
+                }
+
+                RpcTokenRoleSwap(player, roleSwapVictim);
                 break;
             case ChaosEffects.Revive:
                 if (OptionGroupSingleton<ChaosTokensOptions>.Instance.ReviveDisabled)
@@ -442,7 +472,14 @@ public static class ChaosTokensRpc
                     break;
                 }
 
-                RpcTokenRevive(player, canBeRevived.Random());
+                var reviveTarget = canBeRevived.Random();
+                if (reviveTarget == null)
+                {
+                    Reroll();
+                    break;
+                }
+
+                RpcTokenRevive(player, reviveTarget);
                 break;
             case ChaosEffects.RandomModifier:
                 if (player.HasModifier<TokenRandomModifier>())
@@ -477,7 +514,8 @@ public static class ChaosTokensRpc
 
         var body = GameObject.FindObjectsOfType<DeadBody>()
             .FirstOrDefault(b => b.ParentId == dead.PlayerId);
-        var position = ShipStatus.Instance.AllVents.Random().transform.position;
+        var reviveVent = ShipStatus.Instance.AllVents.Random();
+        var position = reviveVent != null ? reviveVent.transform.position : dead.transform.position;
 
         if (body != null)
         {

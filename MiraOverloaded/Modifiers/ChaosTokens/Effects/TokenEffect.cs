@@ -12,7 +12,7 @@ public abstract class TokenEffect : BaseModifier
 {
     public abstract ChaosEffects Effect { get; }
     public abstract bool Negative { get; }
-    public virtual string Notification { get; }
+    public virtual string Notification => string.Empty;
     public virtual bool RemoveAfterMeeting => true;
     public virtual bool RemoveOnDeath => false;
 
@@ -42,7 +42,7 @@ public abstract class TokenEffect<T>(params object[] args) : TokenEffect where T
 {
     public abstract bool LinkToAditional { get; }
     
-    public T AdditionalModifier { get; protected set; }
+    public T? AdditionalModifier { get; protected set; }
     private bool AdditionalHanded { get; set; }
     
     protected object[] Args { get; set; } = args;

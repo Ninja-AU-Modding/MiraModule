@@ -17,4 +17,6 @@ public static class ModifierIcons
         new LoadableResourceAsset($"{ShortPath}.TempIcon.png", 200);
     public static LoadableAsset<Sprite> Agent { get; } =
         new LoadableResourceAsset($"{ShortPath}.TempIcon.png", 200);
+    public static LoadableAsset<Sprite> Colorblind { get; } =
+        new LoadableResourceAsset($"{ShortPath}.TempIcon.png", 200);
 }

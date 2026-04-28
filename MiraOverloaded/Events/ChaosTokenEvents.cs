@@ -81,12 +81,20 @@ public static class ChaosTokenEvents
             MeetingHud.Instance.discussionTimer += timer;
         });
 
-        try
+        var meetingHud = MeetingHud.Instance;
+        if (!meetingHud)
         {
-            MeetingHud.Instance.playerStates.Do(x => x.transform.FindChild("TokenDeathIcon").gameObject.DestroyImmediate());
-            MeetingHud.Instance.playerStates.Do(x => x.transform.FindChild("TokenDeathIcon").gameObject.DestroyImmediate());
+            return;
         }
-        catch {} // don't care
+
+        meetingHud.playerStates.Do(playerState =>
+        {
+            var tokenDeathIcon = playerState.transform.FindChild("TokenDeathIcon");
+            if (tokenDeathIcon != null)
+            {
+                tokenDeathIcon.gameObject.DestroyImmediate();
+            }
+        });
     }
 
     [RegisterEvent]
@@ -95,7 +103,7 @@ public static class ChaosTokenEvents
         if (@event.ExiledPlayer == null) return;
 
         var player = MiscUtils.PlayerById(@event.ExiledPlayer.PlayerId);
-        if (player.HasModifier<TokenDeath>())
+        if (player?.HasModifier<TokenDeath>() == true)
         {
             @event.ExiledPlayer = null;
         }
