@@ -242,15 +242,15 @@
 
     <!-- Hive Mind - Neutral Killing -->
     <string name="MiraRoleHiveMind">Hive Mind</string>
-    <string name="MiraRoleHiveMindIntroBlurb">Link your minds and dominate together.</string>
-    <string name="MiraRoleHiveMindTabDescription">You are the main Hive Mind.\%nl\%Awaken your linked minds before time runs out, or you will die.\%nl\%Kill or be killed: each death harms the hive.</string>
+	<string name="MiraRoleHiveMindIntroBlurb">Assimilate into the hive</string>
+    <string name="MiraRoleHiveMindTabDescription">Awaken your dormant minds before time runs out, or you will die.\%nl\%Kill as fast as you can. Each mind that dies weakens the collective.</string>
 
     <!-- Hive Mind Wiki -->
-    <string name="MiraRoleHiveMindWikiDescription">The Hive Mind is a Neutral Killing role that starts linked to several other players. At the start of the game, the Hive Mind must use the Awaken button before the countdown expires. Failure to do so causes the main Hive Mind to die. Once awakened, linked minds become full Hive Minds. Kills and cooldowns are shared across the entire hive (optional), and deaths within the hive impose cooldown penalties and debuffs on surviving members.</string>
+    <string name="MiraRoleHiveMindWikiDescription">The Hive Mind is a Neutral Killing role assigned to one person at the start of the game. There are a set amount of "dormant" minds. At the start of the game, the Hive Mind must use the Awaken ability before the countdown reaches 0. If this is not done, the main Hive Mind will let out a scream and die. Once awakened, dormant minds become full on Hive Minds. Kills and cooldowns are shared across the entire collective (if that option is checked), and deaths within the hive = cooldown increases and debuffs on surviving minds.</string>
     <string name="MiraRoleHiveMindKill">Kill</string>
-    <string name="MiraRoleHiveMindKillWikiDescription">Kill a player. Kills and cooldowns are shared across all Hive Mind members.</string>
+    <string name="MiraRoleHiveMindKillWikiDescription">Kill a player. Kills and cooldowns are shared across all Hive Mind members (if that option is checked)</string>
     <string name="MiraRoleHiveMindAwaken">Awaken</string>
-    <string name="MiraRoleHiveMindAwakenWikiDescription">Awaken your linked minds, converting them into full Hive Minds. Must be used before the countdown reaches zero.</string>
+    <string name="MiraRoleHiveMindAwakenWikiDescription">Awaken the dormant minds, converting them into full on Hive Minds. Must be used before the countdown reaches zero.</string>
 
     <!-- Hive Mind Options -->
     <string name="MiraOptionHiveMindKillCooldown">Kill Cooldown</string>

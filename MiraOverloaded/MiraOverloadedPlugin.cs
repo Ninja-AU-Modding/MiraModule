@@ -25,7 +25,7 @@ namespace MiraOverloaded;
 public partial class MiraOverloadedPlugin : BasePlugin, IMiraPlugin
 {
     /// <summary>
-    ///     Gets the specified Culture for string manipulations.
+    /// Gets the specified Culture for string manipulations.
     /// </summary>
     public static CultureInfo Culture => TownOfUs.TownOfUsPlugin.Culture;
 
@@ -33,7 +33,7 @@ public partial class MiraOverloadedPlugin : BasePlugin, IMiraPlugin
     public string OptionsTitleText => "Mira Overloaded";
 
     /// <summary>
-    ///     Determines if the current build is a dev build or not.
+    /// Determines if the current build is a dev build or not.
     /// </summary>
     public static bool IsDevBuild => true;
 
