@@ -56,17 +56,5 @@ public partial class MiraOverloadedPlugin : BasePlugin, IMiraPlugin
         HiveMindChatPatches.RegisterChatHandler();
 
         Assets.MiraOverloadedGradientAssets.DumpBundleInfo();
-
-        SpriteTagRegistry.RegisterSprite(Banner.LoadAsset(), "MiraOverloaded", "banner");
-        SpriteTagRegistry.RegisterSprite(SabotagedAuModdingLogo.LoadAsset(), "MiraOverloaded", "logo");
-    }
-}
-
-[HarmonyPatch(typeof(MainMenuManager), nameof(MainMenuManager.Start))]
-public static class MainMenuSpriteInjector
-{
-    public static void Postfix()
-    {
-        SpriteTagRegistry.InjectGlobally();
     }
 }
