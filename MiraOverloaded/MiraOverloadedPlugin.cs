@@ -1,5 +1,6 @@
 using System.Globalization;
 using BepInEx;
+using MiraOverloaded.Patches;
 using BepInEx.Configuration;
 using BepInEx.Unity.IL2CPP;
 using HarmonyLib;
@@ -10,6 +11,8 @@ using Reactor.Networking;
 using Reactor.Networking.Attributes;
 using Reactor.Utilities;
 using UnityEngine;
+using MiraOverloaded.Utilities;
+using static MiraOverloaded.Assets.Assets;
 
 namespace MiraOverloaded;
 
@@ -46,14 +49,24 @@ public partial class MiraOverloadedPlugin : BasePlugin, IMiraPlugin
     {
         ReactorCredits.Register("Mira Overloaded", Version, IsDevBuild, ReactorCredits.AlwaysShow);
         
-        // Initialize localization AFTER mods are loaded to ensure maximum compatibility
         IL2CPPChainloader.Instance.Finished += Modules.ExtensionLocale.SearchInternalLocale;
         
         Harmony.PatchAll();
 
-        // Debug gradient bundle contents.
+        HiveMindChatPatches.RegisterChatHandler();
+
         Assets.MiraOverloadedGradientAssets.DumpBundleInfo();
 
-        // (Rainbow animation handled per-renderer; no global updater needed.)
+        SpriteTagRegistry.RegisterSprite(Banner.LoadAsset(), "MiraOverloaded", "banner");
+        SpriteTagRegistry.RegisterSprite(SabotagedAuModdingLogo.LoadAsset(), "MiraOverloaded", "logo");
+    }
+}
+
+[HarmonyPatch(typeof(MainMenuManager), nameof(MainMenuManager.Start))]
+public static class MainMenuSpriteInjector
+{
+    public static void Postfix()
+    {
+        SpriteTagRegistry.InjectGlobally();
     }
 }

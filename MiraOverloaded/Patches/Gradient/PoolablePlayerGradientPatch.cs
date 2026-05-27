@@ -25,10 +25,12 @@ public static class PoolablePlayerGradientPatch
         if (!renderer || renderer == null) return;
         
 
+        if (!MiraOverloadedGradientAssets.IsLoaded) return;
+
         var mat = renderer.material;
         var target = mat.HasProperty(ShaderID.Mask)
-            ? MiraOverloadedGradientAssets.MaskedGradientMaterial.LoadAsset()
-            : MiraOverloadedGradientAssets.GradientMaterial.LoadAsset();
+            ? MiraOverloadedGradientAssets.MaskedGradientMaterial!.LoadAsset()
+            : MiraOverloadedGradientAssets.GradientMaterial!.LoadAsset();
 
         if (mat.shader != target.shader)
         {

@@ -9,6 +9,7 @@ using MiraOverloaded.Roles.Neutral;
 using TownOfUs.Buttons;
 using TownOfUs.Options.Modifiers.Alliance;
 using UnityEngine;
+using TownOfUs.Networking;
 
 namespace MiraOverloaded.Buttons.Neutral;
 
@@ -19,7 +20,7 @@ public sealed class HiveMindKillButton : TownOfUsKillRoleButton<HiveMindRole, Pl
     public override BaseKeybind Keybind => Keybinds.PrimaryAction;
     public override Color TextOutlineColor => MiraOverloadedColors.HiveMind;
     public override float Cooldown => Math.Clamp(OptionGroupSingleton<HiveMindOptions>.Instance.KillCooldown + MapCooldown, 5f, 120f);
-    public override LoadableAsset<Sprite> Sprite => RoleIcons.HiveMind;
+    public override LoadableAsset<Sprite> Sprite => NeutAssets.HiveMindAwakenSprite;
 
     public override void CreateButton(Transform parent)
     {
@@ -51,6 +52,6 @@ public sealed class HiveMindKillButton : TownOfUsKillRoleButton<HiveMindRole, Pl
             return;
         }
 
-        PlayerControl.LocalPlayer.RpcCustomMurder(Target);
+        PlayerControl.LocalPlayer.RpcSpecialMurder(Target, causeOfDeath: "HiveMind");
     }
 }

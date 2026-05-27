@@ -1,4 +1,5 @@
 using AmongUs.GameOptions;
+using Il2CppInterop.Runtime.Attributes;
 using MiraAPI.GameOptions;
 using MiraAPI.Hud;
 using MiraAPI.LocalSettings;
@@ -11,6 +12,7 @@ using MiraOverloaded.Events;
 using MiraOverloaded.Options.Roles.Neutral;
 using Reactor.Utilities;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using TownOfUs.Roles.Neutral;
 using UnityEngine;
@@ -29,6 +31,24 @@ public sealed class HiveMindRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUs
             TouLocale.GetParsed($"MiraRole{LocaleKey}WikiDescription") +
             MiscUtils.AppendOptionsText(GetType());
     }
+
+    [HideFromIl2Cpp]
+    public List<CustomButtonWikiDescription> Abilities
+    {
+        get
+        {
+            return new List<CustomButtonWikiDescription>
+            {
+                new(TouLocale.GetParsed($"MiraRole{LocaleKey}Kill", "Kill"),
+                    TouLocale.GetParsed($"MiraRole{LocaleKey}KillWikiDescription"),
+                    RoleIcons.HiveMind),
+                new(TouLocale.GetParsed($"MiraRole{LocaleKey}Awaken", "Awaken"),
+                    TouLocale.GetParsed($"MiraRole{LocaleKey}AwakenWikiDescription"),
+                    NeutAssets.HiveMindAwakenSprite),
+            };
+        }
+    }
+
     public DoomableType DoomHintType => DoomableType.Fearmonger;
     public Color RoleColor => MiraOverloadedColors.HiveMind;
     public ModdedRoleTeams Team => ModdedRoleTeams.Custom;
@@ -46,15 +66,12 @@ public sealed class HiveMindRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUs
 
     public bool WinConditionMet()
     {
-        if (Player.HasDied())
-        {
-            return false;
-        }
-
-        var aliveCount = Helpers.GetAlivePlayers().Count;
+        if (Player.HasDied()) return false;
+        var alivePlayers = Helpers.GetAlivePlayers();
+        var aliveHive = alivePlayers.Count(p => p?.Data?.Role is HiveMindRole);
+        if (aliveHive == 0) return false;
         var killersAlive = MiscUtils.KillersAliveCount;
-
-        return aliveCount <= killersAlive && killersAlive == 1;
+        return alivePlayers.Count <= killersAlive && killersAlive == aliveHive;
     }
 
     public void OffsetButtons()

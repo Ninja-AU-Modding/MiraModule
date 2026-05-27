@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace MiraOverloaded.Options.Modifiers.Universal;
 
-public enum NeutralBenignBehavier: uint
+public enum NeutralBenignBehavier
 {
     BecomeCrewmate = 0,
     BecomeFakeposter = 1,
@@ -14,7 +14,7 @@ public enum NeutralBenignBehavier: uint
 
 }
 
-public enum NeutralBehavier: uint
+public enum NeutralBehavier
 {
     BecomeFakeposter = 1,
     BecomeAmni = 2,

@@ -1,6 +1,6 @@
 {
-  "Name": "Mira Overloaded",
-  "Description": "Mira Overloaded (formerly MiraModule) is the largest Mira Extension mod to-date, featuring game-changing role additions for the base game!.",
+  "Name": "<color=#a1e3fe>M</color><color=#fffca1>i</color><color=#7975ff>r</color><color=#5049fe>a</color> <color=#a1e3fe>O</color><color=#ffea9f>v</color><color=#8d89ff>e</color><color=#665eff>r</color><color=#5049fe>l</color><color=#a1e3fe>o</color><color=#7975ff>a</color><color=#665eff>d</color><color=#5049fe>e</color><color=#3b34db>d</color>",
+  "Description": "<color=#a1e3fe>M</color><color=#fffca1>i</color><color=#7975ff>r</color><color=#5049fe>a</color> <color=#a1e3fe>O</color><color=#ffea9f>v</color><color=#8d89ff>e</color><color=#665eff>r</color><color=#5049fe>l</color><color=#a1e3fe>o</color><color=#7975ff>a</color><color=#665eff>d</color><color=#5049fe>e</color><color=#3b34db>d</color> (formerly MiraModule) is the largest Mira Extension mod to-date, featuring game-changing role additions for the base game!.\n\nCreated by the <#ff0000>Sabotaged AU Modding</color> Team, spearheaded by Goober, The Glitch, & Washed.\n\nHuge thanks to Aster and Atony for art!",
   "Tags": [
     "Mira",
     "Town",
@@ -10,7 +10,9 @@
     "Extension",
     "Overloaded",
     "Goober",
-    "Asterisk"
+    "Asterisk",
+    "Glitch",
+    "Washed"
   ],
   "Icon": "MiraOverloaded.Resources.SquareLogo.png",
   "License": "GPLv3",
@@ -18,7 +20,7 @@
     "Goober",
     "Asterisk",
     "The Glitch",
-    "washed bac",
+    "Washed Bac",
     "Atony"
   ],
   "Links": {

@@ -20,13 +20,20 @@ namespace MiraOverloaded.Patches;
 [HarmonyPatch]
 public static class HiveMindDeathPatch
 {
+    public static bool SuppressNextDeathBroadcast;
+
     [HarmonyPostfix]
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.Die))]
     public static void Postfix(PlayerControl __instance, DeathReason reason)
     {
         if (__instance.Data.Role is not HiveMindRole) return;
-        if (__instance.AmOwner)
-            HiveMindEvents.CleanupKillOverlay();
+        if (!__instance.AmOwner) return;
+        HiveMindEvents.CleanupKillOverlay();
+        if (SuppressNextDeathBroadcast)
+        {
+            SuppressNextDeathBroadcast = false;
+            return;
+        }
         RpcHiveMindDeath(__instance);
     }
 
@@ -47,8 +54,10 @@ public static class HiveMindDeathPatch
         if (!opts.KnowsDeath) return;
 
         SoundManager.Instance.PlaySound(MiraOverloadedAudio.HiveMind.LoadAsset(), false, 1f);
-        var extraMessage = opts.HiveMindKnows ? "" : ", who was a part of the hive,";
-        ChaosTokensUtils.Notification($"<b><#FF0000>{sender.name}{extraMessage} has died!</color></b>");
+        var deathLine = opts.HiveMindKnows
+            ? TouLocale.GetParsed("MiraHiveMindNotificationDeath", "[player] has died!").Replace("[player]", sender.name)
+            : TouLocale.GetParsed("MiraHiveMindNotificationDeathAnon", "A member of the hive has died!");
+        ChaosTokensUtils.Notification($"<b><#FF0000>{deathLine}</color></b>");
     }
 
     [MethodRpc((uint)MiraOverloadedRpc.HiveMindKill)]
@@ -65,8 +74,10 @@ public static class HiveMindDeathPatch
         if (!opts.KnowsDeath) return;
 
         SoundManager.Instance.PlaySound(MiraOverloadedAudio.HiveMind.LoadAsset(), false, 1f);
-        var killerName = opts.HiveMindKnows ? sender.name : "A member of the hive";
-        ChaosTokensUtils.Notification($"<b><#DDB244>{killerName} has made a kill!</color></b>");
+        var killLine = opts.HiveMindKnows
+            ? TouLocale.GetParsed("MiraHiveMindNotificationKill", "[player] has made a kill!").Replace("[player]", sender.name)
+            : TouLocale.GetParsed("MiraHiveMindNotificationKillAnon", "A member of the hive has made a kill!");
+        ChaosTokensUtils.Notification($"<b><#DDB244>{killLine}</color></b>");
     }
 
     [MethodRpc((uint)MiraOverloadedRpc.HiveMindLinkedCooldown)]
@@ -75,13 +86,19 @@ public static class HiveMindDeathPatch
         if (sender.AmOwner) return;
         var localPlayer = PlayerControl.LocalPlayer;
         if (localPlayer == null) return;
-        if (localPlayer.Data.Role is not HiveMindRole) return;
+        if (localPlayer.Data?.Role is not HiveMindRole &&
+            !localPlayer.HasModifier<LinkedMindModifier>()) return;
         HiveMindEvents.SetSharedCooldown(localPlayer, cooldown);
     }
 
     [MethodRpc((uint)MiraOverloadedRpc.HiveMindAwaken)]
     public static void RpcHiveMindAwaken(PlayerControl hiveMind)
     {
+        var localPlayer = PlayerControl.LocalPlayer;
+        var localWasAlreadyHiveMind = localPlayer != null && localPlayer.Data?.Role is HiveMindRole;
+
+        if (!hiveMind.HasModifier<HiveMindAwakenModifier>()) return;
+
         hiveMind.RemoveModifier<HiveMindAwakenModifier>();
 
         foreach (var player in PlayerControl.AllPlayerControls.ToArray()
@@ -91,10 +108,8 @@ public static class HiveMindDeathPatch
             player.RemoveModifier<LinkedMindModifier>();
         }
 
-        var localPlayer = PlayerControl.LocalPlayer;
         if (localPlayer == null || hiveMind.AmOwner) return;
-
-        if (localPlayer.Data.Role is not HiveMindRole) return;
+        if (!localWasAlreadyHiveMind) return;
 
         var opts = OptionGroupSingleton<HiveMindOptions>.Instance;
 
@@ -104,17 +119,22 @@ public static class HiveMindDeathPatch
         {
             SoundManager.Instance.PlaySound(MiraOverloadedAudio.HiveMind.LoadAsset(), false, 1f);
             ChaosTokensUtils.Notification(
-                $"<b><#FF0000>⚠ {nameDisplay} has awakened the Hive Mind!</color></b>");
+                $"<b><#FF0000>{TouLocale.GetParsed("MiraHiveMindNotificationAwakened", "⚠ [player] has awakened the Hive Mind!").Replace("[player]", nameDisplay)}</color></b>");
         }
     }
 
     [MethodRpc((uint)MiraOverloadedRpc.HiveMindTimeout)]
     public static void RpcHiveMindTimeout(PlayerControl hiveMind)
     {
-        if (hiveMind.AmOwner) return;
-
         var localPlayer = PlayerControl.LocalPlayer;
         if (localPlayer == null) return;
+
+        if (hiveMind.AmOwner)
+        {
+            SoundManager.Instance.PlaySound(MiraOverloadedAudio.HiveMind.LoadAsset(), false, 1f);
+            ChaosTokensUtils.Notification($"<b><#FF0000>{TouLocale.GetParsed("MiraHiveMindNotificationTimeoutSelf", "⚠ You failed to awaken the Hive Mind in time!")}</color></b>");
+            return;
+        }
 
         bool wasLinked = localPlayer.HasModifier<LinkedMindModifier>();
         if (wasLinked)
@@ -137,7 +157,7 @@ public static class HiveMindDeathPatch
         }
 
         SoundManager.Instance.PlaySound(MiraOverloadedAudio.HiveMind.LoadAsset(), false, 1f);
-        ChaosTokensUtils.Notification($"<b><#FF0000>⚠ {nameDisplay} failed to awaken the Hive Mind in time!</color></b>");
+        ChaosTokensUtils.Notification($"<b><#FF0000>{TouLocale.GetParsed("MiraHiveMindNotificationTimeout", "⚠ [player] failed to awaken the Hive Mind in time!").Replace("[player]", nameDisplay)}</color></b>");
     }
 
     private static bool HasLos(PlayerControl viewer, PlayerControl target)

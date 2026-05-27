@@ -28,12 +28,12 @@ public static class PlayerMaterialGradientUtils
             secondary = secondaryMain;
         }
 
-        if (isGradient)
+        if (isGradient && MiraOverloadedGradientAssets.IsLoaded)
         {
             var mat = renderer.material;
             var target = mat.HasProperty(ShaderID.Mask)
-                ? MiraOverloadedGradientAssets.MaskedGradientMaterial.LoadAsset()
-                : MiraOverloadedGradientAssets.GradientMaterial.LoadAsset();
+                ? MiraOverloadedGradientAssets.MaskedGradientMaterial!.LoadAsset()
+                : MiraOverloadedGradientAssets.GradientMaterial!.LoadAsset();
 
             if (mat.shader != target.shader)
             {
@@ -41,7 +41,6 @@ public static class PlayerMaterialGradientUtils
                 mat = renderer.material;
             }
 
-            
             mat.SetFloat(ShaderID.Get("_GradientBlend"), 1f);
             mat.SetFloat(ShaderID.Get("_GradientAngle"), 225f);
             mat.SetFloat(ShaderID.Get("_GradientOffset"), 0.4f);
@@ -73,12 +72,12 @@ public static class PlayerMaterialGradientUtils
             }
         }
 
-        if (foundId >= 0 && MiraOverloadedGradientColors.TryGetSecondary(foundId, out var secondaryMain, out _))
+        if (foundId >= 0 && MiraOverloadedGradientColors.TryGetSecondary(foundId, out var secondaryMain, out _) && MiraOverloadedGradientAssets.IsLoaded)
         {
             var mat = renderer.material;
             var target = mat.HasProperty(ShaderID.Mask)
-                ? MiraOverloadedGradientAssets.MaskedGradientMaterial.LoadAsset()
-                : MiraOverloadedGradientAssets.GradientMaterial.LoadAsset();
+                ? MiraOverloadedGradientAssets.MaskedGradientMaterial!.LoadAsset()
+                : MiraOverloadedGradientAssets.GradientMaterial!.LoadAsset();
 
             if (mat.shader != target.shader)
             {

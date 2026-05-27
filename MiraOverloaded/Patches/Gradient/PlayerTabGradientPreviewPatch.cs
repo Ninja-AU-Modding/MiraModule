@@ -51,13 +51,14 @@ public static class PlayerTabGradientPreviewPatch
         }
 
         if (!MiraOverloadedGradientColors.TryGetSecondary(colorId, out var secondaryMain, out var secondaryShadow)) return;
+        if (!MiraOverloadedGradientAssets.IsLoaded) return;
 
         foreach (var renderer in GetAllSpriteRenderers(chip, inner).Where(r => r))
         {
             var mat = renderer.material;
             var target = mat.HasProperty(ShaderID.Mask)
-                ? MiraOverloadedGradientAssets.MaskedGradientMaterial.LoadAsset()
-                : MiraOverloadedGradientAssets.GradientMaterial.LoadAsset();
+                ? MiraOverloadedGradientAssets.MaskedGradientMaterial!.LoadAsset()
+                : MiraOverloadedGradientAssets.GradientMaterial!.LoadAsset();
 
             if (mat.shader != target.shader)
             {

@@ -19,7 +19,7 @@ public sealed class HiveMindOptions : AbstractOptionGroup<HiveMindRole>
     [ModdedToggleOption("MiraOptionHiveMindHasImposterVision")]
     public bool ImposterVision { get; set; } = true;
 
-    [ModdedToggleOption("MiraOptionHiveMindHasAssasin")]
+    [ModdedToggleOption("MiraOptionHiveMindHasAssassin")]
     public bool HasAssassin { get; set; } = true;
 
     [ModdedNumberOption("MiraOptionOtherConnectedMinds", 1f, 4f, 1f)]
@@ -40,7 +40,7 @@ public sealed class HiveMindOptions : AbstractOptionGroup<HiveMindRole>
     [ModdedNumberOption("MiraOptionHiveMindSlowdownAfterKill", 0f, 1f, 0.15f, MiraNumberSuffixes.Multiplier)]
     public float SlowdownAfterKill { get; set; } = 0.15f;
 
-    [ModdedToggleOption("MiraOptiomHiveMindScreenDarkenAfterKill")]
+    [ModdedToggleOption("MiraOptionHiveMindScreenDarkenAfterKill")]
     public bool ScreenDarkenAfterKill { get; set; } = true;
 
     [ModdedNumberOption("MiraOptionHiveMindEffectDuration", 0f, 30f, 0.5f, MiraNumberSuffixes.Seconds)]

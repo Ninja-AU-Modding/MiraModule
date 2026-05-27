@@ -9,8 +9,10 @@ public static class HatManagerGradientPatch
 {
     public static void Postfix(HatManager __instance)
     {
-        var mat1 = __instance.PlayerMaterial = MiraOverloadedGradientAssets.GradientMaterial.LoadAsset();
-        var mat2 = __instance.MaskedPlayerMaterial = MiraOverloadedGradientAssets.MaskedGradientMaterial.LoadAsset();
+        if (!MiraOverloadedGradientAssets.IsLoaded) return;
+
+        var mat1 = __instance.PlayerMaterial = MiraOverloadedGradientAssets.GradientMaterial!.LoadAsset();
+        var mat2 = __instance.MaskedPlayerMaterial = MiraOverloadedGradientAssets.MaskedGradientMaterial!.LoadAsset();
 
         mat1.SetFloat(ShaderID.Get("_GradientBlend"), 1f);
         mat2.SetFloat(ShaderID.Get("_GradientBlend"), 1f);
