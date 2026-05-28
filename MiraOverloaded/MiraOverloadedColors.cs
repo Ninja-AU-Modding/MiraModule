@@ -6,8 +6,9 @@ namespace MiraOverloaded;
 
 public static class MiraOverloadedColors
 {
+    public static Color MiraOverloaded => new Color32(246, 228, 44, 255); // Yellow
     // Impostor Colors
-    public static Color Ninja => new Color32(255, 255, 255, 255);
+    public static Color Ninja => new Color32(255, 255, 255, 255); // White
 
     // Neutral Colors
     public static Color Sentinel => new Color32(143, 162, 141, 255);

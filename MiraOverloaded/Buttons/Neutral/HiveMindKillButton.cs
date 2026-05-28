@@ -48,7 +48,6 @@ public sealed class HiveMindKillButton : TownOfUsKillRoleButton<HiveMindRole, Pl
     {
         if (Target == null)
         {
-            Error("Hive Mind Kill: Target is null");
             return;
         }
 

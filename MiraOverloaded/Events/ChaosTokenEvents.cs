@@ -224,7 +224,7 @@ public static class ChaosTokenEvents
             {
                 source.SetKillTimer(GameOptionsManager.Instance.CurrentGameOptions.GetFloat(FloatOptionNames.KillCooldown) / 2f);
                 Coroutines.Start(MiscUtils.CoFlash(MiraOverloadedColors.ChaosTokens));
-                ChaosTokensUtils.Notification("Skill issue", true);
+                ChaosTokensUtils.Notification("Skill issue", true, true);
             }
         }
     }

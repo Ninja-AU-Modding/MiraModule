@@ -1,7 +1,5 @@
 using HarmonyLib;
-using JetBrains.Annotations;
 using MiraAPI.GameOptions;
-using MiraAPI.Hud;
 using MiraAPI.Modifiers;
 using MiraAPI.Roles;
 using MiraOverloaded.Assets;
@@ -12,7 +10,6 @@ using MiraOverloaded.Options.Roles.Neutral;
 using MiraOverloaded.Roles.Neutral;
 using MiraOverloaded.Utilities;
 using Reactor.Networking.Attributes;
-using System.Linq;
 using UnityEngine;
 
 namespace MiraOverloaded.Patches;

@@ -8,10 +8,10 @@ namespace MiraOverloaded.Utilities;
 
 public static class ChaosTokensUtils
 {
-    public static LobbyNotificationMessage Notification(string text, bool negative = false)
+    public static LobbyNotificationMessage Notification(string text, bool negative = false, bool showSpr = false)
     {
         var notif = MiraApiHelpers.CreateAndShowNotification(text, negative ? Color.red : MiraOverloadedColors.ChaosTokens,
-            spr: ChaosTokensAssets.DiceSprite.LoadAsset());
+            spr: showSpr ? ChaosTokensAssets.DiceSprite.LoadAsset() : null);
         notif.Text.SetOutlineThickness(0.35f);
         notif.transform.localPosition = new Vector3(0f, 1f, -20f);
 

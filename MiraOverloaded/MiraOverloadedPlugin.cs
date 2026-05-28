@@ -48,7 +48,8 @@ public partial class MiraOverloadedPlugin : BasePlugin, IMiraPlugin
     public override void Load()
     {
         ReactorCredits.Register("Mira Overloaded", Version, IsDevBuild, ReactorCredits.AlwaysShow);
-        
+
+        Modules.MiraOverloadedLocale.Initialize();
         IL2CPPChainloader.Instance.Finished += Modules.ExtensionLocale.SearchInternalLocale;
         
         Harmony.PatchAll();

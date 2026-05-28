@@ -72,7 +72,7 @@ public class ChaosTokenModifier : UniversalGameModifier
 
     private static void TokensReceived(int amount)
     {
-        ChaosTokensUtils.Notification($"<b>You received {amount} token{(amount > 1 ? "s" : string.Empty)}!</b>");
+        ChaosTokensUtils.Notification($"<b>You received {amount} token{(amount > 1 ? "s" : string.Empty)}!</b>", showSpr: true);
     }
 
     public override void FixedUpdate()

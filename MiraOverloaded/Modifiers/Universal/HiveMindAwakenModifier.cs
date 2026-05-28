@@ -150,8 +150,6 @@ public sealed class HiveMindAwakenModifier : TimedModifier
 
     public override void OnTimerComplete()
     {
-        // Defer the consequence rather than refunding the full duration, so meetings
-        // can't be used to exploit the awakening window.
         if (MeetingHud.Instance || ExileController.Instance)
         {
             _pendingTimeout = true;
@@ -160,12 +158,9 @@ public sealed class HiveMindAwakenModifier : TimedModifier
 
         if (!Player.AmOwner || Player.HasDied()) return;
 
-        // Awaken button was already pressed this round — don't time out as well.
         if (AwakenSucceeded) return;
 
         HiveMindDeathPatch.RpcHiveMindTimeout(Player);
-        // Suppress the Die() postfix from also broadcasting RpcHiveMindDeath,
-        // which would double the banner and cooldown bump for other hive members.
         HiveMindDeathPatch.SuppressNextDeathBroadcast = true;
         Player.RpcCustomMurder(Player);
     }

@@ -1,5 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+	<!-- Options -->
+	<string name="MiraOptionDisableRoles">Disable Certain Other Extension Mod Roles (For Compatibility)</string>
+	
     <!-- Player Colors -->
     <string name="PlayerColorSpiderman">Spiderman</string>
     <string name="PlayerColorSunburn">Sunburn</string>
@@ -14,7 +17,7 @@
     <!-- Sentinel - Neutral Killing -->
     <string name="MiraRoleSentinel">Sentinel</string>
     <string name="MiraRoleSentinelIntroBlurb">Eliminate those who stand in your path.</string>
-    <string name="MiraRoleSentinelTabDescription">Kill players by using your dope abilities!\%nl\%Preferably, explode \%b\%only\%/b\% in a secluded area.</string>
+    <string name="MiraRoleSentinelTabDescription">Kill players by using your dope abilities![nl]Preferably, explode [b]only[/b] in a secluded area.</string>
     
     <!-- Sentinel Wiki -->
     <string name="MiraRoleSentinelWikiDescription">The Sentinel is a Neutral Killing role that can explode themselves to kill anyone nearby. They may also kill normally, but where's the fun in that?</string>
@@ -24,10 +27,10 @@
     <!-- Abyss - Neutral Killing -->
     <string name="MiraRoleAbyss">Abyss</string>
     <string name="MiraRoleAbyssIntroBlurb">Gulp down every last one of them.</string>
-    <string name="MiraRoleAbyssTabDescription">Use your Gulp ability to swallow players whole!\%nl\%Swallowed players vanish with \%b\%no body\%/b\% left behind. They die for good when a meeting is called.</string>
+    <string name="MiraRoleAbyssTabDescription">Use your Gulp ability to swallow players whole![nl]Swallowed players vanish with [b]no body[/b] left behind. They die for good when a meeting is called.</string>
 
     <!-- Abyss Wiki -->
-    <string name="MiraRoleAbyssWikiDescription">The Abyss is a Neutral Killing role that swallows other players, hiding them from the game entirely. Swallowed players leave no corpse and do not appear in the meeting dead list â€” until the next meeting is called, at which point they die for good. If the Abyss dies, any swallowed players are released alive.</string>
+    <string name="MiraRoleAbyssWikiDescription">The Abyss is a Neutral Killing role that swallows other players, hiding them from the game entirely. Swallowed players leave no corpse and do not appear in the meeting dead list — until the next meeting is called, at which point they die for good. If the Abyss dies, any swallowed players are released alive.</string>
     <string name="MiraRoleAbyssGulp">Gulp</string>
     <string name="MiraRoleAbyssGulpWikiDescription">Swallow a nearby player. They vanish from the map and are hidden until the next meeting.</string>
 
@@ -47,10 +50,10 @@
     <!-- Eraser - Impostor -->
     <string name="MiraRoleEraser">Eraser</string>
     <string name="MiraRoleEraserIntroBlurb">Wipe their roles from existence.</string>
-    <string name="MiraRoleEraserTabDescription">Use your Erase ability to mark players.\%nl\%Their role will be wiped at the \%b\%next meeting\%/b\%, no matter what happens in between.</string>
+    <string name="MiraRoleEraserTabDescription">Use your Erase ability to mark players.[nl]Their role will be wiped at the [b]next meeting[/b], no matter what happens in between.</string>
 
     <!-- Eraser Wiki -->
-    <string name="MiraRoleEraserWikiDescription">The Eraser is an Impostor role that can target players and erase their roles. Erased players lose their role at the start of the next meeting â€” the erase is permanent and cannot be undone, even if the Eraser dies before the meeting. Each erase increases the Erase cooldown. By default, the Eraser cannot erase other Impostors. If a Neutral player is erased, the host can configure whether they become a Crewmate or die outright.</string>
+    <string name="MiraRoleEraserWikiDescription">The Eraser is an Impostor role that can target players and erase their roles. Erased players lose their role at the start of the next meeting — the erase is permanent and cannot be undone, even if the Eraser dies before the meeting. Each erase increases the Erase cooldown. By default, the Eraser cannot erase other Impostors. If a Neutral player is erased, the host can configure whether they become a Crewmate or die outright.</string>
     <string name="MiraRoleEraserErase">Erase</string>
     <string name="MiraRoleEraserEraseWikiDescription">Mark a player for erasure. Their role will be removed at the start of the next meeting.</string>
 
@@ -65,7 +68,7 @@
     <!-- Distorter - Impostor -->
     <string name="MiraRoleDistorter">Distorter</string>
     <string name="MiraRoleDistorterIntroBlurb">Pull them in and vanish.</string>
-    <string name="MiraRoleDistorterTabDescription">Use Distort to reel a target toward you.\%nl\%After a quick kill window, you become invisible for a short time.</string>
+    <string name="MiraRoleDistorterTabDescription">Use Distort to reel a target toward you.[nl]After a quick kill window, you become invisible for a short time.</string>
 
     <!-- Distorter Wiki -->
     <string name="MiraRoleDistorterWikiDescription">The Distorter is an Impostor role that can pull a target toward themselves. After using Distort, they get a brief kill window and then turn invisible for a duration, moving faster while hidden.</string>
@@ -82,7 +85,7 @@
     <!-- Ninja - Impostor -->
     <string name="MiraRoleNinja">Ninja</string>
     <string name="MiraRoleNinjaIntroBlurb">Mark your prey and strike from anywhere.</string>
-    <string name="MiraRoleNinjaTabDescription">Mark a target, then Assassinate to instantly teleport and kill.\%nl\%Trace marks are left behind, and you turn invisible to escape.</string>
+    <string name="MiraRoleNinjaTabDescription">Mark a target, then Assassinate to instantly teleport and kill.[nl]Trace marks are left behind, and you turn invisible to escape.</string>
 
     <!-- Ninja Wiki -->
     <string name="MiraRoleNinjaWikiDescription">The Ninja is an Impostor-aligned role that can mark a target and later assassinate them from anywhere on the map. When the assassination occurs, the Ninja teleports to the target, kills instantly, and becomes invisible for a short time. Trace markers reveal the teleport origin and destination.</string>
@@ -103,7 +106,7 @@
 
     <string name="MiraRoleArbiter">Arbiter</string>
     <string name="MiraRoleArbiterIntroBlurb">Choose a target and sway the vote.</string>
-    <string name="MiraRoleArbiterTabDescription">Choose a target from the Arbiter menu.\%nl\%If that player is voted out, you gain a faster kill cooldown, an invisibility use, and a speed boost use.</string>
+    <string name="MiraRoleArbiterTabDescription">Choose a target from the Arbiter menu.[nl]If that player is voted out, you gain a faster kill cooldown, an invisibility use, and a speed boost use.</string>
 
     <string name="MiraRoleArbiterWikiDescription">The Arbiter is an Impostor role that selects a target through a GUI. If the target is exiled by vote, the Arbiter gains a faster kill cooldown plus one-time uses for invisibility and a speed boost. The target cannot be changed unless the option allows it.</string>
     <string name="MiraRoleArbiterMark">Mark</string>
@@ -126,10 +129,10 @@
     <!-- Shifter - Neutral Benign -->
     <string name="MiraRoleShifter">Shifter</string>
     <string name="MiraRoleShifterIntroBlurb">Take someone's place before they even know it.</string>
-    <string name="MiraRoleShifterTabDescription">Use your Shift ability to target a player.\%nl\%At the \%b\%end of the next meeting\%/b\%, you'll swap roles with them â€” they become the Shifter, and you become whatever they were.\%nl\%The swap happens \%b\%even if either of you is dead\%/b\% before the meeting ends.</string>
+    <string name="MiraRoleShifterTabDescription">Use your Shift ability to target a player.[nl]At the [b]end of the next meeting[/b], you'll swap roles with them — they become the Shifter, and you become whatever they were.[nl]The swap happens [b]even if either of you is dead[/b] before the meeting ends.</string>
 
     <!-- Shifter Wiki -->
-    <string name="MiraRoleShifterWikiDescription">The Shifter is a Neutral Benign role that can swap roles with another player. The target must be chosen during the round, and the swap always occurs at the end of the next meeting â€” the target will not know until after the meeting who shifted with them. The shift is guaranteed even if the Shifter or the target dies before the meeting ends. The player who was shifted becomes the Shifter in their place.</string>
+    <string name="MiraRoleShifterWikiDescription">The Shifter is a Neutral Benign role that can swap roles with another player. The target must be chosen during the round, and the swap always occurs at the end of the next meeting — the target will not know until after the meeting who shifted with them. The shift is guaranteed even if the Shifter or the target dies before the meeting ends. The player who was shifted becomes the Shifter in their place.</string>
     <string name="MiraRoleShifterShift">Shift</string>
     <string name="MiraRoleShifterShiftWikiDescription">Target a player to swap roles with. The swap takes effect at the end of the next meeting, no matter what.</string>
 
@@ -154,7 +157,7 @@
     <!-- Baiter - Neutral Evil -->
     <string name="MiraRoleBaiter">Baiter</string>
     <string name="MiraRoleBaiterIntroBlurb">Fool them with a corpse. Make them call it in.</string>
-    <string name="MiraRoleBaiterTabDescription">Spawn fake dead bodies near a chosen player.\%nl\%Get enough bait bodies \%b\%reported\%/b\% to win — but don't get caught!</string>
+    <string name="MiraRoleBaiterTabDescription">Spawn fake dead bodies near a chosen player.[nl]Get enough bait bodies [b]reported[/b] to win — but don't get caught!</string>
 
     <!-- Baiter Wiki -->
     <string name="MiraRoleBaiterWikiDescription">The Baiter is a Neutral Evil role that wins by planting fake dead bodies and having them reported by other players. Each successful report counts toward the required number of baits. The Baiter has no kill ability and must rely entirely on deception to win.</string>
@@ -171,7 +174,7 @@
     <!-- Poisoner - Impostor -->
     <string name="MiraRolePoisoner">Poisoner</string>
     <string name="MiraRolePoisonerIntroBlurb">Poison them and watch it spread.</string>
-    <string name="MiraRolePoisonerTabDescription">Poison a target to turn their name dark green.\%nl\%The poison is \%b\%contagious\%/b\% and spreads when players touch.\%nl\%Setting determines if meetings save or kill victims.</string>
+    <string name="MiraRolePoisonerTabDescription">Poison a target to turn their name dark green.[nl]The poison is [b]contagious[/b] and spreads when players touch.[nl]Setting determines if meetings save or kill victims.</string>
 
     <!-- Poisoner Wiki -->
     <string name="MiraRolePoisonerWikiDescription">The Poisoner is an Impostor role that can poison players. Poisoned players have dark green names visible only to Impostors. The poison spreads to healthy players on contact. If a poisoned player's timer runs out, they die. Meetings can either save victims or trigger their deaths.</string>
@@ -190,7 +193,7 @@
     <!-- Revenant - Impostor -->
     <string name="MiraRoleRevenant">Revenant</string>
     <string name="MiraRoleRevenantIntroBlurb">Strike from the afterlife.</string>
-    <string name="MiraRoleRevenantTabDescription">Use Fake Death to die and turn into a ghost.\%nl\%As a ghost, you can continue killing a limited number of crewmates.\%nl\%Your ghost kills are silent and deadly.</string>
+    <string name="MiraRoleRevenantTabDescription">Use Fake Death to die and turn into a ghost.[nl]As a ghost, you can continue killing a limited number of crewmates.[nl]Your ghost kills are silent and deadly.</string>
 
     <!-- Revenant Wiki -->
     <string name="MiraRoleRevenantWikiDescription">The Revenant is an Impostor role that can fake its death using the Fake Death button. Once used, the Revenant becomes a ghost but retains the ability to kill a limited number of players. This allows the Revenant to strike from safety, though they can no longer sabotaging or perform other physical tasks.</string>
@@ -207,7 +210,7 @@
     <!-- Lifter - Crewmate -->
     <string name="MiraRoleLifter">Lifter</string>
     <string name="MiraRoleLifterIntroBlurb">Lift votes and stack your influence.</string>
-    <string name="MiraRoleLifterTabDescription">Use Lift on a nearby player to gain a \%b\%permanent extra vote\%/b\% each time you lift.</string>
+    <string name="MiraRoleLifterTabDescription">Use Lift on a nearby player to gain a [b]permanent extra vote[/b] each time you lift.</string>
 
     <!-- Lifter Wiki -->
     <string name="MiraRoleLifterWikiDescription">The Lifter is a Crewmate Support role that can lift votes from nearby players. Each lift grants the Lifter a permanent extra vote, stacking for the rest of the game.</string>
@@ -220,7 +223,7 @@
     <!-- Inspector General - Crewmate Killing -->
     <string name="MiraRoleInspectorGeneral">Inspector General</string>
     <string name="MiraRoleInspectorGeneralIntroBlurb">Build a command unit and eliminate threats.</string>
-    <string name="MiraRoleInspectorGeneralTabDescription">Convert crewmates into Command Specialists.\%nl\%You and your specialists can kill neutrals and impostors, but killing a crewmate causes you to die.\%nl\%If you kill an evil target, you can no longer convert.</string>
+    <string name="MiraRoleInspectorGeneralTabDescription">Convert crewmates into Command Specialists.[nl]You and your specialists can kill neutrals and impostors, but killing a crewmate causes you to die.[nl]If you kill an evil target, you can no longer convert.</string>
 
     <!-- Inspector General Wiki -->
     <string name="MiraRoleInspectorGeneralWikiDescription">The Inspector General is a Crewmate Killing role that can convert a limited number of crewmates into Command Specialists. Converting a neutral or impostor kills them instead. If the Inspector General kills a neutral or impostor with their kill button, they lose the ability to convert further.</string>
@@ -238,12 +241,12 @@
     <!-- Command Specialist - Crewmate Killing -->
     <string name="MiraRoleCommandSpecialist">Command Specialist</string>
     <string name="MiraRoleCommandSpecialistIntroBlurb">Enforce the inspector's will.</string>
-    <string name="MiraRoleCommandSpecialistTabDescription">You can kill neutrals and impostors, but killing a crewmate causes you to die.\%nl\%After killing an evil target, you return to your original role.</string>
+    <string name="MiraRoleCommandSpecialistTabDescription">You can kill neutrals and impostors, but killing a crewmate causes you to die.[nl]After killing an evil target, you return to your original role.</string>
 
     <!-- Hive Mind - Neutral Killing -->
     <string name="MiraRoleHiveMind">Hive Mind</string>
 	<string name="MiraRoleHiveMindIntroBlurb">Assimilate into the hive</string>
-    <string name="MiraRoleHiveMindTabDescription">Awaken your dormant minds before time runs out, or you will die.\%nl\%Kill as fast as you can. Each mind that dies weakens the collective.</string>
+    <string name="MiraRoleHiveMindTabDescription">Awaken your dormant minds before time runs out, or you will die.[nl]Kill as fast as you can. Each mind that dies weakens the collective.</string>
 
     <!-- Hive Mind Wiki -->
     <string name="MiraRoleHiveMindWikiDescription">The Hive Mind is a Neutral Killing role assigned to one person at the start of the game. There are a set amount of "dormant" minds. At the start of the game, the Hive Mind must use the Awaken ability before the countdown reaches 0. If this is not done, the main Hive Mind will let out a scream and die. Once awakened, dormant minds become full on Hive Minds. Kills and cooldowns are shared across the entire collective (if that option is checked), and deaths within the hive = cooldown increases and debuffs on surviving minds.</string>

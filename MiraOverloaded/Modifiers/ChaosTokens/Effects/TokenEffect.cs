@@ -24,7 +24,7 @@ public abstract class TokenEffect : BaseModifier
 
         if (!string.IsNullOrEmpty(Notification))
         {
-            ChaosTokensUtils.Notification($"<b>{Notification}</b>", Negative);
+            ChaosTokensUtils.Notification($"<b>{Notification}</b>", Negative, true);
         }
     }
     

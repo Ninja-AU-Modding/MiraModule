@@ -93,12 +93,12 @@ public static class ChaosTokensRpc
 
         if (player.AmOwner)
         {
-            ChaosTokensUtils.Notification("<b>You swapped positions with someone!</b>");
+            ChaosTokensUtils.Notification("<b>You swapped positions with someone!</b>", showSpr: true);
         }
         
         if (victim.AmOwner)
         {
-            ChaosTokensUtils.Notification("<b>Someone swapped positions with you!</b>");
+            ChaosTokensUtils.Notification("<b>Someone swapped positions with you!</b>", showSpr: true);
         }
     }
     
@@ -106,11 +106,11 @@ public static class ChaosTokensRpc
     {
         if (player.AmOwner)
         {
-            ChaosTokensUtils.Notification("<b>You swapped roles with someone!</b>");
+            ChaosTokensUtils.Notification("<b>You swapped roles with someone!</b>", showSpr: true);
         }
         if (victim.AmOwner)
         {
-            ChaosTokensUtils.Notification("<b>Someone swapped roles with you!</b>");
+            ChaosTokensUtils.Notification("<b>Someone swapped roles with you!</b>", showSpr: true);
         }
         
         RoleTypes role1 = player.Data.Role.Role;
@@ -126,13 +126,13 @@ public static class ChaosTokensRpc
 
         if (target.AmOwner)
         {
-            ChaosTokensUtils.Notification("<b>Someone revived you, you are back from the dead!</b>");
+            ChaosTokensUtils.Notification("<b>Someone revived you, you are back from the dead!</b>", showSpr: true);
             Coroutines.Start(MiscUtils.CoFlash(MiraOverloadedColors.ChaosTokens));
         }
 
         if (source.AmOwner)
         {
-            ChaosTokensUtils.Notification("<b>You revived a random person!</b>");
+            ChaosTokensUtils.Notification("<b>You revived a random person!</b>", showSpr: true);
         }
     }
 
