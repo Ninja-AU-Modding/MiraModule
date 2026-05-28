@@ -41,7 +41,7 @@ public sealed class HiveMindRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUs
             {
                 new(TouLocale.GetParsed($"MiraRole{LocaleKey}Kill", "Kill"),
                     TouLocale.GetParsed($"MiraRole{LocaleKey}KillWikiDescription"),
-                    RoleIcons.HiveMind),
+                    NeutAssets.HiveMindAwakenSprite),
                 new(TouLocale.GetParsed($"MiraRole{LocaleKey}Awaken", "Awaken"),
                     TouLocale.GetParsed($"MiraRole{LocaleKey}AwakenWikiDescription"),
                     NeutAssets.HiveMindAwakenSprite),

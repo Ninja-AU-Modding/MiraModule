@@ -6,6 +6,7 @@ namespace MiraOverloaded.Modules;
 
 public static class ExtensionLocale
 {
+    // If anyone sees this, keep it as a seperate logger so if there's any issues with the locale specifically I can filter thru
     internal static ManualLogSource LocaleLogger { get; } = BepInEx.Logging.Logger.CreateLogSource("MiraOverloadedLocale");
 
     public static void SearchInternalLocale()

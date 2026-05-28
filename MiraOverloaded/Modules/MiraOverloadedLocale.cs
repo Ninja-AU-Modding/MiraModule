@@ -6,7 +6,6 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Xml;
 using BepInEx;
-using BepInEx.Logging;
 using MiraAPI.GameOptions;
 using MiraOverloaded.Options;
 
@@ -20,7 +19,6 @@ public static class MiraOverloadedLocale
     private static readonly Dictionary<string, Dictionary<string, string>> Translations =
         new(StringComparer.OrdinalIgnoreCase);
     private static Dictionary<string, string>? _externalOverride;
-    private static ManualLogSource? _logger;
     private static bool _initialized;
 
     public static void Initialize()
@@ -30,7 +28,6 @@ public static class MiraOverloadedLocale
             return;
         }
 
-        _logger ??= BepInEx.Logging.Logger.CreateLogSource("MiraOverloadedLocale");
         LoadEmbeddedLocales();
         LoadExternalOverride();
         _initialized = true;
@@ -87,7 +84,7 @@ public static class MiraOverloadedLocale
             using var stream = assembly.GetManifestResourceStream(resourceName);
             if (stream == null)
             {
-                _logger?.LogError($"Failed to load embedded locale: {resourceName}");
+                Error($"Failed to load embedded locale: {resourceName}");
                 continue;
             }
 
@@ -109,11 +106,11 @@ public static class MiraOverloadedLocale
         {
             _externalOverride = new Dictionary<string, string>();
             ParseXml(File.ReadAllText(overridePath), _externalOverride);
-            _logger?.LogInfo($"Loaded external locale override: {overridePath}");
+            Info($"Loaded external locale override: {overridePath}");
         }
         catch (Exception ex)
         {
-            _logger?.LogError($"Failed to load external locale override: {ex.Message}");
+            Error($"Failed to load external locale override: {ex.Message}");
         }
     }
 
@@ -125,7 +122,7 @@ public static class MiraOverloadedLocale
         var root = xmlDoc.DocumentElement;
         if (root == null || root.Name != "resources")
         {
-            _logger?.LogError("Locale XML root node must be <resources>.");
+            Error("Locale XML root node must be <resources>.");
             return;
         }
 

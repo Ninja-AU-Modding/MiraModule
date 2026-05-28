@@ -75,7 +75,7 @@ public static class ChaosTokensRpc
     {
         if (!player.TryGetModifier<ChaosTokenModifier>(out var chaosTokenModifier))
         {
-            Logger<MiraOverloadedPlugin>.Error($"Cannot decrease tokens: player {player.Data.PlayerName} has no modifier");
+            Error($"Cannot decrease tokens: player {player.Data.PlayerName} has no modifier");
             return;
         }
         
