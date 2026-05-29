@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Xml;
 using BepInEx;
-using MiraAPI.GameOptions;
+using MiraAPI.LocalSettings;
 using MiraOverloaded.Options;
 
 namespace MiraOverloaded.Modules;
@@ -35,7 +35,7 @@ public static class MiraOverloadedLocale
 
     public static string GetString(string name, string? defaultValue = null)
     {
-        var locale = OptionGroupSingleton<MiraOverloadedOptions>.Instance.Locale.ToString();
+        var locale = LocalSettingsTabSingleton<MiraOverloadedOptions>.Instance.Locale.Value.ToString();
         return GetStringForLocale(locale, name, defaultValue);
     }
 

@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-using MiraAPI.GameOptions;
+using MiraAPI.LocalSettings;
 using MiraAPI.Roles;
 using MiraOverloaded.Utilities;
 using MiraOverloaded.Options;
@@ -15,7 +15,7 @@ namespace MiraOverloaded.Patches;
 [HarmonyPatch]
 public static class ModCompatabilityPatches
 {
-    static readonly MiraOverloadedOptions opts = OptionGroupSingleton<MiraOverloadedOptions>.Instance;
+    static readonly MiraOverloadedOptions opts = LocalSettingsTabSingleton<MiraOverloadedOptions>.Instance;
 
     [HarmonyPatch(typeof(CustomRoleUtils), nameof(CustomRoleUtils.CanSpawnOnCurrentMode))]
     public static class DisableRolesPatch
@@ -29,7 +29,7 @@ public static class ModCompatabilityPatches
         [HarmonyPostfix]
         public static void Postfix(RoleBehaviour role, ref bool __result)
         {
-            if (__result && Blocked.Contains(role.GetType().FullName) && opts.DisableRoles)
+            if (__result && Blocked.Contains(role.GetType().FullName) && opts.DisableRoles.Value)
             {
                 __result = false;
             }
@@ -76,7 +76,7 @@ public static class ModCompatabilityPatches
                     );
                 }));
             }
-            else if (hasTownOfExtra && opts.DisableRoles)
+            else if (hasTownOfExtra && opts.DisableRoles.Value)
             {
                 button.OnClick.AddListener((System.Action)(() =>
                 {
