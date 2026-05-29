@@ -69,7 +69,7 @@ public static class ModPopupUtility
                     case PopupImagePosition.AboveText:
                         textSize = new Vector2(bgWidth * 0.9f, bgHeight * 0.5f);
                         imgPos = new Vector3(0, bgCenterY + (bgHeight * 0.3f), -1f);
-                        textPos = new Vector3(0, bgCenterY - (bgHeight * 0.15f), -1f);
+                        textPos = new Vector3(0, bgCenterY - (bgHeight * 0.05f), -1f);
                         break;
                     case PopupImagePosition.BelowText:
                         textSize = new Vector2(bgWidth * 0.9f, bgHeight * 0.5f);
