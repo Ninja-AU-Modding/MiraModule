@@ -16,6 +16,8 @@ public static class MiraOverloadedLocale
     private const string DefaultLocale = "en_US";
     private const string ExternalFilePrefix = "MiraOverloaded.";
 
+    private static readonly Regex TagRegex = new(@"\[([^\]]+)\]", RegexOptions.Compiled);
+
     private static readonly Dictionary<string, Dictionary<string, string>> Translations =
         new(StringComparer.OrdinalIgnoreCase);
     private static readonly Dictionary<string, string> EmbeddedLocaleFiles =
@@ -42,7 +44,7 @@ public static class MiraOverloadedLocale
         return GetStringForLocale(GetSelectedLocaleCode(), name, defaultValue);
     }
 
-    public static string GetStringForLocale(string localeCode, string name, string? defaultValue = null)
+    public static string GetStringForLocale(string localeCode, string name, string? defaultValue = null, bool ignoreParsing = false)
     {
         var normalized = NormalizeLocaleCode(localeCode) ?? DefaultLocale;
         var text = defaultValue ?? "STRMISS_" + name;
@@ -68,7 +70,7 @@ public static class MiraOverloadedLocale
             text = overrideText;
         }
 
-        return ParseText(text);
+        return !ignoreParsing ? ParseText(text) : text;
     }
 
     private static string GetSelectedLocaleCode()
@@ -101,9 +103,10 @@ public static class MiraOverloadedLocale
     }
 
     private static void LoadEmbeddedLocales()
-    {
+    {  
         var assembly = Assembly.GetExecutingAssembly();
         const string prefix = "MiraOverloaded.Resources.Locale.";
+        Translations.Clear();
 
         foreach (var (localeCode, fileName) in EmbeddedLocaleFiles)
         {
@@ -114,14 +117,15 @@ public static class MiraOverloadedLocale
                 continue;
             }
 
-            using var reader = new StreamReader(stream);
             Translations[localeCode] = new Dictionary<string, string>();
-            ParseXml(reader.ReadToEnd(), Translations[localeCode]);
+            ParseXml(stream, Translations[localeCode]);
         }
     }
 
     private static void LoadExternalOverrides()
     {
+        ExternalOverrides.Clear();
+
         if (!Translations.TryGetValue(DefaultLocale, out var bakedEnglish))
         {
             return;
@@ -139,14 +143,17 @@ public static class MiraOverloadedLocale
             try
             {
                 var parsed = new Dictionary<string, string>();
-                ParseXml(File.ReadAllText(filePath), parsed);
+
+                using (var fileStream = File.OpenRead(filePath))
+                {
+                    ParseXml(fileStream, parsed);
+                }
 
                 ExternalOverrides[localeCode] = parsed
                     .Where(kv => bakedEnglish.ContainsKey(kv.Key))
                     .ToDictionary(kv => kv.Key, kv => kv.Value);
 
-                Info($"Loaded external locale override for {localeCode}: {fileName} " +
-                     $"({ExternalOverrides[localeCode].Count} strings)");
+                Info($"Loaded external locale override for {localeCode}: {fileName} ({ExternalOverrides[localeCode].Count} strings)");
             }
             catch (Exception ex)
             {
@@ -160,10 +167,10 @@ public static class MiraOverloadedLocale
         return string.IsNullOrWhiteSpace(code) ? null : code.Trim().Replace('-', '_');
     }
 
-    private static void ParseXml(string xmlContent, Dictionary<string, string> target)
+    private static void ParseXml(Stream xmlStream, Dictionary<string, string> target)
     {
         var xmlDoc = new XmlDocument();
-        xmlDoc.LoadXml(xmlContent);
+        xmlDoc.Load(xmlStream);
 
         var root = xmlDoc.DocumentElement;
         if (root == null || root.Name != "resources")
@@ -190,9 +197,13 @@ public static class MiraOverloadedLocale
 
     private static string ParseText(string text)
     {
+        string englishColoredName = "<#a1e3fe>M</color><#fffca1>i</color><#7975ff>r</color><#5049fe>a</color> <#a1e3fe>O</color><#ffea9f>v</color><#8d89ff>e</color><#665eff>r</color><#5049fe>l</color><#a1e3fe>o</color><#7975ff>a</color><#665eff>d</color><#5049fe>e</color><#3b34db>d</color>";
+        string coloredNameString = GetStringForLocale(GetSelectedLocaleCode(), "MiraTemplateColoredMiraOverloadedName", englishColoredName, true);
+        
         text = text.Replace("[nl]", "\n");
         text = text.Replace("[and]", "&");
-        text = Regex.Replace(text, @"\[([^\]]+)\]", @"<$1>");
+        text = text.Replace("[ColoredMiraOverloadedName]", coloredNameString);
+        text = TagRegex.Replace(text, @"<$1>");
         return text;
     }
 }
