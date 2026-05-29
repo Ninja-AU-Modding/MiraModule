@@ -16,7 +16,7 @@ namespace MiraOverloaded.Buttons.Neutral;
 
 public sealed class HiveMindAwakenButton : TownOfUsRoleButton<HiveMindRole>
 {
-    public override string Name => TouLocale.Get("MiraRoleHiveMindAwaken", "Awaken");
+    public override string Name => MiraOverloadedLocale.GetString("MiraRoleHiveMindAwaken", "Awaken");
     public override BaseKeybind Keybind => Keybinds.SecondaryAction;
     public override Color TextOutlineColor => MiraOverloadedColors.HiveMind;
     public override float Cooldown => 0f;

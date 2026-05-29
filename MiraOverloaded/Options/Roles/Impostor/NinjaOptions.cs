@@ -3,13 +3,11 @@ using MiraAPI.GameOptions.Attributes;
 using MiraAPI.GameOptions.OptionTypes;
 using MiraAPI.Utilities;
 using MiraOverloaded.Roles.Impostor;
-using TownOfUs.Modules.Localization;
-
 namespace MiraOverloaded.Options.Roles.Impostor;
 
 public sealed class NinjaOptions : AbstractOptionGroup<NinjaRole>
 {
-    public override string GroupName => TouLocale.Get("MiraRoleNinja", "Ninja");
+    public override string GroupName => MiraOverloadedLocale.GetString("MiraRoleNinja", "Ninja");
 
     [ModdedNumberOption("MiraOptionNinjaMarkCooldown", 0f, 120f, 2.5f, MiraNumberSuffixes.Seconds)]
     public float MarkCooldown { get; set; } = 10f;

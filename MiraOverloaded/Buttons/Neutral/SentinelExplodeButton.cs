@@ -12,7 +12,6 @@ using TownOfUs.Assets;
 using TownOfUs.Buttons;
 using TownOfUs.Buttons.Neutral;
 using TownOfUs.Modules;
-using TownOfUs.Modules.Localization;
 using TownOfUs.Networking;
 using TownOfUs.Utilities;
 using UnityEngine;
@@ -21,7 +20,7 @@ namespace MiraOverloaded.Buttons.Neutral;
 
 public sealed class SentinelExplodeButton : TownOfUsRoleButton<SentinelRole>
 {
-    public override string Name => TouLocale.GetParsed("MiraRoleSentinelExplode", "Explode");
+    public override string Name => MiraOverloadedLocale.GetString("MiraRoleSentinelExplode", "Explode");
     public override BaseKeybind Keybind => Keybinds.SecondaryAction;
     public override Color TextOutlineColor => MiraOverloadedColors.Sentinel;
     public override float Cooldown => Math.Clamp(OptionGroupSingleton<SentinelOptions>.Instance.ExplodeCooldown + MapCooldown, 5f, 120f);

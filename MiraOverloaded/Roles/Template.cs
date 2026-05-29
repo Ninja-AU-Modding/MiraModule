@@ -23,13 +23,13 @@
 //{
 
 //    public string LocaleKey => "Template";
-//    public string RoleName => TouLocale.Get($"MiraRole{LocaleKey}");
-//    public string RoleDescription => TouLocale.GetParsed($"MiraRole{LocaleKey}IntroBlurb");
-//    public string RoleLongDescription => TouLocale.GetParsed($"MiraRole{LocaleKey}TabDescription");
+//    public string RoleName => MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}");
+//    public string RoleDescription => MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}IntroBlurb");
+//    public string RoleLongDescription => MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}TabDescription");
 
 //    public string GetAdvancedDescription()
 //    {
-//        return TouLocale.GetParsed($"MiraRole{LocaleKey}WikiDescription") +
+//        return MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}WikiDescription") +
 //               MiscUtils.AppendOptionsText(GetType());
 //    }
 
@@ -37,8 +37,8 @@
 //    public List<CustomButtonWikiDescription> Abilities =>
 //    [
 //        new(
-//            TouLocale.GetParsed($"MiraRole{LocaleKey}Template", "Template"),
-//            TouLocale.GetParsed($"MiraRole{LocaleKey}TemplateWikiDescription"),
+//            MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}Template", "Template"),
+//            MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}TemplateWikiDescription"),
 //            CrewAssets.TemplateSprite),
 //    ];
 

@@ -27,14 +27,14 @@ public sealed class AbyssRole(IntPtr cppPtr)
 
     public DoomableType DoomHintType => DoomableType.Relentless;
     public string LocaleKey => "Abyss";
-    public string RoleName => TouLocale.Get($"MiraRole{LocaleKey}");
-    public string RoleDescription => TouLocale.GetParsed($"MiraRole{LocaleKey}IntroBlurb");
+    public string RoleName => MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}");
+    public string RoleDescription => MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}IntroBlurb");
     public string RoleLongDescription => MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}TabDescription");
 
     public string GetAdvancedDescription()
     {
         return
-            TouLocale.GetParsed($"MiraRole{LocaleKey}WikiDescription") +
+            MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}WikiDescription") +
             MiscUtils.AppendOptionsText(GetType());
     }
 
@@ -45,8 +45,8 @@ public sealed class AbyssRole(IntPtr cppPtr)
         {
             return new List<CustomButtonWikiDescription>
             {
-                new(TouLocale.GetParsed($"MiraRole{LocaleKey}Gulp", "Gulp"),
-                    TouLocale.GetParsed($"MiraRole{LocaleKey}GulpWikiDescription"),
+                new(MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}Gulp", "Gulp"),
+                    MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}GulpWikiDescription"),
                     NeutAssets.AbyssGulpSprite),
             };
         }

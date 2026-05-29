@@ -22,13 +22,13 @@ namespace MiraOverloaded.Roles.Neutral;
 public sealed class HiveMindRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUsRole, IWikiDiscoverable, IDoomable
 {
     public string LocaleKey => "HiveMind";
-    public string RoleName => TouLocale.Get($"MiraRole{LocaleKey}");
-    public string RoleDescription => TouLocale.GetParsed($"MiraRole{LocaleKey}IntroBlurb");
+    public string RoleName => MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}");
+    public string RoleDescription => MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}IntroBlurb");
     public string RoleLongDescription => MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}TabDescription");
     public string GetAdvancedDescription()
     {
         return
-            TouLocale.GetParsed($"MiraRole{LocaleKey}WikiDescription") +
+            MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}WikiDescription") +
             MiscUtils.AppendOptionsText(GetType());
     }
 
@@ -39,11 +39,11 @@ public sealed class HiveMindRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUs
         {
             return new List<CustomButtonWikiDescription>
             {
-                new(TouLocale.GetParsed($"MiraRole{LocaleKey}Kill", "Kill"),
-                    TouLocale.GetParsed($"MiraRole{LocaleKey}KillWikiDescription"),
+                new(MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}Kill", "Kill"),
+                    MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}KillWikiDescription"),
                     NeutAssets.HiveMindAwakenSprite),
-                new(TouLocale.GetParsed($"MiraRole{LocaleKey}Awaken", "Awaken"),
-                    TouLocale.GetParsed($"MiraRole{LocaleKey}AwakenWikiDescription"),
+                new(MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}Awaken", "Awaken"),
+                    MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}AwakenWikiDescription"),
                     NeutAssets.HiveMindAwakenSprite),
             };
         }

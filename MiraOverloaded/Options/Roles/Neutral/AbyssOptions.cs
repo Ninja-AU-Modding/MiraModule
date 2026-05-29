@@ -8,7 +8,7 @@ namespace MiraOverloaded.Options.Roles.Neutral;
 
 public sealed class AbyssOptions : AbstractOptionGroup<AbyssRole>
 {
-    public override string GroupName => TouLocale.Get("MiraRoleAbyss", "Abyss");
+    public override string GroupName => MiraOverloadedLocale.GetString("MiraRoleAbyss", "Abyss");
 
     [ModdedNumberOption("MiraOptionAbyssGulpCooldown", 5f, 120f, 2.5f, MiraNumberSuffixes.Seconds)]
     public float GulpCooldown { get; set; } = 25f;

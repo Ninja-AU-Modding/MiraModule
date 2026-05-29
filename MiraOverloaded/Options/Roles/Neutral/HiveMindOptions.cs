@@ -8,7 +8,7 @@ namespace MiraOverloaded.Options.Roles.Neutral;
 
 public sealed class HiveMindOptions : AbstractOptionGroup<HiveMindRole>
 {
-    public override string GroupName => TouLocale.Get("MiraRoleHiveMind", "Hive Mind");
+    public override string GroupName => MiraOverloadedLocale.GetString("MiraRoleHiveMind", "Hive Mind");
 
     [ModdedNumberOption("MiraOptionHiveMindKillCooldown", 5f, 120f, 2.5f, MiraNumberSuffixes.Seconds)]
     public float KillCooldown { get; set; } = 25f;

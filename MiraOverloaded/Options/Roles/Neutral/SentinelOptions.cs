@@ -8,7 +8,7 @@ namespace MiraOverloaded.Options.Roles.Neutral;
 
 public sealed class SentinelOptions : AbstractOptionGroup<SentinelRole>
 {
-    public override string GroupName => TouLocale.Get("MiraRoleSentinel", "Sentinel");
+    public override string GroupName => MiraOverloadedLocale.GetString("MiraRoleSentinel", "Sentinel");
 
     [ModdedNumberOption("MiraOptionSentinelKillCooldown", 5f, 120f, 2.5f, MiraNumberSuffixes.Seconds)]
     public float KillCooldown { get; set; } = 25f;

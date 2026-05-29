@@ -22,14 +22,14 @@ public sealed class SentinelRole(IntPtr cppPtr)
     public RoleBehaviour CrewVariant => RoleManager.Instance.GetRole((RoleTypes)RoleId.Get<TrapperRole>());
     public DoomableType DoomHintType => DoomableType.Relentless;
     public string LocaleKey => "Sentinel";
-    public string RoleName => TouLocale.Get($"MiraRole{LocaleKey}");
-    public string RoleDescription => TouLocale.GetParsed($"MiraRole{LocaleKey}IntroBlurb");
+    public string RoleName => MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}");
+    public string RoleDescription => MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}IntroBlurb");
     public string RoleLongDescription => MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}TabDescription");
 
     public string GetAdvancedDescription()
     {
         return
-            TouLocale.GetParsed($"MiraRole{LocaleKey}WikiDescription") +
+            MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}WikiDescription") +
             MiscUtils.AppendOptionsText(GetType());
     }
 
@@ -40,8 +40,8 @@ public sealed class SentinelRole(IntPtr cppPtr)
         {
             return new List<CustomButtonWikiDescription>
             {
-                new(TouLocale.GetParsed($"MiraRole{LocaleKey}Explode", "Explode"),
-                    TouLocale.GetParsed($"MiraRole{LocaleKey}ExplodeWikiDescription"),
+                new(MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}Explode", "Explode"),
+                    MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}ExplodeWikiDescription"),
                     NeutAssets.SentinelExplodeSprite),
             };
         }

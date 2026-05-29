@@ -14,7 +14,6 @@ using MiraOverloaded.Options.Roles.Impostor;
 using Reactor.Networking.Attributes;
 using Reactor.Utilities;
 using TownOfUs;
-using TownOfUs.Modules.Localization;
 using TownOfUs.Modules.Wiki;
 using TownOfUs.Roles;
 using TownOfUs.Utilities;
@@ -36,13 +35,13 @@ public sealed class NinjaRole(IntPtr cppPtr)
     private TextMeshPro? _invisText;
 
     public string LocaleKey => "Ninja";
-    public string RoleName => TouLocale.Get($"MiraRole{LocaleKey}");
-    public string RoleDescription => TouLocale.GetParsed($"MiraRole{LocaleKey}IntroBlurb");
+    public string RoleName => MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}");
+    public string RoleDescription => MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}IntroBlurb");
     public string RoleLongDescription => MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}TabDescription");
 
     public string GetAdvancedDescription()
     {
-        return TouLocale.GetParsed($"MiraRole{LocaleKey}WikiDescription") +
+        return MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}WikiDescription") +
                MiscUtils.AppendOptionsText(GetType());
     }
 
@@ -54,12 +53,12 @@ public sealed class NinjaRole(IntPtr cppPtr)
             return
             [
                 new(
-                    TouLocale.GetParsed($"MiraRole{LocaleKey}Mark", "Mark"),
-                    TouLocale.GetParsed($"MiraRole{LocaleKey}MarkWikiDescription"),
+                    MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}Mark", "Mark"),
+                    MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}MarkWikiDescription"),
                     ImpostorAssets.NinjaMarkSprite),
                 new(
-                    TouLocale.GetParsed($"MiraRole{LocaleKey}Assassinate", "Assassinate"),
-                    TouLocale.GetParsed($"MiraRole{LocaleKey}AssassinateWikiDescription"),
+                    MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}Assassinate", "Assassinate"),
+                    MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}AssassinateWikiDescription"),
                     ImpostorAssets.NinjaAssassinateSprite),
             ];
         }
