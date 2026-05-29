@@ -8,3 +8,4 @@ global using TownOfUs.Utilities;
 global using TownOfUs.Roles;
 global using MiraAPI.Keybinds;
 global using MiraAPI.LocalSettings;
+global using MiraOverloaded.Modules;

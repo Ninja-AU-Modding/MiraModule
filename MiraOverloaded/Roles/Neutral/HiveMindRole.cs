@@ -24,7 +24,7 @@ public sealed class HiveMindRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUs
     public string LocaleKey => "HiveMind";
     public string RoleName => TouLocale.Get($"MiraRole{LocaleKey}");
     public string RoleDescription => TouLocale.GetParsed($"MiraRole{LocaleKey}IntroBlurb");
-    public string RoleLongDescription => TouLocale.GetParsed($"MiraRole{LocaleKey}TabDescription");
+    public string RoleLongDescription => MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}TabDescription");
     public string GetAdvancedDescription()
     {
         return

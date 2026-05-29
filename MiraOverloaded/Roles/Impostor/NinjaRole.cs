@@ -38,7 +38,7 @@ public sealed class NinjaRole(IntPtr cppPtr)
     public string LocaleKey => "Ninja";
     public string RoleName => TouLocale.Get($"MiraRole{LocaleKey}");
     public string RoleDescription => TouLocale.GetParsed($"MiraRole{LocaleKey}IntroBlurb");
-    public string RoleLongDescription => TouLocale.GetParsed($"MiraRole{LocaleKey}TabDescription");
+    public string RoleLongDescription => MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}TabDescription");
 
     public string GetAdvancedDescription()
     {
