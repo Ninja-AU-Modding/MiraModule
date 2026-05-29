@@ -39,7 +39,7 @@ public class MiraOverloadedModNews
             Title = Title,
             Text = Text,
             Language = (uint)DataManager.Settings.Language.CurrentLanguage,
-            Id = "TouMiraModNews"
+            Id = "MiraOverloadedModNews"
         };
     }
 
@@ -181,9 +181,9 @@ public static class ModNewsFetcher
 
         var assembly = Assembly.GetExecutingAssembly();
         using var resourceStream =
-            assembly.GetManifestResourceStream("TownOfUs.Resources.Announcements.modNews-" + filename)
+            assembly.GetManifestResourceStream("MiraOverloaded.Resources.Announcements.modNews-" + filename)
             ?? throw new InvalidOperationException(
-                $"Resource not found: TownOfUs.Resources.Announcements.modNews-{filename}");
+                $"Resource not found: MiraOverloaded.Resources.Announcements.modNews-{filename}");
         using StreamReader reader = new(resourceStream);
         using var jsonDocument = JsonDocument.Parse(reader.ReadToEnd());
         var newsArray = jsonDocument.RootElement.GetProperty("News");
@@ -249,7 +249,7 @@ public static class ModNewsFetcher
         public static void SetUpPanel_Postfix(AnnouncementPanel __instance,
             [HarmonyArgument(0)] Announcement announcement)
         {
-            if (announcement.Number < 100000)
+            if (announcement.Id != "MiraOverloadedModNews")
             {
                 return;
             }

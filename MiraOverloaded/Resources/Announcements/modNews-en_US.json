@@ -1,18 +1,18 @@
 {
   "News": [
     {
-      "Date": "2026-05-29T05:13:00Z",https://github.com/SabotagedAU/MiraOverloaded/wiki/_new
+      "Date": "2026-05-29T05:13:00Z",
       "Number": "8881",
       "ShortTitle": "MO v1.0.0",
       "SubTitle": "Initial Release!",
-      "Title": "<#a1e3fe>M</color><#fffca1>i</color><#7975ff>r</color><#5049fe>a</color> <#a1e3fe>O</color><#ffea9f>v</color><#8d89ff>e</color><#665eff>r</color><#5049fe>l</color><#a1e3fe>o</color><#7975ff>a</color><#665eff>d</color><#5049fe>e</color><#3b34db>d</color> 1.0.0 Release!",
+      "Title": "<#a1e3fe>M</color><#fffca1>i</color><#7975ff>r</color><#5049fe>a</color> <#a1e3fe>O</color><#ffea9f>v</color><#8d89ff>e</color><#665eff>r</color><#5049fe>l</color><#a1e3fe>o</color><#7975ff>a</color><#665eff>d</color><#5049fe>e</color><#3b34db>d</color> 1.0.0",
       "Text": [
-        "\r <size=115%><b>Welcome to the first release of <#a1e3fe>M</color><#fffca1>i</color><#7975ff>r</color><#5049fe>a</color> <#a1e3fe>O</color><#ffea9f>v</color><#8d89ff>e</color><#665eff>r</color><#5049fe>l</color><#a1e3fe>o</color><#7975ff>a</color><#665eff>d</color><#5049fe>e</color><#3b34db>d</color>!</b></size>",
-        "\n\n <#a1e3fe>M</color><#fffca1>i</color><#7975ff>r</color><#5049fe>a</color> <#a1e3fe>O</color><#ffea9f>v</color><#8d89ff>e</color><#665eff>r</color><#5049fe>l</color><#a1e3fe>o</color><#7975ff>a</color><#665eff>d</color><#5049fe>e</color><#3b34db>d</color>, as you probably already know, is a mod created by the <b><#FF0000>Sabotaged AU Modding</color></b> team, in an attempt to expand TOU Mira to the extreme, adding tens of roles and modifiers.",
-        "\n\n While the mod currently doesn't have as many roles as we want, last we counted there were over 59 roles/modifiers we wanted to add!",
-        "\n\n We reccomend using this mod with other extension mods, such as <link=https://github.com/rewalo/TownOfUsMiraRolesExtension>Roles Extension Mod</link>, <link=https://github.com/DivaniNL/TownOfUsMiraDivaniModsAddOn>Divani Mods</link>, or a proximity chat mod like <link=https://github.com/artriy/Perfect-Comms>PerfectComms</link>!",
-        "\n\n If you want to know what roles do what, what options do what, and ANYTHING else about MiraOverloaded, look at the <link=https://github.com/SabotagedAU/MiraOverloaded/wiki>Wiki</link> and join our <link=https://discord.gg/JpXFCZQWnc>Discord</link>!"
+        "\r<size=115%><b>Welcome to the first release of MiraOverloaded!</b></size>",
+        "\n\n<#7975ff>Mira Overloaded</color>, as you probably already know, is a mod created by the <#FF0000>Sabotaged AU Modding</color> team, in an attempt to expand TOU Mira to the extreme, adding tens of roles and modifiers.",
+        "\n\nWhile the mod currently doesn't have as many roles as we want, last we counted there were over 59 roles/modifiers we wanted to add!",
+        "\n\nWe reccomend using this mod with other extension mods, such as <link=https://github.com/rewalo/TownOfUsMiraRolesExtension>Roles Extension Mod</link>, <link=https://github.com/DivaniNL/TownOfUsMiraDivaniModsAddOn>Divani Mods</link>, or a proximity chat mod like <link=https://github.com/artriy/Perfect-Comms>PerfectComms</link>!",
+        "\n\nIf you want to know what roles do what, what options do what, and ANYTHING else about MiraOverloaded, look at the <link=https://github.com/SabotagedAU/MiraOverloaded/wiki>Wiki</link> and join our <link=https://discord.gg/JpXFCZQWnc>Discord</link>!"
       ]
-    },
+    }
   ]
 }

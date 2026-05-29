@@ -51,6 +51,7 @@ public partial class MiraOverloadedPlugin : BasePlugin, IMiraPlugin
 
         Modules.MiraOverloadedLocale.Initialize();
         IL2CPPChainloader.Instance.Finished += Modules.ExtensionLocale.SearchInternalLocale;
+        IL2CPPChainloader.Instance.Finished += ModNewsFetcher.CheckForNews;
         
         Harmony.PatchAll();
 
