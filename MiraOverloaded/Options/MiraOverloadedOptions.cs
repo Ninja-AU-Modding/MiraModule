@@ -20,7 +20,7 @@ public sealed class MiraOverloadedOptions(ConfigFile config) : LocalSettingsTab(
     };
 
     [LocalToggleSetting]
-    public ConfigEntry<bool> DisableRoles { get; } = config.Bind("General", "Disable Roles", true);
+    public ConfigEntry<bool> DisableRoles { get; } = config.Bind("General", "Disable Incompatible Roles", true);
 
     [LocalEnumSetting]
     public ConfigEntry<GameLocale> Locale { get; } = config.Bind("General", "Game Locale", GameLocale.en_US);
