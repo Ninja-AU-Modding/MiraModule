@@ -13,7 +13,7 @@ public static class RoleIcons
     public static LoadableAsset<Sprite> Sentinel { get; } = new LoadableResourceAsset($"{IconsPath}.Sentinel.png", 200);
     public static LoadableAsset<Sprite> Abyss { get; } = new LoadableResourceAsset($"{IconsPath}.Abyss.png", 200);
     public static LoadableAsset<Sprite> Shifter { get; } = new LoadableResourceAsset($"{IconsPath}.TempRoleIcon.png", 200);
-    public static LoadableAsset<Sprite> Fakeposter { get; } = new LoadableResourceAsset($"{IconsPath}.TempRoleIcon.png", 200);
+    public static LoadableAsset<Sprite> FakePostor { get; } = new LoadableResourceAsset($"{IconsPath}.FakePostor.png", 200);
     public static LoadableAsset<Sprite> Baiter { get; } = new LoadableResourceAsset($"{IconsPath}.Baiter.png", 200);
     public static LoadableAsset<Sprite> HiveMind { get; } = new LoadableResourceAsset($"{IconsPath}.HiveMind.png", 200);
 

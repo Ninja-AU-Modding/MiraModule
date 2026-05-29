@@ -8,15 +8,14 @@ namespace MiraOverloaded.Options.Modifiers.Universal;
 public enum NeutralBenignBehavier
 {
     BecomeCrewmate = 0,
-    BecomeFakeposter = 1,
+    BecomeFakePostor = 1,
     Die = 2,
     BecomeAmni = 3,
-
 }
 
 public enum NeutralBehavier
 {
-    BecomeFakeposter = 1,
+    BecomeFakePostor = 1,
     BecomeAmni = 2,
     Die = 3
 }
@@ -33,5 +32,5 @@ public sealed class StrippedOptions : AbstractOptionGroup<ExplosiveModifier>
     public NeutralBenignBehavier NeutralBenign { get; set; } = NeutralBenignBehavier.BecomeCrewmate;
 
     [ModdedEnumOption("Other Neutrals", typeof(NeutralBehavier))]
-    public NeutralBehavier NeutralOther { get; set; } = NeutralBehavier.BecomeFakeposter;
+    public NeutralBehavier NeutralOther { get; set; } = NeutralBehavier.BecomeFakePostor;
 }

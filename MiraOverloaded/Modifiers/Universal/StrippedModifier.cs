@@ -7,6 +7,7 @@ using MiraOverloaded.Options.Modifiers.Universal;
 using MiraOverloaded.Roles.Neutral;
 using TownOfUs.Modifiers.Game;
 using TownOfUs.Roles.Neutral;
+using TownOfUs.Utilities;
 using UnityEngine;
 
 namespace MiraOverloaded.Modifiers.Universal;
@@ -45,10 +46,13 @@ public sealed class StrippedModifier : UniversalGameModifier
             switch (OptionGroupSingleton<StrippedOptions>.Instance.NeutralBenign)
             {
                 case NeutralBenignBehavier.BecomeCrewmate:
-                    Player.RpcSetRole(RoleTypes.Crewmate);
+                    Player.RpcChangeRole((ushort)RoleTypes.Crewmate);
+                    break;
+                case NeutralBenignBehavier.BecomeFakePostor:
+                    Player.RpcChangeRole((ushort)RoleId.Get<FakePostorRole>());
                     break;
                 case NeutralBenignBehavier.BecomeAmni:
-                    Player.RpcSetRole((RoleTypes)RoleId.Get<AmnesiacRole>());
+                    Player.RpcChangeRole((ushort)RoleId.Get<AmnesiacRole>());
                     break;
                 default:
                     Player.Die(DeathReason.Kill, true);
@@ -60,8 +64,11 @@ public sealed class StrippedModifier : UniversalGameModifier
         {
             switch (OptionGroupSingleton<StrippedOptions>.Instance.NeutralOther)
             {
+                case NeutralBehavier.BecomeFakePostor:
+                    Player.RpcChangeRole((ushort)RoleId.Get<FakePostorRole>());
+                    break;
                 case NeutralBehavier.BecomeAmni:
-                    Player.RpcSetRole((RoleTypes)RoleId.Get<AmnesiacRole>());
+                    Player.RpcChangeRole((ushort)RoleId.Get<AmnesiacRole>());
                     break;
                 default:
                     Player.Die(DeathReason.Kill, true);
@@ -70,11 +77,11 @@ public sealed class StrippedModifier : UniversalGameModifier
         }
         else if (isImp)
         {
-            Player.RpcSetRole(RoleTypes.Impostor);
+            Player.RpcChangeRole((ushort)RoleTypes.Impostor);
         }
         else
         {
-            Player.RpcSetRole(RoleTypes.Crewmate);
+            Player.RpcChangeRole((ushort)RoleTypes.Crewmate);
         }
     }
 }

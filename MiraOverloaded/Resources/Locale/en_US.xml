@@ -144,19 +144,21 @@
     <string name="MiraOptionShifterShiftCooldown">Shift Cooldown</string>
     <string name="MiraOptionShifterShiftDeadPlayers">Can Shift Dead Players</string>
 
-	<!-- Fake-poster - Neutral Killing -->
-	<string name="MiraRoleFakeposter">Fake-poster</string>
-	<string name="MiraRoleFakeposterIntroBlurb">Unlucky, man. Unlucky.</string>
-	<string name="MiraRoleFakeposterTabDescription">A killing role with no abilities, and no allies. Good luck!</string>
+	<!-- Fake-postor - Neutral Killing -->
+	<string name="MiraRoleFakePostor">Fake-postor</string>
+	<string name="MiraRoleFakePostorColoredName">[color=#AAAAAA]Fake-[/color][color=#D23A58]postor[/color]
+	</string>
+	<string name="MiraRoleFakePostorIntroBlurb">Unlucky, man. Unlucky.</string>
+	<string name="MiraRoleFakePostorTabDescription">A killing role with no abilities, and no allies. Good luck!</string>
 
-	<!-- Fake-poster Wiki -->
-	<string name="MiraRoleFakeposterWikiDescription">The Fake-poster is a Neutral Killing role that has no abilites but to kill. Pretty uninteresting, right?</string>
+	<!-- Fake-postor Wiki -->
+	<string name="MiraRoleFakePostorWikiDescription">The Fake-postor is a Neutral Killing role that has no abilites but to kill. Pretty uninteresting, right?</string>
 
-	<!-- Fake-poster Options -->
-	<string name="MiraOptionFakeposterKillCooldown">Kill Cooldown</string>
-	<string name="MiraOptionFakeposterCanVent">Can Vent</string>
-	<string name="MiraOptionFakeposterHasImposterVision">Imposter Vision</string>
-	<string name="MiraOptionFakeposterHasAssassin">Has Assassin</string>
+	<!-- Fake-postor Options -->
+	<string name="MiraOptionFakePostorKillCooldown">Kill Cooldown</string>
+	<string name="MiraOptionFakePostorCanVent">Can Vent</string>
+	<string name="MiraOptionFakePostorHasImposterVision">Imposter Vision</string>
+	<string name="MiraOptionFakePostorHasAssassin">Has Assassin</string>
 
     <!-- Baiter - Neutral Evil -->
     <string name="MiraRoleBaiter">Baiter</string>

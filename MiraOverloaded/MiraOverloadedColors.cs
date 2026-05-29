@@ -14,6 +14,7 @@ public static class MiraOverloadedColors
     public static Color Sentinel => new Color32(143, 162, 141, 255);
     public static Color Abyss => new Color32(75, 45, 120, 255); // Purple
     public static Color HiveMind => new Color32(221, 178, 68, 255); // Golden Yellow
+    public static Color FakePostor => new Color32(170, 170, 170, 255);
 
     // Modifier Colors
     public static Color ChaosTokens => new Color32(221, 178, 68, 255);
