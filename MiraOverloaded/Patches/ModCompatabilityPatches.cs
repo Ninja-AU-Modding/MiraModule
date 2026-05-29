@@ -76,7 +76,7 @@ public static class ModCompatabilityPatches
                     );
                 }));
             }
-            else if (hasTownOfExtra)
+            else if (hasTownOfExtra && opts.DisableRoles)
             {
                 button.OnClick.AddListener((System.Action)(() =>
                 {
