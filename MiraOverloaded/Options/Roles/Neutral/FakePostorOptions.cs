@@ -8,7 +8,7 @@ namespace MiraOverloaded.Options.Roles.Neutral;
 
 public sealed class FakePostorOptions : AbstractOptionGroup<FakePostorRole>
 {
-    public override string GroupName => TouLocale.Get("MiraRoleFakePostor", "Fake-poster");
+    public override string GroupName => MiraOverloadedLocale.GetString("MiraRoleFakePostor");
 
     [ModdedNumberOption("MiraOptionFakePostorKillCooldown", 5f, 120f, 2.5f, MiraNumberSuffixes.Seconds)]
     public float KillCooldown { get; set; } = 25f;
