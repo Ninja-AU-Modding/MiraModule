@@ -31,11 +31,9 @@ public sealed class FakePostorRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOf
     }
     public StringBuilder SetTabText()
     {
-        var nameDisplay = RoleName == MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}ColoredName");
-
         var sb = new StringBuilder();
         sb.AppendLine(CultureInfo.InvariantCulture,
-            $"{RoleColor.ToTextColor()}Your role is <b>{nameDisplay}.</b></color>");
+            $"{RoleColor.ToTextColor()}Your role is <b>{MiraOverloadedLocale.GetString($"MiraRole{LocaleKey}ColoredName")}.</b></color>");
         sb.Append("<size=70%>");
         sb.AppendLine(RoleLongDescription);
         return sb;
