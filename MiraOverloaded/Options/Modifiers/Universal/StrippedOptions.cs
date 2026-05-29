@@ -15,9 +15,9 @@ public enum NeutralBenignBehavier
 
 public enum NeutralBehavier
 {
-    BecomeFakePostor = 1,
-    BecomeAmni = 2,
-    Die = 3
+    BecomeFakePostor = 0,
+    BecomeAmni = 1,
+    Die = 2
 }
 public sealed class StrippedOptions : AbstractOptionGroup<ExplosiveModifier>
 {
