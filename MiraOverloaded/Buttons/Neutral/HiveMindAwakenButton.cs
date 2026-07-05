@@ -43,7 +43,7 @@ public sealed class HiveMindAwakenButton : TownOfUsRoleButton<HiveMindRole>
         HiveMindAwakenModifier.AwakenSucceeded = true;
 
         var opts = OptionGroupSingleton<HiveMindOptions>.Instance;
-        SoundManager.Instance.PlaySound(MiraOverloadedAudio.HiveMind.LoadAsset(), false, 1f);
+        SoundManager.Instance.PlaySound(MiraOverloadedAudio.HiveMindIntro.LoadAsset(), false, 1f);
         HiveMindEvents.ApplyAwakenDebuffs(PlayerControl.LocalPlayer, opts);
 
         HiveMindDeathPatch.RpcHiveMindAwaken(PlayerControl.LocalPlayer);

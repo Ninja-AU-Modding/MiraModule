@@ -57,7 +57,7 @@ public sealed class HiveMindRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUs
     public CustomRoleConfiguration Configuration => new(this)
     {
         CanUseVent = OptionGroupSingleton<HiveMindOptions>.Instance.CanVent,
-        IntroSound = MiraOverloadedAudio.HiveMind,
+        IntroSound = MiraOverloadedAudio.HiveMindIntro,
         Icon = RoleIcons.HiveMind,
         GhostRole = (RoleTypes)RoleId.Get<NeutralGhostRole>()
     };
